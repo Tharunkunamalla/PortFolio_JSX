@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * {
+  outline: 1px solid red !important;
+} */
+
+/* Custom styles for the home page with bubbles*/
+.bubble {
+  --bubble-size: 40px;
+  --bubble-color: rgba(100, 100, 255, 0.12);
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  background: radial-gradient(circle, var(--bubble-color) 0%, transparent 70%);
+  border-radius: 9999px;
+  position: absolute;
+  pointer-events: none;
+  filter: blur(2px);
+  transition: background 0.3s;
+  z-index: 0;
+}
+.dark .bubble {
+  --bubble-color: rgba(255, 255, 255, 0.08);
+}
