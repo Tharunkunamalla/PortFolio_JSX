@@ -183,6 +183,7 @@ const About = () => {
                 enjoy solving challenging problems to improve my skills.
               </p>
 
+              {/* Resume */}
               <div className="pt-4">
                 <button
                   onClick={() =>

@@ -76,7 +76,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Mail API
+    // Mail API --> Some times gets Error 500
     const data = {
       access_key: "5e5c5d50-8ed2-4b2d-b93d-3ba067f0af11",
       name: formData.name,
@@ -307,7 +307,7 @@ const Contact = () => {
                   <span className="sr-only">GitHub</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/tharun-kunamalla-b9b477288/"
+                  href="https://www.linkedin.com/in/tharun-kunamalla-/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
