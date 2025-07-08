@@ -61,6 +61,16 @@ const aboutData = [
         date: "2024 - 2025",
         description: "BETA-LABS, IIIT-Kottayam",
       },
+      {
+        name: "AI-ML Intern",
+        date: "2025",
+        description: "Labmentix, Bengaluru",
+      },
+      {
+        name: "AI-ML Intern",
+        date: "2025",
+        description: "EDUNET-Microsoft",
+      },
     ],
   },
   {
