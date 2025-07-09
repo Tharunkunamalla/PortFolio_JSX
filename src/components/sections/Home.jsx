@@ -24,13 +24,17 @@ const BUBBLE_COLORS = [
 function spawnBubble(container) {
   const bubble = document.createElement("div");
   bubble.className = "bubble";
+
   const size = gsap.utils.random(40, 80);
   bubble.style.setProperty("--bubble-size", `${size}px`);
+
   const color = BUBBLE_COLORS[Math.floor(Math.random() * BUBBLE_COLORS.length)];
   bubble.style.setProperty("--bubble-color", color);
+
   const left = gsap.utils.random(5, 95);
   bubble.style.left = `${left}%`;
   bubble.style.bottom = `-80px`;
+
   container.appendChild(bubble);
 
   gsap.to(bubble, {
