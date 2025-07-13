@@ -5,7 +5,7 @@ import {ExternalLink, Github, Code, Monitor} from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projectsData = [
+const webProjects = [
   {
     id: 1,
     title: "FaceRipple",
@@ -62,7 +62,7 @@ const projectsData = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 6,
+    id: 5,
     title: "Gemini-AI",
     description:
       "An AI assistant dashboard interface integrated with smart modules and a beautiful UI.",
@@ -72,7 +72,7 @@ const projectsData = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 7,
+    id: 6,
     title: "Jarvis -Voice Assistant",
     description:
       "A real-time voice assistant that responds to speech and fetches data from Google.",
@@ -83,18 +83,42 @@ const projectsData = [
   },
 ];
 
+const machineLearningProjects = [
+  {
+    id: 7,
+    title: "Brain Tumor MRI Classification",
+    description:
+      "CNN and Transfer Learning based classification of MRI images.",
+    image: "/assets/brain_tumor.png",
+    technologies: ["Python", "TensorFlow", "Keras", "Streamlit"],
+    liveLink: "https://brain-tumor-app.vercel.app/",
+    codeLink:
+      "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
+  },
+  {
+    id: 8,
+    title: "PhonePe Transactions Insights",
+    description:
+      " A comprehensive analysis of PhonePe transactions using Python, Pandas, and Matplotlib.",
+    image: "/assets/phonepe.png",
+    technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+    liveLink: "",
+    codeLink:
+      "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
+  },
+];
+
+const allProjects = [...webProjects, ...machineLearningProjects];
+
 const Projects = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const projectRefs = useRef([]);
   const [hoveredProject, setHoveredProject] = useState(null);
-
-  // Set up projectRefs with correct length
-  projectRefs.current = Array(projectsData.length).fill(null);
+  const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate the heading
       gsap.from(headingRef.current, {
         y: 50,
         opacity: 0,
@@ -105,15 +129,28 @@ const Projects = () => {
           toggleActions: "play none none reset",
         },
       });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
 
-      // Animate each project card
+  const currentProjects =
+    activeTab === "all"
+      ? allProjects
+      : activeTab === "web"
+      ? webProjects
+      : machineLearningProjects;
+
+  projectRefs.current = Array(currentProjects.length).fill(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
       projectRefs.current.forEach((project, index) => {
         if (project) {
           gsap.from(project, {
             y: 50,
             opacity: 0,
             duration: 0.8,
-            delay: 0.2 * (index % 3), // Stagger effect based on column position
+            delay: 0.2 * (index % 3),
             scrollTrigger: {
               trigger: project,
               start: "top 95%",
@@ -125,7 +162,7 @@ const Projects = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [activeTab]);
 
   return (
     <section
@@ -136,13 +173,46 @@ const Projects = () => {
       <div className="container mx-auto px-4 md:px-6">
         <h2
           ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
+          className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white"
         >
           My <span className="text-secondary-500">Projects</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
+        <div className="flex justify-center mb-10 gap-4">
+          <button
+            onClick={() => setActiveTab("all")}
+            className={`px-6 py-2 rounded-full font-semibold transition ${
+              activeTab === "all"
+                ? "bg-secondary-500 text-white"
+                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+            }`}
+          >
+            All Projects
+          </button>
+          <button
+            onClick={() => setActiveTab("web")}
+            className={`px-6 py-2 rounded-full font-semibold transition ${
+              activeTab === "web"
+                ? "bg-secondary-500 text-white"
+                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+            }`}
+          >
+            Web Projects
+          </button>
+          <button
+            onClick={() => setActiveTab("ml")}
+            className={`px-6 py-2 rounded-full font-semibold transition ${
+              activeTab === "ml"
+                ? "bg-secondary-500 text-white"
+                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+            }`}
+          >
+            Machine Learning Projects
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {currentProjects.map((project, index) => (
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
@@ -156,8 +226,6 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-
-                {/* Overlay with actions that appear on hover */}
                 <div
                   className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-6 transition-opacity duration-300 ${
                     hoveredProject === project.id ? "opacity-100" : "opacity-0"
@@ -188,11 +256,9 @@ const Projects = () => {
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                   {project.title}
                 </h3>
-
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-4">
                   {project.description}
                 </p>
-
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, techIndex) => (
                     <span
@@ -203,7 +269,6 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-
                 <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                   <a
                     href={project.liveLink}
