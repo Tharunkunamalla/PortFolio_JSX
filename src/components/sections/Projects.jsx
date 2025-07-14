@@ -164,7 +164,6 @@ const Projects = () => {
     // Refresh ScrollTrigger to ensure correct positioning
     ScrollTrigger.refresh();
     // Scroll to top when tab changes
-    window.scrollTo({top: 0, behavior: "smooth"});
     return () => ctx.revert();
   }, [activeTab]);
 
