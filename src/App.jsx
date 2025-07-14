@@ -9,6 +9,8 @@ import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/Footer";
 
+import {Toaster} from "react-hot-toast";
+
 function App() {
   const [activeSection, setActiveSection] = useState("home");
   const sections = ["home", "about", "skills", "projects", "contact"];
@@ -71,6 +73,7 @@ function App() {
           <Home scrollToSection={scrollToSection} />
           <About />
           <Skills />
+          <Toaster position="top-center" />
           <Projects />
           <Contact />
         </main>

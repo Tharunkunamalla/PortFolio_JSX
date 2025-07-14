@@ -2,6 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ExternalLink, Github, Code, Monitor} from "lucide-react";
+import toast from "react-hot-toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,7 +92,7 @@ const machineLearningProjects = [
       "CNN and Transfer Learning based classification of MRI images.",
     image: "/assets/brain_tumor.png",
     technologies: ["Python", "TensorFlow", "Keras", "Streamlit"],
-    liveLink: "https://brain-tumor-app.vercel.app/",
+    liveLink: "",
     codeLink:
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
@@ -99,7 +100,7 @@ const machineLearningProjects = [
     id: 8,
     title: "PhonePe Transactions Insights",
     description:
-      " A comprehensive analysis of PhonePe transactions using Python, Pandas, and Matplotlib.",
+      "A comprehensive analysis of PhonePe transactions using Python, Pandas, and Matplotlib.",
     image: "/assets/phonepe.png",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     liveLink: "",
@@ -160,9 +161,16 @@ const Projects = () => {
         }
       });
     }, sectionRef);
-
     return () => ctx.revert();
   }, [activeTab]);
+
+  const handleLiveClick = (liveLink) => {
+    if (!liveLink) {
+      toast.error("Live preview will be updated soon... Stay Tuned!😉");
+      return;
+    }
+    window.open(liveLink, "_blank", "noopener noreferrer");
+  };
 
   return (
     <section
@@ -178,36 +186,38 @@ const Projects = () => {
           My <span className="text-secondary-500">Projects</span>
         </h2>
 
-        <div className="flex justify-center mb-10 gap-4">
+        <div className="flex flex-wrap md:flex-nowrap justify-center items-center mb-10 gap-4 w-full px-4">
           <button
             onClick={() => setActiveTab("all")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
+            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
               activeTab === "all"
-                ? "bg-secondary-500 text-white"
-                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+                ? "bg-secondary-500 text-white shadow-md"
+                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
             }`}
           >
             All Projects
           </button>
+
           <button
             onClick={() => setActiveTab("web")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
+            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
               activeTab === "web"
-                ? "bg-secondary-500 text-white"
-                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+                ? "bg-secondary-500 text-white shadow-md"
+                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
             }`}
           >
             Web Projects
           </button>
+
           <button
             onClick={() => setActiveTab("ml")}
-            className={`px-6 py-2 rounded-full font-semibold transition ${
+            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
               activeTab === "ml"
-                ? "bg-secondary-500 text-white"
-                : "bg-gray-200 dark:bg-dark-400 text-gray-800 dark:text-gray-100"
+                ? "bg-secondary-500 text-white shadow-md"
+                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
             }`}
           >
-            Machine Learning Projects
+            Machine Learning
           </button>
         </div>
 
@@ -231,15 +241,13 @@ const Projects = () => {
                     hoveredProject === project.id ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => handleLiveClick(project.liveLink)}
                     className="interactive p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300 group"
                     aria-label="View live demo"
                   >
                     <Monitor className="h-5 w-5" />
-                  </a>
+                  </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
@@ -270,14 +278,12 @@ const Projects = () => {
                   ))}
                 </div>
                 <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => handleLiveClick(project.liveLink)}
                     className="interactive text-sm text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 transition-colors duration-300"
                   >
                     Live Demo <ExternalLink className="h-3 w-3" />
-                  </a>
+                  </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
