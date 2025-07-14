@@ -163,7 +163,6 @@ const Projects = () => {
     }, sectionRef);
     // Refresh ScrollTrigger to ensure correct positioning
     ScrollTrigger.refresh();
-    // Scroll to top when tab changes
     return () => ctx.revert();
   }, [activeTab]);
 
