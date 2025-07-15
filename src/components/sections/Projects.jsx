@@ -49,7 +49,7 @@ const webProjects = [
       "A web application for managing tournaments, including user authentication, team management, and match scheduling.",
     image: "/assets/TMS_proj.png",
     technologies: ["Php", "SQL", "JS", "CSS", "HTML"],
-    liveLink: "https://google.com",
+    liveLink: "",
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
