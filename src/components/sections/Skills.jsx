@@ -100,7 +100,7 @@ const skillsData = [
   {name: "Vercel", icon: <SiVercel />, level: 8, category: "tools"},
   {name: "Firebase", icon: <SiFirebase />, level: 7, category: "tools"},
   {name: "Vite", icon: <SiVite />, level: 7, category: "tools"},
-  {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
+  // {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
 ];
 
 const groupedSkills = skillsData.reduce((acc, skill) => {
