@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Lottie from "lottie-react";
-import codingAnimation from "../sections/Coding.json"; // ✅ Correct path
+import codingAnimation from "../sections/Coding.json";
 
 gsap.registerPlugin(ScrollTrigger);
 
