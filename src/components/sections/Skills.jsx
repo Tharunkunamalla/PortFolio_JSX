@@ -128,8 +128,8 @@ const Skills = () => {
         duration: 1,
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 95%",
-          toggleActions: "play none none reset",
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -142,8 +142,8 @@ const Skills = () => {
             delay: 0.3 * index,
             scrollTrigger: {
               trigger: category,
-              start: "top 95%",
-              toggleActions: "play none none reset",
+              start: "top 90%",
+              toggleActions: "play reverse play reverse",
             },
           });
         }
@@ -175,7 +175,7 @@ const Skills = () => {
                 scrollTrigger: {
                   trigger: bar,
                   start: "top 95%",
-                  toggleActions: "play none none reset",
+                  toggleActions: "play reverse play reverse",
                 },
               }
             );

@@ -65,6 +65,10 @@ const About = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const infoRef = useRef(null);
+  const lottieRef = useRef(null);
+  const introTextRef = useRef(null);
+  const paragraphsRef = useRef([]);
+  const buttonRef = useRef(null);
   const boxesRef = useRef(null);
   const boxRefs = useRef([]);
   const lineRefs = useRef([]);
@@ -81,19 +85,56 @@ const About = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reset",
+          toggleActions: "play reverse play reverse",
         },
       });
 
-      gsap.from(infoRef.current, {
+      gsap.from(lottieRef.current, {
         y: 50,
         opacity: 0,
         duration: 1,
-        delay: 0.3,
         scrollTrigger: {
-          trigger: sectionRef.current,
+          trigger: infoRef.current,
           start: "top 80%",
-          toggleActions: "play none none reset",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      gsap.from(introTextRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      paragraphsRef.current.forEach((para, index) => {
+        gsap.from(para, {
+          y: 30,
+          opacity: 0,
+          duration: 0.6,
+          delay: 0.3 + index * 0.2,
+          scrollTrigger: {
+            trigger: infoRef.current,
+            start: "top 80%",
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      });
+
+      gsap.from(buttonRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        delay: 1.2,
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -107,7 +148,7 @@ const About = () => {
             scrollTrigger: {
               trigger: boxesRef.current,
               start: "top 80%",
-              toggleActions: "play none none reset",
+              toggleActions: "play reverse play reverse",
             },
           });
         }
@@ -158,31 +199,41 @@ const About = () => {
               <div className="w-72 h-72 rounded-full blur-3xl bg-purple-400 opacity-20 absolute" />
             </div>
 
-            <Lottie
-              animationData={codingAnimation}
-              loop={true}
-              className="w-64 h-64 z-10"
-            />
+            <div ref={lottieRef} className="w-64 h-64 z-10">
+              <Lottie animationData={codingAnimation} loop={true} />
+            </div>
 
-            <div className="w-full flex flex-col items-center z-10">
+            <div
+              ref={introTextRef}
+              className="w-full flex flex-col items-center z-10"
+            >
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
                 I'm a{" "}
                 <span className="text-secondary-500 font-bold drop-shadow-md">
                   passionate Frontend Developer
                 </span>
               </h3>
-              <p className="text-gray-600 dark:text-gray-300 mt-3 text-center text-sm leading-relaxed">
+              <p
+                ref={(el) => (paragraphsRef.current[0] = el)}
+                className="text-gray-600 dark:text-gray-300 mt-3 text-center text-sm leading-relaxed"
+              >
                 I specialize in creating responsive and interactive web
                 applications with modern technologies. My journey in web
                 development started during my college years, and since then,
                 I've been constantly learning and still improving my skills.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed">
+              <p
+                ref={(el) => (paragraphsRef.current[1] = el)}
+                className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed"
+              >
                 I enjoy creating smooth user experiences and solving problems
                 with clean, efficient code. I work with React, Javascript,
                 Tailwind CSS, and other modern frontend tools.
               </p>
-              <p className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed">
+              <p
+                ref={(el) => (paragraphsRef.current[2] = el)}
+                className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed"
+              >
                 Outside of coding, I'm focused on learning Data Structures and
                 Algorithms <span className="text-secondary-500">(DSA)</span>
                 and enjoy solving challenging problems to improve my skills.
@@ -190,6 +241,7 @@ const About = () => {
 
               <div className="pt-6">
                 <button
+                  ref={buttonRef}
                   onClick={() =>
                     window.open(
                       "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",

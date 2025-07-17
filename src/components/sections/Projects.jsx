@@ -127,7 +127,7 @@ const Projects = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 95%",
-          toggleActions: "play none none reset",
+          toggleActions: "play reverse play reverse",
         },
       });
     }, sectionRef);
