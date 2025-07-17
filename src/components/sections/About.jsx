@@ -73,22 +73,22 @@ const aboutData = [
       },
     ],
   },
-  {
-    id: 4,
-    title: "Achievements",
-    items: [
-      {
-        name: "Will add",
-        date: "202*",
-        description: "lorem ipsum dolor sit amet",
-      },
-      {
-        name: "Will add",
-        date: "202*",
-        description: "lorem ipsum dolor sit amet",
-      },
-    ],
-  },
+  // {
+  //   id: 4,
+  //   title: "Achievements",
+  //   items: [
+  //     {
+  //       name: "Will add",
+  //       date: "202*",
+  //       description: "lorem ipsum dolor sit amet",
+  //     },
+  //     {
+  //       name: "Will add",
+  //       date: "202*",
+  //       description: "lorem ipsum dolor sit amet",
+  //     },
+  //   ],
+  // },
 ];
 
 const About = () => {
