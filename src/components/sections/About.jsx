@@ -1,6 +1,8 @@
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import Lottie from "lottie-react";
+import codingAnimation from "../sections/Coding.json"; // ✅ Correct path
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,11 +32,7 @@ const aboutData = [
     id: 2,
     title: "Certifications",
     items: [
-      {
-        name: "Machine Learning",
-        date: "2025",
-        description: "Coursera",
-      },
+      {name: "Machine Learning", date: "2025", description: "Coursera"},
       {
         name: "Cloud Essentials Knowledge Badge Assessment",
         date: "2024",
@@ -45,11 +43,7 @@ const aboutData = [
         date: "2024",
         description: "HackerRank",
       },
-      {
-        name: "Basics of Cloud Computing",
-        date: "2025",
-        description: "Udemy",
-      },
+      {name: "Basics of Cloud Computing", date: "2025", description: "Udemy"},
     ],
   },
   {
@@ -61,34 +55,10 @@ const aboutData = [
         date: "2024 - 2025",
         description: "BETA-LABS, IIIT-Kottayam",
       },
-      {
-        name: "AI-ML Intern",
-        date: "2025",
-        description: "Labmentix, Bengaluru",
-      },
-      {
-        name: "AI-ML Intern",
-        date: "2025",
-        description: "EDUNET-Microsoft",
-      },
+      {name: "AI-ML Intern", date: "2025", description: "Labmentix, Bengaluru"},
+      {name: "AI-ML Intern", date: "2025", description: "EDUNET-Microsoft"},
     ],
   },
-  // {
-  //   id: 4,
-  //   title: "Achievements",
-  //   items: [
-  //     {
-  //       name: "Will add",
-  //       date: "202*",
-  //       description: "lorem ipsum dolor sit amet",
-  //     },
-  //     {
-  //       name: "Will add",
-  //       date: "202*",
-  //       description: "lorem ipsum dolor sit amet",
-  //     },
-  //   ],
-  // },
 ];
 
 const About = () => {
@@ -97,8 +67,10 @@ const About = () => {
   const infoRef = useRef(null);
   const boxesRef = useRef(null);
   const boxRefs = useRef([]);
+  const lineRefs = useRef([]);
 
   boxRefs.current = Array(aboutData.length).fill(null);
+  lineRefs.current = [];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -140,8 +112,26 @@ const About = () => {
           });
         }
       });
-    }, sectionRef);
 
+      lineRefs.current.forEach((line) => {
+        if (!line) return;
+        gsap.fromTo(
+          line,
+          {height: "0%"},
+          {
+            height: "100%",
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: line.parentElement,
+              start: "top 90%",
+              end: "bottom 10%",
+              scrub: true,
+            },
+          }
+        );
+      });
+    }, sectionRef);
     return () => ctx.revert();
   }, []);
 
@@ -159,47 +149,50 @@ const About = () => {
           About <span className="text-secondary-500">Me</span>
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 items-stretch">
-          {/* Left: Centered vertically and horizontally */}
+        <div className="grid md:grid-cols-2 gap-12 items-center relative">
           <div
             ref={infoRef}
-            className="flex flex-col justify-center items-center md:items-center h-full min-h-[400px] md:min-h-[500px] space-y-6"
+            className="flex flex-col justify-center items-center min-h-[500px] relative"
           >
-            <div className="w-full flex flex-col items-center">
-              <h3 className="text-2xl font-semibold text-gray-800 dark:text-white text-center">
+            <div className="absolute inset-0 flex justify-center items-center">
+              <div className="w-72 h-72 rounded-full blur-3xl bg-purple-400 opacity-20 absolute" />
+            </div>
+
+            <Lottie
+              animationData={codingAnimation}
+              loop={true}
+              className="w-64 h-64 z-10"
+            />
+
+            <div className="w-full flex flex-col items-center z-10">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
                 I'm a{" "}
                 <span className="text-secondary-500 font-bold drop-shadow-md">
                   passionate Frontend Developer
                 </span>
               </h3>
-
-              <p className="text-gray-600 dark:text-gray-300 mt-4 text-center">
+              <p className="text-gray-600 dark:text-gray-300 mt-3 text-center text-sm leading-relaxed">
                 I specialize in creating responsive and interactive web
                 applications with modern technologies. My journey in web
                 development started during my college years, and since then,
                 I've been constantly learning and still improving my skills.
               </p>
-              <br />
-
-              <p className="text-gray-600 dark:text-gray-300 text-center">
+              <p className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed">
                 I enjoy creating smooth user experiences and solving problems
                 with clean, efficient code. I work with React, Javascript,
                 Tailwind CSS, and other modern frontend tools.
               </p>
-              <br />
-              <p className="text-gray-600 dark:text-gray-300 text-center">
+              <p className="text-gray-600 dark:text-gray-300 text-center mt-3 text-sm leading-relaxed">
                 Outside of coding, I'm focused on learning Data Structures and
-                Algorithms <span className="text-secondary-500">(DSA)</span> and
-                enjoy solving challenging problems to improve my skills.
+                Algorithms <span className="text-secondary-500">(DSA)</span>
+                and enjoy solving challenging problems to improve my skills.
               </p>
 
-              {/* Resume */}
-              <div className="pt-4">
+              <div className="pt-6">
                 <button
                   onClick={() =>
                     window.open(
-                      // "https://drive.google.com/file/d/19fz2-Im_FpQ_N5Ebv95vW2Ns_MqDAkuP/view?usp=sharing",
-                      "https://www.linkedin.com/in/tharun-kunamalla-b9b477288//",
+                      "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
                       "_blank"
                     )
                   }
@@ -211,24 +204,24 @@ const About = () => {
             </div>
           </div>
 
-          {/* Right: About boxes */}
-          <div ref={boxesRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div ref={boxesRef} className="grid grid-cols-1 gap-6">
             {aboutData.map((box, index) => (
               <div
                 key={box.id}
                 ref={(el) => (boxRefs.current[index] = el)}
-                className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6 hover:shadow-2xl transition-shadow duration-500"
+                className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-4 md:p-5 hover:shadow-2xl transition-shadow duration-500"
               >
-                <h3 className="text-xl font-semibold text-secondary-500 mb-4">
+                <h3 className="text-lg font-semibold text-secondary-500 mb-3">
                   {box.title}
                 </h3>
-
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {box.items.map((item, i) => (
-                    <div
-                      key={i}
-                      className="border-l-2 border-gray-200 dark:border-gray-700 pl-4 py-1" // For left border
-                    >
+                    <div key={i} className="relative pl-4 py-2">
+                      <span
+                        ref={(el) => (lineRefs.current[index * 10 + i] = el)}
+                        className="absolute left-0 top-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"
+                        style={{height: "0%"}}
+                      />
                       <h4
                         className={`font-medium ${
                           i % 2 === 0
@@ -239,12 +232,12 @@ const About = () => {
                         {item.name}
                       </h4>
                       {item.date && (
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           {item.date}
                         </p>
                       )}
                       {item.description && (
-                        <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+                        <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
                           {item.description}
                         </p>
                       )}
