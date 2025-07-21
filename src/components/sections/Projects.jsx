@@ -11,7 +11,7 @@ const webProjects = [
     id: 1,
     title: "FaceRipple",
     description: "Video Calling Realtime Chat App & Social App",
-    image: "/assets/FaceRipple.png",
+    image: "/assets/FaceRipple1.png",
     technologies: [
       "React",
       "Node.js",
@@ -29,7 +29,7 @@ const webProjects = [
     title: "ResumeGenie Ai",
     description:
       "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS (Applicant Tracking System) score for the resume. It uses OpenAI's GPT-3.5 Turbo model for generating the ATS score and insights. IT also gives suggestions to improve the resume. Built with React(Typescript), puter.js, and Tailwind CSS.",
-    image: "/assets/ResumeGenie.png",
+    image: "/assets/ResumeGenie1.png",
     technologies: [
       "React",
       "Typescript",
