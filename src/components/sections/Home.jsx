@@ -174,7 +174,9 @@ const Home = ({scrollToSection}) => {
               sequence={[
                 "Frontend Developer",
                 2000,
-                "Full Stack Developer",
+                "MERN Stack Developer",
+                2000,
+                "ML Enthusiast",
                 2000,
               ]}
               wrapper="p"
