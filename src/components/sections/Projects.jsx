@@ -37,7 +37,7 @@ const webProjects = [
       "Tailwind CSS",
       "OpenAI API",
     ],
-    liveLink: "",
+    liveLink: "https://resume-genie-ai.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/ResumeGenie-Ai",
   },
 
