@@ -76,7 +76,6 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Mail API --> Some times gets Error 500
     const data = {
       access_key: "5e5c5d50-8ed2-4b2d-b93d-3ba067f0af11",
       name: formData.name,
@@ -131,9 +130,17 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-20 bg-light-100 dark:bg-dark-100"
+      className="relative py-20 bg-light-100 dark:bg-dark-100 overflow-hidden"
     >
-      <div className="container mx-auto px-4 md:px-6">
+      {/* Square Grid Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(#00000011_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff0e_1px,transparent_1px)] [background-size:30px_30px] z-0"></div>
+
+      {/* Blurred Color Blobs */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-purple-500 opacity-20 rounded-full filter blur-3xl z-0"></div>
+      <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400 opacity-20 rounded-full filter blur-2xl z-0"></div>
+      <div className="absolute bottom-0 left-1/2 w-80 h-80 bg-green-400 opacity-20 rounded-full filter blur-2xl transform -translate-x-1/2 z-0"></div>
+
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <h2
           ref={headingRef}
           className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-950 dark:text-white"
@@ -142,7 +149,6 @@ const Contact = () => {
         </h2>
 
         <div className="grid md:grid-cols-2 gap-10 items-start">
-          {/* Contact Form */}
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -234,7 +240,6 @@ const Contact = () => {
             </button>
           </form>
 
-          {/* Contact Information */}
           <div ref={infoRef} className="space-y-8">
             <div className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6">
               <h3 className="text-xl font-semibold text-gray-950 dark:text-white mb-6">
@@ -304,7 +309,6 @@ const Contact = () => {
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
                 </a>
                 <a
                   href="https://www.linkedin.com/in/tharun-kunamalla-/"
@@ -313,7 +317,6 @@ const Contact = () => {
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Linkedin className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
                 </a>
                 <a
                   href="https://x.com/Tharunk0509"
@@ -322,7 +325,6 @@ const Contact = () => {
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Twitter className="h-5 w-5" />
-                  <span className="sr-only">Twitter</span>
                 </a>
                 <a
                   href="https://www.instagram.com/__tharun_0509.__/"
@@ -331,7 +333,6 @@ const Contact = () => {
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Instagram className="h-5 w-5" />
-                  <span className="sr-only">Instagram</span>
                 </a>
               </div>
             </div>

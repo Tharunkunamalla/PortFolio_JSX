@@ -25,7 +25,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/FaceRipple",
   },
   {
-    id: 3,
+    id: 2,
     title: "ResumeGenie Ai",
     description:
       "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS (Applicant Tracking System) score for the resume. It uses OpenAI's GPT-3.5 Turbo model for generating the ATS score and insights. IT also gives suggestions to improve the resume. Built with React(Typescript), puter.js, and Tailwind CSS.",
@@ -42,7 +42,7 @@ const webProjects = [
   },
 
   {
-    id: 4,
+    id: 3,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive web application for a resort booking system, featuring user authentication, room management, and booking functionalities.",
@@ -60,7 +60,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
   {
-    id: 5,
+    id: 4,
     title: "Tournament Management System",
     description:
       "A web application for managing tournaments, including user authentication, team management, and match scheduling.",
@@ -70,7 +70,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
-    id: 6,
+    id: 5,
     title: "Portfolio Website",
     description:
       "A personal portfolio website showcasing my projects, skills, and experience.",
@@ -80,7 +80,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 7,
+    id: 6,
     title: "Gemini-AI",
     description:
       "An AI assistant dashboard interface integrated with smart modules and a beautiful UI.",
@@ -90,7 +90,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 8,
+    id: 7,
     title: "Jarvis -Voice Assistant",
     description:
       "A real-time voice assistant that responds to speech and fetches data from Google.",
@@ -103,7 +103,7 @@ const webProjects = [
 
 const machineLearningProjects = [
   {
-    id: 7,
+    id: 8,
     title: "Brain Tumor MRI Classification",
     description:
       "CNN and Transfer Learning based classification of MRI images.",
@@ -114,7 +114,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 8,
+    id: 9,
     title: "PhonePe Transactions Insights",
     description:
       "A comprehensive analysis of PhonePe transactions using Python, Pandas, and Matplotlib.",
