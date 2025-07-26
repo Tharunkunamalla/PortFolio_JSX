@@ -1,0 +1,93 @@
+[
+  {
+    "id": "1",
+    "title": "Sapphire Skies Resort",
+    "tagline": "Effortless Booking at Your Fingertips",
+    "description": "Sapphire Skies Resort is a full-fledged resort booking system offering user authentication, room availability, online payments, and an admin dashboard. Built using React, Tailwind CSS, Node.js, Express, MongoDB, and Clerk.",
+    "image": "../assets/sapphire-skies-resort.jpg",
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Clerk"
+    ],
+    "github": "https://github.com/Tharunkunamalla/sapphire-skies-resort",
+    "live": "https://sapphire-skies-resort.vercel.app"
+  },
+  {
+    "id": "2",
+    "title": "FaceRipple",
+    "tagline": "Realtime Communication Simplified",
+    "description": "FaceRipple is a real-time social communication app with video calling, messaging, and a friends system. It uses getStream for chat and WebRTC for video communication, with complete backend using Node.js, Express, and MongoDB.",
+    "image": "/images/faceripple.jpg",
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "getStream",
+      "WebRTC"
+    ],
+    "github": "https://github.com/Tharunkunamalla/faceripple",
+    "live": "https://faceripple.vercel.app"
+  },
+  {
+    "id": "3",
+    "title": "Personal Portfolio",
+    "tagline": "Showcasing Skills and Projects",
+    "description": "A sleek and responsive personal portfolio website that showcases my projects, resume, contact, and tech stack. Built with React and Tailwind CSS, animated with Framer Motion.",
+    "image": "/images/portfolio.jpg",
+    "technologies": ["React", "Tailwind CSS", "Framer Motion"],
+    "github": "https://github.com/Tharunkunamalla/portfolio",
+    "live": "https://portfolio-tharun-kunamalla.vercel.app"
+  },
+  {
+    "id": "4",
+    "title": "Tournament Management System",
+    "tagline": "Managing Multi-Sport Events Seamlessly",
+    "description": "A PHP-based tournament system managing sports, regions, players, events, and matches. Includes admin control, sponsor tracking, and match visualization using advanced CSS styling.",
+    "image": "/images/tournament-system.jpg",
+    "technologies": ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
+    "github": "https://github.com/Tharunkunamalla/tournament-management-system",
+    "live": ""
+  },
+  {
+    "id": "5",
+    "title": "AI-Powered Resume Builder",
+    "tagline": "Smart Resumes for Modern Developers",
+    "description": "An AI-powered resume builder that allows users to generate professional resumes using AI suggestions, smart formatting, and PDF export functionality.",
+    "image": "/images/ai-resume.jpg",
+    "technologies": [
+      "React",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "OpenAI API"
+    ],
+    "github": "https://github.com/Tharunkunamalla/ai-resume-builder",
+    "live": ""
+  },
+  {
+    "id": "6",
+    "title": "SpiderWeb Canvas Animation",
+    "tagline": "Visually Stunning Web Animation",
+    "description": "An interactive canvas-based spiderweb animation integrated into the homepage of my portfolio. Created using HTML5 Canvas and requestAnimationFrame for smooth visuals.",
+    "image": "/images/spiderweb-canvas.jpg",
+    "technologies": ["JavaScript", "Canvas API", "HTML", "CSS"],
+    "github": "https://github.com/Tharunkunamalla/spiderweb-canvas-animation",
+    "live": ""
+  },
+  {
+    "id": "7",
+    "title": "Quiz App with Report Generation",
+    "tagline": "Track Your Scores with PDF Reports",
+    "description": "A Python-based quiz application using Tkinter, MySQL for user management and question storage. Generates result reports in PDF and sends via email.",
+    "image": "/images/quiz-app.jpg",
+    "technologies": ["Python", "Tkinter", "MySQL", "ReportLab", "smtplib"],
+    "github": "https://github.com/Tharunkunamalla/quiz-app-report",
+    "live": ""
+  }
+]
