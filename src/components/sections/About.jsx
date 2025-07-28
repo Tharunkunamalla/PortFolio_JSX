@@ -51,6 +51,16 @@ const aboutData = [
     title: "Experience",
     items: [
       {
+        name: "GSSoC- 25 Contributor",
+        date: "2025",
+        description: "GirlScript Foundation",
+      },
+      {
+        name: "Open Source Contribution India",
+        date: "2025",
+        description: "Various Open Source Projects",
+      },
+      {
         name: "Sub-Lead of Robotics Club-IIIT-K",
         date: "2024 - 2025",
         description: "BETA-LABS, IIIT-Kottayam",
