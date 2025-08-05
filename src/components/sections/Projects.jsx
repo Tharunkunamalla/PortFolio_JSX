@@ -28,7 +28,7 @@ const webProjects = [
     id: 2,
     title: "ResumeGenie Ai",
     description:
-      "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS (Applicant Tracking System) score for the resume. It uses OpenAI's GPT-3.5 Turbo model for generating the ATS score and insights. IT also gives suggestions to improve the resume. Built with React(Typescript), puter.js, and Tailwind CSS.",
+      "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
     image: "/assets/ResumeGenie1.png",
     technologies: [
       "React",
@@ -40,12 +40,11 @@ const webProjects = [
     liveLink: "https://resume-genie-ai.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/ResumeGenie-Ai",
   },
-
   {
     id: 3,
     title: "Sapphire Skies Resort",
     description:
-      "A fully responsive web application for a resort booking system, featuring user authentication, room management, and booking functionalities.",
+      "A fully responsive resort booking app with authentication and room management.",
     image: "/assets/sapphire.png",
     technologies: [
       "React",
@@ -54,7 +53,6 @@ const webProjects = [
       "Express",
       "MongoDB",
       "Clerk",
-      "Prebuilt UI",
     ],
     liveLink: "https://sapphire-skies-resort.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
@@ -62,8 +60,7 @@ const webProjects = [
   {
     id: 4,
     title: "Tournament Management System",
-    description:
-      "A web application for managing tournaments, including user authentication, team management, and match scheduling.",
+    description: "Manage tournaments, teams, and schedules online.",
     image: "/assets/TMS_proj.png",
     technologies: ["Php", "SQL", "JS", "CSS", "HTML"],
     liveLink: "",
@@ -72,8 +69,7 @@ const webProjects = [
   {
     id: 5,
     title: "Portfolio Website",
-    description:
-      "A personal portfolio website showcasing my projects, skills, and experience.",
+    description: "My personal portfolio showcasing skills and projects.",
     image: "/assets/portfolio.png",
     technologies: ["Js", "CSS", "HTML"],
     liveLink: "https://tharun-kunamalla.netlify.app/",
@@ -82,8 +78,7 @@ const webProjects = [
   {
     id: 6,
     title: "Gemini-AI",
-    description:
-      "An AI assistant dashboard interface integrated with smart modules and a beautiful UI.",
+    description: "AI assistant dashboard with clean UI and GPT integration.",
     image: "/assets/gemini.jpg",
     technologies: ["JS", "Css", "OpenAI API"],
     liveLink: "https://gemini-app-chatbot.vercel.app/",
@@ -92,8 +87,7 @@ const webProjects = [
   {
     id: 7,
     title: "Jarvis -Voice Assistant",
-    description:
-      "A real-time voice assistant that responds to speech and fetches data from Google.",
+    description: "Real-time voice assistant with Google integration.",
     image: "/assets/jarvis.gif",
     technologies: ["JS", "Google"],
     liveLink: "https://jarvis-responder.vercel.app/",
@@ -105,8 +99,7 @@ const machineLearningProjects = [
   {
     id: 8,
     title: "Brain Tumor MRI Classification",
-    description:
-      "CNN and Transfer Learning based classification of MRI images.",
+    description: "CNN and Transfer Learning to classify MRI brain images.",
     image: "/assets/brain_tumor.png",
     technologies: ["Python", "TensorFlow", "Keras", "Streamlit"],
     liveLink: "",
@@ -117,7 +110,7 @@ const machineLearningProjects = [
     id: 9,
     title: "PhonePe Transactions Insights",
     description:
-      "A comprehensive analysis of PhonePe transactions using Python, Pandas, and Matplotlib.",
+      "Data analysis of PhonePe transactions using Python and visualization libraries.",
     image: "/assets/phonepe.png",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     liveLink: "",
@@ -178,7 +171,6 @@ const Projects = () => {
         }
       });
     }, sectionRef);
-    // Refresh ScrollTrigger to ensure correct positioning
     ScrollTrigger.refresh();
     return () => ctx.revert();
   }, [activeTab]);
@@ -195,9 +187,17 @@ const Projects = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="py-20 bg-light-200 dark:bg-dark-200"
+      className="relative py-20 bg-light-200 dark:bg-dark-200 overflow-hidden"
     >
-      <div className="container mx-auto px-4 md:px-6">
+      {/* Glowing background orbs */}
+      <div className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
+      <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
+
+      {/* Optional background pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
+
+      {/* Actual Content */}
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
         <h2
           ref={headingRef}
           className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white"
@@ -206,38 +206,23 @@ const Projects = () => {
         </h2>
 
         <div className="flex flex-wrap md:flex-nowrap justify-center items-center mb-10 gap-4 w-full px-4">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
-              activeTab === "all"
-                ? "bg-secondary-500 text-white shadow-md"
-                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
-            }`}
-          >
-            All Projects
-          </button>
-
-          <button
-            onClick={() => setActiveTab("web")}
-            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
-              activeTab === "web"
-                ? "bg-secondary-500 text-white shadow-md"
-                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
-            }`}
-          >
-            Web Projects
-          </button>
-
-          <button
-            onClick={() => setActiveTab("ml")}
-            className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
-              activeTab === "ml"
-                ? "bg-secondary-500 text-white shadow-md"
-                : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
-            }`}
-          >
-            Machine Learning
-          </button>
+          {["all", "web", "ml"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
+                activeTab === tab
+                  ? "bg-secondary-500 text-white shadow-md"
+                  : "border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300"
+              }`}
+            >
+              {tab === "all"
+                ? "All Projects"
+                : tab === "web"
+                ? "Web Projects"
+                : "Machine Learning"}
+            </button>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -262,7 +247,7 @@ const Projects = () => {
                 >
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="interactive p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300 group"
+                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
                     aria-label="View live demo"
                   >
                     <Monitor className="h-5 w-5" />
@@ -271,7 +256,7 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="interactive p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300 group"
+                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
                     aria-label="View source code"
                   >
                     <Code className="h-5 w-5" />
@@ -287,9 +272,9 @@ const Projects = () => {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
+                  {project.technologies.map((tech, idx) => (
                     <span
-                      key={techIndex}
+                      key={idx}
                       className="px-2 py-1 bg-light-300 dark:bg-dark-400 text-gray-700 dark:text-gray-300 text-xs rounded-full"
                     >
                       {tech}
@@ -299,7 +284,7 @@ const Projects = () => {
                 <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="interactive text-sm text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 transition-colors duration-300"
+                    className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 transition-colors duration-300"
                   >
                     Live Demo <ExternalLink className="h-3 w-3" />
                   </button>
@@ -307,7 +292,7 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="interactive text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 transition-colors duration-300"
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 transition-colors duration-300"
                   >
                     View Code <Github className="h-4 w-4" />
                   </a>
@@ -322,7 +307,7 @@ const Projects = () => {
             href="https://github.com/Tharunkunamalla"
             target="_blank"
             rel="noopener noreferrer"
-            className="interactive inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white hover:dark:bg-secondary-500 hover:bg-secondary-500 transition-colors duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white hover:dark:bg-secondary-500 hover:bg-secondary-500 transition-colors duration-300"
           >
             More Projects on GitHub <Github className="h-5 w-5" />
           </a>
