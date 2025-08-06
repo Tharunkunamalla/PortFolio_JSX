@@ -1,3 +1,5 @@
+"use client";
+
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
@@ -10,6 +12,7 @@ import {
   Code2,
 } from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
+import {useTheme} from "../../context/ThemeContext";
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -49,6 +52,7 @@ function spawnBubble(container) {
 }
 
 const Home = ({scrollToSection}) => {
+  const {theme} = useTheme();
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -68,12 +72,21 @@ const Home = ({scrollToSection}) => {
         )
         .from(
           buttonsRef.current,
-          {y: 30, opacity: 0, duration: 0.8, stagger: 0.15},
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.15,
+          },
           "-=0.4"
         )
         .from(
           scrollDownRef.current,
-          {opacity: 0, duration: 0.5, y: 20},
+          {
+            opacity: 0,
+            duration: 0.5,
+            y: 20,
+          },
           "-=0.2"
         );
 
@@ -95,7 +108,6 @@ const Home = ({scrollToSection}) => {
     if (!container || !loader) return;
 
     const loadingTl = gsap.timeline({delay: 1.5});
-
     loadingTl.to(loader, {
       yPercent: -100,
       duration: 1,
@@ -169,7 +181,6 @@ const Home = ({scrollToSection}) => {
               </span>
             </h1>
 
-            {/* Typing animation */}
             <TypeAnimation
               sequence={[
                 "Frontend Developer",
@@ -193,9 +204,36 @@ const Home = ({scrollToSection}) => {
               looking for opportunities to enhance my skills
             </p>
 
-            <p className="text-gray-600 dark:text-gray-300 mb-8">
-              Currently open to work
-            </p>
+            <div className="flex items-center gap-2 text-lg font-medium mb-4 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 w-fit">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+              Open to Work
+            </div>
+
+            <div className="flex flex-wrap gap-4 mb-8">
+              <img
+                src="/assets/mongodb.svg"
+                alt="MongoDB"
+                className="w-10 h-10"
+              />
+              <img
+                src={
+                  theme === "dark"
+                    ? "/assets/expressjs-dark.svg"
+                    : "/assets/express.svg"
+                }
+                alt="Express"
+                className="w-10 h-10"
+              />
+              <img src="/assets/react.svg" alt="React" className="w-10 h-10" />
+              <img
+                src="/assets/nodejs.svg"
+                alt="Node.js"
+                className="w-10 h-10"
+              />
+            </div>
 
             <div ref={buttonsRef} className="flex flex-wrap gap-4">
               <button
@@ -223,33 +261,34 @@ const Home = ({scrollToSection}) => {
                 className="w-full h-full object-cover rounded-3xl animate-float"
               />
               <div className="md:hidden absolute -left-4 flex flex-col space-y-4 top-1/2 transform -translate-y-1/2">
-                <a
-                  href="https://github.com/Tharunkunamalla"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-white dark:bg-dark-200 flex items-center justify-center text-gray-800 dark:text-white shadow-md hover:bg-secondary-500 hover:text-white transition-all duration-300 interactive"
-                >
-                  <Github className="h-5 w-5" />
-                  <span className="sr-only">GitHub</span>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/tharun-kunamalla-b9b477288/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-white dark:bg-dark-200 flex items-center justify-center text-gray-800 dark:text-white shadow-md hover:bg-secondary-500 hover:text-white transition-all duration-300 interactive"
-                >
-                  <Linkedin className="h-5 w-5" />
-                  <span className="sr-only">LinkedIn</span>
-                </a>
-                <a
-                  href="https://www.instagram.com/__tharun_0509.__/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-full bg-white dark:bg-dark-200 flex items-center justify-center text-gray-800 dark:text-white shadow-md hover:bg-secondary-500 hover:text-white transition-all duration-300 interactive"
-                >
-                  <Instagram className="h-5 w-5" />
-                  <span className="sr-only">Instagram</span>
-                </a>
+                {[
+                  {
+                    href: "https://github.com/Tharunkunamalla",
+                    icon: <Github className="h-5 w-5" />,
+                    label: "GitHub",
+                  },
+                  {
+                    href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
+                    icon: <Linkedin className="h-5 w-5" />,
+                    label: "LinkedIn",
+                  },
+                  {
+                    href: "https://www.instagram.com/__tharun_0509.__/",
+                    icon: <Instagram className="h-5 w-5" />,
+                    label: "Instagram",
+                  },
+                ].map(({href, icon, label}) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-white dark:bg-dark-200 flex items-center justify-center text-gray-800 dark:text-white shadow-md hover:bg-secondary-500 hover:text-white transition-all duration-300 interactive"
+                  >
+                    {icon}
+                    <span className="sr-only">{label}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

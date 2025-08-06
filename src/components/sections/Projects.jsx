@@ -1,3 +1,5 @@
+// src/components/sections/Projects.jsx
+import React from "react";
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -6,6 +8,7 @@ import toast from "react-hot-toast";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Your project data
 const webProjects = [
   {
     id: 1,
@@ -151,7 +154,9 @@ const Projects = () => {
       ? webProjects
       : machineLearningProjects;
 
-  projectRefs.current = Array(currentProjects.length).fill(null);
+  projectRefs.current = Array(currentProjects.length)
+    .fill()
+    .map((_, i) => projectRefs.current[i] || React.createRef());
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -192,11 +197,9 @@ const Projects = () => {
       {/* Glowing background orbs */}
       <div className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
       <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
-
-      {/* Optional background pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
 
-      {/* Actual Content */}
+      {/* Content */}
       <div className="relative z-10 container mx-auto px-4 md:px-6">
         <h2
           ref={headingRef}
@@ -248,7 +251,6 @@ const Projects = () => {
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
                     className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
-                    aria-label="View live demo"
                   >
                     <Monitor className="h-5 w-5" />
                   </button>
@@ -257,13 +259,11 @@ const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
-                    aria-label="View source code"
                   >
                     <Code className="h-5 w-5" />
                   </a>
                 </div>
               </div>
-
               <div className="p-6">
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                   {project.title}
