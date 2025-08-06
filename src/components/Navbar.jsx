@@ -97,7 +97,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               <Github className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
             </a>
             <a
-              href="https://www.linkedin.com/in/tharun-kunamalla-b9b477288/"
+              href="https://www.linkedin.com/in/tharun-kunamalla-/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
