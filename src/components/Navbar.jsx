@@ -80,9 +80,9 @@ const Navbar = ({activeSection, scrollToSection}) => {
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <Sun className="h-7 w-7 text-yellow-400" />
+              <Sun className="h-7 w-7 text-yellow-400 transform transition-transform duration-300 hover:rotate-90" />
             ) : (
-              <Moon className="h-7 w-7 text-gray-700" />
+              <Moon className="h-7 w-7 text-gray-700 transform transition-transform duration-300 hover:rotate-[20deg]" />
             )}
           </button>
 
@@ -94,7 +94,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Github className="h-7 w-7" />
+              <Github className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
             </a>
             <a
               href="https://www.linkedin.com/in/tharun-kunamalla-b9b477288/"
@@ -102,7 +102,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Linkedin className="h-7 w-7" />
+              <Linkedin className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
             </a>
             <a
               href="https://instagram.com/__tharun_0509.__"
@@ -110,7 +110,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Instagram className="h-7 w-7" />
+              <Instagram className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
             </a>
           </div>
 
