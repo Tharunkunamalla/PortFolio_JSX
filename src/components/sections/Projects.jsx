@@ -120,6 +120,40 @@ const machineLearningProjects = [
     codeLink:
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
+  {
+    id: 10,
+    title: "Shopper spectrum - Customer Segmentation",
+    description:
+      "Customer segmentation using K-means clustering to analyze shopping behavior.",
+    image: "/assets/shopper1.png",
+    technologies: [
+      "Python",
+      "Scikit-learn",
+      "Pandas",
+      "Matplotlib",
+      "Seaborn",
+      "Streamlit",
+    ],
+    liveLink: "https://shopperspectrum-recommendation-ai.streamlit.app/",
+    codeLink:
+      "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
+  },
+  {
+    id: 11,
+    title: "Multi class fish classification",
+    description: "CNN model to classify different species of fish.",
+    image: "/assets/fish1.png",
+    technologies: [
+      "Python",
+      "TensorFlow",
+      "Keras",
+      "Streamlit",
+      "5 pre-trained models",
+    ],
+    liveLink: "",
+    codeLink:
+      "https://github.com/Tharunkunamalla/Project-4_Labementix_Multi_Class_Fish_Classification",
+  },
 ];
 
 const allProjects = [...webProjects, ...machineLearningProjects];
