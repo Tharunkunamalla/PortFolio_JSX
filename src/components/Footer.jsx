@@ -12,7 +12,20 @@ const Footer = () => {
               href="#home"
               className="text-lg md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
-              <span className="text-secondary-500">T</span>harun
+              {/* Mobile */}
+              <span className="block md:hidden">
+                <span className="text-secondary-500 drop-shadow-md text-4xl">
+                  T
+                </span>
+                <span className="drop-shadow-md text-2xl">harun Kunamalla</span>
+              </span>
+              {/* Desktop */}
+              <span className="hidden md:block">
+                <span className="text-secondary-500 drop-shadow-md text-4xl">
+                  T
+                </span>
+                harun K
+              </span>
             </a>
           </div>
 
