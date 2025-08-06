@@ -1,7 +1,9 @@
+// src/components/sections/Projects.jsx
 import React from "react";
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor} from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -329,6 +331,12 @@ const Projects = () => {
                   >
                     View Code <Github className="h-4 w-4" />
                   </a>
+                  <RouterLink
+                    to={`/project/${project.id}`}
+                    className="text-sm text-secondary-600 dark:text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-300 flex items-center gap-1 transition-colors duration-300"
+                  >
+                    View Details <ExternalLink className="h-3 w-3" />
+                  </RouterLink>
                 </div>
               </div>
             </div>

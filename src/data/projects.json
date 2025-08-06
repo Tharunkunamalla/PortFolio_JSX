@@ -1,93 +1,139 @@
-[
-  {
-    "id": "1",
-    "title": "Sapphire Skies Resort",
-    "tagline": "Effortless Booking at Your Fingertips",
-    "description": "Sapphire Skies Resort is a full-fledged resort booking system offering user authentication, room availability, online payments, and an admin dashboard. Built using React, Tailwind CSS, Node.js, Express, MongoDB, and Clerk.",
-    "image": "../assets/sapphire-skies-resort.jpg",
-    "technologies": [
-      "React",
-      "Tailwind CSS",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Clerk"
-    ],
-    "github": "https://github.com/Tharunkunamalla/sapphire-skies-resort",
-    "live": "https://sapphire-skies-resort.vercel.app"
-  },
-  {
-    "id": "2",
-    "title": "FaceRipple",
-    "tagline": "Realtime Communication Simplified",
-    "description": "FaceRipple is a real-time social communication app with video calling, messaging, and a friends system. It uses getStream for chat and WebRTC for video communication, with complete backend using Node.js, Express, and MongoDB.",
-    "image": "/images/faceripple.jpg",
-    "technologies": [
-      "React",
-      "Tailwind CSS",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "getStream",
-      "WebRTC"
-    ],
-    "github": "https://github.com/Tharunkunamalla/faceripple",
-    "live": "https://faceripple.vercel.app"
-  },
-  {
-    "id": "3",
-    "title": "Personal Portfolio",
-    "tagline": "Showcasing Skills and Projects",
-    "description": "A sleek and responsive personal portfolio website that showcases my projects, resume, contact, and tech stack. Built with React and Tailwind CSS, animated with Framer Motion.",
-    "image": "/images/portfolio.jpg",
-    "technologies": ["React", "Tailwind CSS", "Framer Motion"],
-    "github": "https://github.com/Tharunkunamalla/portfolio",
-    "live": "https://portfolio-tharun-kunamalla.vercel.app"
-  },
-  {
-    "id": "4",
-    "title": "Tournament Management System",
-    "tagline": "Managing Multi-Sport Events Seamlessly",
-    "description": "A PHP-based tournament system managing sports, regions, players, events, and matches. Includes admin control, sponsor tracking, and match visualization using advanced CSS styling.",
-    "image": "/images/tournament-system.jpg",
-    "technologies": ["PHP", "MySQL", "HTML", "CSS", "JavaScript"],
-    "github": "https://github.com/Tharunkunamalla/tournament-management-system",
-    "live": ""
-  },
-  {
-    "id": "5",
-    "title": "AI-Powered Resume Builder",
-    "tagline": "Smart Resumes for Modern Developers",
-    "description": "An AI-powered resume builder that allows users to generate professional resumes using AI suggestions, smart formatting, and PDF export functionality.",
-    "image": "/images/ai-resume.jpg",
-    "technologies": [
-      "React",
-      "Tailwind CSS",
-      "Node.js",
-      "Express",
-      "OpenAI API"
-    ],
-    "github": "https://github.com/Tharunkunamalla/ai-resume-builder",
-    "live": ""
-  },
-  {
-    "id": "6",
-    "title": "SpiderWeb Canvas Animation",
-    "tagline": "Visually Stunning Web Animation",
-    "description": "An interactive canvas-based spiderweb animation integrated into the homepage of my portfolio. Created using HTML5 Canvas and requestAnimationFrame for smooth visuals.",
-    "image": "/images/spiderweb-canvas.jpg",
-    "technologies": ["JavaScript", "Canvas API", "HTML", "CSS"],
-    "github": "https://github.com/Tharunkunamalla/spiderweb-canvas-animation",
-    "live": ""
-  },
-  {
-    "id": "7",
-    "title": "Quiz App with Report Generation",
-    "tagline": "Track Your Scores with PDF Reports",
-    "description": "A Python-based quiz application using Tkinter, MySQL for user management and question storage. Generates result reports in PDF and sends via email.",
-    "image": "/images/quiz-app.jpg",
-    "technologies": ["Python", "Tkinter", "MySQL", "ReportLab", "smtplib"],
-    "github": "https://github.com/Tharunkunamalla/quiz-app-report",
-    "live": ""
-  }
-]
+{
+  "webProjects": [
+    {
+      "id": 1,
+      "title": "FaceRipple",
+      "description": "Video Calling Realtime Chat App & Social App",
+      "image": "/assets/FaceRipple1.png",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Postman-Api",
+        "Tailwind CSS",
+        "getStream"
+      ],
+      "liveLink": "https://faceripple.onrender.com/",
+      "codeLink": "https://github.com/Tharunkunamalla/FaceRipple"
+    },
+    {
+      "id": 2,
+      "title": "ResumeGenie Ai",
+      "description": "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
+      "image": "/assets/ResumeGenie1.png",
+      "technologies": [
+        "React",
+        "Typescript",
+        "Puter.js",
+        "Tailwind CSS",
+        "OpenAI API"
+      ],
+      "liveLink": "https://resume-genie-ai.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/ResumeGenie-Ai"
+    },
+    {
+      "id": 3,
+      "title": "Sapphire Skies Resort",
+      "description": "A fully responsive resort booking app with authentication and room management.",
+      "image": "/assets/sapphire.png",
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "Clerk"
+      ],
+      "liveLink": "https://sapphire-skies-resort.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Sapphire-skies-resort"
+    },
+    {
+      "id": 4,
+      "title": "Tournament Management System",
+      "description": "Manage tournaments, teams, and schedules online.",
+      "image": "/assets/TMS_proj.png",
+      "technologies": ["Php", "SQL", "JS", "CSS", "HTML"],
+      "liveLink": "",
+      "codeLink": "https://github.com/Tharunkunamalla/TMS"
+    },
+    {
+      "id": 5,
+      "title": "Portfolio Website",
+      "description": "My personal portfolio showcasing skills and projects.",
+      "image": "/assets/portfolio.png",
+      "technologies": ["Js", "CSS", "HTML"],
+      "liveLink": "https://tharun-kunamalla.netlify.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Portfolio-js"
+    },
+    {
+      "id": 6,
+      "title": "Gemini-AI",
+      "description": "AI assistant dashboard with clean UI and GPT integration.",
+      "image": "/assets/gemini.jpg",
+      "technologies": ["JS", "Css", "OpenAI API"],
+      "liveLink": "https://gemini-app-chatbot.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Gemini_App"
+    },
+    {
+      "id": 7,
+      "title": "Jarvis -Voice Assistant",
+      "description": "Real-time voice assistant with Google integration.",
+      "image": "/assets/jarvis.gif",
+      "technologies": ["JS", "Google"],
+      "liveLink": "https://jarvis-responder.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Jarvis"
+    }
+  ],
+  "machineLearningProjects": [
+    {
+      "id": 8,
+      "title": "Brain Tumor MRI Classification",
+      "description": "CNN and Transfer Learning to classify MRI brain images.",
+      "image": "/assets/brain_tumor.png",
+      "technologies": ["Python", "TensorFlow", "Keras", "Streamlit"],
+      "liveLink": "",
+      "codeLink": "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls"
+    },
+    {
+      "id": 9,
+      "title": "PhonePe Transactions Insights",
+      "description": "Data analysis of PhonePe transactions using Python and visualization libraries.",
+      "image": "/assets/phonepe.png",
+      "technologies": ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
+      "liveLink": "",
+      "codeLink": "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights"
+    },
+    {
+      "id": 10,
+      "title": "Shopper spectrum - Customer Segmentation",
+      "description": "Customer segmentation using K-means clustering to analyze shopping behavior.",
+      "image": "/assets/shopper1.png",
+      "technologies": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Matplotlib",
+        "Seaborn",
+        "Streamlit"
+      ],
+      "liveLink": "https://shopperspectrum-recommendation-ai.streamlit.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation"
+    },
+    {
+      "id": 11,
+      "title": "Multi class fish classification",
+      "description": "CNN model to classify different species of fish.",
+      "image": "/assets/fish1.png",
+      "technologies": [
+        "Python",
+        "TensorFlow",
+        "Keras",
+        "Streamlit",
+        "5 pre-trained models"
+      ],
+      "liveLink": "",
+      "codeLink": "https://github.com/Tharunkunamalla/Project-4_Labementix_Multi_Class_Fish_Classification"
+    }
+  ]
+}
