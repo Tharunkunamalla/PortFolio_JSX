@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "FaceRipple",
-      "description": "Video Calling Realtime Chat App & Social App",
+      "description": "Video Calling Realtime Chat App & Social App. Combines WebRTC with React for seamless peer-to-peer video chat. Integrates getStream API for real-time messaging, with MongoDB storing user data and messages. Tailwind CSS ensures responsive design. User authentication and room management are handled via Express and Node.js backend.",
       "image": "/assets/FaceRipple1.png",
       "technologies": [
         "React",
@@ -20,7 +20,7 @@
     {
       "id": 2,
       "title": "ResumeGenie Ai",
-      "description": "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
+      "description": "An AI-powered Resume Analyzer and Generator. Utilizes OpenAI's GPT-3.5 Turbo to analyze resumes and generate feedback. Users can upload resumes and get ATS score and suggestions for improvements. Built with React and TypeScript, with Tailwind CSS for a modern UI. It helps job seekers optimize resumes for ATS systems.",
       "image": "/assets/ResumeGenie1.png",
       "technologies": [
         "React",
@@ -35,7 +35,7 @@
     {
       "id": 3,
       "title": "Sapphire Skies Resort",
-      "description": "A fully responsive resort booking app with authentication and room management.",
+      "description": "A fully functional resort booking system. It includes user registration, room selection, and booking history. Admin dashboard to manage rooms and bookings. Uses Clerk for user authentication. Frontend in React with Tailwind CSS and backend via Node.js, Express, and MongoDB.",
       "image": "/assets/sapphire.png",
       "technologies": [
         "React",
@@ -51,7 +51,7 @@
     {
       "id": 4,
       "title": "Tournament Management System",
-      "description": "Manage tournaments, teams, and schedules online.",
+      "description": "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.",
       "image": "/assets/TMS_proj.png",
       "technologies": ["Php", "SQL", "JS", "CSS", "HTML"],
       "liveLink": "",
@@ -60,7 +60,7 @@
     {
       "id": 5,
       "title": "Portfolio Website",
-      "description": "My personal portfolio showcasing skills and projects.",
+      "description": "Responsive personal portfolio with project showcase, contact form, and social media integration. Built using vanilla HTML/CSS/JS. Clean UI, animated sections, mobile-friendly layout. Hosted on Netlify.",
       "image": "/assets/portfolio.png",
       "technologies": ["Js", "CSS", "HTML"],
       "liveLink": "https://tharun-kunamalla.netlify.app/",
@@ -69,7 +69,7 @@
     {
       "id": 6,
       "title": "Gemini-AI",
-      "description": "AI assistant dashboard with clean UI and GPT integration.",
+      "description": "An AI chatbot interface styled like Google's Gemini. Uses OpenAI's GPT-3.5 for conversational abilities. Minimalistic UI built with vanilla JS/CSS. Aimed at providing clean UI inspiration for AI dashboard tools.",
       "image": "/assets/gemini.jpg",
       "technologies": ["JS", "Css", "OpenAI API"],
       "liveLink": "https://gemini-app-chatbot.vercel.app/",
@@ -78,7 +78,7 @@
     {
       "id": 7,
       "title": "Jarvis -Voice Assistant",
-      "description": "Real-time voice assistant with Google integration.",
+      "description": "Voice-controlled assistant using browser\u2019s speech recognition. Responds to commands like Google search, opening apps, telling time. Built with JS and Web Speech API. Clean UI and smooth audio feedback.",
       "image": "/assets/jarvis.gif",
       "technologies": ["JS", "Google"],
       "liveLink": "https://jarvis-responder.vercel.app/",
@@ -89,7 +89,7 @@
     {
       "id": 8,
       "title": "Brain Tumor MRI Classification",
-      "description": "CNN and Transfer Learning to classify MRI brain images.",
+      "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans.",
       "image": "/assets/brain_tumor.png",
       "technologies": ["Python", "TensorFlow", "Keras", "Streamlit"],
       "liveLink": "",
@@ -98,7 +98,7 @@
     {
       "id": 9,
       "title": "PhonePe Transactions Insights",
-      "description": "Data analysis of PhonePe transactions using Python and visualization libraries.",
+      "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction.",
       "image": "/assets/phonepe.png",
       "technologies": ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
       "liveLink": "",
@@ -107,7 +107,7 @@
     {
       "id": 10,
       "title": "Shopper spectrum - Customer Segmentation",
-      "description": "Customer segmentation using K-means clustering to analyze shopping behavior.",
+      "description": "Clustering shoppers using K-means based on demographics and spending patterns. Visualized with Seaborn and deployed via Streamlit for real-time interaction and insights. Targeted towards marketing teams for behavior analysis.",
       "image": "/assets/shopper1.png",
       "technologies": [
         "Python",
@@ -123,7 +123,7 @@
     {
       "id": 11,
       "title": "Multi class fish classification",
-      "description": "CNN model to classify different species of fish.",
+      "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics.",
       "image": "/assets/fish1.png",
       "technologies": [
         "Python",

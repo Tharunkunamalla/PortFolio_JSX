@@ -1,11 +1,14 @@
 import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
+import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../context/ThemeContext";
 
-const Navbar = ({activeSection, scrollToSection}) => {
+const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const {theme, toggleTheme} = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     {id: "home", label: "Home"},
@@ -23,15 +26,18 @@ const Navbar = ({activeSection, scrollToSection}) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleNavClick = (sectionId) => {
-    scrollToSection(sectionId);
     setIsMenuOpen(false);
+    if (location.pathname === "/") {
+      scrollToSection(sectionId);
+    } else {
+      navigate("/", {state: {scrollTo: sectionId}});
+    }
   };
 
   return (
@@ -58,13 +64,13 @@ const Navbar = ({activeSection, scrollToSection}) => {
               key={item.id}
               onClick={() => handleNavClick(item.id)}
               className={`relative text-lg font-medium transition ${
-                activeSection === item.id
+                activeSection === item.id && isHomePage
                   ? "text-secondary-500"
                   : "text-gray-700 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
               }`}
             >
               {item.label}
-              {activeSection === item.id && (
+              {activeSection === item.id && isHomePage && (
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-500 mt-1" />
               )}
             </button>
@@ -80,13 +86,13 @@ const Navbar = ({activeSection, scrollToSection}) => {
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <Sun className="h-7 w-7 text-yellow-400 transform transition-transform duration-300 hover:rotate-90" />
+              <Sun className="h-7 w-7 text-yellow-400 hover:rotate-90 transition-transform duration-300" />
             ) : (
-              <Moon className="h-7 w-7 text-gray-700 transform transition-transform duration-300 hover:rotate-[20deg]" />
+              <Moon className="h-7 w-7 text-gray-700 hover:rotate-[20deg] transition-transform duration-300" />
             )}
           </button>
 
-          {/* Social Icons - Desktop */}
+          {/* Socials Desktop */}
           <div className="hidden md:flex items-center space-x-4">
             <a
               href="https://github.com/Tharunkunamalla"
@@ -94,7 +100,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Github className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
+              <Github className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
             </a>
             <a
               href="https://www.linkedin.com/in/tharun-kunamalla-/"
@@ -102,7 +108,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Linkedin className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
+              <Linkedin className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
             </a>
             <a
               href="https://instagram.com/__tharun_0509.__"
@@ -110,7 +116,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               rel="noopener noreferrer"
               className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
-              <Instagram className="h-7 w-7 transform transition-transform duration-300 hover:scale-125 hover:rotate-[6deg]" />
+              <Instagram className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
             </a>
           </div>
 
@@ -125,7 +131,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
         </div>
       </div>
 
-      {/* Mobile Menu Close Icon - outside the menu box */}
+      {/* Mobile Menu Close Icon */}
       {isMenuOpen && (
         <button
           onClick={() => setIsMenuOpen(false)}
@@ -148,7 +154,7 @@ const Navbar = ({activeSection, scrollToSection}) => {
               key={item.id}
               onClick={() => handleNavClick(item.id)}
               className={`text-xl font-semibold text-left transition ${
-                activeSection === item.id
+                activeSection === item.id && isHomePage
                   ? "text-secondary-500"
                   : "text-gray-800 dark:text-gray-200"
               }`}
@@ -158,28 +164,16 @@ const Navbar = ({activeSection, scrollToSection}) => {
           ))}
 
           <div className="pt-4 border-t border-gray-300 dark:border-gray-700 flex space-x-5">
-            <a
-              href="https://github.com/Tharunkunamalla"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500"
-            >
+            <a href="https://github.com/Tharunkunamalla" target="_blank">
               <Github className="h-7 w-7" />
             </a>
             <a
-              href="https://www.linkedin.com/in/tharun-kunamalla-b9b477288/"
+              href="https://www.linkedin.com/in/tharun-kunamalla-/"
               target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500"
             >
               <Linkedin className="h-7 w-7" />
             </a>
-            <a
-              href="https://instagram.com/__tharun_0509.__"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500"
-            >
+            <a href="https://instagram.com/__tharun_0509.__" target="_blank">
               <Instagram className="h-7 w-7" />
             </a>
           </div>
