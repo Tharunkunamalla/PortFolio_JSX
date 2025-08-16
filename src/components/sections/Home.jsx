@@ -222,7 +222,7 @@ const Home = ({scrollToSection}) => {
 
             <div
               ref={buttonsRef}
-              className="flex flex-wrap gap-4 mb-20 md:mb-8"
+              className="flex flex-wrap gap-4 mb-16 md:mb-20"
             >
               <button
                 onClick={() => scrollToSection("contact")}
@@ -285,7 +285,7 @@ const Home = ({scrollToSection}) => {
         {/* Scroll Down Button */}
         <div
           ref={scrollDownRef}
-          className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center"
+          className="absolute bottom-4 md:bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center"
           onClick={() => scrollToSection("about")}
         >
           <span className="text-sm mb-3 text-gray-600 dark:text-gray-300">

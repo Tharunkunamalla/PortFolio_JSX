@@ -9,36 +9,67 @@
 .mouse-scroll {
   width: 35px;
   height: 55px;
-  border: 2px solid #ccc;
-  border-radius: 25px;
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
+  border-radius: 25px;
+  overflow: hidden; /* keep dot inside */
+}
+
+/* Gradient border using ::before */
+.mouse-scroll::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  padding: 2px; /* border thickness */
+  background: linear-gradient(180deg, #6366f1, #a855f7, #ec4899);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 0;
+}
+
+/* Dark mode gradient border */
+@media (prefers-color-scheme: dark) {
+  .mouse-scroll::before {
+    background: linear-gradient(180deg, #22d3ee, #3b82f6, #6366f1);
+  }
 }
 
 .mouse-scroll .wheel {
   width: 6px;
   height: 6px;
-  background: #ccc;
   border-radius: 50%;
   position: absolute;
   top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #6366f1, #ec4899);
   animation: wheelMove 1.5s infinite;
+  z-index: 1; /* keep above gradient border */
+}
+
+/* Dark mode dot */
+@media (prefers-color-scheme: dark) {
+  .mouse-scroll .wheel {
+    background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  }
 }
 
 @keyframes wheelMove {
   0% {
     opacity: 0;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
   }
   50% {
     opacity: 1;
-    transform: translateY(15px);
+    transform: translate(-50%, 15px);
   }
   100% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate(-50%, 30px);
   }
 }
 
