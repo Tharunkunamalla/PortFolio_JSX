@@ -3,14 +3,7 @@
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
-import {
-  ArrowDownCircle,
-  Github,
-  Linkedin,
-  Instagram,
-  Mail,
-  Code2,
-} from "lucide-react";
+import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 
@@ -89,14 +82,6 @@ const Home = ({scrollToSection}) => {
           },
           "-=0.2"
         );
-
-      gsap.to(scrollDownRef.current, {
-        y: 10,
-        repeat: -1,
-        yoyo: true,
-        duration: 1.5,
-        ease: "power1.inOut",
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -235,7 +220,10 @@ const Home = ({scrollToSection}) => {
               />
             </div>
 
-            <div ref={buttonsRef} className="flex flex-wrap gap-4">
+            <div
+              ref={buttonsRef}
+              className="flex flex-wrap gap-4 mb-20 md:mb-8"
+            >
               <button
                 onClick={() => scrollToSection("contact")}
                 className="interactive px-6 py-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
@@ -294,13 +282,18 @@ const Home = ({scrollToSection}) => {
           </div>
         </div>
 
+        {/* Scroll Down Button */}
         <div
           ref={scrollDownRef}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-600 dark:text-gray-300 flex flex-col items-center interactive cursor-pointer"
+          className="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center"
           onClick={() => scrollToSection("about")}
         >
-          <span className="text-sm mb-2">Scroll Down</span>
-          <ArrowDownCircle className="h-6 w-6" />
+          <span className="text-sm mb-3 text-gray-600 dark:text-gray-300">
+            Scroll
+          </span>
+          <div className="mouse-scroll">
+            <span className="wheel"></span>
+          </div>
         </div>
       </section>
     </>

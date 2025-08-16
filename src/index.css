@@ -2,9 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-/* * {
+/* 
   outline: 1px solid red !important;
 } */
+
+.mouse-scroll {
+  width: 35px;
+  height: 55px;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+.mouse-scroll .wheel {
+  width: 6px;
+  height: 6px;
+  background: #ccc;
+  border-radius: 50%;
+  position: absolute;
+  top: 12px;
+  animation: wheelMove 1.5s infinite;
+}
+
+@keyframes wheelMove {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
 
 /* Custom styles for the home page with bubbles*/
 .bubble {
