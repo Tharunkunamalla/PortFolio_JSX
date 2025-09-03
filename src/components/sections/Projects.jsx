@@ -153,7 +153,7 @@ const machineLearningProjects = [
     ],
     liveLink: "",
     codeLink:
-      "https://github.com/Tharunkunamalla/Project-4_Labementix_Multi_Class_Fish_Classification",
+      "https://github.com/Tharunkunamalla/project-5-Multiclass-fish-classification.git",
   },
 ];
 
