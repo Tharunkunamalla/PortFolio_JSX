@@ -64,7 +64,7 @@ const webProjects = [
   {
     id: 4,
     title: "Tournament Management System",
-    description: "Manage tournaments, teams, and schedules online.",
+    description: "Manage tournaments, teams, and schedules online. #ClgProject",
     image: "/assets/TMS_proj.png",
     technologies: ["Php", "SQL", "JS", "CSS", "HTML"],
     liveLink: "",

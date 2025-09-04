@@ -51,7 +51,7 @@
     {
       "id": 4,
       "title": "Tournament Management System",
-      "description": "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.",
+      "description": "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.#ClgProject",
       "image": "/assets/TMS_proj.png",
       "technologies": ["Php", "SQL", "JS", "CSS", "HTML"],
       "liveLink": "",
@@ -133,7 +133,7 @@
         "5 pre-trained models"
       ],
       "liveLink": "",
-      "codeLink": "https://github.com/Tharunkunamalla/Project-4_Labementix_Multi_Class_Fish_Classification"
+      "codeLink": "https://github.com/Tharunkunamalla/project-5-Multiclass-fish-classification.git"
     }
   ]
 }
