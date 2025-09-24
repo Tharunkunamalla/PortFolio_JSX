@@ -24,7 +24,7 @@ const aboutData = [
       {
         name: "High School",
         date: "2019 - 2020",
-        description: "Hanamkonda, Telangana",
+        description: "Shine High School, Hanamkonda, Telangana",
       },
     ],
   },
