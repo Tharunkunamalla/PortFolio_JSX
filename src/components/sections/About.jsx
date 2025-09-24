@@ -19,7 +19,7 @@ const aboutData = [
       {
         name: "Intermediate Education",
         date: "2020 - 2022",
-        description: "Hanamkonda, Telangana",
+        description: "Sr-Edu,Hanamkonda, Telangana",
       },
       {
         name: "High School",
