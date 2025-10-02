@@ -24,7 +24,7 @@ import {
   SiMysql,
   SiFirebase,
   SiGit,
-  SiVite,
+  // SiVite,
   SiFigma,
   SiGraphql,
   SiPython,
@@ -39,7 +39,7 @@ import {
   SiJupyter,
   SiGooglecolab,
   SiPostman,
-  SiBlender,
+  // SiBlender,
   SiBootstrap,
   SiVercel,
 } from "react-icons/si";
@@ -83,7 +83,7 @@ const skillsData = [
   {name: "C", icon: <BiCodeAlt />, level: 8, category: "backend"},
 
   // Tools & Workflows
-  {name: "ROS", icon: <SiRos />, level: 6, category: "tools"},
+  {name: "ROS", icon: <SiRos />, level: 5, category: "tools"},
   {name: "NumPy", icon: <SiNumpy />, level: 8, category: "tools"},
   {name: "Pandas", icon: <SiPandas />, level: 8, category: "tools"},
   {name: "Matplotlib", icon: <SiPlotly />, level: 7, category: "tools"},
@@ -95,11 +95,11 @@ const skillsData = [
   {name: "Jupyter Notebook", icon: <SiJupyter />, level: 8, category: "tools"},
   {name: "Google Colab", icon: <SiGooglecolab />, level: 8, category: "tools"},
   {name: "Postman", icon: <SiPostman />, level: 7, category: "tools"},
-  {name: "Figma", icon: <SiFigma />, level: 7, category: "tools"},
-  {name: "Blender", icon: <SiBlender />, level: 6, category: "tools"},
+  {name: "Figma", icon: <SiFigma />, level: 5, category: "tools"},
+  // {name: "Blender", icon: <SiBlender />, level: 6, category: "tools"},
   {name: "Vercel", icon: <SiVercel />, level: 8, category: "tools"},
-  {name: "Firebase", icon: <SiFirebase />, level: 7, category: "tools"},
-  {name: "Vite", icon: <SiVite />, level: 7, category: "tools"},
+  {name: "Firebase", icon: <SiFirebase />, level: 5, category: "tools"},
+  // {name: "Vite", icon: <SiVite />, level: 7, category: "tools"},
   // {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
 ];
 
