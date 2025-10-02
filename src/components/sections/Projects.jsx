@@ -46,6 +46,23 @@ const webProjects = [
   },
   {
     id: 3,
+    title: "Auricare- A Gift to God's child",
+    description:
+      "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
+    image: "/assets/auricare.png",
+    technologies: [
+      "React",
+      "Tailwind",
+      "Supabase",
+      "Node.js",
+      "Express",
+      "Groq-Api",
+    ],
+    liveLink: "https://auricare-v2.vercel.app/",
+    codeLink: "https://github.com/Tharunkunamalla/Auricare-V2",
+  },
+  {
+    id: 4,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive resort booking app with authentication and room management.",
@@ -61,8 +78,9 @@ const webProjects = [
     liveLink: "https://sapphire-skies-resort.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
+
   {
-    id: 4,
+    id: 5,
     title: "Tournament Management System",
     description: "Manage tournaments, teams, and schedules online. #ClgProject",
     image: "/assets/TMS_proj.png",
@@ -71,7 +89,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
-    id: 5,
+    id: 6,
     title: "Portfolio Website",
     description: "My personal portfolio showcasing skills and projects.",
     image: "/assets/portfolio.png",
@@ -80,7 +98,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 6,
+    id: 7,
     title: "Gemini-AI",
     description: "AI assistant dashboard with clean UI and GPT integration.",
     image: "/assets/gemini.jpg",
@@ -89,7 +107,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 7,
+    id: 8,
     title: "Jarvis -Voice Assistant",
     description: "Real-time voice assistant with Google integration.",
     image: "/assets/jarvis.gif",
@@ -101,7 +119,7 @@ const webProjects = [
 
 const machineLearningProjects = [
   {
-    id: 8,
+    id: 9,
     title: "Brain Tumor MRI Classification",
     description: "CNN and Transfer Learning to classify MRI brain images.",
     image: "/assets/brain_tumor.png",
@@ -111,7 +129,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 9,
+    id: 10,
     title: "PhonePe Transactions Insights",
     description:
       "Data analysis of PhonePe transactions using Python and visualization libraries.",
@@ -122,7 +140,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
   {
-    id: 10,
+    id: 11,
     title: "Shopper spectrum - Customer Segmentation",
     description:
       "Customer segmentation using K-means clustering to analyze shopping behavior.",
@@ -140,7 +158,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
   },
   {
-    id: 11,
+    id: 12,
     title: "Multi class fish classification",
     description: "CNN model to classify different species of fish.",
     image: "/assets/fish1.png",
