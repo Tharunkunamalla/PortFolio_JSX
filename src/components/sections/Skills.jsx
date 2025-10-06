@@ -122,6 +122,7 @@ const Skills = () => {
         y: 50,
         opacity: 0,
         duration: 1,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
@@ -132,10 +133,11 @@ const Skills = () => {
       categoryRefs.current.forEach((category, index) => {
         if (category) {
           gsap.from(category, {
-            y: 50,
+            y: 40,
             opacity: 0,
             duration: 0.8,
-            delay: 0.3 * index,
+            delay: 0.2 * index,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: category,
               start: "top 90%",
@@ -217,7 +219,6 @@ const Skills = () => {
 
   return (
     <>
-      {/* Skills Section */}
       <section
         ref={sectionRef}
         id="skills"
@@ -310,7 +311,6 @@ const Skills = () => {
         </div>
       </section>
 
-      {/* ✅ LeetCode Stats Section */}
       <LeetCodeStats />
     </>
   );
