@@ -1,7 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "buildCommand": "vite build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  "builds": [
+    {"src": "proxy-server.js", "use": "@vercel/node"},
+    {"src": "vite.config.js", "use": "@vercel/static-build"}
+  ],
+  "routes": [
+    {"src": "/api/leetcode/graphql", "dest": "/proxy-server.js"},
+    {"src": "/(.*)", "dest": "/"}
+  ]
 }
