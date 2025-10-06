@@ -1,3 +1,4 @@
+// src/components/Skills.jsx
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -24,7 +25,6 @@ import {
   SiMysql,
   SiFirebase,
   SiGit,
-  // SiVite,
   SiFigma,
   SiGraphql,
   SiPython,
@@ -39,13 +39,13 @@ import {
   SiJupyter,
   SiGooglecolab,
   SiPostman,
-  // SiBlender,
   SiBootstrap,
   SiVercel,
 } from "react-icons/si";
 import {FaJava} from "react-icons/fa";
 import {BiCodeAlt} from "react-icons/bi";
 import {VscCode} from "react-icons/vsc";
+import LeetCodeStats from "./LeetCodeStats.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,7 +73,7 @@ const skillsData = [
 
   // Backend
   {name: "Java", icon: <FaJava />, level: 9, category: "backend"},
-  {name: "Python", icon: <SiPython />, level: 8, category: "tools"},
+  {name: "Python", icon: <SiPython />, level: 8, category: "backend"},
   {name: "Express.js", icon: <SiExpress />, level: 7, category: "backend"},
   {name: "Node.js", icon: <SiNodedotjs />, level: 7, category: "backend"},
   {name: "MongoDB", icon: <SiMongodb />, level: 7, category: "backend"},
@@ -96,17 +96,13 @@ const skillsData = [
   {name: "Google Colab", icon: <SiGooglecolab />, level: 8, category: "tools"},
   {name: "Postman", icon: <SiPostman />, level: 7, category: "tools"},
   {name: "Figma", icon: <SiFigma />, level: 5, category: "tools"},
-  // {name: "Blender", icon: <SiBlender />, level: 6, category: "tools"},
   {name: "Vercel", icon: <SiVercel />, level: 8, category: "tools"},
   {name: "Firebase", icon: <SiFirebase />, level: 5, category: "tools"},
-  // {name: "Vite", icon: <SiVite />, level: 7, category: "tools"},
-  // {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
+  {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
 ];
 
 const groupedSkills = skillsData.reduce((acc, skill) => {
-  if (!acc[skill.category]) {
-    acc[skill.category] = [];
-  }
+  if (!acc[skill.category]) acc[skill.category] = [];
   acc[skill.category].push(skill);
   return acc;
 }, {});
@@ -220,97 +216,103 @@ const Skills = () => {
   let barFlatIndex = 0;
 
   return (
-    <section
-      ref={sectionRef}
-      id="skills"
-      className="py-20 bg-light-100 dark:bg-dark-100"
-    >
-      <div className="container mx-auto px-4 md:px-6">
-        <h2
-          ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
-        >
-          My <span className="text-secondary-500">Skills</span>
-        </h2>
+    <>
+      {/* Skills Section */}
+      <section
+        ref={sectionRef}
+        id="skills"
+        className="py-20 bg-light-100 dark:bg-dark-100"
+      >
+        <div className="container mx-auto px-4 md:px-6">
+          <h2
+            ref={headingRef}
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
+          >
+            My <span className="text-secondary-500">Skills</span>
+          </h2>
 
-        <div className="grid gap-10">
-          {Object.keys(groupedSkills).map((category, categoryIndex) => {
-            const isToolsCategory = category === "tools";
-            const skillsToShow =
-              isToolsCategory && !showAllTools
-                ? groupedSkills[category].slice(0, 8)
-                : groupedSkills[category];
+          <div className="grid gap-10">
+            {Object.keys(groupedSkills).map((category, categoryIndex) => {
+              const isToolsCategory = category === "tools";
+              const skillsToShow =
+                isToolsCategory && !showAllTools
+                  ? groupedSkills[category].slice(0, 8)
+                  : groupedSkills[category];
 
-            return (
-              <div
-                key={category}
-                ref={(el) => (categoryRefs.current[categoryIndex] = el)}
-                className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6 md:p-8"
-              >
-                <div className="flex items-center mb-6">
-                  {getCategoryIcon(category)}
-                  <h3 className="text-xl md:text-2xl font-semibold ml-3 text-gray-800 dark:text-white">
-                    {getCategoryTitle(category)}
-                  </h3>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {skillsToShow.map((skill) => {
-                    const currentIndex = barFlatIndex++;
-                    return (
-                      <div
-                        key={skill.name}
-                        className="group hover:bg-light-200 dark:hover:bg-dark-200 p-4 rounded-lg transition-colors duration-300"
-                      >
-                        <div className="flex items-center mb-3">
-                          <span className="text-2xl mr-3">{skill.icon}</span>
-                          <h4 className="font-medium text-gray-800 dark:text-white">
-                            {skill.name}
-                          </h4>
-                        </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                          <div
-                            ref={(el) =>
-                              (skillBarRefs.current[currentIndex] = el)
-                            }
-                            className="h-2.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:animate-pulse"
-                            style={{width: "0%"}}
-                          ></div>
-                        </div>
-                        <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
-                          <span>Beginner</span>
-                          <span>Expert</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {isToolsCategory && (
-                  <div className="flex justify-center mt-6">
-                    <button
-                      onClick={() => setShowAllTools((prev) => !prev)}
-                      className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-secondary-500 hover:underline"
-                    >
-                      {showAllTools ? (
-                        <>
-                          Show less <ChevronUp className="h-4 w-4" />
-                        </>
-                      ) : (
-                        <>
-                          Show all Tools & Workflows{" "}
-                          <ChevronDown className="h-4 w-4" />
-                        </>
-                      )}
-                    </button>
+              return (
+                <div
+                  key={category}
+                  ref={(el) => (categoryRefs.current[categoryIndex] = el)}
+                  className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6 md:p-8"
+                >
+                  <div className="flex items-center mb-6">
+                    {getCategoryIcon(category)}
+                    <h3 className="text-xl md:text-2xl font-semibold ml-3 text-gray-800 dark:text-white">
+                      {getCategoryTitle(category)}
+                    </h3>
                   </div>
-                )}
-              </div>
-            );
-          })}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {skillsToShow.map((skill) => {
+                      const currentIndex = barFlatIndex++;
+                      return (
+                        <div
+                          key={skill.name}
+                          className="group hover:bg-light-200 dark:hover:bg-dark-200 p-4 rounded-lg transition-colors duration-300"
+                        >
+                          <div className="flex items-center mb-3">
+                            <span className="text-2xl mr-3">{skill.icon}</span>
+                            <h4 className="font-medium text-gray-800 dark:text-white">
+                              {skill.name}
+                            </h4>
+                          </div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                            <div
+                              ref={(el) =>
+                                (skillBarRefs.current[currentIndex] = el)
+                              }
+                              className="h-2.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:animate-pulse"
+                              style={{width: "0%"}}
+                            ></div>
+                          </div>
+                          <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            <span>Beginner</span>
+                            <span>Expert</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {isToolsCategory && (
+                    <div className="flex justify-center mt-6">
+                      <button
+                        onClick={() => setShowAllTools((prev) => !prev)}
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-secondary-500 hover:underline"
+                      >
+                        {showAllTools ? (
+                          <>
+                            Show less <ChevronUp className="h-4 w-4" />
+                          </>
+                        ) : (
+                          <>
+                            Show all Tools & Workflows{" "}
+                            <ChevronDown className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ✅ LeetCode Stats Section */}
+      <LeetCodeStats />
+    </>
   );
 };
 
