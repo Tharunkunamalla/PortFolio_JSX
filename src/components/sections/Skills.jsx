@@ -114,8 +114,12 @@ const Skills = () => {
   const skillBarRefs = useRef([]);
   const [showAllTools, setShowAllTools] = useState(false);
 
-  categoryRefs.current = Array(Object.keys(groupedSkills).length).fill(null);
+  // Initialize refs array once
+  useEffect(() => {
+    categoryRefs.current = Array(Object.keys(groupedSkills).length).fill(null);
+  }, []);
 
+  // Separate effect for initial animations that don't depend on showAllTools
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(headingRef.current, {
@@ -146,7 +150,14 @@ const Skills = () => {
           });
         }
       });
+    }, sectionRef);
 
+    return () => ctx.revert();
+  }, []);
+
+  // Separate effect for skill bar animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
       skillBarRefs.current.forEach((bar, i) => {
         if (bar) {
           let flatIndex = 0;

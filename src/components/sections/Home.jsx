@@ -246,6 +246,7 @@ const Home = ({scrollToSection}) => {
               <img
                 src="/assets/img.png"
                 alt="Tharun - Frontend Developer"
+                loading="lazy"
                 className="w-full h-full object-cover rounded-3xl animate-float"
               />
               <div className="md:hidden absolute -left-4 flex flex-col space-y-4 top-1/2 transform -translate-y-1/2">

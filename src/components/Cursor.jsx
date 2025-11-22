@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { rafThrottle } from '../utils/performanceHelpers';
 
 const Cursor = () => {
   const cursorRef = useRef(null);
@@ -14,7 +15,8 @@ const Cursor = () => {
     // Hide system cursor
     document.body.style.cursor = 'none';
     
-    const onMouseMove = (e) => {
+    // Use requestAnimationFrame for smooth cursor movement
+    const onMouseMove = rafThrottle((e) => {
       // Position the cursor dot
       gsap.to(cursor, {
         x: e.clientX,
@@ -29,7 +31,7 @@ const Cursor = () => {
         duration: 0.5,
         ease: 'power2.out',
       });
-    };
+    });
     
     // Handle cursor over interactive elements
     const onMouseEnter = () => {
@@ -57,14 +59,14 @@ const Cursor = () => {
     };
     
     // Add event listeners
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', onMouseMove, {passive: true});
     
     // Add effect for interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .interactive');
     
     interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', onMouseEnter);
-      el.addEventListener('mouseleave', onMouseLeave);
+      el.addEventListener('mouseenter', onMouseEnter, {passive: true});
+      el.addEventListener('mouseleave', onMouseLeave, {passive: true});
     });
     
     return () => {
