@@ -1,3 +1,4 @@
+import {memo} from "react";
 import {Link} from "react-router-dom";
 
 const ProjectCard = ({project}) => (
@@ -5,6 +6,7 @@ const ProjectCard = ({project}) => (
     <img
       src={project.image}
       alt={project.title}
+      loading="lazy"
       className="w-full h-48 object-cover rounded-md mb-4"
     />
     <h3 className="text-xl font-bold">{project.title}</h3>
@@ -22,4 +24,4 @@ const ProjectCard = ({project}) => (
   </div>
 );
 
-export default ProjectCard;
+export default memo(ProjectCard);

@@ -1,12 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { gsap } from 'gsap';
 import { rafThrottle } from '../utils/performanceHelpers';
 
 const Cursor = () => {
   const cursorRef = useRef(null);
   const cursorOuterRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile to avoid rendering cursor
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
+    // Don't run cursor logic on mobile devices
+    if (isMobile) return;
+
     const cursor = cursorRef.current;
     const cursorOuter = cursorOuterRef.current;
     
@@ -78,7 +92,10 @@ const Cursor = () => {
       });
       document.body.style.cursor = 'auto';
     };
-  }, []);
+  }, [isMobile]);
+
+  // Don't render cursor on mobile devices
+  if (isMobile) return null;
 
   return (
     <>
@@ -96,4 +113,4 @@ const Cursor = () => {
   );
 };
 
-export default Cursor;
+export default memo(Cursor);
