@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useRef, useMemo} from "react";
+import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
@@ -53,25 +53,6 @@ const Home = ({scrollToSection}) => {
   const scrollDownRef = useRef(null);
   const bubblesContainerRef = useRef(null);
   const loaderRef = useRef(null);
-
-  // Memoize social links to prevent recreation
-  const socialLinks = useMemo(() => [
-    {
-      href: "https://github.com/Tharunkunamalla",
-      icon: <Github className="h-5 w-5" />,
-      label: "GitHub",
-    },
-    {
-      href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-      icon: <Linkedin className="h-5 w-5" />,
-      label: "LinkedIn",
-    },
-    {
-      href: "https://www.instagram.com/__tharun_0509.__/",
-      icon: <Instagram className="h-5 w-5" />,
-      label: "Instagram",
-    },
-  ], []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -265,11 +246,26 @@ const Home = ({scrollToSection}) => {
               <img
                 src="/assets/img.png"
                 alt="Tharun - Frontend Developer"
-                loading="lazy"
                 className="w-full h-full object-cover rounded-3xl animate-float"
               />
               <div className="md:hidden absolute -left-4 flex flex-col space-y-4 top-1/2 transform -translate-y-1/2">
-                {socialLinks.map(({href, icon, label}) => (
+                {[
+                  {
+                    href: "https://github.com/Tharunkunamalla",
+                    icon: <Github className="h-5 w-5" />,
+                    label: "GitHub",
+                  },
+                  {
+                    href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
+                    icon: <Linkedin className="h-5 w-5" />,
+                    label: "LinkedIn",
+                  },
+                  {
+                    href: "https://www.instagram.com/__tharun_0509.__/",
+                    icon: <Instagram className="h-5 w-5" />,
+                    label: "Instagram",
+                  },
+                ].map(({href, icon, label}) => (
                   <a
                     key={label}
                     href={href}

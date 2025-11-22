@@ -207,10 +207,9 @@ const Projects = () => {
       ? webProjects
       : machineLearningProjects;
 
-  // Initialize refs array only once and update length as needed
-  useEffect(() => {
-    projectRefs.current = projectRefs.current.slice(0, currentProjects.length);
-  }, [currentProjects.length]);
+  projectRefs.current = Array(currentProjects.length)
+    .fill()
+    .map((_, i) => projectRefs.current[i] || React.createRef());
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -295,7 +294,6 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div
