@@ -1,5 +1,5 @@
 // src/components/Skills.jsx
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useMemo} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {
@@ -114,10 +114,14 @@ const Skills = () => {
   const skillBarRefs = useRef([]);
   const [showAllTools, setShowAllTools] = useState(false);
 
+  // Memoize groupedSkills to ensure stable reference
+  const groupedSkillsMemo = useMemo(() => groupedSkills, []);
+  const categoryCount = useMemo(() => Object.keys(groupedSkillsMemo).length, [groupedSkillsMemo]);
+
   // Initialize refs array once
   useEffect(() => {
-    categoryRefs.current = Array(Object.keys(groupedSkills).length).fill(null);
-  }, []);
+    categoryRefs.current = Array(categoryCount).fill(null);
+  }, [categoryCount]);
 
   // Separate effect for initial animations that don't depend on showAllTools
   useEffect(() => {
@@ -163,8 +167,8 @@ const Skills = () => {
           let flatIndex = 0;
           let skillLevel = 0;
           let found = false;
-          Object.keys(groupedSkills).forEach((category) => {
-            groupedSkills[category].forEach((skill) => {
+          Object.keys(groupedSkillsMemo).forEach((category) => {
+            groupedSkillsMemo[category].forEach((skill) => {
               if (flatIndex === i) {
                 skillLevel = skill.level * 10;
                 found = true;
@@ -194,7 +198,7 @@ const Skills = () => {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [showAllTools]);
+  }, [showAllTools, groupedSkillsMemo]);
 
   const getCategoryIcon = (category) => {
     switch (category) {
@@ -244,12 +248,12 @@ const Skills = () => {
           </h2>
 
           <div className="grid gap-10">
-            {Object.keys(groupedSkills).map((category, categoryIndex) => {
+            {Object.keys(groupedSkillsMemo).map((category, categoryIndex) => {
               const isToolsCategory = category === "tools";
               const skillsToShow =
                 isToolsCategory && !showAllTools
-                  ? groupedSkills[category].slice(0, 8)
-                  : groupedSkills[category];
+                  ? groupedSkillsMemo[category].slice(0, 8)
+                  : groupedSkillsMemo[category];
 
               return (
                 <div
