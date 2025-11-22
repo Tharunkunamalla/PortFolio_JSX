@@ -1,11 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, memo } from 'react';
 import { gsap } from 'gsap';
+import { rafThrottle } from '../utils/performanceHelpers';
 
 const Cursor = () => {
   const cursorRef = useRef(null);
   const cursorOuterRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile to avoid rendering cursor
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
+    // Don't run cursor logic on mobile devices
+    if (isMobile) return;
+
     const cursor = cursorRef.current;
     const cursorOuter = cursorOuterRef.current;
     
@@ -14,7 +29,8 @@ const Cursor = () => {
     // Hide system cursor
     document.body.style.cursor = 'none';
     
-    const onMouseMove = (e) => {
+    // Use requestAnimationFrame for smooth cursor movement
+    const onMouseMove = rafThrottle((e) => {
       // Position the cursor dot
       gsap.to(cursor, {
         x: e.clientX,
@@ -29,7 +45,7 @@ const Cursor = () => {
         duration: 0.5,
         ease: 'power2.out',
       });
-    };
+    });
     
     // Handle cursor over interactive elements
     const onMouseEnter = () => {
@@ -57,14 +73,14 @@ const Cursor = () => {
     };
     
     // Add event listeners
-    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mousemove', onMouseMove, {passive: true});
     
     // Add effect for interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .interactive');
     
     interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', onMouseEnter);
-      el.addEventListener('mouseleave', onMouseLeave);
+      el.addEventListener('mouseenter', onMouseEnter, {passive: true});
+      el.addEventListener('mouseleave', onMouseLeave, {passive: true});
     });
     
     return () => {
@@ -76,7 +92,10 @@ const Cursor = () => {
       });
       document.body.style.cursor = 'auto';
     };
-  }, []);
+  }, [isMobile]);
+
+  // Don't render cursor on mobile devices
+  if (isMobile) return null;
 
   return (
     <>
@@ -94,4 +113,4 @@ const Cursor = () => {
   );
 };
 
-export default Cursor;
+export default memo(Cursor);

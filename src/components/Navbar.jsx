@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../context/ThemeContext";
+import {throttle} from "../utils/performanceHelpers";
 
 const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,8 +28,12 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
       setIsScrolled(window.scrollY > 50);
     };
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Throttle scroll handler to improve performance
+    const throttledHandleScroll = throttle(handleScroll, 100);
+    
+    window.addEventListener("scroll", throttledHandleScroll, {passive: true});
+    return () => window.removeEventListener("scroll", throttledHandleScroll);
   }, []);
 
   const handleNavClick = (sectionId) => {

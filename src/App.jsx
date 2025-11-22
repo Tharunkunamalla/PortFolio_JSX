@@ -1,23 +1,32 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef, lazy, Suspense} from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 
 import {ThemeProvider} from "./context/ThemeContext";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
-import Home from "./components/sections/Home";
-import About from "./components/sections/About";
-import Skills from "./components/sections/Skills";
-import Projects from "./components/sections/Projects";
-import Contact from "./components/sections/Contact";
 import Footer from "./components/Footer";
 import {Toaster} from "react-hot-toast";
-import ProjectDetail from "./components/sections/ProjectDetail";
+import {throttle} from "./utils/performanceHelpers";
+
+// Lazy load sections for better performance
+const Home = lazy(() => import("./components/sections/Home"));
+const About = lazy(() => import("./components/sections/About"));
+const Skills = lazy(() => import("./components/sections/Skills"));
+const Projects = lazy(() => import("./components/sections/Projects"));
+const Contact = lazy(() => import("./components/sections/Contact"));
+const ProjectDetail = lazy(() => import("./components/sections/ProjectDetail"));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-secondary-500"></div>
+  </div>
+);
 
 function ScrollRouterWrapper() {
   const [activeSection, setActiveSection] = useState("home");
@@ -48,7 +57,10 @@ function ScrollRouterWrapper() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    // Throttle scroll handler to improve performance
+    const throttledHandleScroll = throttle(handleScroll, 100);
+
+    window.addEventListener("scroll", throttledHandleScroll, {passive: true});
     handleScroll();
 
     // Check scroll-to-section state on first load
@@ -57,7 +69,7 @@ function ScrollRouterWrapper() {
       scrollToSection(section);
     }
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", throttledHandleScroll);
   }, [location]);
 
   const scrollToSection = (sectionId) => {
@@ -78,22 +90,24 @@ function ScrollRouterWrapper() {
         isHomePage={location.pathname === "/"}
       />
       <main>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Home scrollToSection={scrollToSection} />
-                <About />
-                <Skills />
-                <Toaster position="top-center" />
-                <Projects />
-                <Contact />
-              </>
-            }
-          />
-          <Route path="/project/:projectId" element={<ProjectDetail />} />
-        </Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Home scrollToSection={scrollToSection} />
+                  <About />
+                  <Skills />
+                  <Toaster position="top-center" />
+                  <Projects />
+                  <Contact />
+                </>
+              }
+            />
+            <Route path="/project/:projectId" element={<ProjectDetail />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>

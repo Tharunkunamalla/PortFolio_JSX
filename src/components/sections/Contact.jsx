@@ -1,10 +1,11 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useMemo} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {ToastContainer, toast} from "react-toastify";
+import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Github, Linkedin, Twitter, Instagram} from "lucide-react";
 import {Mail, Phone, MapPin, Send} from "lucide-react";
+import {useTheme} from "../../context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +14,7 @@ const Contact = () => {
   const headingRef = useRef(null);
   const formRef = useRef(null);
   const infoRef = useRef(null);
+  const {theme} = useTheme();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,6 +24,30 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Memoize social links to prevent recreation
+  const socialLinks = useMemo(() => [
+    {
+      href: "https://github.com/Tharunkunamalla",
+      icon: <Github className="h-5 w-5" />,
+      label: "GitHub",
+    },
+    {
+      href: "https://www.linkedin.com/in/tharun-kunamalla-/",
+      icon: <Linkedin className="h-5 w-5" />,
+      label: "LinkedIn",
+    },
+    {
+      href: "https://x.com/Tharunk0509",
+      icon: <Twitter className="h-5 w-5" />,
+      label: "Twitter",
+    },
+    {
+      href: "https://www.instagram.com/__tharun_0509.__/",
+      icon: <Instagram className="h-5 w-5" />,
+      label: "Instagram",
+    },
+  ], []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -302,38 +328,18 @@ const Contact = () => {
                 Follow Me
               </h3>
               <div className="flex space-x-4">
-                <a
-                  href="https://github.com/Tharunkunamalla"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/tharun-kunamalla-/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://x.com/Tharunk0509"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://www.instagram.com/__tharun_0509.__/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
+                {socialLinks.map(({href, icon, label}) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                    aria-label={label}
+                  >
+                    {icon}
+                  </a>
+                ))}
               </div>
             </div>
 
@@ -346,13 +352,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-
-      <ToastContainer
-        position="bottom-right"
-        theme={
-          document.documentElement.classList.contains("dark") ? "dark" : "light"
-        }
-      />
     </section>
   );
 };
