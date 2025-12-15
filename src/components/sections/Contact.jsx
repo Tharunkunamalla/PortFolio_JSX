@@ -5,6 +5,7 @@ import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Github, Linkedin, Twitter, Instagram} from "lucide-react";
 import {Mail, Phone, MapPin, Send} from "lucide-react";
+import BackgroundParticles from "../BackgroundParticles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,8 +131,26 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-20 bg-light-100 dark:bg-dark-100 overflow-hidden"
+      className="relative py-20 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
     >
+      <BackgroundParticles />
+      <div
+        className="
+          absolute top-0 left-0 right-0 h-24
+          bg-gradient-to-b
+          from-white/80 to-transparent
+          dark:from-black/60
+        "
+      />
+      {/* ===== TOP BLEND ===== */}
+      <div
+        className="
+            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+            bg-gradient-to-b
+            from-white/80 to-transparent
+            dark:from-black/60
+          "
+      />
       {/* Square Grid Background */}
       <div className="absolute inset-0 bg-[radial-gradient(#00000011_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff0e_1px,transparent_1px)] [background-size:30px_30px] z-0"></div>
 
@@ -152,7 +171,7 @@ const Contact = () => {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6 md:p-8"
+            className="bg-white dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg p-6 md:p-8"
           >
             <div className="mb-6">
               <label
@@ -168,7 +187,7 @@ const Contact = () => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-400 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-100 dark:text-white"
               />
             </div>
 
@@ -186,7 +205,7 @@ const Contact = () => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-400 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-100 dark:text-white"
               />
             </div>
 
@@ -204,7 +223,7 @@ const Contact = () => {
                 required
                 value={formData.subject}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-400 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-100 dark:text-white"
               />
             </div>
 
@@ -222,7 +241,7 @@ const Contact = () => {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-400 dark:text-white resize-none"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent dark:bg-dark-100 dark:text-white resize-none"
               ></textarea>
             </div>
 
@@ -241,7 +260,7 @@ const Contact = () => {
           </form>
 
           <div ref={infoRef} className="space-y-8">
-            <div className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6">
+            <div className="bg-white dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-semibold text-gray-950 dark:text-white mb-6">
                 Contact Information
               </h3>
@@ -297,7 +316,7 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6">
+            <div className="bg-white dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg p-6">
               <h3 className="text-xl font-semibold text-gray-950 dark:text-white mb-6">
                 Follow Me
               </h3>
@@ -306,7 +325,7 @@ const Contact = () => {
                   href="https://github.com/Tharunkunamalla"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Github className="h-5 w-5" />
                 </a>
@@ -314,7 +333,7 @@ const Contact = () => {
                   href="https://www.linkedin.com/in/tharun-kunamalla-/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
@@ -322,7 +341,7 @@ const Contact = () => {
                   href="https://x.com/Tharunk0509"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Twitter className="h-5 w-5" />
                 </a>
@@ -330,7 +349,7 @@ const Contact = () => {
                   href="https://www.instagram.com/__tharun_0509.__/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-200 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Instagram className="h-5 w-5" />
                 </a>

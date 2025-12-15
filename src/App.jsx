@@ -10,6 +10,7 @@ import {
 import {ThemeProvider} from "./context/ThemeContext";
 import Cursor from "./components/Cursor";
 import Navbar from "./components/Navbar";
+import Line from "./components/Line";
 import Home from "./components/sections/Home";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
@@ -107,6 +108,7 @@ function App() {
         <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300">
           <Cursor />
           <ScrollRouterWrapper />
+          <Line />
         </div>
       </ThemeProvider>
     </Router>

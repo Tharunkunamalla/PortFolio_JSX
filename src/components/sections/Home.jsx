@@ -6,6 +6,7 @@ import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
+import BackgroundParticles from "../BackgroundParticles";
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -124,7 +125,7 @@ const Home = ({scrollToSection}) => {
       {/* Loading Screen */}
       <div
         ref={loaderRef}
-        className="fixed inset-0 z-50 bg-light-100 dark:bg-dark-100 flex items-center justify-center transition-all duration-500"
+        className="fixed inset-0 z-50 bg-[#f8f9fb]  dark:bg-[#0b0b0f] flex items-center justify-center transition-all duration-500"
       >
         <img
           src="/assets/loader.gif"
@@ -137,8 +138,14 @@ const Home = ({scrollToSection}) => {
       <section
         ref={sectionRef}
         id="home"
-        className="relative min-h-screen flex items-center pt-16 pb-8 bg-light-100 dark:bg-dark-100"
+        className="
+    relative min-h-screen flex items-center pt-16 pb-8
+    bg-[#f8f9fb] 
+    dark:bg-[#0b0b0f]
+    overflow-hidden
+  "
       >
+        <BackgroundParticles />
         {/* Bubbles */}
         <div
           ref={bubblesContainerRef}
@@ -296,6 +303,15 @@ const Home = ({scrollToSection}) => {
           </div>
         </div>
       </section>
+      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+      <div
+        className="
+            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+            bg-gradient-to-t
+            from-white/90 to-transparent
+            dark:from-black/80
+          "
+      />
     </>
   );
 };

@@ -46,6 +46,7 @@ import {FaJava} from "react-icons/fa";
 import {BiCodeAlt} from "react-icons/bi";
 import {VscCode} from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
+import BackgroundParticles from "../BackgroundParticles.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,15 +91,15 @@ const skillsData = [
   {name: "OpenCV", icon: <SiOpencv />, level: 8, category: "tools"},
   {name: "Git", icon: <SiGit />, level: 8, category: "tools"},
   {name: "VS Code", icon: <VscCode />, level: 9, category: "tools"},
-  {name: "Linux", icon: <SiLinux />, level: 7, category: "tools"},
+  {name: "Linux", icon: <SiLinux />, level: 6, category: "tools"},
   {name: "GCP", icon: <SiGooglecloud />, level: 7, category: "tools"},
   {name: "Jupyter Notebook", icon: <SiJupyter />, level: 8, category: "tools"},
-  {name: "Google Colab", icon: <SiGooglecolab />, level: 8, category: "tools"},
+  {name: "Google Colab", icon: <SiGooglecolab />, level: 9, category: "tools"},
   {name: "Postman", icon: <SiPostman />, level: 7, category: "tools"},
   {name: "Figma", icon: <SiFigma />, level: 5, category: "tools"},
   {name: "Vercel", icon: <SiVercel />, level: 8, category: "tools"},
   {name: "Firebase", icon: <SiFirebase />, level: 5, category: "tools"},
-  {name: "GraphQL", icon: <SiGraphql />, level: 7, category: "tools"},
+  {name: "GraphQL", icon: <SiGraphql />, level: 6, category: "tools"},
 ];
 
 const groupedSkills = skillsData.reduce((acc, skill) => {
@@ -222,8 +223,22 @@ const Skills = () => {
       <section
         ref={sectionRef}
         id="skills"
-        className="py-20 bg-light-100 dark:bg-dark-100"
+        className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
       >
+        {/* ===== PARTICLES ===== */}
+        <div className="absolute inset-0 z-0">
+          <BackgroundParticles />
+        </div>
+        {/* ===== TOP BLEND ===== */}
+        <div
+          className="
+            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+            bg-gradient-to-b
+            from-white/80 to-transparent
+            dark:from-black/60
+          "
+        />
+
         <div className="container mx-auto px-4 md:px-6">
           <h2
             ref={headingRef}
@@ -243,8 +258,14 @@ const Skills = () => {
               return (
                 <div
                   key={category}
-                  ref={(el) => (categoryRefs.current[categoryIndex] = el)}
-                  className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-6 md:p-8"
+                  className="
+                  rounded-2xl p-8
+                  bg-white/5 backdrop-blur-md
+                  border border-white/10
+                  shadow-lg
+                  hover:shadow-2xl
+                  transition-shadow duration-300
+                "
                 >
                   <div className="flex items-center mb-6">
                     {getCategoryIcon(category)}
@@ -259,7 +280,7 @@ const Skills = () => {
                       return (
                         <div
                           key={skill.name}
-                          className="group hover:bg-light-200 dark:hover:bg-dark-200 p-4 rounded-lg transition-colors duration-300"
+                          className="group hover:bg-light-200 dark:hover:bg-[#0b0b0f]/50 p-4 rounded-lg transition-colors duration-300"
                         >
                           <div className="flex items-center mb-3">
                             <span className="text-2xl mr-3">{skill.icon}</span>
@@ -309,6 +330,15 @@ const Skills = () => {
             })}
           </div>
         </div>
+        {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+        <div
+          className="
+            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+            bg-gradient-to-t
+            from-white/90 to-transparent
+            dark:from-black/80
+          "
+        />
       </section>
 
       <LeetCodeStats />

@@ -3,6 +3,7 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Lottie from "lottie-react";
 import codingAnimation from "../sections/Coding.json";
+import BackgroundParticles from "../BackgroundParticles";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -190,8 +191,27 @@ const About = () => {
     <section
       ref={sectionRef}
       id="about"
-      className="py-20 bg-light-200 dark:bg-dark-200"
+      className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
     >
+      <BackgroundParticles />
+      <div
+        className="
+    absolute top-0 left-0 right-0 h-24
+    bg-gradient-to-b
+    from-white/80 to-transparent
+    dark:from-black/60
+  "
+      />
+      {/* ===== TOP BLEND ===== */}
+      <div
+        className="
+            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+            bg-gradient-to-b
+            from-white/80 to-transparent
+            dark:from-black/60
+          "
+      />
+
       <div className="container mx-auto px-4 md:px-6">
         <h2
           ref={headingRef}
@@ -271,7 +291,9 @@ const About = () => {
               <div
                 key={box.id}
                 ref={(el) => (boxRefs.current[index] = el)}
-                className="bg-white dark:bg-dark-300 rounded-xl shadow-md p-4 md:p-5 hover:shadow-2xl transition-shadow duration-500"
+                className="rounded-2xl
+                  bg-white/5 backdrop-blur-md
+                  border border-white/10 shadow-lg p-4 md:p-5 hover:shadow-2xl transition-shadow duration-500"
               >
                 <h3 className="text-lg font-semibold text-secondary-500 mb-3">
                   {box.title}
@@ -311,6 +333,15 @@ const About = () => {
           </div>
         </div>
       </div>
+      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+      <div
+        className="
+            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+            bg-gradient-to-t
+            from-white/90 to-transparent
+            dark:from-black/80
+          "
+      />
     </section>
   );
 };

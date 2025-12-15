@@ -2,7 +2,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-light-200 dark:bg-dark-200 py-10 border-t border-gray-300 dark:border-gray-700 shadow-inner">
+    <footer className="bg-light-200 dark:bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden py-10 border-t border-gray-300 dark:border-gray-700 shadow-inner">
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo / Name */}

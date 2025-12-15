@@ -5,7 +5,11 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor} from "lucide-react";
+import {ChevronDown, ChevronUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
+import BackgroundParticles from "../BackgroundParticles";
+
+// import GitHubStats from "./GitHubStats";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,7 +82,6 @@ const webProjects = [
     liveLink: "https://sapphire-skies-resort.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
-
   {
     id: 5,
     title: "Tournament Management System",
@@ -183,6 +186,7 @@ const Projects = () => {
   const projectRefs = useRef([]);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeTab, setActiveTab] = useState("all");
+  const [showMore, setShowMore] = useState(false); // 👈 added state for show more
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -207,7 +211,12 @@ const Projects = () => {
       ? webProjects
       : machineLearningProjects;
 
-  projectRefs.current = Array(currentProjects.length)
+  // 👇 limit the number of projects shown initially
+  const visibleProjects = showMore
+    ? currentProjects
+    : currentProjects.slice(0, 4);
+
+  projectRefs.current = Array(visibleProjects.length)
     .fill()
     .map((_, i) => projectRefs.current[i] || React.createRef());
 
@@ -231,7 +240,11 @@ const Projects = () => {
     }, sectionRef);
     ScrollTrigger.refresh();
     return () => ctx.revert();
-  }, [activeTab]);
+  }, [activeTab, showMore]); // 👈 re-run animation when toggled
+
+  const visibleProject = showMore
+    ? currentProjects
+    : currentProjects.slice(0, 4);
 
   const handleLiveClick = (liveLink) => {
     if (!liveLink) {
@@ -245,10 +258,20 @@ const Projects = () => {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative py-20 bg-light-200 dark:bg-dark-200 overflow-hidden"
+      className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
     >
+      <BackgroundParticles />
+      {/* ===== TOP BLEND ===== */}
+      <div
+        className="
+            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+            bg-gradient-to-b
+            from-white/80 to-transparent
+            dark:from-black/60
+          "
+      />
       {/* Glowing background orbs */}
-      <div className="absolute -top-10 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
+      <div className="absolute top-50 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
       <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
 
@@ -261,11 +284,19 @@ const Projects = () => {
           My <span className="text-secondary-500">Projects</span>
         </h2>
 
+        {/* 👇 Project Count */}
+        <p className="text-center text-sm text-gray-600 dark:text-gray-400 mb-8">
+          Showing {visibleProject.length} of {currentProjects.length} projects
+        </p>
+
         <div className="flex flex-wrap md:flex-nowrap justify-center items-center mb-10 gap-4 w-full px-4">
           {["all", "web", "ml"].map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => {
+                setActiveTab(tab);
+                setShowMore(false); // reset to first 4 when switching tabs
+              }}
               className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold transition duration-300 transform hover:scale-105 text-sm md:text-base ${
                 activeTab === tab
                   ? "bg-secondary-500 text-white shadow-md"
@@ -281,12 +312,14 @@ const Projects = () => {
           ))}
         </div>
 
+        {/* Project Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {currentProjects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
-              className="bg-white dark:bg-dark-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="bg-white/5 backdrop-blur-md
+                  border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -361,6 +394,27 @@ const Projects = () => {
           ))}
         </div>
 
+        {/* 👇 Show More / Show Less Button */}
+        {currentProjects.length > 4 && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => setShowMore((prev) => !prev)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-secondary-500 text-white hover:bg-secondary-600 transition-all duration-300"
+            >
+              {/* {showMore ? "Show Less" : "Show More"} */}
+              {showMore ? (
+                <>
+                  Show less <ChevronUp className="h-5 w-5" />
+                </>
+              ) : (
+                <>
+                  Show more <ChevronDown className="h-5 w-5" />
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
         <div className="text-center mt-12">
           <a
             href="https://github.com/Tharunkunamalla"
@@ -371,7 +425,18 @@ const Projects = () => {
             More Projects on GitHub <Github className="h-5 w-5" />
           </a>
         </div>
+        <br />
+        {/* <GitHubStats username="Tharunkunamalla" /> */}
       </div>
+      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+      <div
+        className="
+            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+            bg-gradient-to-t
+            from-white/90 to-transparent
+            dark:from-black/80
+          "
+      />
     </section>
   );
 };

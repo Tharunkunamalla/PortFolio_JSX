@@ -1,19 +1,19 @@
-// proxy-server.js
+// server.js
 import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
+import dotenv from "dotenv";
+
+dotenv.config(); // load GITHUB_TOKEN
 
 const app = express();
-
-// Allow CORS only for local dev; Vercel handles CORS automatically
 app.use(cors({origin: "http://localhost:5173"}));
 app.use(express.json());
 
-// Proxy endpoint
+// -------- LeetCode Proxy --------
 app.post("/api/leetcode/graphql", async (req, res) => {
   try {
     const {query, variables, operationName} = req.body;
-
     const response = await fetch("https://leetcode.com/graphql", {
       method: "POST",
       headers: {
@@ -26,20 +26,43 @@ app.post("/api/leetcode/graphql", async (req, res) => {
       body: JSON.stringify({query, variables, operationName}),
     });
 
-    const text = await response.text();
-    res.status(response.status).type("application/json").send(text);
+    const data = await response.json();
+    res.status(response.status).json(data);
   } catch (err) {
-    console.error("Proxy error:", err);
+    console.error("LeetCode proxy error:", err);
     res.status(500).json({error: "Failed to fetch LeetCode data"});
   }
 });
 
-// Export for Vercel serverless runtime
-export default app;
+// -------- GitHub Proxy --------
+app.post("/api/github/graphql", async (req, res) => {
+  try {
+    const {query, variables, operationName} = req.body;
+    const githubToken = process.env.GITHUB_TOKEN;
 
-// Run locally (optional)
-if (process.env.NODE_ENV !== "production") {
-  app.listen(8080, () =>
-    console.log("✅ Local proxy running at http://localhost:8080")
-  );
-}
+    if (!githubToken) {
+      return res.status(401).json({error: "Missing GitHub token in .env"});
+    }
+
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${githubToken}`,
+      },
+      body: JSON.stringify({query, variables, operationName}),
+    });
+
+    const data = await response.json();
+    res.status(response.status).json(data);
+  } catch (err) {
+    console.error("GitHub proxy error:", err);
+    res.status(500).json({error: "Failed to fetch GitHub data"});
+  }
+});
+
+const PORT = process.env.PORT || 8081;
+
+app.listen(PORT, () =>
+  console.log(`✅ Proxy server running at http://localhost:${PORT}`)
+);
