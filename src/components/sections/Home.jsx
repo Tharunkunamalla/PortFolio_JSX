@@ -302,16 +302,16 @@ const Home = ({scrollToSection}) => {
             <span className="wheel"></span>
           </div>
         </div>
-      </section>
-      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
-      <div
-        className="
+        {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+        <div
+          className="
             pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
             bg-gradient-to-t
             from-white/90 to-transparent
             dark:from-black/80
           "
-      />
+        />
+      </section>
     </>
   );
 };
