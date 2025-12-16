@@ -44,7 +44,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
     <nav
       className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-light-100/90 dark:bg-dark-100/90 backdrop-blur-md shadow-md"
+          ? "bg-white/60 dark:bg-[#0f0f14]/60 backdrop-blur-lg shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -82,7 +82,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-300 transition-colors"
+            className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-100 transition-colors"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
