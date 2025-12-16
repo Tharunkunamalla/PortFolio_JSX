@@ -140,7 +140,7 @@ const Home = ({scrollToSection}) => {
         id="home"
         className="
     relative min-h-screen flex items-center pt-16 pb-8
-    bg-[#f8f9fb] 
+    bg-[#f8f9fb]
     dark:bg-[#0b0b0f]
     overflow-hidden
   "

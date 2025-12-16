@@ -57,24 +57,38 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
           <span className="text-secondary-500">T</span>harun
         </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-10">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`relative text-lg font-medium transition ${
-                activeSection === item.id && isHomePage
-                  ? "text-secondary-500"
-                  : "text-gray-700 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
-              }`}
-            >
-              {item.label}
-              {activeSection === item.id && isHomePage && (
-                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-secondary-500 mt-1" />
-              )}
-            </button>
-          ))}
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center space-x-3">
+          {navItems.map((item) => {
+            const isActive = activeSection === item.id && isHomePage;
+
+            return (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`relative px-4 py-2 text-lg font-medium rounded-full
+          transition-all duration-300 overflow-hidden 
+          ${
+            isActive
+              ? "text-secondary-500"
+              : "text-gray-700 dark:text-gray-300 hover:text-secondary-400"
+          }
+            hover:-translate-y-[3px]
+        `}
+              >
+                {/* Animated background */}
+                <span
+                  className={`absolute inset-0 rounded-full bg-secondary-500/10
+            scale-0 transition-transform duration-300 ease-out
+            ${isActive ? "scale-100" : "hover:scale-100"}
+          `}
+                />
+
+                {/* Text stays above */}
+                <span className="relative z-10">{item.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Right Section */}

@@ -2,7 +2,6 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {SiLeetcode} from "react-icons/si";
-import BackgroundParticles from "../BackgroundParticles";
 import Bg from "../Bg";
 
 gsap.registerPlugin(ScrollTrigger);
