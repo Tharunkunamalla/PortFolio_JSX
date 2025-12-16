@@ -267,7 +267,7 @@ const LeetCodeStats = () => {
         </div>
 
         {/* BUTTON */}
-        <div className="mt-8 text-center">
+        {/* <div className="mt-8 text-center">
           <a
             href={`https://leetcode.com/u/${username}/`}
             target="_blank"
@@ -281,7 +281,7 @@ const LeetCodeStats = () => {
             <SiLeetcode className="w-6 h-6" />
             View LeetCode Profile
           </a>
-        </div>
+        </div> */}
       </div>
       {/* ===== BOTTOM BLEND (KEY PART) ===== */}
       <div
