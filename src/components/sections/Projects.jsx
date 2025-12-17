@@ -123,6 +123,23 @@ const webProjects = [
 const machineLearningProjects = [
   {
     id: 9,
+    title: "Anime Recommendation System",
+    description:
+      "A content-based anime recommendation system using cosine similarity.",
+    image: "/assets/p3.png",
+    technologies: [
+      "Python",
+      "Scikit-learn",
+      "Pandas",
+      "Jikan API",
+      "Streamlit",
+    ],
+    liveLink: "https://anime-recommendations-system.streamlit.app/",
+    codeLink:
+      "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git",
+  },
+  {
+    id: 10,
     title: "Brain Tumor MRI Classification",
     description: "CNN and Transfer Learning to classify MRI brain images.",
     image: "/assets/brain_tumor.png",
@@ -132,7 +149,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 10,
+    id: 11,
     title: "PhonePe Transactions Insights",
     description:
       "Data analysis of PhonePe transactions using Python and visualization libraries.",
@@ -143,7 +160,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
   {
-    id: 11,
+    id: 12,
     title: "Shopper spectrum - Customer Segmentation",
     description:
       "Customer segmentation using K-means clustering to analyze shopping behavior.",
@@ -161,7 +178,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
   },
   {
-    id: 12,
+    id: 13,
     title: "Multi class fish classification",
     description: "CNN model to classify different species of fish.",
     image: "/assets/fish1.png",

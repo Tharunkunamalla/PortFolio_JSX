@@ -104,6 +104,21 @@
   "machineLearningProjects": [
     {
       "id": 9,
+      "title": "Anime Recommendation System",
+      "description": "A content-based anime recommendation system using cosine similarity.",
+      "image": "/assets/p2.jpg",
+      "technologies": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Jikan API",
+        "Streamlit"
+      ],
+      "liveLink": "https://anime-recommendations-system.streamlit.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git"
+    },
+    {
+      "id": 10,
       "title": "Brain Tumor MRI Classification",
       "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans.",
       "image": "/assets/brain_tumor.png",
@@ -112,7 +127,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls"
     },
     {
-      "id": 10,
+      "id": 11,
       "title": "PhonePe Transactions Insights",
       "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction.",
       "image": "/assets/phonepe.png",
@@ -121,7 +136,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights"
     },
     {
-      "id": 11,
+      "id": 12,
       "title": "Shopper spectrum - Customer Segmentation",
       "description": "Clustering shoppers using K-means based on demographics and spending patterns. Visualized with Seaborn and deployed via Streamlit for real-time interaction and insights. Targeted towards marketing teams for behavior analysis.",
       "image": "/assets/shopper1.png",
@@ -137,7 +152,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation"
     },
     {
-      "id": 12,
+      "id": 13,
       "title": "Multi class fish classification",
       "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics.",
       "image": "/assets/fish1.png",
