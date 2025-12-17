@@ -100,6 +100,7 @@ const LeetCodeStats = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
+          toggleActions: "play none none reverse",
         },
       });
 
@@ -113,6 +114,7 @@ const LeetCodeStats = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",
+          toggleActions: "play none none reverse",
         },
       });
 
@@ -146,6 +148,7 @@ const LeetCodeStats = () => {
           scrollTrigger: {
             trigger: el,
             start: "top 90%",
+            // toggleActions: "play none none reverse",
           },
         });
       });
@@ -171,36 +174,37 @@ const LeetCodeStats = () => {
     <section
       ref={sectionRef}
       className="
-        relative py-14 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden
+        relative py-14
+        bg-light-100 dark:bg-gradient-to-br
+        from-[#0f0f14] via-[#12121a] to-[#0c0c10]
+        overflow-hidden
       "
     >
       <Bg />
-      {/* ===== PARTICLES (BOTTOM LAYER) ===== */}
-      <div className="absolute inset-0 z-0">
-        {/* <BackgroundParticles /> */}
-      </div>
-
-      {/* ===== TOP BLEND (MODE AWARE) ===== */}
-      <div
-        className="
-          pointer-events-none
-          absolute top-0 left-0 right-0 h-28 z-10
-          bg-gradient-to-b
-          from-white/80 to-transparent
-          dark:from-black/60
-        "
-      />
-
+      {/* ===== TOP BLEND (MODE AWARE) ===== */}{" "}
+      <div className=" pointer-events-none absolute top-0 left-0 right-0 h-28 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60 " />
       {/* ===== CONTENT ===== */}
       <div className="relative z-20 container mx-auto px-6">
-        <h2
+        {/* HEADING + LIVE INDICATOR */}
+        <div
           ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-8
-                     text-gray-800 dark:text-white"
+          className="flex items-center justify-center gap-4 mb-8"
         >
-          My <span className="text-secondary-500">DSA Journey</span>
-        </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
+            My <span className="text-secondary-500">DSA Journey</span>
+          </h2>
 
+          {/* LIVE DOT */}
+          <div className="flex items-center gap-2 text-sm text-green-400">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span className="tracking-wide">Live</span>
+          </div>
+        </div>
+
+        {/* STATS GRID */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
           {tiles.map((t, i) => (
             <div
@@ -265,33 +269,9 @@ const LeetCodeStats = () => {
             </p>
           </div>
         </div>
-
-        {/* BUTTON */}
-        {/* <div className="mt-8 text-center">
-          <a
-            href={`https://leetcode.com/u/${username}/`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold
-              bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500
-              text-black shadow-lg hover:scale-105 transition
-            "
-          >
-            <SiLeetcode className="w-6 h-6" />
-            View LeetCode Profile
-          </a>
-        </div> */}
       </div>
-      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
-      <div
-        className="
-            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-            bg-gradient-to-t
-            from-white/90 to-transparent
-            dark:from-black/80
-          "
-      />
+      {/* ===== BOTTOM BLEND (KEY PART) ===== */}{" "}
+      <div className=" pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10 bg-gradient-to-t from-white/90 to-transparent dark:from-black/80 " />
     </section>
   );
 };
