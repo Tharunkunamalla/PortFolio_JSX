@@ -18,7 +18,8 @@ const webProjects = [
   {
     id: 1,
     title: "FaceRipple",
-    description: "Video Calling Realtime Chat App & Social App",
+    description:
+      "Video Calling Realtime Chat App & Social App using getStream API for real-time messaging, with MongoDB storing user data and messages.",
     image: "/assets/FaceRipple1.png",
     technologies: [
       "React",
@@ -85,7 +86,8 @@ const webProjects = [
   {
     id: 5,
     title: "Tournament Management System",
-    description: "Manage tournaments, teams, and schedules online. #ClgProject",
+    description:
+      "Manage tournaments, teams, and schedules online. Full-stack app. Database designed in SQL. Frontend using HTML/CSS/JS and backend logic in PHP.",
     image: "/assets/TMS_proj.png",
     technologies: ["Php", "SQL", "JS", "CSS", "HTML"],
     liveLink: "",
@@ -125,7 +127,7 @@ const machineLearningProjects = [
     id: 9,
     title: "Anime Recommendation System",
     description:
-      "A content-based anime recommendation system using cosine similarity.",
+      "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input.",
     image: "/assets/p3.png",
     technologies: [
       "Python",
@@ -141,7 +143,8 @@ const machineLearningProjects = [
   {
     id: 10,
     title: "Brain Tumor MRI Classification",
-    description: "CNN and Transfer Learning to classify MRI brain images.",
+    description:
+      "CNN and Transfer Learning to classify MRI brain images. Deployed via Streamlit with UI to upload and predict on MRI scans and visualize results.",
     image: "/assets/brain_tumor.png",
     technologies: ["Python", "TensorFlow", "Keras", "Streamlit"],
     liveLink: "",
@@ -152,7 +155,7 @@ const machineLearningProjects = [
     id: 11,
     title: "PhonePe Transactions Insights",
     description:
-      "Data analysis of PhonePe transactions using Python and visualization libraries.",
+      "Data analysis of PhonePe transactions using Python and visualization libraries. Extracts trends in transaction volume, types, and geography.",
     image: "/assets/phonepe.png",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     liveLink: "",
@@ -180,7 +183,8 @@ const machineLearningProjects = [
   {
     id: 13,
     title: "Multi class fish classification",
-    description: "CNN model to classify different species of fish.",
+    description:
+      "CNN model to classify different species of fish. Includes data preprocessing, augmentation, and visualization of results.",
     image: "/assets/fish1.png",
     technologies: [
       "Python",
@@ -432,16 +436,45 @@ const Projects = () => {
           </div>
         )}
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-16 mb-16 relative">
+          {/* Glow background */}
+          <div className="absolute inset-0 flex justify-center">
+            <div className="w-64 h-14 bg-gradient-to-r from-fuchsia-500 via-purple-500 to-indigo-500 blur-2xl opacity-40 animate-pulse"></div>
+          </div>
+
           <a
             href="https://github.com/Tharunkunamalla"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gray-800 dark:bg-gray-700 text-white hover:dark:bg-secondary-500 hover:bg-secondary-500 transition-colors duration-300"
+            className="
+      relative inline-flex items-center gap-3 px-8 py-4
+      rounded-full font-medium tracking-wide
+      text-white
+      bg-gradient-to-r from-[#1f1f2e] via-[#26263a] to-[#1a1a2a]
+      border border-white/10
+      shadow-lg shadow-purple-500/20
+      backdrop-blur-md
+      transition-all duration-500
+      hover:-translate-y-1
+      hover:shadow-purple-500/40
+      hover:border-purple-400/40
+      group
+    "
           >
-            More Projects on GitHub <Github className="h-5 w-5" />
+            <span className="text-sm md:text-base">
+              More Projects on GitHub
+            </span>
+
+            <Github
+              className="
+        h-5 w-5
+        transition-transform duration-500
+        group-hover:rotate-12 group-hover:scale-110
+      "
+            />
           </a>
         </div>
+
         <br />
         {/* <GitHubStats username="Tharunkunamalla" /> */}
       </div>

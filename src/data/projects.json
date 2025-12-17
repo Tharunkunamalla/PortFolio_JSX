@@ -105,7 +105,7 @@
     {
       "id": 9,
       "title": "Anime Recommendation System",
-      "description": "A content-based anime recommendation system using cosine similarity.",
+      "description": "A content-based anime recommendation system using cosine similarity. Analyzes anime attributes like genre, type, and score to suggest similar shows. Built with Python, Scikit-learn, and Pandas. Deployed via Streamlit with a user-friendly interface to get recommendations based on selected anime. Fetches additional anime details using Jikan API. ",
       "image": "/assets/p2.jpg",
       "technologies": [
         "Python",
@@ -120,7 +120,7 @@
     {
       "id": 10,
       "title": "Brain Tumor MRI Classification",
-      "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans.",
+      "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans. Includes data preprocessing, augmentation, and visualization of results.",
       "image": "/assets/brain_tumor.png",
       "technologies": ["Python", "TensorFlow", "Keras", "Streamlit"],
       "liveLink": "",
@@ -129,7 +129,7 @@
     {
       "id": 11,
       "title": "PhonePe Transactions Insights",
-      "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction.",
+      "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction. Deployed via Streamlit for interactive exploration.",
       "image": "/assets/phonepe.png",
       "technologies": ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
       "liveLink": "",
@@ -154,7 +154,7 @@
     {
       "id": 13,
       "title": "Multi class fish classification",
-      "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics.",
+      "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics. Visualizes results with Matplotlib.",
       "image": "/assets/fish1.png",
       "technologies": [
         "Python",
