@@ -85,7 +85,7 @@ const webProjects = [
     codeLink: "",
   },
   {
-    id: 4,
+    id: 5,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive resort booking app with authentication and room management.",
@@ -102,7 +102,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
   {
-    id: 5,
+    id: 6,
     title: "Tournament Management System",
     description:
       "Manage tournaments, teams, and schedules online. Full-stack app. Database designed in SQL. Frontend using HTML/CSS/JS and backend logic in PHP.",
@@ -112,7 +112,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
-    id: 6,
+    id: 7,
     title: "Portfolio Website",
     description: "My personal portfolio showcasing skills and projects.",
     image: "/assets/portfolio.png",
@@ -121,7 +121,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 7,
+    id: 8,
     title: "Gemini-AI",
     description: "AI assistant dashboard with clean UI and GPT integration.",
     image: "/assets/gemini.jpg",
@@ -130,7 +130,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 8,
+    id: 9,
     title: "Jarvis -Voice Assistant",
     description: "Real-time voice assistant with Google integration.",
     image: "/assets/jarvis.gif",
@@ -142,7 +142,7 @@ const webProjects = [
 
 const machineLearningProjects = [
   {
-    id: 9,
+    id: 10,
     title: "Anime Recommendation System",
     description:
       "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input.",
@@ -159,7 +159,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git",
   },
   {
-    id: 10,
+    id: 11,
     title: "Brain Tumor MRI Classification",
     description:
       "CNN and Transfer Learning to classify MRI brain images. Deployed via Streamlit with UI to upload and predict on MRI scans and visualize results.",
@@ -170,7 +170,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 11,
+    id: 12,
     title: "PhonePe Transactions Insights",
     description:
       "Data analysis of PhonePe transactions using Python and visualization libraries. Extracts trends in transaction volume, types, and geography.",
@@ -181,7 +181,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
   {
-    id: 12,
+    id: 13,
     title: "Shopper spectrum - Customer Segmentation",
     description:
       "Customer segmentation using K-means clustering to analyze shopping behavior.",
@@ -199,7 +199,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
   },
   {
-    id: 13,
+    id: 14,
     title: "Multi class fish classification",
     description:
       "CNN model to classify different species of fish. Includes data preprocessing, augmentation, and visualization of results.",

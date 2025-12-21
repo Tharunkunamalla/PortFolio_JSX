@@ -1,10 +1,10 @@
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import Lottie from "lottie-react";
+import Lottie from "lottie-react"; // Ensure the casing matches the actual directory
 import codingAnimation from "../sections/Coding.json";
 import BackgroundParticles from "../BackgroundParticles";
-import Snowfall from "react-snowfall";
+// import Snowfall from "react-snowfall";
 
 gsap.registerPlugin(ScrollTrigger);
 
