@@ -68,6 +68,24 @@ const webProjects = [
   },
   {
     id: 4,
+    title: "DSA- Play Visualizer",
+    description:
+      "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms. With dark mode and responsive design. and JWT authentication.",
+    image: "/assets/b1.png",
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "GSAP",
+      "Express",
+      "Node.js",
+      "MongoDB",
+      "JWT",
+    ],
+    liveLink: "",
+    codeLink: "",
+  },
+  {
+    id: 4,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive resort booking app with authentication and room management.",
@@ -348,8 +366,15 @@ const Projects = () => {
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="
+                      w-full h-full
+                      object-cover object-top
+                      scale-95
+                      transition-transform duration-500 ease-out
+                      group-hover:scale-105 rounded-lg
+                    "
                 />
+
                 <div
                   className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-6 transition-opacity duration-300 ${
                     hoveredProject === project.id ? "opacity-100" : "opacity-0"

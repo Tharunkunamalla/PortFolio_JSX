@@ -61,6 +61,38 @@ app.post("/api/github/graphql", async (req, res) => {
   }
 });
 
+// -------- Monkeytype Proxy (FIXED) --------
+app.get("/api/monkeytype/:username", async (req, res) => {
+  try {
+    const {username} = req.params;
+
+    const response = await fetch(
+      `https://api.monkeytype.com/users/${username}/stats`,
+      {
+        headers: {
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        },
+      }
+    );
+
+    const text = await response.text();
+
+    if (!response.ok) {
+      console.error("Monkeytype raw response:", text);
+      return res.status(response.status).json({
+        error: "Failed to fetch Monkeytype stats",
+      });
+    }
+
+    const data = JSON.parse(text);
+    res.status(200).json(data);
+  } catch (err) {
+    console.error("Monkeytype proxy error:", err);
+    res.status(500).json({error: "Monkeytype proxy failed"});
+  }
+});
+
 const PORT = process.env.PORT || 8081;
 
 app.listen(PORT, () =>

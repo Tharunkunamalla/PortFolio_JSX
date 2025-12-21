@@ -4,6 +4,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Lottie from "lottie-react";
 import codingAnimation from "../sections/Coding.json";
 import BackgroundParticles from "../BackgroundParticles";
+import Snowfall from "react-snowfall";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -87,6 +88,10 @@ const About = () => {
   boxRefs.current = Array(aboutData.length).fill(null);
   lineRefs.current = [];
 
+  const introTitleRef = useRef(null);
+  const gradientTextRef = useRef(null);
+  const underlineRef = useRef(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(headingRef.current, {
@@ -135,6 +140,46 @@ const About = () => {
             toggleActions: "play reverse play reverse",
           },
         });
+      });
+
+      // Title animation
+      gsap.from(introTitleRef.current, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      // Gradient text subtle pop
+      gsap.from(gradientTextRef.current, {
+        scale: 0.95,
+        opacity: 0,
+        duration: 0.6,
+        delay: 0.3,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        },
+      });
+
+      // Underline draw animation
+      gsap.to(underlineRef.current, {
+        width: "100%",
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.6,
+        scrollTrigger: {
+          trigger: infoRef.current,
+          start: "top 80%",
+          toggleActions: "play reverse play reverse",
+        },
       });
 
       gsap.from(buttonRef.current, {
@@ -194,6 +239,8 @@ const About = () => {
       className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
     >
       <BackgroundParticles />
+      {/* <Snowfall color="#82C3D9" /> */}
+
       <div
         className="
     absolute top-0 left-0 right-0 h-24
@@ -237,12 +284,33 @@ const About = () => {
               ref={introTextRef}
               className="w-full flex flex-col items-center z-10"
             >
-              <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center">
+              <h3
+                ref={introTitleRef}
+                className="text-xl md:text-2xl font-semibold text-center text-gray-800 dark:text-white"
+              >
                 I'm a{" "}
-                <span className="text-secondary-500 font-bold drop-shadow-md">
-                  passionate Frontend Developer
+                <span
+                  ref={gradientTextRef}
+                  className="
+      relative inline-block
+      font-extrabold
+      bg-clip-text text-transparent
+      bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
+    "
+                >
+                  MERN-Stack Developer
+                  <span
+                    ref={underlineRef}
+                    className="
+        absolute left-0 -bottom-1 h-[2px]
+        bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
+        rounded-full
+        w-0
+      "
+                  />
                 </span>
               </h3>
+
               <p
                 ref={(el) => (paragraphsRef.current[0] = el)}
                 className="text-gray-600 dark:text-gray-300 mt-3 text-center text-sm leading-relaxed"

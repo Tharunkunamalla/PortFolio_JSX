@@ -16,7 +16,10 @@ import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
+
 import Footer from "./components/Footer";
+// import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";
+
 import {Toaster} from "react-hot-toast";
 import ProjectDetail from "./components/sections/ProjectDetail";
 
@@ -87,6 +90,7 @@ function ScrollRouterWrapper() {
                 <Home scrollToSection={scrollToSection} />
                 <About />
                 <Skills />
+                {/* <MonkeyTypeStats /> */}
                 <Toaster position="top-center" />
                 <Projects />
                 <Contact />

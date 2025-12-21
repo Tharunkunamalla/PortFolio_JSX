@@ -188,20 +188,60 @@ const LeetCodeStats = () => {
         {/* HEADING + LIVE INDICATOR */}
         <div
           ref={headingRef}
-          className="flex items-center justify-center gap-4 mb-8"
+          className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-8 text-center md:text-left"
         >
+          {/* TITLE */}
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white">
             My <span className="text-secondary-500">DSA Journey</span>
           </h2>
 
           {/* LIVE DOT */}
-          <div className="flex items-center gap-2 text-sm text-green-400">
-            <span className="relative flex h-3 w-3">
+          <div className="flex items-center gap-2 text-xs md:text-sm text-green-400">
+            <span className="relative flex h-2.5 w-2.5 md:h-3 md:w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              <span className="relative inline-flex rounded-full h-full w-full bg-green-500"></span>
             </span>
             <span className="tracking-wide">Live</span>
           </div>
+
+          {/* TOP-CODED LANGUAGE */}
+          {/* <div
+            className="
+      mt-1 md:mt-0
+      md:ml-6
+      flex items-center gap-1.5
+      text-[10px] md:text-sm
+      tracking-wide
+      justify-center
+    "
+          >
+            <span
+              className="
+        font-['Inter','Poppins',sans-serif]
+        text-gray-500 dark:text-gray-400
+        font-medium
+        uppercase
+        letter-spacing-[0.1em]
+        opacity-80
+      "
+            >
+              Top-coded Language
+            </span>
+
+            <span
+              className="
+        text-purple-400
+        font-semibold
+        bg-purple-500/10
+        px-1.5 py-[1px]
+        md:px-2 md:py-[2px]
+        rounded-md
+        shadow-[0_0_10px_rgba(168,85,247,0.35)]
+      "
+            >
+              Java
+            </span>
+          </div> */}
         </div>
 
         {/* STATS GRID */}

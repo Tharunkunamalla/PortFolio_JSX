@@ -50,6 +50,23 @@
     },
     {
       "id": 4,
+      "title": "DSA- Play Visualizer",
+      "description": "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms. With dark mode and responsive design. and JWT authentication.",
+      "image": "/assets/b1.png",
+      "technologies": [
+        "React",
+        "Tailwind CSS",
+        "GSAP",
+        "MongoDB",
+        "Express",
+        "Node.js",
+        "JWT"
+      ],
+      "liveLink": "",
+      "codeLink": ""
+    },
+    {
+      "id": 5,
       "title": "Sapphire Skies Resort",
       "description": "A fully functional resort booking system. It includes user registration, room selection, and booking history. Admin dashboard to manage rooms and bookings. Uses Clerk for user authentication. Frontend in React with Tailwind CSS and backend via Node.js, Express, and MongoDB.",
       "image": "/assets/sapphire.png",
@@ -65,7 +82,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Sapphire-skies-resort"
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "Tournament Management System",
       "description": "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.#ClgProject",
       "image": "/assets/TMS_proj.png",
@@ -74,7 +91,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/TMS"
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Portfolio Website",
       "description": "Responsive personal portfolio with project showcase, contact form, and social media integration. Built using vanilla HTML/CSS/JS. Clean UI, animated sections, mobile-friendly layout. Hosted on Netlify.",
       "image": "/assets/portfolio.png",
@@ -83,7 +100,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Portfolio-js"
     },
     {
-      "id": 7,
+      "id": 8,
       "title": "Gemini-AI",
       "description": "An AI chatbot interface styled like Google's Gemini. Uses OpenAI's GPT-3.5 for conversational abilities. Minimalistic UI built with vanilla JS/CSS. Aimed at providing clean UI inspiration for AI dashboard tools.",
       "image": "/assets/gemini.jpg",
@@ -92,7 +109,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Gemini_App"
     },
     {
-      "id": 8,
+      "id": 9,
       "title": "Jarvis -Voice Assistant",
       "description": "Voice-controlled assistant using browser\u2019s speech recognition. Responds to commands like Google search, opening apps, telling time. Built with JS and Web Speech API. Clean UI and smooth audio feedback.",
       "image": "/assets/jarvis.gif",
@@ -103,7 +120,7 @@
   ],
   "machineLearningProjects": [
     {
-      "id": 9,
+      "id": 10,
       "title": "Anime Recommendation System",
       "description": "A content-based anime recommendation system using cosine similarity. Analyzes anime attributes like genre, type, and score to suggest similar shows. Built with Python, Scikit-learn, and Pandas. Deployed via Streamlit with a user-friendly interface to get recommendations based on selected anime. Fetches additional anime details using Jikan API. ",
       "image": "/assets/p2.jpg",
@@ -118,7 +135,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git"
     },
     {
-      "id": 10,
+      "id": 11,
       "title": "Brain Tumor MRI Classification",
       "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans. Includes data preprocessing, augmentation, and visualization of results.",
       "image": "/assets/brain_tumor.png",
@@ -127,7 +144,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls"
     },
     {
-      "id": 11,
+      "id": 12,
       "title": "PhonePe Transactions Insights",
       "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction. Deployed via Streamlit for interactive exploration.",
       "image": "/assets/phonepe.png",
@@ -136,7 +153,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights"
     },
     {
-      "id": 12,
+      "id": 13,
       "title": "Shopper spectrum - Customer Segmentation",
       "description": "Clustering shoppers using K-means based on demographics and spending patterns. Visualized with Seaborn and deployed via Streamlit for real-time interaction and insights. Targeted towards marketing teams for behavior analysis.",
       "image": "/assets/shopper1.png",
@@ -152,7 +169,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation"
     },
     {
-      "id": 13,
+      "id": 14,
       "title": "Multi class fish classification",
       "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics. Visualizes results with Matplotlib.",
       "image": "/assets/fish1.png",
