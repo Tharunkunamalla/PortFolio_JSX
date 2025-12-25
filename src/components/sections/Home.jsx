@@ -175,11 +175,11 @@ const Home = ({scrollToSection}) => {
 
             <TypeAnimation
               sequence={[
-                "Frontend Developer",
-                2000,
                 "MERN Stack Developer",
                 2000,
                 "ML Enthusiast",
+                2000,
+                "FullStack Developer",
                 2000,
               ]}
               wrapper="p"
