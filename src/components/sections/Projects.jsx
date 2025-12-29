@@ -70,8 +70,8 @@ const webProjects = [
     id: 4,
     title: "DSA- Play Visualizer",
     description:
-      "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms. With dark mode and responsive design. and JWT authentication.",
-    image: "/assets/b1.png",
+      "A web app to visualize various Data Structures and Algorithms with interactive animations.Creative space for drawing, and for taking notes with saved logs Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms.",
+    image: "/assets/dsaplay1.png",
     technologies: [
       "React",
       "Tailwind CSS",
