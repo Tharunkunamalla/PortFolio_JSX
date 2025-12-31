@@ -315,7 +315,8 @@ const Projects = () => {
       <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 md:px-6">
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-[95%] 2xl:max-w-[85%] mx-auto px-4">
         <h2
           ref={headingRef}
           className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white"
@@ -352,17 +353,17 @@ const Projects = () => {
         </div>
 
         {/* Project Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {visibleProjects.map((project, index) => (
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
               className="bg-white/5 backdrop-blur-md
-                  border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                  border border-white/10 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative h-48 overflow-hidden group">
+              <div className="relative h-48 overflow-hidden group flex-shrink-0">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -396,27 +397,38 @@ const Projects = () => {
                   </a>
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-5 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-4">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-4 flex-grow text-sm">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 bg-light-300 dark:bg-dark-400 text-gray-700 dark:text-gray-300 text-xs rounded-full"
+                      className="
+                        px-2.5 py-1 
+                        text-[11px] font-medium tracking-wide
+                        text-gray-700 dark:text-gray-300 
+                        bg-gray-100 dark:bg-white/5 
+                        border border-gray-200 dark:border-white/10 
+                        rounded-md shadow-sm
+                        transition-all duration-300
+                        hover:bg-secondary-50 hover:text-secondary-600 hover:border-secondary-200 
+                        dark:hover:bg-secondary-900/30 dark:hover:text-secondary-300 dark:hover:border-secondary-500/30
+                        cursor-default
+                      "
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                <div className="flex justify-between items-center pt-2 border-t border-gray-100 dark:border-gray-700">
+                <div className="flex justify-between items-center pt-3 border-t border-gray-200 dark:border-gray-700 mt-auto gap-2">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 transition-colors duration-300"
+                    className="text-xs font-medium text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 transition-colors duration-300 whitespace-nowrap"
                   >
                     Live Demo <ExternalLink className="h-3 w-3" />
                   </button>
@@ -424,15 +436,15 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 transition-colors duration-300"
+                    className="text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 transition-colors duration-300 whitespace-nowrap"
                   >
-                    View Code <Github className="h-4 w-4" />
+                    View Code <Github className="h-3.5 w-3.5" />
                   </a>
                   <RouterLink
                     to={`/project/${project.id}`}
-                    className="text-sm text-secondary-600 dark:text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-300 flex items-center gap-1 transition-colors duration-300"
+                    className="text-xs font-medium text-secondary-600 dark:text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-300 flex items-center gap-1 transition-colors duration-300 whitespace-nowrap"
                   >
-                    View Details <ExternalLink className="h-3 w-3" />
+                    Details <ExternalLink className="h-3 w-3" />
                   </RouterLink>
                 </div>
               </div>
