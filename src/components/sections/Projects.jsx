@@ -472,19 +472,19 @@ const Projects = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="
-      relative inline-flex items-center gap-3 px-8 py-4
-      rounded-full font-medium tracking-wide
-      text-white
-      bg-gradient-to-r from-[#1f1f2e] via-[#26263a] to-[#1a1a2a]
-      border border-white/10
-      shadow-lg shadow-purple-500/20
-      backdrop-blur-md
-      transition-all duration-500
-      hover:-translate-y-1
-      hover:shadow-purple-500/40
-      hover:border-purple-400/40
-      group
-    "
+                        relative inline-flex items-center gap-3 px-8 py-4
+                        rounded-full font-medium tracking-wide
+                        text-white
+                        bg-gradient-to-r from-[#1f1f2e] via-[#26263a] to-[#1a1a2a]
+                        border border-white/10
+                        shadow-lg shadow-purple-500/20
+                        backdrop-blur-md
+                        transition-all duration-500
+                        hover:-translate-y-1
+                        hover:shadow-purple-500/40
+                        hover:border-purple-400/40
+                        group
+                      "
           >
             <span className="text-sm md:text-base">
               More Projects on GitHub
