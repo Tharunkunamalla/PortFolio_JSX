@@ -48,7 +48,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center py-5 md:py-6">
+      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center py-3 md:py-4">
         <a
           href="#home"
           className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
