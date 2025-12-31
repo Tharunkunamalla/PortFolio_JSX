@@ -292,10 +292,10 @@ const Contact = () => {
                       Phone
                     </h4>
                     <a
-                      href="tel:+91-6303-495-726"
+                      href="tel:+91-6303-480-726"
                       className="text-gray-950 dark:text-white hover:text-secondary-500 dark:hover:text-secondary-400 transition-colors duration-300"
                     >
-                      +91 6303-495-726
+                      +91 6303-480-726
                     </a>
                   </div>
                 </div>
