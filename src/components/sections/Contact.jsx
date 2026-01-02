@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {Github, Linkedin, Twitter, Instagram} from "lucide-react";
 import {Mail, Phone, MapPin, Send} from "lucide-react";
 import BackgroundParticles from "../BackgroundParticles";
+import confetti from "canvas-confetti";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,6 +106,14 @@ const Contact = () => {
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
+        });
+
+        // Trigger confetti animation
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#6366f1", "#a855f7", "#ec4899"], // Matches your theme colors (primary, secondary, accent)
         });
 
         setFormData({
