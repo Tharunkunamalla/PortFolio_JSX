@@ -134,7 +134,8 @@ const webProjects = [
   {
     id: 9,
     title: "Jarvis -Voice Assistant",
-    description: "Real-time voice assistant with Google integration.",
+    description:
+      "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
     image: "/assets/jarvis.gif",
     technologies: ["JS", "Google"],
     liveLink: "https://jarvis-responder.vercel.app/",
