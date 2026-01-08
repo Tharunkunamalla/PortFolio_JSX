@@ -125,7 +125,7 @@ const webProjects = [
     id: 8,
     title: "Gemini-AI",
     description:
-      "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks. ",
+      "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks.",
     image: "/assets/gemini.jpg",
     technologies: ["JS", "Css", "OpenAI API"],
     liveLink: "https://gemini-app-chatbot.vercel.app/",
@@ -134,8 +134,7 @@ const webProjects = [
   {
     id: 9,
     title: "Jarvis -Voice Assistant",
-    description:
-      "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
+    description: "Real-time voice assistant with Google integration.",
     image: "/assets/jarvis.gif",
     technologies: ["JS", "Google"],
     liveLink: "https://jarvis-responder.vercel.app/",
