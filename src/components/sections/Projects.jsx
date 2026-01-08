@@ -88,7 +88,7 @@ const webProjects = [
     id: 5,
     title: "Sapphire Skies Resort",
     description:
-      "A fully responsive resort booking app with authentication and room management.",
+      "A fully responsive resort booking app with authentication and room management. Users can book rooms, view amenities, and manage reservations.",
     image: "/assets/sapphire.png",
     technologies: [
       "React",
@@ -114,7 +114,8 @@ const webProjects = [
   {
     id: 7,
     title: "Portfolio Website",
-    description: "My personal portfolio showcasing skills and projects.",
+    description:
+      "My personal portfolio showcasing skills and projects. Built with modern web technologies and responsive design.",
     image: "/assets/portfolio.png",
     technologies: ["Js", "CSS", "HTML"],
     liveLink: "https://tharun-kunamalla.netlify.app/",
@@ -123,7 +124,8 @@ const webProjects = [
   {
     id: 8,
     title: "Gemini-AI",
-    description: "AI assistant dashboard with clean UI and GPT integration.",
+    description:
+      "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks. ",
     image: "/assets/gemini.jpg",
     technologies: ["JS", "Css", "OpenAI API"],
     liveLink: "https://gemini-app-chatbot.vercel.app/",
@@ -132,7 +134,8 @@ const webProjects = [
   {
     id: 9,
     title: "Jarvis -Voice Assistant",
-    description: "Real-time voice assistant with Google integration.",
+    description:
+      "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
     image: "/assets/jarvis.gif",
     technologies: ["JS", "Google"],
     liveLink: "https://jarvis-responder.vercel.app/",
