@@ -297,6 +297,10 @@ const Skills = () => {
                               style={{width: "0%"}}
                             ></div>
                           </div>
+                          {/* <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
+                            <span>Beginner</span>
+                            <span>Expert</span>
+                          </div> */}
                         </div>
                       );
                     })}
