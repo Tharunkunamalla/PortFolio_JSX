@@ -81,8 +81,8 @@ const webProjects = [
       "MongoDB",
       "JWT",
     ],
-    liveLink: "",
-    codeLink: "",
+    liveLink: "https://dsa-playground-iiitk.vercel.app/",
+    codeLink: "https://github.com/Tharunkunamalla/Dsa-playground.git",
   },
   {
     id: 5,
