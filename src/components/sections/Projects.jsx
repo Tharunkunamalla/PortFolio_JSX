@@ -44,6 +44,7 @@ const webProjects = [
       "Tailwind CSS",
       "Leaflet.js",
       "Java",
+      "shadcn/ui",
       "Dijkstra's Algorithm",
       "A* Search Algorithm",
       "OSM Data",
