@@ -1,6 +1,22 @@
 {
   "webProjects": [
     {
+      "id": 0,
+      "title": "CodeSync",
+      "description": "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Features include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative debugging tools. The platform supports creating multiple editing sessions with customizable permissions for read-only or full-access modes. Code changes are instantly synchronized across all connected clients with conflict resolution. Users can save their sessions and export code in various formats. The application includes a comprehensive documentation library and example projects to help new users get started quickly.",
+      "image": "/assets/codesync.png",
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "Socket.IO",
+        "Monaco Editor",
+        "piston Api"
+      ],
+      "liveLink": "https://codesync-cs.vercel.app",
+      "codeLink": "https://github.com/Tharunkunamalla/CodeSync"
+    },
+    {
       "id": 1,
       "title": "FaceRipple",
       "description": "Video Calling Realtime Chat App & Social App. Combines WebRTC with React for seamless peer-to-peer video chat. Integrates getStream API for real-time messaging, with MongoDB storing user data and messages. Tailwind CSS ensures responsive design. User authentication and room management are handled via Express and Node.js backend.",

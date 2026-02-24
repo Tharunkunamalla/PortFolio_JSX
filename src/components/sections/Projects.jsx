@@ -16,6 +16,23 @@ gsap.registerPlugin(ScrollTrigger);
 // Your project data
 const webProjects = [
   {
+    id: 0,
+    title: "CodeSync",
+    description:
+      "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting.",
+    image: "/assets/codesync.png",
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      "Socket.IO",
+      "Monaco Editor",
+      "piston Api",
+    ],
+    liveLink: "https://codesync-cs.vercel.app",
+    codeLink: "https://github.com/Tharunkunamalla/CodeSync",
+  },
+  {
     id: 1,
     title: "FaceRipple",
     description:
