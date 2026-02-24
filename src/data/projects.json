@@ -55,22 +55,6 @@
     },
     {
       "id": 3,
-      "title": "Auricare- A Gift to God's child",
-      "description": "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
-      "image": "/assets/auricare.png",
-      "technologies": [
-        "React",
-        "Tailwind",
-        "Supabase",
-        "Node.js",
-        "Express",
-        "Groq-Api"
-      ],
-      "liveLink": "https://auricare-v2.vercel.app/",
-      "codeLink": "https://github.com/Tharunkunamalla/Auricare-V2"
-    },
-    {
-      "id": 4,
       "title": "DSA- Play Visualizer",
       "description": "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms, And Creative space for drawing, and for taking notes with saved logs and JWT authentication. ",
       "image": "/assets/dsaplay1.png",
@@ -85,6 +69,22 @@
       ],
       "liveLink": "https://dsa-playground-iiitk.vercel.app/",
       "codeLink": "https://github.com/Tharunkunamalla/Dsa-playground.git"
+    },
+    {
+      "id": 4,
+      "title": "Auricare- A Gift to God's child",
+      "description": "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
+      "image": "/assets/auricare.png",
+      "technologies": [
+        "React",
+        "Tailwind",
+        "Supabase",
+        "Node.js",
+        "Express",
+        "Groq-Api"
+      ],
+      "liveLink": "https://auricare-v2.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Auricare-V2"
     },
     {
       "id": 5,
