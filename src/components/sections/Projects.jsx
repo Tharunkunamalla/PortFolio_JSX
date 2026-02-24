@@ -19,7 +19,7 @@ const webProjects = [
     id: 0,
     title: "CodeSync",
     description:
-      "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting.",
+      "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative debugging tools",
     image: "/assets/codesync.png",
     technologies: [
       "React",
