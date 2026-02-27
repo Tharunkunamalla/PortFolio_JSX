@@ -19,7 +19,7 @@ const ProjectDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const selectedProject = allProjects.find(
-      (p) => p.id === parseInt(projectId)
+      (p) => p.id === parseInt(projectId),
     );
     setProject(selectedProject);
     const timer = setTimeout(() => setIsLoading(false), 700);
