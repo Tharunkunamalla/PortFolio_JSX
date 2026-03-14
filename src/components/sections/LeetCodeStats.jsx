@@ -6,7 +6,7 @@ import Bg from "../Bg";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const username = "Tharunkunamalla";
+const username = "Tharun_0509";
 
 const LeetCodeStats = () => {
   const [stats, setStats] = useState(null);
