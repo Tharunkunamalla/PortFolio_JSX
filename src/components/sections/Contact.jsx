@@ -112,7 +112,7 @@ const Contact = () => {
         confetti({
           particleCount: 100,
           spread: 70,
-          origin: { y: 0.6 },
+          origin: {y: 0.6},
           colors: ["#6366f1", "#a855f7", "#ec4899"], // Matches your theme colors (primary, secondary, accent)
         });
 
@@ -182,6 +182,16 @@ const Contact = () => {
             onSubmit={handleSubmit}
             className="bg-white dark:bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg p-6 md:p-8"
           >
+            <input
+              type="hidden"
+              name="from_name"
+              value="Portfolio Contact Form"
+            />
+            <input
+              type="hidden"
+              name="subject"
+              value="New Message from Portfolio🚀"
+            />
             <div className="mb-6">
               <label
                 htmlFor="name"
