@@ -6,14 +6,14 @@ const ownerPosts = [
   {
     id: "welcome-note",
     type: "text",
-    text: "Thanks for visiting my portfolio. I regularly post updates about projects and what I am currently building.",
+    text: "Thanks for visiting my portfolio. I will post updates about projects and what I am currently building.",
     postedAt: "2026-03-19T09:45:00",
   },
   {
     id: "profile-update",
     type: "image",
-    text: "New profile photo and branding update. More project demos are coming this week.",
-    imageUrl: "/assets/pfp.jpg",
+    text: "Some of my project services are suspended for a while due to Free Account limitation on Render. Those services will be back once Again from starting of the next Month. Thanks for your understanding.",
+    imageUrl: "/assets/messages/render-19-3.png",
     imageAlt: "Owner update",
     postedAt: "2026-03-18T20:10:00",
   },
@@ -47,39 +47,41 @@ const Message = () => {
 
   return (
     <div className="fixed bottom-5 right-4 z-50 flex max-w-[92vw] flex-col items-end gap-3">
-      <div className="flex items-center gap-2">
+      {!isOpen && (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          disabled={isOpen}
-          className="inline-flex items-center gap-2 rounded-full border border-secondary-500/60 bg-white/85 px-4 py-2 text-sm font-semibold text-secondary-700 shadow-lg backdrop-blur-md transition hover:scale-[1.02] hover:bg-white disabled:cursor-not-allowed disabled:opacity-60 dark:bg-[#141421]/90 dark:text-secondary-300 dark:hover:bg-[#1a1a2d]"
+          className="inline-flex items-center gap-2 rounded-full border border-secondary-500/60 bg-white/85 px-4 py-2 text-sm font-semibold text-secondary-700 shadow-lg backdrop-blur-md transition hover:scale-[1.02] hover:bg-white dark:bg-[#141421]/90 dark:text-secondary-300 dark:hover:bg-[#1a1a2d]"
           aria-label="Open owner message"
         >
           <MessageCircleMore className="h-4 w-4" />
           Open
         </button>
-
-        <button
-          type="button"
-          onClick={() => setIsOpen(false)}
-          disabled={!isOpen}
-          className="inline-flex items-center gap-2 rounded-full border border-red-500/60 bg-white/85 px-4 py-2 text-sm font-semibold text-red-600 shadow-lg backdrop-blur-md transition hover:scale-[1.02] hover:bg-white disabled:cursor-not-allowed disabled:opacity-60 dark:bg-[#141421]/90 dark:text-red-300 dark:hover:bg-[#1a1a2d]"
-          aria-label="Close owner message"
-        >
-          <X className="h-4 w-4" />
-          Close
-        </button>
-      </div>
+      )}
 
       {isOpen && (
         <section className="w-[min(390px,92vw)] overflow-hidden rounded-2xl border border-secondary-500/30 bg-white/90 shadow-2xl backdrop-blur-md dark:border-secondary-500/20 dark:bg-[#10101a]/95">
           <header className="border-b border-secondary-500/20 px-4 py-3">
-            <h2 className="text-base font-bold text-gray-900 dark:text-white">
-              Message From Owner
-            </h2>
-            <p className="text-xs text-gray-600 dark:text-gray-300">
-              Text and image posts with date and time
-            </p>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="text-base font-bold text-gray-900 dark:text-white">
+                  A Small Message From me to you! 👋
+                </h2>
+                <p className="text-xs text-gray-600 dark:text-gray-300">
+                  Text and image posts with date and time
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex items-center gap-1 rounded-full border border-red-500/60 bg-white/85 px-3 py-1.5 text-xs font-semibold text-red-600 transition hover:bg-white dark:bg-[#141421]/90 dark:text-red-300 dark:hover:bg-[#1a1a2d]"
+                aria-label="Close owner message"
+              >
+                <X className="h-3.5 w-3.5" />
+                Close
+              </button>
+            </div>
           </header>
 
           <div className="max-h-[340px] space-y-3 overflow-y-auto p-4 scrollbar-hide">
