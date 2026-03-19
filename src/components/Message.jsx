@@ -17,6 +17,9 @@ const ownerPosts = [
     imageAlt: "Owner update",
     postedAt: "2026-03-18T20:10:00",
   },
+  {
+    id: "",
+  },
 ];
 
 const formatDateTime = (value) => {
