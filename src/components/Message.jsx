@@ -1,4 +1,4 @@
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {MessageCircleMore, X} from "lucide-react";
 
 // Update this list to publish new text/image posts from the owner.
@@ -39,6 +39,30 @@ const formatDateTime = (value) => {
 
 const Message = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const messageBoxRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const handleOutsideClick = (event) => {
+      if (
+        messageBoxRef.current &&
+        !messageBoxRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [isOpen]);
 
   const posts = useMemo(
     () =>
@@ -66,7 +90,10 @@ const Message = () => {
       )}
 
       {isOpen && (
-        <section className="w-[min(390px,92vw)] overflow-hidden rounded-2xl border border-secondary-500/30 bg-white/90 shadow-2xl backdrop-blur-md dark:border-secondary-500/20 dark:bg-[#10101a]/95">
+        <section
+          ref={messageBoxRef}
+          className="w-[min(390px,92vw)] overflow-hidden rounded-2xl border border-secondary-500/30 bg-white/90 shadow-2xl backdrop-blur-md dark:border-secondary-500/20 dark:bg-[#10101a]/95"
+        >
           <header className="border-b border-secondary-500/20 px-4 py-3">
             <div className="flex items-start justify-between gap-3">
               <div>
