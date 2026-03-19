@@ -19,28 +19,4 @@ export const ownerMessages = [
     text: "I am currently working on a new project that will be added to my portfolio soon, Stay tuned . So This project is real time application and where most users can interact with each other. I will launch it in the next month.",
     postedAt: "2026-03-17T19:20:00",
   },
-  {
-    id: "project Update - February 2026",
-    type: "text",
-    text: "I have added new projects to my portfolio, including a real-time chat application and a personal blog built with Next.js. Check them out in the Projects section!",
-    postedAt: "2026-02-25T19:30:00",
-  },
-  {
-    id: "project Update - February 2026",
-    type: "text",
-    text: "I have added new projects to my portfolio, including a real-time chat application and a personal blog built with Next.js. Check them out in the Projects section!",
-    postedAt: "2026-02-25T19:30:00",
-  },
-  {
-    id: "project Update - February 2026",
-    type: "text",
-    text: "I have added new projects to my portfolio, including a real-time chat application and a personal blog built with Next.js. Check them out in the Projects section!",
-    postedAt: "2026-02-25T19:35:00",
-  },
-  {
-    id: "project Update - February 2026",
-    type: "text",
-    text: "I have added new projects to my portfolio, including a real-time chat application and a personal blog built with Next.js. Check them out in the Projects section!",
-    postedAt: "2026-02-25T19:35:00",
-  },
 ];
