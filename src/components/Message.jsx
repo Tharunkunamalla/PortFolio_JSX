@@ -1,29 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from "react";
-import {MessageCircleMore, X} from "lucide-react";
-
-// Update this list to publish new text/image posts from the owner.
-const ownerPosts = [
-  {
-    id: "welcome-note",
-    type: "text",
-    text: "Thanks for visiting my portfolio. I will post updates about projects and what I am currently building.",
-    postedAt: "2026-03-19T09:45:00",
-  },
-  {
-    id: "Project Update - March 2026",
-    type: "image",
-    text: "Some of my project services are suspended for a while due to Free Account limitation on Render. Those services will be back once Again from starting of the next Month. Thanks for your understanding.",
-    imageUrl: "/assets/messages/render-19-3.png",
-    imageAlt: "Owner update",
-    postedAt: "2026-03-18T20:10:00",
-  },
-  {
-    id: "project Update - March 2026",
-    type: "text",
-    text: "I am currently working on a new project that will be added to my portfolio soon, Stay tuned . So This project is real time application and where most users can interact with each other. I will launch it in the next month.",
-    postedAt: "2026-03-17T19:20:00",
-  },
-];
+import {BellRing, MessageCircleMore, X} from "lucide-react";
+import {ownerMessages} from "../data/ownerMessages";
 
 const formatDateTime = (value) => {
   const parsedDate = new Date(value);
@@ -37,9 +14,97 @@ const formatDateTime = (value) => {
   });
 };
 
+const LAST_SEEN_MESSAGE_KEY = "owner-last-seen-message";
+const LAST_SEEN_WINDOW_MS = 60 * 1000;
+
+const getTimestamp = (value) => {
+  const time = new Date(value).getTime();
+  return Number.isNaN(time) ? null : time;
+};
+
+const getMessageSignature = (post) => {
+  if (!post) {
+    return null;
+  }
+
+  return [post.id, post.postedAt, post.text, post.imageUrl].join("|");
+};
+
+const readLastSeenState = () => {
+  try {
+    const rawValue = localStorage.getItem(LAST_SEEN_MESSAGE_KEY);
+    if (!rawValue) {
+      return null;
+    }
+
+    const parsedValue = JSON.parse(rawValue);
+    if (
+      typeof parsedValue !== "object" ||
+      parsedValue === null ||
+      typeof parsedValue.signature !== "string"
+    ) {
+      return null;
+    }
+
+    return {
+      signature: parsedValue.signature,
+      seenAt:
+        typeof parsedValue.seenAt === "number"
+          ? parsedValue.seenAt
+          : Date.now(),
+    };
+  } catch {
+    return null;
+  }
+};
+
+const saveLastSeenState = (signature) => {
+  localStorage.setItem(
+    LAST_SEEN_MESSAGE_KEY,
+    JSON.stringify({signature, seenAt: Date.now()}),
+  );
+};
+
 const Message = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
   const messageBoxRef = useRef(null);
+
+  const posts = useMemo(
+    () =>
+      [...ownerMessages]
+        .map((post) => ({
+          ...post,
+          postedAtMs: getTimestamp(post.postedAt),
+          displayTime: formatDateTime(post.postedAt),
+        }))
+        .sort((a, b) => (b.postedAtMs ?? 0) - (a.postedAtMs ?? 0)),
+    [],
+  );
+
+  const latestPost = posts[0];
+  const latestMessageKey = getMessageSignature(latestPost);
+
+  useEffect(() => {
+    if (!latestMessageKey) {
+      setShowNewMessageAlert(false);
+      return;
+    }
+
+    const seenState = readLastSeenState();
+    const hasNewMessage =
+      !seenState || seenState.signature !== latestMessageKey;
+    setShowNewMessageAlert(hasNewMessage);
+
+    // Keep a short seen-timestamp window (60s) while preserving new-message checks.
+    if (
+      seenState &&
+      !hasNewMessage &&
+      Date.now() - seenState.seenAt > LAST_SEEN_WINDOW_MS
+    ) {
+      saveLastSeenState(latestMessageKey);
+    }
+  }, [latestMessageKey]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -64,23 +129,45 @@ const Message = () => {
     };
   }, [isOpen]);
 
-  const posts = useMemo(
-    () =>
-      [...ownerPosts]
-        .sort((a, b) => new Date(b.postedAt) - new Date(a.postedAt))
-        .map((post) => ({
-          ...post,
-          displayTime: formatDateTime(post.postedAt),
-        })),
-    [],
-  );
+  const handleOpenMessage = () => {
+    setIsOpen(true);
+
+    if (latestMessageKey) {
+      saveLastSeenState(latestMessageKey);
+    }
+
+    setShowNewMessageAlert(false);
+  };
 
   return (
     <div className="fixed bottom-5 right-4 z-50 flex max-w-[92vw] flex-col items-end gap-3">
+      {!isOpen && showNewMessageAlert && (
+        <button
+          type="button"
+          onClick={handleOpenMessage}
+          className="group relative animate-fade-in rounded-xl border border-secondary-500/35 bg-white/90 px-3 py-2 text-xs font-semibold text-secondary-700 shadow-xl backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:shadow-secondary-500/20 dark:border-secondary-400/35 dark:bg-[#16162a]/95 dark:text-[#e7a9ff]"
+          aria-label="Open latest message"
+        >
+          <span className="pointer-events-none absolute -inset-0.5 rounded-xl bg-gradient-to-r from-secondary-500/20 via-transparent to-cyan-400/20 opacity-70 blur-sm dark:from-fuchsia-500/25 dark:via-transparent dark:to-cyan-400/20" />
+
+          <span className="relative z-10 flex items-center gap-1.5">
+            <BellRing className="h-3.5 w-3.5 text-secondary-600 dark:text-[#e7a9ff]" />
+            New update available
+          </span>
+
+          <span className="absolute -bottom-1 right-6 h-2 w-2 rotate-45 border-b border-r border-secondary-500/35 bg-white/90 dark:border-secondary-400/35 dark:bg-[#16162a]/95" />
+
+          <span className="absolute -right-1 -top-1 inline-flex h-3 w-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary-500 opacity-70" />
+            <span className="relative inline-flex h-3 w-3 rounded-full border border-white/80 bg-secondary-500 dark:border-[#0f0f14]" />
+          </span>
+        </button>
+      )}
+
       {!isOpen && (
         <button
           type="button"
-          onClick={() => setIsOpen(true)}
+          onClick={handleOpenMessage}
           className="inline-flex items-center gap-2 rounded-full border border-secondary-500/60 bg-white/85 px-4 py-2 text-sm font-semibold text-secondary-700 shadow-lg backdrop-blur-md transition hover:scale-[1.02] hover:bg-white dark:bg-[#141421]/90 dark:text-secondary-300 dark:hover:bg-[#1a1a2d]"
           aria-label="Open owner message"
         >
@@ -115,9 +202,9 @@ const Message = () => {
           </header>
 
           <div className="max-h-[340px] space-y-3 overflow-y-auto p-4 scrollbar-hide">
-            {posts.map((post) => (
+            {posts.map((post, index) => (
               <article
-                key={post.id}
+                key={`${post.id}-${post.postedAt}-${index}`}
                 className="rounded-xl border border-gray-200/80 bg-white/80 p-3 shadow-sm dark:border-gray-700 dark:bg-[#181826]"
               >
                 <div className="mb-2 flex items-start justify-between gap-3">
