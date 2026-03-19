@@ -16,6 +16,7 @@ import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
 import Contact from "./components/sections/Contact";
+import Message from "./components/Message";
 
 import Footer from "./components/Footer";
 // import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";
@@ -112,6 +113,7 @@ function App() {
         <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300">
           <Cursor />
           <ScrollRouterWrapper />
+          <Message />
           <Line />
         </div>
       </ThemeProvider>
