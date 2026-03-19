@@ -10,7 +10,7 @@ const ownerPosts = [
     postedAt: "2026-03-19T09:45:00",
   },
   {
-    id: "profile-update",
+    id: "Project Update - March 2026",
     type: "image",
     text: "Some of my project services are suspended for a while due to Free Account limitation on Render. Those services will be back once Again from starting of the next Month. Thanks for your understanding.",
     imageUrl: "/assets/messages/render-19-3.png",
@@ -65,11 +65,8 @@ const Message = () => {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h2 className="text-base font-bold text-gray-900 dark:text-white">
-                  A Small Message From me to you! 👋
+                  A Message From Me.....
                 </h2>
-                <p className="text-xs text-gray-600 dark:text-gray-300">
-                  Text and image posts with date and time
-                </p>
               </div>
 
               <button
