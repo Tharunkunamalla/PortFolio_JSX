@@ -16,7 +16,7 @@ export const ownerMessages = [
   {
     id: "project Update - March 2026",
     type: "text",
-    text: "I am currently working on a new project that will be added to my portfolio soon, Stay tuned . So This project is real time application and where most users can interact with each other. I will launch it in the next month.",
+    text: "I am currently working on a new project that will be added to my portfolio soon. So This project is real time application and where most users can interact with each other. I will launch it in the next month.",
     postedAt: "2026-03-17T19:20:00",
   },
 ];
