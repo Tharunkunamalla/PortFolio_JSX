@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
+import {FaDiscord} from "react-icons/fa";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../context/ThemeContext";
 
@@ -132,6 +133,14 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
             >
               <Instagram className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
             </a>
+            <a
+              href="https://discord.com/users/751713701425446945"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
+            >
+              <FaDiscord className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -178,17 +187,37 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
           ))}
 
           <div className="pt-4 border-t border-gray-300 dark:border-gray-700 flex space-x-5">
-            <a href="https://github.com/Tharunkunamalla" target="_blank">
+            <a
+              href="https://github.com/Tharunkunamalla"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
+            >
               <Github className="h-7 w-7" />
             </a>
             <a
               href="https://www.linkedin.com/in/tharun-kunamalla-/"
               target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
             >
               <Linkedin className="h-7 w-7" />
             </a>
-            <a href="https://instagram.com/__tharun_0509.__" target="_blank">
+            <a
+              href="https://instagram.com/__tharun_0509.__"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
+            >
               <Instagram className="h-7 w-7" />
+            </a>
+            <a
+              href="https://discord.com/users/751713701425446945"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
+            >
+              <FaDiscord className="h-7 w-7" />
             </a>
           </div>
         </div>

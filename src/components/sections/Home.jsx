@@ -62,7 +62,7 @@ const Home = ({scrollToSection}) => {
         .from(
           descriptionRef.current,
           {y: 30, opacity: 0, duration: 0.8},
-          "-=0.4"
+          "-=0.4",
         )
         .from(
           buttonsRef.current,
@@ -72,7 +72,7 @@ const Home = ({scrollToSection}) => {
             duration: 0.8,
             stagger: 0.15,
           },
-          "-=0.4"
+          "-=0.4",
         )
         .from(
           scrollDownRef.current,
@@ -81,7 +81,7 @@ const Home = ({scrollToSection}) => {
             duration: 0.5,
             y: 20,
           },
-          "-=0.2"
+          "-=0.2",
         );
     }, sectionRef);
 
@@ -160,7 +160,6 @@ const Home = ({scrollToSection}) => {
           <div className="absolute top-1/4 -left-20 w-72 h-72 bg-secondary-200/20 dark:bg-secondary-900/20 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-accent-200/20 dark:bg-accent-900/20 rounded-full filter blur-3xl"></div>
         </div>
-
         <div className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
             <h1
