@@ -4,6 +4,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {Github, Linkedin, Twitter, Instagram} from "lucide-react";
+import {FaDiscord} from "react-icons/fa";
 import {Mail, Phone, MapPin, Send} from "lucide-react";
 import BackgroundParticles from "../BackgroundParticles";
 import confetti from "canvas-confetti";
@@ -371,6 +372,14 @@ const Contact = () => {
                   className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
                 >
                   <Instagram className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://discord.com/users/751713701425446945"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="interactive w-10 h-10 rounded-full bg-gray-100 dark:bg-dark-100 flex items-center justify-center text-gray-950 dark:text-white hover:bg-secondary-500 hover:text-white transition-all duration-300"
+                >
+                  <FaDiscord className="h-7 w-7" />
                 </a>
               </div>
             </div>

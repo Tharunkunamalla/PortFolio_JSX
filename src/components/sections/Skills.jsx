@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import {
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiJavascript,
   SiTypescript,
   SiReact,
@@ -53,7 +53,7 @@ gsap.registerPlugin(ScrollTrigger);
 const skillsData = [
   // Frontend
   {name: "HTML5", icon: <SiHtml5 />, level: 9, category: "frontend"},
-  {name: "CSS3", icon: <SiCss3 />, level: 9, category: "frontend"},
+  {name: "CSS3", icon: <SiCss />, level: 9, category: "frontend"},
   {name: "JavaScript", icon: <SiJavascript />, level: 8, category: "frontend"},
   {name: "TypeScript", icon: <SiTypescript />, level: 7, category: "frontend"},
   {name: "React.js", icon: <SiReact />, level: 8, category: "frontend"},
@@ -176,7 +176,7 @@ const Skills = () => {
                   start: "top 95%",
                   toggleActions: "play reverse play reverse",
                 },
-              }
+              },
             );
           }
         }
