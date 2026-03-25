@@ -41,6 +41,8 @@ import {
   SiPostman,
   SiBootstrap,
   SiVercel,
+  SiDocker,
+  SiKubernetes,
 } from "react-icons/si";
 import {FaJava} from "react-icons/fa";
 import {BiCodeAlt} from "react-icons/bi";
@@ -78,6 +80,8 @@ const skillsData = [
   {name: "Express.js", icon: <SiExpress />, level: 7, category: "backend"},
   {name: "Node.js", icon: <SiNodedotjs />, level: 7, category: "backend"},
   {name: "MongoDB", icon: <SiMongodb />, level: 7, category: "backend"},
+  {name: "Docker", icon: <SiDocker />, level: 6, category: "backend"},
+  {name: "Kubernetes", icon: <SiKubernetes />, level: 5, category: "backend"},
   {name: "SQL", icon: <SiMysql />, level: 7, category: "backend"},
   {name: "PHP", icon: <SiPhp />, level: 7, category: "backend"},
   {name: "C++", icon: <BiCodeAlt />, level: 6, category: "backend"},
