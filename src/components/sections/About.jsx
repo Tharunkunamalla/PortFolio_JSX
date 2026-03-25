@@ -55,7 +55,7 @@ const aboutData = [
       {
         name: "GSSoC- 25 Contributor",
         date: "2025",
-        description: "GirlScript Foundation",
+        description: "GirlScript Summer of Code 2025 - GSSoC Foundation",
       },
       {
         name: "Open Source Contribution India",
@@ -225,7 +225,7 @@ const About = () => {
               end: "bottom 10%",
               scrub: true,
             },
-          }
+          },
         );
       });
     }, sectionRef);
@@ -343,7 +343,7 @@ const About = () => {
                   onClick={() =>
                     window.open(
                       "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                      "_blank"
+                      "_blank",
                     )
                   }
                   className="interactive px-6 py-2.5 rounded-full border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white transition-all duration-300 font-medium"
