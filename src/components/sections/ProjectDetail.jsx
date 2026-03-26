@@ -35,7 +35,8 @@ const ProjectDetail = () => {
     return (
       <div
         ref={loaderRef}
-        className="fixed inset-0 z-50 bg-light-100 dark:bg-[#0b0b0f] flex items-center justify-center"
+        data-app-loader="true"
+        className="fixed inset-0 z-[100] bg-light-100 dark:bg-[#0b0b0f] flex items-center justify-center"
       >
         <img
           src="/assets/loader.gif"

@@ -68,6 +68,7 @@ const saveLastSeenState = (signature) => {
 const Message = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
+  const [isLoaderVisible, setIsLoaderVisible] = useState(false);
   const messageBoxRef = useRef(null);
 
   const posts = useMemo(
@@ -129,6 +130,24 @@ const Message = () => {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    const updateLoaderState = () => {
+      setIsLoaderVisible(Boolean(document.querySelector("[data-app-loader='true']")));
+    };
+
+    updateLoaderState();
+
+    const observer = new MutationObserver(updateLoaderState);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["style", "class", "data-app-loader"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleOpenMessage = () => {
     setIsOpen(true);
 
@@ -138,6 +157,10 @@ const Message = () => {
 
     setShowNewMessageAlert(false);
   };
+
+  if (isLoaderVisible) {
+    return null;
+  }
 
   return (
     <div className="fixed bottom-5 right-4 z-50 flex max-w-[92vw] flex-col items-end gap-3">

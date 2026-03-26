@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
@@ -47,6 +47,7 @@ function spawnBubble(container) {
 
 const Home = ({scrollToSection}) => {
   const {theme} = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const descriptionRef = useRef(null);
@@ -99,7 +100,7 @@ const Home = ({scrollToSection}) => {
       duration: 1,
       ease: "power4.inOut",
       onComplete: () => {
-        loader.style.display = "none";
+        setIsLoading(false);
       },
     });
 
@@ -123,16 +124,19 @@ const Home = ({scrollToSection}) => {
   return (
     <>
       {/* Loading Screen */}
-      <div
-        ref={loaderRef}
-        className="fixed inset-0 z-50 bg-[#f8f9fb]  dark:bg-[#0b0b0f] flex items-center justify-center transition-all duration-500"
-      >
-        <img
-          src="/assets/loader.gif"
-          alt="Loading..."
-          className="w-28 h-28 object-contain"
-        />
-      </div>
+      {isLoading && (
+        <div
+          ref={loaderRef}
+          data-app-loader="true"
+          className="fixed inset-0 z-[100] bg-[#f8f9fb]  dark:bg-[#0b0b0f] flex items-center justify-center transition-all duration-500"
+        >
+          <img
+            src="/assets/loader.gif"
+            alt="Loading..."
+            className="w-28 h-28 object-contain"
+          />
+        </div>
+      )}
 
       {/* Main Section */}
       <section
