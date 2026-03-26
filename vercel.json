@@ -5,9 +5,8 @@
     {"src": "proxy-server.js", "use": "@vercel/node"},
     {"src": "package.json", "use": "@vercel/static-build"}
   ],
-  "routes": [
-    {"src": "/api/leetcode/graphql", "dest": "/proxy-server.js"},
-    {"src": "/(.*\\..*)", "dest": "/dist/$1"},
-    {"src": "/(.*)", "dest": "/dist/index.html"}
+  "rewrites": [
+    {"source": "/api/leetcode/graphql", "destination": "/proxy-server.js"},
+    {"source": "/(.*)", "destination": "/index.html"}
   ]
 }
