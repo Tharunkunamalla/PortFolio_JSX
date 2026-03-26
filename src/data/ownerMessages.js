@@ -19,4 +19,11 @@ export const ownerMessages = [
     text: "I am currently working on a new project that will be added to my portfolio soon. So This project is real time application and where most users can interact with each other. I will launch it in the next month.",
     postedAt: "2026-03-19T19:20:00",
   },
+
+  {
+    id: "Social Account - March 2026",
+    type: "text",
+    text: "Hi, I had recently Added My Discord Account on my portfolio. So If you want to connect with me or have any questions, feel free to join my Discord server. I will be happy to chat with you there.",
+    postedAt: "2026-03-27T01:20:00",
+  },
 ];
