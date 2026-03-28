@@ -363,7 +363,7 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative w-full md:w-[45%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 md:border-r border-white/10 dark:border-white/5">
+              <div className="relative w-full md:w-[55%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 md:border-r border-white/10 dark:border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -392,7 +392,7 @@ const Projects = () => {
                 </div>
               </div>
 
-              <div className="p-5 md:p-10 flex flex-col w-full md:w-[55%] h-[60%] md:h-full">
+              <div className="p-5 md:p-10 flex flex-col w-full md:w-[45%] h-[60%] md:h-full">
                 <h3 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 md:mb-4 font-heading shrink-0">
                   {project.title}
                 </h3>
