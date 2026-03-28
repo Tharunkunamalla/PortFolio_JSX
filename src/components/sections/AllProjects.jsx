@@ -324,7 +324,7 @@ const AllProjects = () => {
           {currentProjects.map((project) => (
             <div
               key={project.id}
-              className="bg-white dark:bg-[#12121a] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-purple-500/10 transition-shadow duration-300 flex flex-col h-full"
+              className="bg-white/10 dark:bg-[#1a1a24]/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col h-full group"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -367,7 +367,7 @@ const AllProjects = () => {
                   {project.technologies.slice(0, 4).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-white/10 rounded-md"
+                      className="px-2.5 py-1 text-[11px] font-medium tracking-wide text-gray-800 dark:text-gray-300 bg-transparent border border-gray-300 dark:border-white/20 rounded-md"
                     >
                       {tech}
                     </span>
