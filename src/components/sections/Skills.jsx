@@ -49,6 +49,7 @@ import {BiCodeAlt} from "react-icons/bi";
 import {VscCode} from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
 import BackgroundParticles from "../BackgroundParticles.jsx";
+import Tilt from "react-parallax-tilt";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,12 +122,17 @@ const Skills = () => {
 
   categoryRefs.current = Array(Object.keys(groupedSkills).length).fill(null);
 
+  // 1. Run Category Entrances ONLY ONCE on mount
   useEffect(() => {
     const ctx = gsap.context(() => {
+      gsap.set(sectionRef.current, { perspective: 1500 });
+
       gsap.from(headingRef.current, {
-        y: 50,
+        y: 100,
+        z: -300,
+        rotationX: -20,
         opacity: 0,
-        duration: 1,
+        duration: 1.2,
         ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -138,11 +144,13 @@ const Skills = () => {
       categoryRefs.current.forEach((category, index) => {
         if (category) {
           gsap.from(category, {
-            y: 40,
+            y: 80,
+            z: -200,
+            rotationX: 30,
             opacity: 0,
-            duration: 0.8,
+            duration: 1,
             delay: 0.2 * index,
-            ease: "power2.out",
+            ease: "back.out(1.5)",
             scrollTrigger: {
               trigger: category,
               start: "top 90%",
@@ -151,34 +159,29 @@ const Skills = () => {
           });
         }
       });
+    }, sectionRef);
 
-      skillBarRefs.current.forEach((bar, i) => {
+    return () => ctx.revert();
+  }, []);
+
+  // 2. Run Bar Animations whenever Tool list expands/collapses
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      skillBarRefs.current.forEach((bar) => {
         if (bar) {
-          let flatIndex = 0;
-          let skillLevel = 0;
-          let found = false;
-          Object.keys(groupedSkills).forEach((category) => {
-            groupedSkills[category].forEach((skill) => {
-              if (flatIndex === i) {
-                skillLevel = skill.level * 10;
-                found = true;
-              }
-              flatIndex++;
-            });
-          });
-
-          if (found) {
+          const level = bar.getAttribute("data-level");
+          if (level) {
             gsap.fromTo(
               bar,
               {width: "0%"},
               {
-                width: `${skillLevel}%`,
+                width: `${level}%`,
                 duration: 1,
                 ease: "power2.out",
                 scrollTrigger: {
                   trigger: bar,
                   start: "top 95%",
-                  toggleActions: "play reverse play reverse",
+                  toggleActions: "play none none reverse",
                 },
               },
             );
@@ -186,6 +189,8 @@ const Skills = () => {
         }
       });
     }, sectionRef);
+
+    setTimeout(() => ScrollTrigger.refresh(), 100);
 
     return () => ctx.revert();
   }, [showAllTools]);
@@ -260,17 +265,25 @@ const Skills = () => {
                   : groupedSkills[category];
 
               return (
-                <div
+                <Tilt
                   key={category}
-                  className="
-                  rounded-2xl p-8
-                  bg-white/5 backdrop-blur-md
-                  border border-white/10
-                  shadow-lg
-                  hover:shadow-2xl
-                  transition-shadow duration-300
-                "
+                  tiltMaxAngleX={3}
+                  tiltMaxAngleY={3}
+                  scale={1.01}
+                  transitionSpeed={2500}
+                  className="w-full h-full"
                 >
+                  <div
+                    ref={(el) => (categoryRefs.current[categoryIndex] = el)}
+                    className="
+                      rounded-2xl p-8 h-full
+                      bg-white/5 backdrop-blur-md
+                      border border-white/10
+                      shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]
+                      hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)]
+                      transition-all duration-500
+                    "
+                  >
                   <div className="flex items-center mb-6">
                     {getCategoryIcon(category)}
                     <h3 className="text-xl md:text-2xl font-semibold ml-3 text-gray-800 dark:text-white">
@@ -297,6 +310,7 @@ const Skills = () => {
                               ref={(el) =>
                                 (skillBarRefs.current[currentIndex] = el)
                               }
+                              data-level={skill.level * 10}
                               className="h-2.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:animate-pulse"
                               style={{width: "0%"}}
                             ></div>
@@ -330,6 +344,7 @@ const Skills = () => {
                     </div>
                   )}
                 </div>
+                </Tilt>
               );
             })}
           </div>

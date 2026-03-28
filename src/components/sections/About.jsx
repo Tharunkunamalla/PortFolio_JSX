@@ -4,6 +4,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Lottie from "lottie-react"; // Ensure the casing matches the actual directory
 import codingAnimation from "../sections/Coding.json";
 import BackgroundParticles from "../BackgroundParticles";
+import Tilt from "react-parallax-tilt";
 // import Snowfall from "react-snowfall";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -94,10 +95,16 @@ const About = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Apply a global 3D perspective to the container parent so children can fly in 3D
+      gsap.set(sectionRef.current, { perspective: 1000 });
+
       gsap.from(headingRef.current, {
-        y: 50,
+        y: 100,
+        z: -200,
+        rotationX: -20,
         opacity: 0,
-        duration: 1,
+        duration: 1.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
@@ -106,9 +113,12 @@ const About = () => {
       });
 
       gsap.from(lottieRef.current, {
-        y: 50,
+        y: 100,
+        z: -300,
+        rotationY: -30,
         opacity: 0,
-        duration: 1,
+        duration: 1.5,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 80%",
@@ -117,10 +127,12 @@ const About = () => {
       });
 
       gsap.from(introTextRef.current, {
-        y: 30,
+        y: 50,
+        z: -100,
         opacity: 0,
-        duration: 0.8,
+        duration: 1,
         delay: 0.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 80%",
@@ -130,10 +142,12 @@ const About = () => {
 
       paragraphsRef.current.forEach((para, index) => {
         gsap.from(para, {
-          y: 30,
+          y: 40,
           opacity: 0,
-          duration: 0.6,
-          delay: 0.3 + index * 0.2,
+          rotationX: -15,
+          duration: 0.8,
+          delay: 0.3 + index * 0.15,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: infoRef.current,
             start: "top 80%",
@@ -146,8 +160,9 @@ const About = () => {
       gsap.from(introTitleRef.current, {
         y: 30,
         opacity: 0,
+        scale: 0.9,
         duration: 0.8,
-        ease: "power3.out",
+        ease: "back.out(1.7)",
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 80%",
@@ -157,11 +172,12 @@ const About = () => {
 
       // Gradient text subtle pop
       gsap.from(gradientTextRef.current, {
-        scale: 0.95,
+        scale: 0.8,
+        rotationY: 15,
         opacity: 0,
-        duration: 0.6,
-        delay: 0.3,
-        ease: "power2.out",
+        duration: 0.8,
+        delay: 0.2,
+        ease: "back.out(2)",
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 80%",
@@ -172,8 +188,8 @@ const About = () => {
       // Underline draw animation
       gsap.to(underlineRef.current, {
         width: "100%",
-        duration: 0.8,
-        ease: "power2.out",
+        duration: 1,
+        ease: "power4.out",
         delay: 0.6,
         scrollTrigger: {
           trigger: infoRef.current,
@@ -183,10 +199,12 @@ const About = () => {
       });
 
       gsap.from(buttonRef.current, {
-        y: 30,
+        scale: 0.8,
+        y: 20,
         opacity: 0,
         duration: 0.8,
-        delay: 1.2,
+        delay: 1,
+        ease: "back.out(1.5)",
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 80%",
@@ -197,13 +215,16 @@ const About = () => {
       boxRefs.current.forEach((box, index) => {
         if (box) {
           gsap.from(box, {
-            y: 50,
+            y: 80,
+            z: -150,
+            rotationX: -20,
             opacity: 0,
-            duration: 0.8,
-            delay: 0.2 * index,
+            duration: 1,
+            delay: 0.15 * index,
+            ease: "back.out(1.2)",
             scrollTrigger: {
               trigger: boxesRef.current,
-              start: "top 80%",
+              start: "top 85%",
               toggleActions: "play reverse play reverse",
             },
           });
@@ -356,47 +377,55 @@ const About = () => {
 
           <div ref={boxesRef} className="grid grid-cols-1 gap-6">
             {aboutData.map((box, index) => (
-              <div
+              <Tilt
                 key={box.id}
-                ref={(el) => (boxRefs.current[index] = el)}
-                className="rounded-2xl
-                  bg-white/5 backdrop-blur-md
-                  border border-white/10 shadow-lg p-4 md:p-5 hover:shadow-2xl transition-shadow duration-500"
+                tiltMaxAngleX={5}
+                tiltMaxAngleY={5}
+                scale={1.02}
+                transitionSpeed={2500}
+                className="w-full"
               >
-                <h3 className="text-lg font-semibold text-secondary-500 mb-3">
-                  {box.title}
-                </h3>
-                <div className="space-y-3">
-                  {box.items.map((item, i) => (
-                    <div key={i} className="relative pl-4 py-2">
-                      <span
-                        ref={(el) => (lineRefs.current[index * 10 + i] = el)}
-                        className="absolute left-0 top-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"
-                        style={{height: "0%"}}
-                      />
-                      <h4
-                        className={`font-medium ${
-                          i % 2 === 0
-                            ? "text-primary-500"
-                            : "text-secondary-500"
-                        }`}
-                      >
-                        {item.name}
-                      </h4>
-                      {item.date && (
-                        <p className="text-xs text-gray-500 dark:text-gray-400">
-                          {item.date}
-                        </p>
-                      )}
-                      {item.description && (
-                        <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
-                          {item.description}
-                        </p>
-                      )}
-                    </div>
-                  ))}
+                <div
+                  ref={(el) => (boxRefs.current[index] = el)}
+                  className="rounded-2xl
+                    bg-white/5 backdrop-blur-md
+                    border border-white/10 shadow-lg p-4 md:p-5 hover:shadow-2xl transition-shadow duration-500 h-full"
+                >
+                  <h3 className="text-lg font-semibold text-secondary-500 mb-3">
+                    {box.title}
+                  </h3>
+                  <div className="space-y-3">
+                    {box.items.map((item, i) => (
+                      <div key={i} className="relative pl-4 py-2">
+                        <span
+                          ref={(el) => (lineRefs.current[index * 10 + i] = el)}
+                          className="absolute left-0 top-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"
+                          style={{height: "0%"}}
+                        />
+                        <h4
+                          className={`font-medium ${
+                            i % 2 === 0
+                              ? "text-primary-500"
+                              : "text-secondary-500"
+                          }`}
+                        >
+                          {item.name}
+                        </h4>
+                        {item.date && (
+                          <p className="text-xs text-gray-500 dark:text-gray-400">
+                            {item.date}
+                          </p>
+                        )}
+                        {item.description && (
+                          <p className="text-xs text-gray-700 dark:text-gray-300 mt-1">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Tilt>
             ))}
           </div>
         </div>

@@ -15,8 +15,11 @@ import Home from "./components/sections/Home";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
+import AllProjects from "./components/sections/AllProjects";
 import Contact from "./components/sections/Contact";
 import Message from "./components/Message";
+
+import { ReactLenis } from '@studio-freight/react-lenis';
 
 import Footer from "./components/Footer";
 // import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";
@@ -98,6 +101,7 @@ function ScrollRouterWrapper() {
               </>
             }
           />
+          <Route path="/projects" element={<AllProjects />} />
           <Route path="/project/:projectId" element={<ProjectDetail />} />
         </Routes>
       </main>
@@ -108,16 +112,18 @@ function ScrollRouterWrapper() {
 
 function App() {
   return (
-    <Router>
-      <ThemeProvider>
-        <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300">
-          <Cursor />
-          <ScrollRouterWrapper />
-          <Message />
-          <Line />
-        </div>
-      </ThemeProvider>
-    </Router>
+    <ReactLenis root>
+      <Router>
+        <ThemeProvider>
+          <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300 font-sans">
+            <Cursor />
+            <ScrollRouterWrapper />
+            <Message />
+            <Line />
+          </div>
+        </ThemeProvider>
+      </Router>
+    </ReactLenis>
   );
 }
 

@@ -60,8 +60,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        heading: ["Raleway", "sans-serif"],
+        sans: ["Outfit", "sans-serif"],
+        heading: ["Space Grotesk", "sans-serif"],
       },
       spacing: {
         128: "32rem",

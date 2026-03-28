@@ -260,60 +260,20 @@ const machineLearningProjects = [
 
 const allProjects = [...webProjects, ...machineLearningProjects];
 
-const Projects = () => {
-  const sectionRef = useRef(null);
-  const headingRef = useRef(null);
-  const projectRefs = useRef([]);
+const AllProjects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
+  const [activeTab, setActiveTab] = useState("all");
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(headingRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 95%",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-    }, sectionRef);
-    return () => ctx.revert();
+    window.scrollTo(0, 0);
   }, []);
 
-  const visibleProjects = allProjects.slice(0, 5);
-
-  projectRefs.current = Array(visibleProjects.length)
-    .fill()
-    .map((_, i) => projectRefs.current[i] || React.createRef());
-
-  useEffect(() => {
-    // Apply a 3D perspective to the wrapper for three.js style reveals
-    gsap.set(sectionRef.current, { perspective: 1500 });
-
-    const ctx = gsap.context(() => {
-      projectRefs.current.forEach((project, index) => {
-        if (project) {
-          gsap.from(project, {
-            y: 120,
-            z: -200,
-            rotationX: -15,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: project,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          });
-        }
-      });
-    }, sectionRef);
-    ScrollTrigger.refresh();
-    return () => ctx.revert();
-  }, [visibleProjects.length]); 
+  const currentProjects =
+    activeTab === "all"
+      ? allProjects
+      : activeTab === "web"
+        ? webProjects
+        : machineLearningProjects;
 
   const handleLiveClick = (liveLink) => {
     if (!liveLink) {
@@ -324,60 +284,64 @@ const Projects = () => {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      id="projects"
-      className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-clip"
-    >
+    <div className="relative pt-32 pb-24 min-h-screen bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10]">
       <BackgroundParticles />
-      <div
-        className="pointer-events-none absolute top-0 inset-x-0 h-24 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60"
-      />
-      
-      <div className="absolute top-50 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
-      <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
-      <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
+        
+        <div className="mb-12">
+          <RouterLink to="/" className="inline-flex items-center gap-2 text-secondary-500 hover:text-secondary-400 mb-6 font-medium transition-colors">
+            <span>&larr; Back to Home</span>
+          </RouterLink>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white">
+            All <span className="text-secondary-500">Projects</span>
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Showing {currentProjects.length} of {allProjects.length} total projects
+          </p>
+        </div>
 
-      <div className="relative z-10 w-full max-w-[95%] 2xl:max-w-[85%] mx-auto px-4">
-        <h2
-          ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800 dark:text-white"
-        >
-          Featured <span className="text-secondary-500">Projects</span>
-        </h2>
+        <div className="flex flex-wrap gap-4 mb-12">
+          {["all", "web", "ml"].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 text-sm md:text-base shadow-lg ${
+                activeTab === tab
+                  ? "bg-secondary-500 text-white shadow-secondary-500/20"
+                  : "bg-white/5 border border-white/10 text-gray-600 dark:text-gray-300 hover:bg-white/10"
+              }`}
+            >
+              {tab === "all"
+                ? "All Projects"
+                : tab === "web"
+                  ? "Web Development"
+                  : "Machine Learning"}
+            </button>
+          ))}
+        </div>
 
-        <p className="text-center text-sm md:text-base text-gray-600 dark:text-gray-400 mb-16">
-          A selection of my best work. See everything on the dedicated projects page.
-        </p>
-
-        <div className="flex flex-col gap-[10vh] w-full max-w-5xl mx-auto pb-32">
-          {visibleProjects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {currentProjects.map((project) => (
             <div
               key={project.id}
-              ref={(el) => (projectRefs.current[index] = el)}
-              className="sticky w-full bg-white dark:bg-[#12121a] border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-purple-500/20 transition-shadow duration-300 flex flex-col md:flex-row h-[500px] md:h-[450px]"
-              style={{
-                top: `calc(10vh + ${index * 45}px)`, // Adjusted for clean step visibility
-                zIndex: index,
-              }}
+              className="bg-white dark:bg-[#12121a] border border-gray-200 dark:border-white/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-purple-500/10 transition-shadow duration-300 flex flex-col h-full"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative w-full md:w-[45%] h-[40%] md:h-full overflow-hidden group flex-shrink-0 bg-black/20">
+              <div className="relative h-56 overflow-hidden group flex-shrink-0 bg-black/5 dark:bg-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
                 />
-
                 <div
-                  className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-6 transition-opacity duration-300 ${
+                  className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-4 transition-opacity duration-300 ${
                     hoveredProject === project.id ? "opacity-100" : "opacity-0"
                   }`}
                 >
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300 shadow-lg"
+                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
                   >
                     <Monitor className="h-5 w-5" />
                   </button>
@@ -385,50 +349,55 @@ const Projects = () => {
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300 shadow-lg"
+                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
                   >
                     <Code className="h-5 w-5" />
                   </a>
                 </div>
               </div>
 
-              <div className="p-5 md:p-10 flex flex-col w-full md:w-[55%] h-[60%] md:h-full">
-                <h3 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 md:mb-4 font-heading shrink-0">
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 md:mb-6 text-xs md:text-base leading-relaxed shrink-0 line-clamp-3 md:line-clamp-4">
+                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-8 shrink-0 overflow-hidden max-h-[50px] md:max-h-none">
-                  {project.technologies.map((tech, idx) => (
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.technologies.slice(0, 4).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 md:px-3 md:py-1.5 text-[10px] md:text-xs font-semibold tracking-wide text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/5 rounded-lg shadow-sm transition-all duration-300 cursor-default"
+                      className="px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-white/10 rounded-md"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 4 && (
+                    <span className="px-2.5 py-1 text-[11px] font-semibold text-gray-500 bg-transparent">
+                      +{project.technologies.length - 4} more
+                    </span>
+                  )}
                 </div>
-                <div className="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-200 dark:border-gray-700/50 mt-auto shrink-0">
+                <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-white/10 mt-auto">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="text-xs md:text-sm font-bold text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 md:gap-2 transition-colors duration-300 group"
+                    className="text-xs font-bold text-primary-600 dark:text-primary-400 flex items-center gap-1 hover:underline"
                   >
-                    Live Demo <ExternalLink className="h-3 w-3 md:h-4 md:w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    Live Demo <ExternalLink className="h-3 w-3" />
                   </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs md:text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 md:gap-2 transition-colors duration-300"
+                    className="text-xs font-bold text-gray-600 dark:text-gray-400 flex items-center gap-1 hover:underline"
                   >
-                    View Code <Github className="h-3 w-3 md:h-4 md:w-4" />
+                    Code <Github className="h-3.5 w-3.5" />
                   </a>
                   <RouterLink
                     to={`/project/${project.id}`}
-                    className="text-xs md:text-sm font-bold text-secondary-600 dark:text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-300 flex items-center gap-1 md:gap-2 transition-colors duration-300 group"
+                    className="text-xs font-bold text-secondary-600 dark:text-secondary-400 flex items-center gap-1 hover:underline"
                   >
-                    Details <ExternalLink className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    Details <ExternalLink className="h-3 w-3" />
                   </RouterLink>
                 </div>
               </div>
@@ -436,35 +405,47 @@ const Projects = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12 mb-16 relative">
-          <RouterLink
-            to="/projects"
+        <div className="text-center mt-16 relative">
+          <a
+            href="https://github.com/Tharunkunamalla"
+            target="_blank"
+            rel="noopener noreferrer"
             className="
-              relative inline-flex items-center gap-3 px-10 py-5
-              rounded-full font-bold tracking-wide text-lg
+              relative inline-flex items-center gap-3 px-8 py-4
+              rounded-full font-medium tracking-wide
               text-white
-              bg-secondary-500 hover:bg-secondary-600
-              shadow-lg shadow-secondary-500/30
+              bg-gradient-to-r from-[#1f1f2e] via-[#26263a] to-[#1a1a2a]
+              border border-white/10
+              shadow-lg shadow-purple-500/20
+              backdrop-blur-md
               transition-all duration-500
-              hover:shadow-secondary-500/50
               hover:-translate-y-1
+              hover:shadow-purple-500/40
+              hover:border-purple-400/40
+              group
             "
           >
-            Explore All Projects &rarr;
-          </RouterLink>
+            <span className="text-sm md:text-base">
+              More Projects on GitHub
+            </span>
+
+            <Github
+              className="h-5 w-5 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
+            />
+          </a>
         </div>
       </div>
-      {/* ===== BOTTOM BLEND (KEY PART) ===== */}
+
       <div
         className="
-            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-            bg-gradient-to-t
-            from-white/90 to-transparent
-            dark:from-black/80
-          "
+          pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+          bg-gradient-to-t
+          from-white/90 to-transparent
+          dark:from-black/80
+        "
       />
-    </section>
+    </div>
   );
 };
 
-export default Projects;
+export default AllProjects;
