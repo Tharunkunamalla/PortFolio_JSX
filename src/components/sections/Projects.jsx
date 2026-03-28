@@ -355,7 +355,7 @@ const Projects = () => {
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
-              className="sticky w-full bg-white dark:bg-[#12121a] border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl hover:shadow-purple-500/20 transition-shadow duration-300 flex flex-col md:flex-row h-[500px] md:h-[450px]"
+              className="sticky w-full bg-white/10 dark:bg-[#1a1a24]/70 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col md:flex-row h-[500px] md:h-[450px]"
               style={{
                 top: `calc(10vh + ${index * 45}px)`, // Adjusted for clean step visibility
                 zIndex: index,
@@ -363,11 +363,11 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative w-full md:w-[45%] h-[40%] md:h-full overflow-hidden group flex-shrink-0 bg-black/20">
+              <div className="relative w-full md:w-[45%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 md:border-r border-white/10 dark:border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/image:scale-110"
                 />
 
                 <div
@@ -403,13 +403,13 @@ const Projects = () => {
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 md:px-3 md:py-1.5 text-[10px] md:text-xs font-semibold tracking-wide text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-white/10 border border-gray-200 dark:border-white/5 rounded-lg shadow-sm transition-all duration-300 cursor-default"
+                      className="px-2 py-1 md:px-3 md:py-1 text-[10px] md:text-xs font-medium tracking-wide text-gray-800 dark:text-gray-300 bg-transparent border border-gray-300 dark:border-white/20 rounded-md"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
-                <div className="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-200 dark:border-gray-700/50 mt-auto shrink-0">
+                <div className="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-200 dark:border-white/10 mt-auto shrink-0">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
                     className="text-xs md:text-sm font-bold text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 md:gap-2 transition-colors duration-300 group"
