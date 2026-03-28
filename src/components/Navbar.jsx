@@ -167,19 +167,19 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed top-0 right-0 h-screen w-72 bg-light-100 dark:bg-dark-100 rounded-l-2xl shadow-xl z-40 transform transition-transform duration-300 ease-in-out will-change-transform md:hidden overflow-y-auto ${
+        className={`fixed top-0 right-0 h-screen w-64 bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-l-3xl border-l border-white/20 shadow-2xl z-40 transform transition-transform duration-500 ease-in-out will-change-transform md:hidden overflow-y-auto ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col px-6 py-8 space-y-6">
+        <div className="flex flex-col px-6 py-12 space-y-5">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
-              className={`text-xl font-semibold text-left transition ${
+              className={`text-lg font-bold text-left transition-all duration-300 ${
                 activeSection === item.id && isHomePage
-                  ? "text-secondary-500"
-                  : "text-gray-800 dark:text-gray-200"
+                  ? "text-secondary-500 translate-x-1"
+                  : "text-gray-800 dark:text-gray-200 hover:text-secondary-400 hover:translate-x-1"
               }`}
             >
               {item.label}
