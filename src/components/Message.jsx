@@ -224,7 +224,10 @@ const Message = () => {
             </div>
           </header>
 
-          <div className="max-h-[340px] space-y-3 overflow-y-auto p-4 scrollbar-hide">
+          <div 
+            data-lenis-prevent
+            className="max-h-[min(480px,65vh)] space-y-3 overflow-y-auto p-4 touch-pan-y scrollbar-custom"
+          >
             {posts.map((post, index) => (
               <article
                 key={`${post.id}-${post.postedAt}-${index}`}
