@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
-import {ExternalLink, Github, Code, Monitor} from "lucide-react";
+import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import {ChevronDown, ChevronUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../BackgroundParticles";
@@ -392,43 +392,69 @@ const Projects = () => {
                 </div>
               </div>
 
-              <div className="p-5 md:p-10 flex flex-col w-full md:w-[45%] h-[60%] md:h-full">
-                <h3 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-white mb-2 md:mb-4 font-heading shrink-0">
+              <div className="p-8 md:p-12 flex flex-col w-full md:w-[45%] h-[60%] md:h-full relative overflow-hidden">
+                {/* Modern subtle project counter */}
+                <div className="absolute top-4 right-8 text-4xl md:text-6xl font-bold text-black/5 dark:text-white/5 pointer-events-none select-none">
+                  0{index + 1}
+                </div>
+
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6 font-heading shrink-0 bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 md:mb-6 text-xs md:text-base leading-relaxed shrink-0 line-clamp-3 md:line-clamp-4">
+                
+                <p className="text-gray-600 dark:text-gray-300 mb-6 md:mb-8 text-sm md:text-base leading-relaxed shrink-0 line-clamp-3 md:line-clamp-5">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-8 shrink-0 overflow-hidden max-h-[50px] md:max-h-none">
-                  {project.technologies.map((tech, idx) => (
+
+                <div className="flex flex-wrap gap-2.5 mb-8 md:mb-10 shrink-0">
+                  {project.technologies.slice(0, 5).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 md:px-3 md:py-1 text-[10px] md:text-xs font-medium tracking-wide text-gray-800 dark:text-gray-300 bg-transparent border border-gray-300 dark:border-white/20 rounded-md"
+                      className="px-3 py-1.5 text-[10px] md:text-xs font-semibold tracking-wider text-primary-700 dark:text-primary-300 bg-primary-500/5 dark:bg-primary-500/10 border border-primary-500/20 dark:border-primary-500/10 rounded-full transition-all duration-300 hover:border-primary-500/40"
                     >
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 5 && (
+                    <span className="px-3 py-1.5 text-[10px] md:text-xs font-medium text-gray-500 bg-transparent border border-transparent">
+                      +{project.technologies.length - 5}
+                    </span>
+                  )}
                 </div>
-                <div className="flex justify-between items-center pt-3 md:pt-4 border-t border-gray-200 dark:border-white/10 mt-auto shrink-0">
+
+                <div className="flex items-center gap-6 mt-auto pt-6 border-t border-gray-200/50 dark:border-white/5">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="text-xs md:text-sm font-bold text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 flex items-center gap-1 md:gap-2 transition-colors duration-300 group"
+                    className="text-xs md:text-sm font-bold text-primary-600 dark:text-primary-400 flex items-center gap-2 hover:text-primary-800 dark:hover:text-primary-300 transition-colors group/link"
                   >
-                    Live Demo <ExternalLink className="h-3 w-3 md:h-4 md:w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <span className="relative">
+                      Live Preview
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <ExternalLink className="h-4 w-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                   </button>
+
                   <a
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs md:text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 flex items-center gap-1 md:gap-2 transition-colors duration-300"
+                    className="text-xs md:text-sm font-bold text-gray-600 dark:text-gray-400 flex items-center gap-2 hover:text-gray-900 dark:hover:text-white transition-colors group/link"
                   >
-                    View Code <Github className="h-3 w-3 md:h-4 md:w-4" />
+                    <span className="relative">
+                      Source
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gray-500 transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <Github className="h-4.5 w-4.5" />
                   </a>
+
                   <RouterLink
                     to={`/project/${project.id}`}
-                    className="text-xs md:text-sm font-bold text-secondary-600 dark:text-secondary-400 hover:text-secondary-800 dark:hover:text-secondary-300 flex items-center gap-1 md:gap-2 transition-colors duration-300 group"
+                    className="ml-auto p-3 bg-secondary-500/10 hover:bg-secondary-500 text-secondary-500 hover:text-white rounded-xl transition-all duration-500 group/btn"
                   >
-                    Details <ExternalLink className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    <div className="flex items-center gap-2 text-xs md:text-sm font-bold">
+                      Details
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                    </div>
                   </RouterLink>
                 </div>
               </div>
