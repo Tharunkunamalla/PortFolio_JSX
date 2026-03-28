@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
-import {ExternalLink, Github, Code, Monitor} from "lucide-react";
+import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import {ChevronDown, ChevronUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../BackgroundParticles";
@@ -264,10 +264,6 @@ const AllProjects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeTab, setActiveTab] = useState("all");
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const currentProjects =
     activeTab === "all"
       ? allProjects
@@ -282,6 +278,53 @@ const AllProjects = () => {
     }
     window.open(liveLink, "_blank", "noopener noreferrer");
   };
+
+  const containerRef = useRef(null);
+  const projectRefs = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Refresh ScrollTrigger to account for dynamic content height changes
+      ScrollTrigger.refresh();
+
+      projectRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+
+        // Alternate pop direction and rotation for a dynamic feel
+        const isOdd = index % 2 !== 0;
+        
+        gsap.fromTo(
+          ref,
+          {
+            opacity: 0,
+            scale: 0.85,
+            y: 40,
+            rotateX: -10,
+            rotateY: isOdd ? 5 : -5,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            rotateX: 0,
+            rotateY: 0,
+            duration: 0.7,
+            ease: "back.out(1.1)",
+            scrollTrigger: {
+              trigger: ref,
+              start: "top 92%",
+              end: "top 40%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [currentProjects]);
+
+  projectRefs.current = projectRefs.current.slice(0, currentProjects.length);
 
   return (
     <div className="relative pt-32 pb-24 min-h-screen bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10]">
@@ -320,10 +363,11 @@ const AllProjects = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {currentProjects.map((project) => (
+        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {currentProjects.map((project, index) => (
             <div
               key={project.id}
+              ref={(el) => (projectRefs.current[index] = el)}
               className="bg-white/10 dark:bg-[#1a1a24]/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col h-full group"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
@@ -357,7 +401,7 @@ const AllProjects = () => {
               </div>
 
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">
+                <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent font-heading">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed line-clamp-3">
@@ -367,37 +411,49 @@ const AllProjects = () => {
                   {project.technologies.slice(0, 4).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 text-[11px] font-medium tracking-wide text-gray-800 dark:text-gray-300 bg-transparent border border-gray-300 dark:border-white/20 rounded-md"
+                      className="px-2.5 py-1 text-[10px] font-semibold tracking-wide text-primary-700 dark:text-primary-300 bg-primary-500/5 dark:bg-primary-500/10 border border-primary-500/20 dark:border-primary-500/10 rounded-full"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="px-2.5 py-1 text-[11px] font-semibold text-gray-500 bg-transparent">
-                      +{project.technologies.length - 4} more
+                    <span className="px-2.5 py-1 text-[10px] font-medium text-gray-500 bg-transparent">
+                      +{project.technologies.length - 4}
                     </span>
                   )}
                 </div>
                 <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-white/10 mt-auto">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="text-xs font-bold text-primary-600 dark:text-primary-400 flex items-center gap-1 hover:underline"
+                    className="text-xs font-bold text-primary-600 dark:text-primary-400 flex items-center gap-1 group/link"
                   >
-                    Live Demo <ExternalLink className="h-3 w-3" />
+                    <span className="relative">
+                      Live Demo
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <ExternalLink className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-bold text-gray-600 dark:text-gray-400 flex items-center gap-1 hover:underline"
+                    className="text-xs font-bold text-gray-600 dark:text-gray-400 flex items-center gap-1 group/link"
                   >
-                    Code <Github className="h-3.5 w-3.5" />
+                    <span className="relative">
+                      Code
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gray-500 transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <Github className="h-3.5 w-3.5" />
                   </a>
                   <RouterLink
                     to={`/project/${project.id}`}
-                    className="text-xs font-bold text-secondary-600 dark:text-secondary-400 flex items-center gap-1 hover:underline"
+                    className="text-xs font-bold text-secondary-600 dark:text-secondary-400 flex items-center gap-1 group/link"
                   >
-                    Details <ExternalLink className="h-3 w-3" />
+                    <span className="relative">
+                      Details
+                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-secondary-500 transition-all duration-300 group-hover/link:w-full"></span>
+                    </span>
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5" />
                   </RouterLink>
                 </div>
               </div>
