@@ -139,12 +139,12 @@
 .animate-fade-in {
   animation: fade-in 0.7s ease-out;
 }
-.scrollbar-hide {
+.scrollbar-hide, body, html {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
 
-.scrollbar-hide::-webkit-scrollbar {
+.scrollbar-hide::-webkit-scrollbar, body::-webkit-scrollbar, html::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 

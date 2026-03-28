@@ -5,7 +5,6 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
-import {ChevronDown, ChevronUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../BackgroundParticles";
 
@@ -363,7 +362,7 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative w-full md:w-[55%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 md:border-r border-white/10 dark:border-white/5">
+              <div className="relative w-full md:w-[55%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 border-white/10 dark:border-white/5">
                 <img
                   src={project.image}
                   alt={project.title}

@@ -202,7 +202,7 @@ const Message = () => {
       {isOpen && (
         <section
           ref={messageBoxRef}
-          className="w-[min(390px,92vw)] overflow-hidden rounded-2xl border border-secondary-500/30 bg-white/90 shadow-2xl backdrop-blur-md dark:border-secondary-500/20 dark:bg-[#10101a]/95"
+          className="w-[min(320px,85vw)] overflow-hidden rounded-2xl border border-secondary-500/30 bg-white/90 shadow-2xl backdrop-blur-md dark:border-secondary-500/20 dark:bg-[#10101a]/95"
         >
           <header className="border-b border-secondary-500/20 px-4 py-3">
             <div className="flex items-start justify-between gap-3">
@@ -226,7 +226,7 @@ const Message = () => {
 
           <div 
             data-lenis-prevent
-            className="max-h-[min(480px,65vh)] space-y-3 overflow-y-auto p-4 touch-pan-y scrollbar-custom"
+            className="max-h-[360px] space-y-3 overflow-y-auto p-4 touch-pan-y scrollbar-hide"
           >
             {posts.map((post, index) => (
               <article
