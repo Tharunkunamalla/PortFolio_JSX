@@ -5,9 +5,10 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
-import {ChevronDown, ChevronUp} from "lucide-react"; // 👈 import icons
+import {ChevronDown, ChevronUp, ArrowUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../BackgroundParticles";
+import { useLenis } from '@studio-freight/react-lenis';
 
 // import GitHubStats from "./GitHubStats";
 
@@ -263,6 +264,37 @@ const allProjects = [...webProjects, ...machineLearningProjects];
 const AllProjects = () => {
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeTab, setActiveTab] = useState("all");
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const lenis = useLenis();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+    
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lenis]);
+
+  const scrollToTop = () => {
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  };
 
   const currentProjects =
     activeTab === "all"
@@ -500,6 +532,29 @@ const AllProjects = () => {
           dark:from-black/80
         "
       />
+
+      {/* Floating Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-10 left-10 z-[100] p-4 rounded-full bg-secondary-500 text-white shadow-2xl shadow-secondary-500/40 hover:bg-secondary-600 transition-all duration-300 transform hover:-translate-y-2 hover:scale-110 active:scale-95 group"
+        >
+          <ArrowUp className="w-6 h-6 animate-bounce-subtle" />
+          <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-gray-900 text-white text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Back to Top
+          </span>
+        </button>
+      )}
+
+      <style jsx="true">{`
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 2s infinite ease-in-out;
+        }
+      `}</style>
     </div>
   );
 };
