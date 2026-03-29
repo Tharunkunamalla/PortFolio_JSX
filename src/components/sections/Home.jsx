@@ -6,7 +6,7 @@ import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
-import BackgroundParticles from "../BackgroundParticles";
+import BackgroundParticles from "../layout/BackgroundParticles";
 
 gsap.registerPlugin(MotionPathPlugin);
 

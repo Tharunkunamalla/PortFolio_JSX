@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {Github, Linkedin, Twitter, Instagram} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import {Mail, Phone, MapPin, Send} from "lucide-react";
-import BackgroundParticles from "../BackgroundParticles";
+import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
 
 gsap.registerPlugin(ScrollTrigger);

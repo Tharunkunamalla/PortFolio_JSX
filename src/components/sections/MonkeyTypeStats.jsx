@@ -2,7 +2,7 @@ import {useEffect, useRef} from "react";
 import {SiMonkeytype} from "react-icons/si";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import BackgroundParticles from "../BackgroundParticles";
+import BackgroundParticles from "../layout/BackgroundParticles";
 
 gsap.registerPlugin(ScrollTrigger);
 

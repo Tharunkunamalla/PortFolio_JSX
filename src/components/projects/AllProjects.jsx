@@ -7,7 +7,7 @@ import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import {ChevronDown, ChevronUp, ArrowUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
-import BackgroundParticles from "../BackgroundParticles";
+import BackgroundParticles from "../layout/BackgroundParticles";
 import { useLenis } from '@studio-freight/react-lenis';
 
 // import GitHubStats from "./GitHubStats";

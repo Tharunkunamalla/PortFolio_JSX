@@ -2,8 +2,8 @@ import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import Lottie from "lottie-react"; // Ensure the casing matches the actual directory
-import codingAnimation from "../sections/Coding.json";
-import BackgroundParticles from "../BackgroundParticles";
+import codingAnimation from "../../data/Coding.json";
+import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 // import Snowfall from "react-snowfall";
 

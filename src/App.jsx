@@ -8,24 +8,24 @@ import {
 } from "react-router-dom";
 
 import {ThemeProvider} from "./context/ThemeContext";
-import Cursor from "./components/Cursor";
-import Navbar from "./components/Navbar";
-import Line from "./components/Line";
+import Cursor from "./components/layout/Cursor";
+import Navbar from "./components/layout/Navbar";
+import Line from "./components/layout/Line";
 import Home from "./components/sections/Home";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
 import Projects from "./components/sections/Projects";
-import AllProjects from "./components/sections/AllProjects";
+import AllProjects from "./components/projects/AllProjects";
 import Contact from "./components/sections/Contact";
-import Message from "./components/Message";
+import Message from "./components/layout/Message";
 
 import { ReactLenis } from '@studio-freight/react-lenis';
 
-import Footer from "./components/Footer";
+import Footer from "./components/layout/Footer";
 // import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";
 
 import {Toaster} from "react-hot-toast";
-import ProjectDetail from "./components/sections/ProjectDetail";
+import ProjectDetail from "./components/projects/ProjectDetail";
 
 function ScrollRouterWrapper() {
   const [activeSection, setActiveSection] = useState("home");

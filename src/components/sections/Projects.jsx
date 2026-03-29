@@ -6,7 +6,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import toast from "react-hot-toast";
-import BackgroundParticles from "../BackgroundParticles";
+import BackgroundParticles from "../layout/BackgroundParticles";
 
 // import GitHubStats from "./GitHubStats";
 

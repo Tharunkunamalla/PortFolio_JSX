@@ -48,7 +48,7 @@ import {FaJava} from "react-icons/fa";
 import {BiCodeAlt} from "react-icons/bi";
 import {VscCode} from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
-import BackgroundParticles from "../BackgroundParticles.jsx";
+import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 
 gsap.registerPlugin(ScrollTrigger);

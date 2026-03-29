@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import {useNavigate, useLocation} from "react-router-dom";
-import {useTheme} from "../context/ThemeContext";
+import {useTheme} from "../../context/ThemeContext";
 
 const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import {BellRing, MessageCircleMore, X} from "lucide-react";
-import {ownerMessages} from "../data/ownerMessages";
+import {ownerMessages} from "../../data/ownerMessages";
 
 const formatDateTime = (value) => {
   const parsedDate = new Date(value);
