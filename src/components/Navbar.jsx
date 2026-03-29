@@ -52,20 +52,20 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
       <div 
         className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "w-full max-w-5xl px-6 py-2 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
-            : "w-full container mx-auto px-4 md:px-8 py-4 md:py-6"
+            ? "w-full max-w-6xl px-10 py-3 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            : "w-full container mx-auto px-6 md:px-12 py-5 md:py-8"
         }`}
       >
         <button
           onClick={() => handleNavClick("home")}
-          className="group relative flex items-center gap-1 text-2xl md:text-3xl font-bold tracking-tighter text-gray-900 dark:text-white shrink-0"
+          className="group relative flex items-center gap-1 text-3xl md:text-4xl font-bold tracking-tighter text-gray-900 dark:text-white shrink-0"
         >
           <span className="text-secondary-500 transform transition-transform group-hover:scale-110 group-hover:-rotate-12 select-none">T</span>
           <span className="bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent transition-all duration-300 group-hover:tracking-wider select-none">harun</span>
         </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center bg-gray-500/5 dark:bg-white/5 p-1 rounded-full backdrop-blur-sm transition-all duration-500">
+        <div className="hidden md:flex items-center gap-1 bg-gray-500/5 dark:bg-white/5 p-1.5 rounded-full backdrop-blur-sm transition-all duration-500">
           {navItems.map((item) => {
             const isActive = activeSection === item.id && isHomePage;
 
@@ -73,7 +73,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative px-5 py-2 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-500 group
+                className={`relative px-7 py-2.5 text-sm font-bold tracking-[0.1em] uppercase transition-all duration-500 group
           ${
             isActive
               ? "text-white"
@@ -85,7 +85,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
                 
                 {/* Active/Hover Background Pill */}
                 <span 
-                  className={`absolute inset-0 rounded-full bg-secondary-500 shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all duration-500 ${
+                  className={`absolute inset-0 rounded-full bg-secondary-500 shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-500 ${
                     isActive ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover:opacity-20 group-hover:scale-100"
                   }`}
                 />
@@ -111,7 +111,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
                 rel="noopener noreferrer"
                 className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-secondary-500 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 group"
               >
-                <Icon className="h-6 w-6 transition-transform duration-300 group-hover:rotate-12  group-hover:text-secondary-500" />
+                <Icon className="h-7 w-7 transition-transform duration-300 group-hover:rotate-12  group-hover:text-secondary-500" />
                 {/* <span className="absolute inset-0 rounded-full bg-secondary-500/10 scale-0 transition-transform duration-300 group-hover:scale-100" /> */}
               </a>
             ))}
@@ -126,9 +126,9 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <Sun className="h-5 w-5 text-yellow-400 group-hover:rotate-180 transition-transform duration-500" />
+              <Sun className="h-7 w-7 text-yellow-400 group-hover:rotate-180 transition-transform duration-500" />
             ) : (
-              <Moon className="h-5 w-5 text-gray-700 group-hover:rotate-12 transition-transform duration-300" />
+              <Moon className="h-7 w-7 text-gray-700 group-hover:rotate-12 transition-transform duration-300" />
             )}
           </button>
 
@@ -137,7 +137,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-xl bg-gray-100 dark:bg-white/5 hover:bg-white/10 transition-colors"
           >
-            <Menu className="h-6 w-6 text-gray-800 dark:text-white" />
+            <Menu className="h-7 w-7 text-gray-800 dark:text-white" />
           </button>
         </div>
       </div>
