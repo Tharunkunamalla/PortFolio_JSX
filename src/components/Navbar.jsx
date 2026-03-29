@@ -43,23 +43,29 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
+      className={`fixed left-0 w-full z-40 transition-all duration-500 ease-in-out ${
         isScrolled
-          ? "bg-white/60 dark:bg-[#0f0f14]/60 backdrop-blur-lg shadow-lg"
-          : "bg-transparent"
+          ? "top-4 px-4 md:px-0 flex justify-center"
+          : "top-0 bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex justify-between items-center py-3 md:py-4">
-        <a
-          href="#home"
-          className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+      <div 
+        className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
+          isScrolled
+            ? "w-full max-w-5xl px-6 py-2 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            : "w-full container mx-auto px-4 md:px-8 py-4 md:py-6"
+        }`}
+      >
+        <button
           onClick={() => handleNavClick("home")}
+          className="group relative flex items-center gap-1 text-2xl md:text-3xl font-bold tracking-tighter text-gray-900 dark:text-white shrink-0"
         >
-          <span className="text-secondary-500">T</span>harun
-        </a>
+          <span className="text-secondary-500 transform transition-transform group-hover:scale-110 group-hover:-rotate-12 select-none">T</span>
+          <span className="bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 bg-clip-text text-transparent transition-all duration-300 group-hover:tracking-wider select-none">harun</span>
+        </button>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center space-x-3">
+        <div className="hidden md:flex items-center bg-gray-500/5 dark:bg-white/5 p-1 rounded-full backdrop-blur-sm transition-all duration-500">
           {navItems.map((item) => {
             const isActive = activeSection === item.id && isHomePage;
 
@@ -67,158 +73,122 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative px-4 py-2 text-lg font-medium rounded-full
-          transition-all duration-300 overflow-hidden 
+                className={`relative px-5 py-2 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-500 group
           ${
             isActive
-              ? "text-secondary-500"
-              : "text-gray-700 dark:text-gray-300 hover:text-secondary-400"
+              ? "text-white"
+              : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
           }
-            hover:-translate-y-[3px]
         `}
               >
-                {/* Animated background */}
-                <span
-                  className={`absolute inset-0 rounded-full bg-secondary-500/10
-            scale-0 transition-transform duration-300 ease-out
-            ${isActive ? "scale-100" : "hover:scale-100"}
-          `}
-                />
-
-                {/* Text stays above */}
                 <span className="relative z-10">{item.label}</span>
+                
+                {/* Active/Hover Background Pill */}
+                <span 
+                  className={`absolute inset-0 rounded-full bg-secondary-500 shadow-[0_0_15px_rgba(168,85,247,0.4)] transition-all duration-500 ${
+                    isActive ? "opacity-100 scale-100" : "opacity-0 scale-90 group-hover:opacity-20 group-hover:scale-100"
+                  }`}
+                />
               </button>
             );
           })}
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3 md:space-x-5">
+          {/* Socials Desktop */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {[
+              { Icon: Github, href: "https://github.com/Tharunkunamalla" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/in/tharun-kunamalla-/" },
+              { Icon: Instagram, href: "https://instagram.com/__tharun_0509.__" },
+              { Icon: FaDiscord, href: "https://discord.com/users/751713701425446945" }
+            ].map(({ Icon, href }, idx) => (
+              <a
+                key={idx}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative p-2 text-gray-600 dark:text-gray-400 hover:text-secondary-500 transition-all duration-300 transform hover:-translate-y-1 hover:scale-110 group"
+              >
+                <Icon className="h-6 w-6 transition-transform duration-300 group-hover:rotate-12  group-hover:text-secondary-500" />
+                {/* <span className="absolute inset-0 rounded-full bg-secondary-500/10 scale-0 transition-transform duration-300 group-hover:scale-100" /> */}
+              </a>
+            ))}
+          </div>
+
+          <div className="h-6 w-[1px] bg-gray-300 dark:bg-gray-700 hidden md:block opacity-50" />
+
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-100 transition-colors"
+            className="p-2.5 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-secondary-500/20 transition-all duration-300 group"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <Sun className="h-7 w-7 text-yellow-400 hover:rotate-90 transition-transform duration-300" />
+              <Sun className="h-5 w-5 text-yellow-400 group-hover:rotate-180 transition-transform duration-500" />
             ) : (
-              <Moon className="h-7 w-7 text-gray-700 hover:rotate-[20deg] transition-transform duration-300" />
+              <Moon className="h-5 w-5 text-gray-700 group-hover:rotate-12 transition-transform duration-300" />
             )}
           </button>
-
-          {/* Socials Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="https://github.com/Tharunkunamalla"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Github className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/tharun-kunamalla-/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Linkedin className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
-            </a>
-            <a
-              href="https://instagram.com/__tharun_0509.__"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Instagram className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
-            </a>
-            <a
-              href="https://discord.com/users/751713701425446945"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <FaDiscord className="h-7 w-7 hover:scale-125 hover:rotate-[6deg] transition-transform" />
-            </a>
-          </div>
 
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-1 rounded-full hover:bg-gray-200 dark:hover:bg-dark-300 transition-colors"
-            aria-label="Toggle menu"
+            className="md:hidden p-2 rounded-xl bg-gray-100 dark:bg-white/5 hover:bg-white/10 transition-colors"
           >
-            <Menu className="h-8 w-8 text-gray-800 dark:text-white" />
+            <Menu className="h-6 w-6 text-gray-800 dark:text-white" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Close Icon */}
-      {isMenuOpen && (
-        <button
-          onClick={() => setIsMenuOpen(false)}
-          className="fixed top-5 right-5 z-50 p-2 rounded-full bg-white dark:bg-dark-200 shadow-md hover:bg-gray-100 dark:hover:bg-dark-300 transition-colors md:hidden"
-          aria-label="Close menu"
-        >
-          <X className="h-8 w-8 text-gray-800 dark:text-white" />
-        </button>
-      )}
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden transition-opacity duration-500 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={() => setIsMenuOpen(false)}
+      />
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Container */}
       <div
-        className={`fixed top-0 right-0 h-screen w-64 bg-white/10 dark:bg-black/10 backdrop-blur-2xl rounded-l-3xl border-l border-white/20 shadow-2xl z-40 transform transition-transform duration-500 ease-in-out will-change-transform md:hidden overflow-y-auto ${
+        className={`fixed top-0 right-0 h-screen w-[80vw] max-w-sm bg-white dark:bg-[#0f0f14] z-[60] shadow-2xl transform transition-transform duration-500 ease-emphasized md:hidden ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col px-6 py-12 space-y-5">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className={`text-lg font-bold text-left transition-all duration-300 ${
-                activeSection === item.id && isHomePage
-                  ? "text-secondary-500 translate-x-1"
-                  : "text-gray-800 dark:text-gray-200 hover:text-secondary-400 hover:translate-x-1"
-              }`}
+        <div className="flex flex-col h-full px-8 py-10">
+          <div className="flex justify-between items-center mb-12">
+            <span className="text-2xl font-bold dark:text-white">Menu</span>
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 rounded-full bg-gray-100 dark:bg-white/10"
             >
-              {item.label}
+              <X className="h-6 w-6 dark:text-white" />
             </button>
-          ))}
+          </div>
 
-          <div className="pt-4 border-t border-gray-300 dark:border-gray-700 flex space-x-5">
-            <a
-              href="https://github.com/Tharunkunamalla"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Github className="h-7 w-7" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/tharun-kunamalla-/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Linkedin className="h-7 w-7" />
-            </a>
-            <a
-              href="https://instagram.com/__tharun_0509.__"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <Instagram className="h-7 w-7" />
-            </a>
-            <a
-              href="https://discord.com/users/751713701425446945"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-secondary-500 transition-colors"
-            >
-              <FaDiscord className="h-7 w-7" />
-            </a>
+          <div className="flex flex-col space-y-6">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`text-3xl font-bold text-left transition-all duration-300 flex items-center gap-4 group ${
+                  activeSection === item.id && isHomePage
+                    ? "text-secondary-500"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                <span className="text-sm opacity-50 font-mono">0{navItems.indexOf(item) + 1}</span>
+                <span className="group-hover:translate-x-2 transition-transform">{item.label}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-auto py-8 border-t border-gray-200 dark:border-white/10">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-widest font-bold">Social Connection</p>
+            <div className="flex gap-6">
+              {[Github, Linkedin, Instagram, FaDiscord].map((Icon, i) => (
+                <Icon key={i} className="h-6 w-6 text-gray-400 hover:text-secondary-500 transition-colors cursor-pointer" />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -115,7 +115,7 @@ function App() {
     <ReactLenis root>
       <Router>
         <ThemeProvider>
-          <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300 font-sans">
+          <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white font-sans">
             <Cursor />
             <ScrollRouterWrapper />
             <Message />
