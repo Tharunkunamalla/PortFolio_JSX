@@ -340,7 +340,7 @@ const Projects = () => {
       <div className="relative z-10 w-full max-w-[95%] 2xl:max-w-[85%] mx-auto px-4">
         <h2
           ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-6 text-gray-800 dark:text-white"
+          className="text-4xl md:text-6xl font-bold text-center mb-6 text-gray-800 dark:text-white"
         >
           Featured <span className="text-secondary-500">Projects</span>
         </h2>

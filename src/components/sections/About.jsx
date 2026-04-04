@@ -281,12 +281,14 @@ const About = () => {
       />
 
       <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-24">
         <h2
           ref={headingRef}
-          className="text-3xl md:text-4xl font-bold text-center mb-10 text-gray-800 dark:text-white"
+          className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tight"
         >
           About <span className="text-secondary-500">Me</span>
         </h2>
+      </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center relative">
           <div
