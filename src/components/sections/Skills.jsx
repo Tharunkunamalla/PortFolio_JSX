@@ -1,14 +1,11 @@
-// src/components/Skills.jsx
-import {useEffect, useRef, useState} from "react";
-import {gsap} from "gsap";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
+// src/components/sections/Skills.jsx
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Code,
-  Database,
-  Wrench,
-  Layers,
-  ChevronDown,
-  ChevronUp,
+  Cpu,
+  Globe,
+  Terminal,
 } from "lucide-react";
 import {
   SiHtml5,
@@ -43,324 +40,216 @@ import {
   SiVercel,
   SiDocker,
   SiKubernetes,
+  SiCplusplus,
+  SiC,
 } from "react-icons/si";
-import {FaJava} from "react-icons/fa";
-import {BiCodeAlt} from "react-icons/bi";
-import {VscCode} from "react-icons/vsc";
+import { FaJava } from "react-icons/fa";
+import { VscCode } from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
-import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const skillsData = [
   // Frontend
-  {name: "HTML5", icon: <SiHtml5 />, level: 9, category: "frontend"},
-  {name: "CSS3", icon: <SiCss />, level: 9, category: "frontend"},
-  {name: "JavaScript", icon: <SiJavascript />, level: 8, category: "frontend"},
-  {name: "TypeScript", icon: <SiTypescript />, level: 7, category: "frontend"},
-  {name: "React.js", icon: <SiReact />, level: 8, category: "frontend"},
-  {name: "Redux", icon: <SiRedux />, level: 7, category: "frontend"},
-  {
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss />,
-    level: 9,
-    category: "frontend",
-  },
-  {
-    name: "BootStrap CSS",
-    icon: <SiBootstrap />,
-    level: 9,
-    category: "frontend",
-  },
-  {name: "GSAP", icon: <SiGreensock />, level: 7, category: "frontend"},
+  { name: "HTML5", icon: <SiHtml5 />, category: "frontend", color: "#E34F26" },
+  { name: "CSS3", icon: <SiCss />, category: "frontend", color: "#1572B6" },
+  { name: "JavaScript", icon: <SiJavascript />, category: "frontend", color: "#F7DF1E" },
+  { name: "TypeScript", icon: <SiTypescript />, category: "frontend", color: "#3178C6" },
+  { name: "React.js", icon: <SiReact />, category: "frontend", color: "#61DAFB" },
+  { name: "Redux", icon: <SiRedux />, category: "frontend", color: "#764ABC" },
+  { name: "Tailwind", icon: <SiTailwindcss />, category: "frontend", color: "#06B6D4" },
+  { name: "GSAP", icon: <SiGreensock />, category: "frontend", color: "#88CE02" },
 
   // Backend
-  {name: "Java", icon: <FaJava />, level: 9, category: "backend"},
-  {name: "Python", icon: <SiPython />, level: 8, category: "backend"},
-  {name: "Express.js", icon: <SiExpress />, level: 7, category: "backend"},
-  {name: "Node.js", icon: <SiNodedotjs />, level: 7, category: "backend"},
-  {name: "MongoDB", icon: <SiMongodb />, level: 7, category: "backend"},
-  {name: "Docker", icon: <SiDocker />, level: 6, category: "backend"},
-  {name: "Kubernetes", icon: <SiKubernetes />, level: 5, category: "backend"},
-  {name: "SQL", icon: <SiMysql />, level: 7, category: "backend"},
-  {name: "PHP", icon: <SiPhp />, level: 7, category: "backend"},
-  {name: "C++", icon: <BiCodeAlt />, level: 6, category: "backend"},
-  {name: "C", icon: <BiCodeAlt />, level: 8, category: "backend"},
+  { name: "Java", icon: <FaJava />, category: "backend", color: "#007396" },
+  { name: "Python", icon: <SiPython />, category: "backend", color: "#3776AB" },
+  { name: "Node.js", icon: <SiNodedotjs />, category: "backend", color: "#339933" },
+  { name: "MongoDB", icon: <SiMongodb />, category: "backend", color: "#47A248" },
+  { name: "SQL", icon: <SiMysql />, category: "backend", color: "#4479A1" },
+  { name: "C++", icon: <SiCplusplus />, category: "backend", color: "#00599C" },
+  { name: "C", icon: <SiC />, category: "backend", color: "#A8B9CC" },
 
-  // Tools & Workflows
-  {name: "ROS", icon: <SiRos />, level: 5, category: "tools"},
-  {name: "NumPy", icon: <SiNumpy />, level: 8, category: "tools"},
-  {name: "Pandas", icon: <SiPandas />, level: 8, category: "tools"},
-  {name: "Matplotlib", icon: <SiPlotly />, level: 7, category: "tools"},
-  {name: "OpenCV", icon: <SiOpencv />, level: 8, category: "tools"},
-  {name: "Git", icon: <SiGit />, level: 8, category: "tools"},
-  {name: "VS Code", icon: <VscCode />, level: 9, category: "tools"},
-  {name: "Linux", icon: <SiLinux />, level: 6, category: "tools"},
-  {name: "GCP", icon: <SiGooglecloud />, level: 7, category: "tools"},
-  {name: "Jupyter Notebook", icon: <SiJupyter />, level: 8, category: "tools"},
-  {name: "Google Colab", icon: <SiGooglecolab />, level: 9, category: "tools"},
-  {name: "Postman", icon: <SiPostman />, level: 7, category: "tools"},
-  {name: "Figma", icon: <SiFigma />, level: 5, category: "tools"},
-  {name: "Vercel", icon: <SiVercel />, level: 8, category: "tools"},
-  {name: "Firebase", icon: <SiFirebase />, level: 5, category: "tools"},
-  {name: "GraphQL", icon: <SiGraphql />, level: 6, category: "tools"},
+  // Ecosystem & AI
+  { name: "Docker", icon: <SiDocker />, category: "ecosystem", color: "#2496ED" },
+  { name: "Git", icon: <SiGit />, category: "ecosystem", color: "#F05032" },
+  { name: "Postman", icon: <SiPostman />, category: "ecosystem", color: "#FF6C37" },
+  { name: "Linux", icon: <SiLinux />, category: "ecosystem", color: "#FCC624" },
+  { name: "OpenCV", icon: <SiOpencv />, category: "ecosystem", color: "#5C3EE8" },
+  { name: "NumPy", icon: <SiNumpy />, category: "ecosystem", color: "#013243" },
+  { name: "Pandas", icon: <SiPandas />, category: "ecosystem", color: "#150458" },
+  { name: "Vercel", icon: <SiVercel />, category: "ecosystem", color: "#000000" },
 ];
 
-const groupedSkills = skillsData.reduce((acc, skill) => {
-  if (!acc[skill.category]) acc[skill.category] = [];
-  acc[skill.category].push(skill);
-  return acc;
-}, {});
+const SkillCard = ({ skill }) => {
+  return (
+    <Tilt
+      tiltMaxAngleX={10}
+      tiltMaxAngleY={10}
+      perspective={1000}
+      scale={1.05}
+      transitionSpeed={1500}
+      className="w-full h-full"
+    >
+      <div 
+        className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-transparent transition-all duration-500 overflow-hidden"
+        style={{ '--hover-color': skill.color }}
+      >
+        {/* Simple Brand Glow on Hover */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+          style={{ backgroundColor: skill.color }}
+        />
+        
+        {/* Glow Border Effect */}
+        <div 
+          className="absolute inset-0 border-2 border-transparent group-hover:border-[var(--hover-color)] opacity-0 group-hover:opacity-30 transition-all duration-500 rounded-2xl pointer-events-none"
+        />
+
+        <div className="relative z-10 flex flex-col items-center justify-center gap-4">
+          {/* Icon */}
+          <div className="p-4 rounded-xl bg-white/5 transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1">
+            <span className="text-4xl" style={{ color: skill.color }}>{skill.icon}</span>
+          </div>
+
+          {/* Name */}
+          <h4 className="text-white/70 font-semibold text-lg group-hover:text-white transition-colors">
+            {skill.name}
+          </h4>
+        </div>
+      </div>
+    </Tilt>
+  );
+};
+
+const SkillsMarquee = ({ skills }) => {
+  return (
+    <div className="relative w-full overflow-hidden py-12 border-y border-white/5">
+      <div className="flex whitespace-nowrap animate-marquee">
+        {/* Two sets of skills are enough for a seamless loop with translateX(-50%) */}
+        {[...skills, ...skills].map((skill, idx) => (
+          <div key={idx} className="flex items-center gap-4 px-10 group">
+            <span className="text-4xl grayscale group-hover:grayscale-0 transition-all duration-500" style={{ color: skill.color }}>
+              {skill.icon}
+            </span>
+            <span className="text-white/20 group-hover:text-white/80 font-bold tracking-tight uppercase transition-colors">
+              {skill.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Skills = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
-  const categoryRefs = useRef([]);
-  const skillBarRefs = useRef([]);
-  const [showAllTools, setShowAllTools] = useState(false);
 
-  categoryRefs.current = Array(Object.keys(groupedSkills).length).fill(null);
-
-  // 1. Run Category Entrances ONLY ONCE on mount
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set(sectionRef.current, { perspective: 1500 });
-
       gsap.from(headingRef.current, {
-        y: 100,
-        z: -300,
-        rotationX: -20,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.out",
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          toggleActions: "play reverse play reverse",
+          trigger: headingRef.current,
+          start: "top 90%",
         },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
       });
 
-      categoryRefs.current.forEach((category, index) => {
-        if (category) {
-          gsap.from(category, {
-            y: 80,
-            z: -200,
-            rotationX: 30,
-            opacity: 0,
-            duration: 1,
-            delay: 0.2 * index,
-            ease: "back.out(1.5)",
-            scrollTrigger: {
-              trigger: category,
-              start: "top 90%",
-              toggleActions: "play reverse play reverse",
-            },
-          });
-        }
+      const cards = gsap.utils.toArray(".skill-card-anim");
+      gsap.from(cards, {
+        scrollTrigger: {
+          trigger: ".skills-grid",
+          start: "top 85%",
+        },
+        y: 30,
+        opacity: 0,
+        stagger: 0.04,
+        duration: 0.8,
+        ease: "power2.out",
       });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // 2. Run Bar Animations whenever Tool list expands/collapses
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      skillBarRefs.current.forEach((bar) => {
-        if (bar) {
-          const level = bar.getAttribute("data-level");
-          if (level) {
-            gsap.fromTo(
-              bar,
-              {width: "0%"},
-              {
-                width: `${level}%`,
-                duration: 1,
-                ease: "power2.out",
-                scrollTrigger: {
-                  trigger: bar,
-                  start: "top 95%",
-                  toggleActions: "play none none reverse",
-                },
-              },
-            );
-          }
-        }
-      });
-    }, sectionRef);
-
-    setTimeout(() => ScrollTrigger.refresh(), 100);
-
-    return () => ctx.revert();
-  }, [showAllTools]);
-
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case "frontend":
-        return <Code className="h-6 w-6 text-primary-500" />;
-      case "backend":
-        return <Database className="h-6 w-6 text-secondary-500" />;
-      case "tools":
-        return <Wrench className="h-6 w-6 text-accent-500" />;
-      case "other":
-        return <Layers className="h-6 w-6 text-green-500" />;
-      default:
-        return null;
-    }
-  };
-
-  const getCategoryTitle = (category) => {
-    switch (category) {
-      case "frontend":
-        return "Frontend Development";
-      case "backend":
-        return "Backend Development";
-      case "tools":
-        return "Tools & Workflows";
-      case "other":
-        return "Other Skills";
-      default:
-        return category;
-    }
-  };
-
-  let barFlatIndex = 0;
+  const categorizedSkills = skillsData.reduce((acc, skill) => {
+    if (!acc[skill.category]) acc[skill.category] = [];
+    acc[skill.category].push(skill);
+    return acc;
+  }, {});
 
   return (
     <>
       <section
         ref={sectionRef}
         id="skills"
-        className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
+        className="relative py-28 bg-[#050505] overflow-hidden"
       >
-        {/* ===== PARTICLES ===== */}
-        <div className="absolute inset-0 z-0">
-          <BackgroundParticles />
-        </div>
-        {/* ===== TOP BLEND ===== */}
-        <div
-          className="
-            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
-            bg-gradient-to-b
-            from-white/80 to-transparent
-            dark:from-black/60
-          "
-        />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <h2
+              ref={headingRef}
+              className="text-4xl md:text-6xl font-bold text-white tracking-tight"
+            >
+              Technical <span className="text-white/40">Skills</span>
+            </h2>
+          </div>
 
-        <div className="container mx-auto px-4 md:px-6">
-          <h2
-            ref={headingRef}
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-white"
-          >
-            My <span className="text-secondary-500">Skills</span>
-          </h2>
-
-          <div className="grid gap-10">
-            {Object.keys(groupedSkills).map((category, categoryIndex) => {
-              const isToolsCategory = category === "tools";
-              const skillsToShow =
-                isToolsCategory && !showAllTools
-                  ? groupedSkills[category].slice(0, 8)
-                  : groupedSkills[category];
-
-              return (
-                <Tilt
-                  key={category}
-                  tiltMaxAngleX={3}
-                  tiltMaxAngleY={3}
-                  scale={1.01}
-                  transitionSpeed={2500}
-                  className="w-full h-full"
-                >
-                  <div
-                    ref={(el) => (categoryRefs.current[categoryIndex] = el)}
-                    className="
-                      rounded-2xl p-8 h-full
-                      bg-white/5 backdrop-blur-md
-                      border border-white/10
-                      shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]
-                      hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)]
-                      transition-all duration-500
-                    "
-                  >
-                  <div className="flex items-center mb-6">
-                    {getCategoryIcon(category)}
-                    <h3 className="text-xl md:text-2xl font-semibold ml-3 text-gray-800 dark:text-white">
-                      {getCategoryTitle(category)}
-                    </h3>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {skillsToShow.map((skill) => {
-                      const currentIndex = barFlatIndex++;
-                      return (
-                        <div
-                          key={skill.name}
-                          className="group hover:bg-light-200 dark:hover:bg-[#0b0b0f]/50 p-4 rounded-lg transition-colors duration-300"
-                        >
-                          <div className="flex items-center mb-3">
-                            <span className="text-2xl mr-3">{skill.icon}</span>
-                            <h4 className="font-medium text-gray-800 dark:text-white">
-                              {skill.name}
-                            </h4>
-                          </div>
-                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                            <div
-                              ref={(el) =>
-                                (skillBarRefs.current[currentIndex] = el)
-                              }
-                              data-level={skill.level * 10}
-                              className="h-2.5 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:animate-pulse"
-                              style={{width: "0%"}}
-                            ></div>
-                          </div>
-                          {/* <div className="flex justify-between mt-1 text-xs text-gray-500 dark:text-gray-400">
-                            <span>Beginner</span>
-                            <span>Expert</span>
-                          </div> */}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {isToolsCategory && (
-                    <div className="flex justify-center mt-6">
-                      <button
-                        onClick={() => setShowAllTools((prev) => !prev)}
-                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-secondary-500 hover:underline"
-                      >
-                        {showAllTools ? (
-                          <>
-                            Show less <ChevronUp className="h-4 w-4" />
-                          </>
-                        ) : (
-                          <>
-                            Show all Tools & Workflows{" "}
-                            <ChevronDown className="h-4 w-4" />
-                          </>
-                        )}
-                      </button>
-                    </div>
-                  )}
+          <div className="space-y-24">
+            {["frontend", "backend"].map((cat) => (
+              <div key={cat} className="space-y-10">
+                <div className="flex items-center gap-4 opacity-30 px-2">
+                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white flex items-center gap-2">
+                      {cat === 'frontend' ? <Globe className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
+                      {cat} Development
+                   </h3>
+                   <div className="h-[1px] flex-1 bg-white/20" />
                 </div>
-                </Tilt>
-              );
-            })}
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
+                  {categorizedSkills[cat].map((skill) => (
+                    <div key={skill.name} className="skill-card-anim">
+                      <SkillCard skill={skill} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="space-y-10 pt-10">
+                <div className="flex items-center gap-4 opacity-30 px-2">
+                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white flex items-center gap-2">
+                      <Cpu className="w-4 h-4" />
+                      Tools & Ecosystem
+                   </h3>
+                   <div className="h-[1px] flex-1 bg-white/20" />
+                </div>
+                <SkillsMarquee skills={categorizedSkills.ecosystem} />
+            </div>
           </div>
         </div>
-        {/* ===== BOTTOM BLEND (KEY PART) ===== */}
-        <div
-          className="
-            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-            bg-gradient-to-t
-            from-white/90 to-transparent
-            dark:from-black/80
-          "
-        />
+
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            animation: marquee 40s linear infinite;
+          }
+          .animate-marquee:hover {
+            animation-play-state: paused;
+          }
+        `}} />
       </section>
 
-      <LeetCodeStats />
+      <div className="bg-[#050505] pb-24">
+         <LeetCodeStats />
+      </div>
     </>
   );
 };
