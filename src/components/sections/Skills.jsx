@@ -46,6 +46,7 @@ import {
 import { FaJava } from "react-icons/fa";
 import { VscCode } from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
+import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -92,28 +93,22 @@ const SkillCard = ({ skill }) => {
       className="w-full h-full"
     >
       <div 
-        className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-transparent transition-all duration-500 overflow-hidden"
+        className="group relative p-6 rounded-2xl bg-black/5 dark:bg-white/[0.03] border border-black/10 dark:border-white/5 hover:border-transparent transition-all duration-500 overflow-hidden"
         style={{ '--hover-color': skill.color }}
       >
-        {/* Simple Brand Glow on Hover */}
         <div 
           className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
           style={{ backgroundColor: skill.color }}
         />
-        
-        {/* Glow Border Effect */}
         <div 
           className="absolute inset-0 border-2 border-transparent group-hover:border-[var(--hover-color)] opacity-0 group-hover:opacity-30 transition-all duration-500 rounded-2xl pointer-events-none"
         />
 
         <div className="relative z-10 flex flex-col items-center justify-center gap-4">
-          {/* Icon */}
           <div className="p-4 rounded-xl bg-white/5 transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1">
             <span className="text-4xl" style={{ color: skill.color }}>{skill.icon}</span>
           </div>
-
-          {/* Name */}
-          <h4 className="text-white/70 font-semibold text-lg group-hover:text-white transition-colors">
+          <h4 className="text-gray-600 dark:text-white/70 font-semibold text-lg group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-center">
             {skill.name}
           </h4>
         </div>
@@ -124,15 +119,14 @@ const SkillCard = ({ skill }) => {
 
 const SkillsMarquee = ({ skills }) => {
   return (
-    <div className="relative w-full overflow-hidden py-12 border-y border-white/5">
+    <div className="relative w-full overflow-hidden py-12 border-y border-black/10 dark:border-white/5 bg-black/5 dark:bg-[#050505] transition-colors duration-300">
       <div className="flex whitespace-nowrap animate-marquee">
-        {/* Two sets of skills are enough for a seamless loop with translateX(-50%) */}
         {[...skills, ...skills].map((skill, idx) => (
           <div key={idx} className="flex items-center gap-4 px-10 group">
             <span className="text-4xl grayscale group-hover:grayscale-0 transition-all duration-500" style={{ color: skill.color }}>
               {skill.icon}
             </span>
-            <span className="text-white/20 group-hover:text-white/80 font-bold tracking-tight uppercase transition-colors">
+            <span className="text-gray-900/20 dark:text-white/20 group-hover:text-gray-900/80 dark:group-hover:text-white/80 font-bold tracking-tight uppercase transition-colors">
               {skill.name}
             </span>
           </div>
@@ -187,27 +181,39 @@ const Skills = () => {
       <section
         ref={sectionRef}
         id="skills"
-        className="relative py-28 bg-[#050505] overflow-hidden"
+        className="relative py-28 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] transition-colors duration-300 overflow-hidden"
       >
+        <BackgroundParticles />
+        
+        {/* ===== TOP BLEND ===== */}
+        <div
+          className="
+              pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+              bg-gradient-to-b
+              from-white/80 to-transparent
+              dark:from-black/60
+            "
+        />
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <h2
               ref={headingRef}
-              className="text-4xl md:text-6xl font-bold text-white tracking-tight"
+              className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tight"
             >
-              Technical <span className="text-white/40">Skills</span>
+              Technical <span className="text-secondary-500">Skills</span>
             </h2>
           </div>
 
           <div className="space-y-24">
             {["frontend", "backend"].map((cat) => (
               <div key={cat} className="space-y-10">
-                <div className="flex items-center gap-4 opacity-30 px-2">
-                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white flex items-center gap-2">
+                <div className="flex items-center gap-4 opacity-70 px-2">
+                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
                       {cat === 'frontend' ? <Globe className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
                       {cat} Development
                    </h3>
-                   <div className="h-[1px] flex-1 bg-white/20" />
+                   <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
                 </div>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
@@ -221,12 +227,12 @@ const Skills = () => {
             ))}
 
             <div className="space-y-10 pt-10">
-                <div className="flex items-center gap-4 opacity-30 px-2">
-                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-white flex items-center gap-2">
+                <div className="flex items-center gap-4 opacity-70 px-2">
+                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
                       <Cpu className="w-4 h-4" />
                       Tools & Ecosystem
                    </h3>
-                   <div className="h-[1px] flex-1 bg-white/20" />
+                   <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
                 </div>
                 <SkillsMarquee skills={categorizedSkills.ecosystem} />
             </div>
@@ -245,9 +251,19 @@ const Skills = () => {
             animation-play-state: paused;
           }
         `}} />
+
+        {/* ===== BOTTOM BLEND ===== */}
+        <div
+          className="
+              pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+              bg-gradient-to-t
+              from-white/90 to-transparent
+              dark:from-black/80
+            "
+        />
       </section>
 
-      <div className="bg-[#050505] pb-24">
+      <div className="bg-light-100 dark:bg-dark-100 transition-colors duration-300 pb-24">
          <LeetCodeStats />
       </div>
     </>
