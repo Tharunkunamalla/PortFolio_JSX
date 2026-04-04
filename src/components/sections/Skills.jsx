@@ -119,19 +119,25 @@ const SkillCard = ({ skill }) => {
 
 const SkillsMarquee = ({ skills }) => {
   return (
-    <div className="relative w-full overflow-hidden py-12 border-y border-black/10 dark:border-white/5 bg-black/5 dark:bg-[#050505] transition-colors duration-300">
-      <div className="flex whitespace-nowrap animate-marquee">
-        {[...skills, ...skills].map((skill, idx) => (
-          <div key={idx} className="flex items-center gap-4 px-10 group">
-            <span className="text-4xl grayscale group-hover:grayscale-0 transition-all duration-500" style={{ color: skill.color }}>
-              {skill.icon}
-            </span>
-            <span className="text-gray-900/20 dark:text-white/20 group-hover:text-gray-900/80 dark:group-hover:text-white/80 font-bold tracking-tight uppercase transition-colors">
-              {skill.name}
-            </span>
-          </div>
-        ))}
+    <div className="relative max-w-7xl mx-auto px-4 md:px-0">
+      <div className="relative overflow-hidden py-8 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] group/reel transition-all duration-500 hover:border-white/20 hover:bg-white/[0.06]">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/reel:animate-shine pointer-events-none" />
+        
+        <div className="flex whitespace-nowrap animate-marquee">
+          {[...skills, ...skills].map((skill, idx) => (
+            <div key={idx} className="flex items-center gap-4 px-12 group transition-transform duration-300">
+              <span className="text-4xl grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500" 
+                    style={{ color: skill.color }}>
+                {skill.icon}
+              </span>
+              <span className="text-gray-900/40 dark:text-white/20 group-hover:text-gray-900/90 dark:group-hover:text-white/90 font-black tracking-widest uppercase transition-colors text-[10px]">
+                {skill.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-2xl opacity-0 group-hover/reel:opacity-100 transition-opacity duration-700 pointer-events-none" />
     </div>
   );
 };
@@ -177,96 +183,101 @@ const Skills = () => {
   }, {});
 
   return (
-    <>
-      <section
-        ref={sectionRef}
-        id="skills"
-        className="relative py-28 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] transition-colors duration-300 overflow-hidden"
-      >
-        <BackgroundParticles />
-        
-        {/* ===== TOP BLEND ===== */}
-        <div
-          className="
-              pointer-events-none absolute top-0 inset-x-0 h-24 z-10
-              bg-gradient-to-b
-              from-white/80 to-transparent
-              dark:from-black/60
-            "
-        />
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="relative py-28 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] transition-colors duration-300 overflow-hidden"
+    >
+      <BackgroundParticles />
+      
+      {/* ===== TOP BLEND ===== */}
+      <div
+        className="
+            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
+            bg-gradient-to-b
+            from-white/80 to-transparent
+            dark:from-black/60
+          "
+      />
 
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-24">
-            <h2
-              ref={headingRef}
-              className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tight"
-            >
-              Technical <span className="text-secondary-500">Skills</span>
-            </h2>
-          </div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-24">
+          <h2
+            ref={headingRef}
+            className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tight"
+          >
+            Technical <span className="text-secondary-500">Skills</span>
+          </h2>
+        </div>
 
-          <div className="space-y-24">
-            {["frontend", "backend"].map((cat) => (
-              <div key={cat} className="space-y-10">
-                <div className="flex items-center gap-4 opacity-70 px-2">
-                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
-                      {cat === 'frontend' ? <Globe className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
-                      {cat} Development
-                   </h3>
-                   <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
-                </div>
-                
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
-                  {categorizedSkills[cat].map((skill) => (
-                    <div key={skill.name} className="skill-card-anim">
-                      <SkillCard skill={skill} />
-                    </div>
-                  ))}
-                </div>
+        <div className="space-y-24">
+          {["frontend", "backend"].map((cat) => (
+            <div key={cat} className="space-y-10">
+              <div className="flex items-center gap-4 opacity-70 px-2">
+                 <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
+                    {cat === 'frontend' ? <Globe className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
+                    {cat} Development
+                 </h3>
+                 <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
               </div>
-            ))}
-
-            <div className="space-y-10 pt-10">
-                <div className="flex items-center gap-4 opacity-70 px-2">
-                   <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
-                      <Cpu className="w-4 h-4" />
-                      Tools & Ecosystem
-                   </h3>
-                   <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
-                </div>
-                <SkillsMarquee skills={categorizedSkills.ecosystem} />
+              
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
+                {categorizedSkills[cat].map((skill) => (
+                  <div key={skill.name} className="skill-card-anim">
+                    <SkillCard skill={skill} />
+                  </div>
+                ))}
+              </div>
             </div>
+          ))}
+
+          <div className="space-y-10 pt-10">
+              <div className="flex items-center gap-4 opacity-70 px-2">
+                 <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
+                    <Cpu className="w-4 h-4" />
+                    Tools & Ecosystem
+                 </h3>
+                 <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
+              </div>
+              <SkillsMarquee skills={categorizedSkills.ecosystem} />
           </div>
         </div>
 
-        <style dangerouslySetInnerHTML={{ __html: `
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-marquee {
-            animation: marquee 40s linear infinite;
-          }
-          .animate-marquee:hover {
-            animation-play-state: paused;
-          }
-        `}} />
-
-        {/* ===== BOTTOM BLEND ===== */}
-        <div
-          className="
-              pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-              bg-gradient-to-t
-              from-white/90 to-transparent
-              dark:from-black/80
-            "
-        />
-      </section>
-
-      <div className="bg-light-100 dark:bg-dark-100 transition-colors duration-300 pb-24">
-         <LeetCodeStats />
+        {/* LeetCodeStats moved inside section to fix background gap */}
+        <div className="mt-32 relative z-20">
+          <LeetCodeStats />
+        </div>
       </div>
-    </>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes shine {
+          100% { transform: translateX(100%); }
+        }
+        .animate-marquee {
+          animation: marquee 40s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
+        }
+        .animate-shine {
+          animation: shine 1.5s ease-out;
+        }
+      `}} />
+
+      {/* ===== BOTTOM BLEND ===== */}
+      <div
+        className="
+            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
+            bg-gradient-to-t
+            from-white/90 to-transparent
+            dark:from-black/80
+          "
+      />
+    </section>
   );
 };
 
