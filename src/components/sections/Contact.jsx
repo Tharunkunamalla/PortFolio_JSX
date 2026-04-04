@@ -219,20 +219,22 @@ const Contact = () => {
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative w-full overflow-hidden px-8 py-5 rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black text-lg transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-3 shadow-2xl hover:shadow-blue-500/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10 flex items-center gap-3">
-                   {isSubmitting ? "Sending..." : "Send Message"}
-                   {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-                </span>
-                {isSubmitting && (
-                  <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
-                )}
-              </button>
+              <div className="flex justify-center pt-4">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group relative overflow-hidden px-10 py-4 rounded-2xl bg-white dark:bg-white/10 border border-black/10 dark:border-white/10 text-gray-900 dark:text-white font-bold transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-3 shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span className="relative z-10 flex items-center gap-3">
+                     {isSubmitting ? "Sending..." : "Send Message"}
+                     {!isSubmitting && <Send className="w-5 h-5 group-hover:rotate-12 transition-transform" />}
+                  </span>
+                  {isSubmitting && (
+                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
+                  )}
+                </button>
+              </div>
             </form>
           </div>
 
