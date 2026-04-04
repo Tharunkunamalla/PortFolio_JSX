@@ -148,15 +148,21 @@ const Skills = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Set perspective for 3D animations
+      gsap.set(sectionRef.current, { perspective: 1000 });
+
       gsap.from(headingRef.current, {
+        y: 100,
+        z: -200,
+        rotationX: -20,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: headingRef.current,
           start: "top 90%",
+          toggleActions: "play reverse play reverse",
         },
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
       });
 
       const cards = gsap.utils.toArray(".skill-card-anim");
