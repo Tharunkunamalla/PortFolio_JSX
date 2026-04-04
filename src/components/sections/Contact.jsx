@@ -3,7 +3,7 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin, Send, MessageSquare} from "lucide-react";
+import {Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin, Send} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
@@ -176,8 +176,68 @@ const Contact = () => {
 
         <div className="grid lg:grid-cols-12 gap-16 items-start">
           
-          {/* LEFT: Contact Information */}
-          <div ref={infoRef} className="lg:col-span-5 space-y-12">
+          {/* RIGHT-SIDE on Desktop, TOP-SIDE on Mobile: Message Form */}
+          <div ref={formRef} className="lg:col-span-7 contact-card order-1 lg:order-2">
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2.5rem] p-10 md:p-14 shadow-2xl space-y-8"
+            >
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-3">
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Your Name</label>
+                  <input
+                    type="text" name="name" required value={formData.name} onChange={handleChange}
+                    placeholder="John Doe"
+                    className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Email Address</label>
+                  <input
+                    type="email" name="email" required value={formData.email} onChange={handleChange}
+                    placeholder="john@example.com"
+                    className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Subject</label>
+                <input
+                  type="text" name="subject" required value={formData.subject} onChange={handleChange}
+                  placeholder="How can I help you?"
+                  className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
+                />
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Message</label>
+                <textarea
+                  name="message" rows={5} required value={formData.message} onChange={handleChange}
+                  placeholder="Your message here..."
+                  className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium resize-none autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group relative w-full overflow-hidden px-8 py-5 rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black text-lg transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-3 shadow-2xl hover:shadow-blue-500/20"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="relative z-10 flex items-center gap-3">
+                   {isSubmitting ? "Sending..." : "Send Message"}
+                   {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
+                </span>
+                {isSubmitting && (
+                  <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
+                )}
+              </button>
+            </form>
+          </div>
+
+          {/* LEFT-SIDE on Desktop, BOTTOM-SIDE on Mobile: Contact Information */}
+          <div ref={infoRef} className="lg:col-span-5 space-y-12 order-2 lg:order-1">
             <div className="space-y-8">
               {contactMethods.map((method, idx) => (
                 <div key={idx} className="group flex items-center gap-6 contact-method">
@@ -233,66 +293,6 @@ const Contact = () => {
                   </div>
                </div>
             </div>
-          </div>
-
-          {/* RIGHT: Message Form */}
-          <div ref={formRef} className="lg:col-span-7 contact-card">
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2.5rem] p-10 md:p-14 shadow-2xl space-y-8"
-            >
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Your Name</label>
-                  <input
-                    type="text" name="name" required value={formData.name} onChange={handleChange}
-                    placeholder="John Doe"
-                    className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset]"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Email Address</label>
-                  <input
-                    type="email" name="email" required value={formData.email} onChange={handleChange}
-                    placeholder="john@example.com"
-                    className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Subject</label>
-                <input
-                  type="text" name="subject" required value={formData.subject} onChange={handleChange}
-                  placeholder="How can I help you?"
-                  className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset]"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Message</label>
-                <textarea
-                  name="message" rows={5} required value={formData.message} onChange={handleChange}
-                  placeholder="Your message here..."
-                  className="w-full px-6 py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white font-medium resize-none autofill:shadow-[0_0_0_30px_#12121a_inset]"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group relative w-full overflow-hidden px-8 py-5 rounded-2xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-black text-lg transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-3 shadow-2xl hover:shadow-blue-500/20"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10 flex items-center gap-3">
-                   {isSubmitting ? "Sending..." : "Send Message"}
-                   {!isSubmitting && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
-                </span>
-                {isSubmitting && (
-                  <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
-                )}
-              </button>
-            </form>
           </div>
         </div>
       </div>
