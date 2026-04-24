@@ -185,7 +185,7 @@ const machineLearningProjects = [
     id: 11,
     title: "Anime Recommendation System",
     description:
-      "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input.",
+      "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input using FastApi.",
     image: "/assets/p3.png",
     technologies: [
       "Python",
@@ -289,7 +289,7 @@ const Projects = () => {
 
   useEffect(() => {
     // Apply a 3D perspective to the wrapper for three.js style reveals
-    gsap.set(sectionRef.current, { perspective: 1500 });
+    gsap.set(sectionRef.current, {perspective: 1500});
 
     const ctx = gsap.context(() => {
       projectRefs.current.forEach((project, index) => {
@@ -312,7 +312,7 @@ const Projects = () => {
     }, sectionRef);
     ScrollTrigger.refresh();
     return () => ctx.revert();
-  }, [visibleProjects.length]); 
+  }, [visibleProjects.length]);
 
   const handleLiveClick = (liveLink) => {
     if (!liveLink) {
@@ -329,10 +329,8 @@ const Projects = () => {
       className="relative py-24 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-clip"
     >
       <BackgroundParticles />
-      <div
-        className="pointer-events-none absolute top-0 inset-x-0 h-24 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60"
-      />
-      
+      <div className="pointer-events-none absolute top-0 inset-x-0 h-24 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60" />
+
       <div className="absolute top-50 -left-10 w-[500px] h-[500px] bg-gradient-to-tr from-secondary-300 via-purple-400 to-pink-300 opacity-30 rounded-full blur-3xl animate-pulse-slow pointer-events-none z-0" />
       <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
@@ -346,7 +344,8 @@ const Projects = () => {
         </h2>
 
         <p className="text-center text-sm md:text-base text-gray-600 dark:text-gray-400 mb-16">
-          A selection of my best work. See everything on the dedicated projects page.
+          A selection of my best work. See everything on the dedicated projects
+          page.
         </p>
 
         <div className="flex flex-col gap-[10vh] w-full max-w-5xl mx-auto pb-32">
@@ -400,7 +399,7 @@ const Projects = () => {
                 <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6 font-heading shrink-0 bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent">
                   {project.title}
                 </h3>
-                
+
                 <p className="text-gray-600 dark:text-gray-300 mb-6 md:mb-8 text-sm md:text-base leading-relaxed shrink-0 line-clamp-3 md:line-clamp-5">
                   {project.description}
                 </p>
