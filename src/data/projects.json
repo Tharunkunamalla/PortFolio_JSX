@@ -158,7 +158,7 @@
     {
       "id": 11,
       "title": "Anime Recommendation System",
-      "description": "A content-based anime recommendation system using cosine similarity. Analyzes anime attributes like genre, type, and score to suggest similar shows. Built with Python, Scikit-learn, and Pandas. Deployed via Streamlit with a user-friendly interface to get recommendations based on selected anime. Fetches additional anime details using Jikan API. ",
+      "description": "Anime Discover is a content-based recommendation platform that suggests similar anime titles by analyzing genre and metadata patterns with TF-IDF vectorization and cosine similarity. It is built with Python, Pandas, and Scikit-learn, served through a custom FastAPI backend for fast search and recommendation responses. The interface enriches every result in real time using the Jikan API, displaying posters, ratings, genres, and synopses to deliver a complete discovery experience for users.",
       "image": "/assets/p2.jpg",
       "technologies": [
         "Python",
@@ -167,7 +167,7 @@
         "Jikan API",
         "Streamlit"
       ],
-      "liveLink": "https://anime-recommendations-system.streamlit.app/",
+      "liveLink": "https://anime-recommend-sys.netlify.app/",
       "codeLink": "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git"
     },
     {
