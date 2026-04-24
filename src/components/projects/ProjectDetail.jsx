@@ -70,9 +70,9 @@ const ProjectDetail = () => {
         {/* Back Button */}
         <button
           onClick={goBackToProjects}
-          className="mb-6 text-sm font-medium text-secondary-500 hover:underline"
+          className="m-10 text-m font-medium text-secondary-500  hover:animate-pulse transition"
         >
-          ← Back to Projects
+          &larr; Back to All Projects
         </button>
 
         {/* ===== HERO ===== */}
