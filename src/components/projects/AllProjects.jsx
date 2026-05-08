@@ -8,7 +8,7 @@ import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import {ChevronDown, ChevronUp, ArrowUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
-import { useLenis } from '@studio-freight/react-lenis';
+import {useLenis} from "@studio-freight/react-lenis";
 
 // import GitHubStats from "./GitHubStats";
 
@@ -18,6 +18,24 @@ gsap.registerPlugin(ScrollTrigger);
 const webProjects = [
   {
     id: 0,
+    title: "Wavvy",
+    description:
+      "Wavvy is a real-time watch party platform that lets friends, families, and fandoms watch YouTube videos together in perfect synchronization. Create a room, share the link, and enjoy - no downloads, no plugins, just paste a link and watch.",
+    image: "/assets/wavvy.png",
+    technologies: [
+      "React",
+      "Vite",
+      "Node.js",
+      "Socket.IO",
+      "MongoDB",
+      "TailwindCSS",
+    ],
+    liveLink: "https://wavvy-xi.vercel.app/",
+    codeLink: "https://github.com/Tharunkunamalla/Wavvy.git",
+  },
+
+  {
+    id: 1,
     title: "CodeSync",
     description:
       "A real-time collaborative code editor built with Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative tools",
@@ -34,7 +52,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/CodeSync",
   },
   {
-    id: 1,
+    id: 2,
     title: "FaceRipple",
     description:
       "Video Calling Realtime Chat App & Social App using getStream API for real-time messaging, with MongoDB storing user data and messages.",
@@ -52,7 +70,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/FaceRipple",
   },
   {
-    id: 2,
+    id: 3,
     title: "InstantRoute",
     description:
       "InstantRoute is an interactive map-based route visualization system that finds the shortest path between two locations using graph algorithms. It allows users to select source and destination points directly on the map and visually observe how algorithms explore routes step by step. The system snaps user-selected points to real road nodes to ensure accurate routing. A dynamic speed controller lets users adjust the algorithm execution in real time. The final shortest path is rendered clearly on the map using real-world road data. ",
@@ -73,7 +91,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/instant-route-guide.git",
   },
   {
-    id: 3,
+    id: 4,
     title: "DSA- Play Visualizer",
     description:
       "A web app to visualize various Data Structures and Algorithms with interactive animations.Creative space for drawing, and for taking notes with saved logs Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms.",
@@ -91,7 +109,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Dsa-playground.git",
   },
   {
-    id: 4,
+    id: 5,
     title: "Auricare- A Gift to God's child",
     description:
       "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
@@ -108,7 +126,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Auricare-V2",
   },
   {
-    id: 5,
+    id: 6,
     title: "ResumeGenie Ai",
     description:
       "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
@@ -124,7 +142,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/ResumeGenie-Ai",
   },
   {
-    id: 6,
+    id: 7,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive resort booking app with authentication and room management. Users can book rooms, view amenities, and manage reservations.",
@@ -141,7 +159,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
   {
-    id: 7,
+    id: 8,
     title: "Tournament Management System",
     description:
       "Manage tournaments, teams, and schedules online. Full-stack app. Database designed in SQL. Frontend using HTML/CSS/JS and backend logic in PHP.",
@@ -151,7 +169,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
-    id: 8,
+    id: 9,
     title: "Portfolio Website",
     description:
       "My personal portfolio showcasing skills and projects. Built with modern web technologies and responsive design.",
@@ -161,7 +179,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 9,
+    id: 10,
     title: "Gemini-AI",
     description:
       "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks.",
@@ -171,7 +189,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 10,
+    id: 11,
     title: "Jarvis -Voice Assistant",
     description:
       "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
@@ -184,7 +202,7 @@ const webProjects = [
 
 const machineLearningProjects = [
   {
-    id: 11,
+    id: 12,
     title: "Anime Recommendation System",
     description:
       "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input.",
@@ -201,7 +219,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git",
   },
   {
-    id: 12,
+    id: 13,
     title: "Brain Tumor MRI Classification",
     description:
       "CNN and Transfer Learning to classify MRI brain images. Deployed via Streamlit with UI to upload and predict on MRI scans and visualize results.",
@@ -212,7 +230,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 13,
+    id: 14,
     title: "PhonePe Transactions Insights",
     description:
       "Data analysis of PhonePe transactions using Python and visualization libraries. Extracts trends in transaction volume, types, and geography.",
@@ -223,7 +241,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
   {
-    id: 14,
+    id: 15,
     title: "Shopper spectrum - Customer Segmentation",
     description:
       "Customer segmentation using K-means clustering to analyze shopping behavior.",
@@ -241,7 +259,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
   },
   {
-    id: 15,
+    id: 16,
     title: "Multi class fish classification",
     description:
       "CNN model to classify different species of fish. Includes data preprocessing, augmentation, and visualization of results.",
@@ -270,9 +288,9 @@ const AllProjects = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (lenis) {
-      lenis.scrollTo(0, { immediate: true });
+      lenis.scrollTo(0, {immediate: true});
     }
-    
+
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowScrollTop(true);
@@ -287,11 +305,14 @@ const AllProjects = () => {
 
   const scrollToTop = () => {
     if (lenis) {
-      lenis.scrollTo(0, { duration: 1.5, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+      lenis.scrollTo(0, {
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
     } else {
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   };
@@ -324,7 +345,7 @@ const AllProjects = () => {
 
         // Alternate pop direction and rotation for a dynamic feel
         const isOdd = index % 2 !== 0;
-        
+
         gsap.fromTo(
           ref,
           {
@@ -348,7 +369,7 @@ const AllProjects = () => {
               end: "top 40%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
     }, containerRef);
@@ -362,16 +383,19 @@ const AllProjects = () => {
     <div className="relative pt-32 pb-24 min-h-screen bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10]">
       <BackgroundParticles />
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
-        
         <div className="mb-12">
-          <RouterLink to="/" className="inline-flex items-center gap-2 text-secondary-500 hover:text-secondary-400 mb-6 font-medium transition-colors">
+          <RouterLink
+            to="/"
+            className="inline-flex items-center gap-2 text-secondary-500 hover:text-secondary-400 mb-6 font-medium transition-colors"
+          >
             <span>&larr; Back to Home</span>
           </RouterLink>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white">
             All <span className="text-secondary-500">Projects</span>
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Showing {currentProjects.length} of {allProjects.length} total projects
+            Showing {currentProjects.length} of {allProjects.length} total
+            projects
           </p>
         </div>
 
@@ -395,7 +419,10 @@ const AllProjects = () => {
           ))}
         </div>
 
-        <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          ref={containerRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {currentProjects.map((project, index) => (
             <div
               key={project.id}
@@ -517,9 +544,7 @@ const AllProjects = () => {
               More Projects on GitHub
             </span>
 
-            <Github
-              className="h-5 w-5 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110"
-            />
+            <Github className="h-5 w-5 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
           </a>
         </div>
       </div>
@@ -548,8 +573,13 @@ const AllProjects = () => {
 
       <style jsx="true">{`
         @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-4px);
+          }
         }
         .animate-bounce-subtle {
           animation: bounce-subtle 2s infinite ease-in-out;

@@ -2,6 +2,22 @@
   "webProjects": [
     {
       "id": 0,
+      "title": "Wavvy",
+      "description": "Wavvy is a real-time watch party platform that lets friends, families, and fandoms watch YouTube videos together in perfect synchronization. Create a room, share the link, and enjoy - no downloads, no plugins, just paste a link and watch.",
+      "image": "/assets/wavvy.png",
+      "technologies": [
+        "React",
+        "Vite",
+        "Node.js",
+        "Socket.IO",
+        "MongoDB",
+        "TailwindCSS"
+      ],
+      "liveLink": "https://wavvy-xi.vercel.app/",
+      "codeLink": "https://github.com/Tharunkunamalla/Wavvy.git"
+    },
+    {
+      "id": 1,
       "title": "CodeSync",
       "description": "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Features include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative debugging tools. The platform supports creating multiple editing sessions with customizable permissions for read-only or full-access modes. Code changes are instantly synchronized across all connected clients with conflict resolution. Users can save their sessions and export code in various formats. The application includes a comprehensive documentation library and example projects to help new users get started quickly.",
       "image": "/assets/codesync.png",
@@ -17,7 +33,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/CodeSync"
     },
     {
-      "id": 1,
+      "id": 2,
       "title": "FaceRipple",
       "description": "Video Calling Realtime Chat App & Social App. Combines WebRTC with React for seamless peer-to-peer video chat. Integrates getStream API for real-time messaging, with MongoDB storing user data and messages. Tailwind CSS ensures responsive design. User authentication and room management are handled via Express and Node.js backend.",
       "image": "/assets/FaceRipple1.png",
@@ -34,7 +50,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/FaceRipple"
     },
     {
-      "id": 2,
+      "id": 3,
       "title": "InstantRoute",
       "description": "InstantRoute is an interactive map-based route visualization system that finds the shortest path between two locations using graph algorithms. It allows users to select source and destination points directly on the map and visually observe how algorithms explore routes step by step. The system snaps user-selected points to real road nodes to ensure accurate routing. A dynamic speed controller lets users adjust the algorithm execution in real time. The final shortest path is rendered clearly on the map using real-world road data. ",
       "image": "/assets/instant-route.png",
@@ -54,7 +70,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/instant-route-guide.git"
     },
     {
-      "id": 3,
+      "id": 4,
       "title": "DSA- Play Visualizer",
       "description": "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms, And Creative space for drawing, and for taking notes with saved logs and JWT authentication. ",
       "image": "/assets/dsaplay1.png",
@@ -71,7 +87,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Dsa-playground.git"
     },
     {
-      "id": 4,
+      "id": 5,
       "title": "Auricare- A Gift to God's child",
       "description": "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
       "image": "/assets/auricare.png",
@@ -87,7 +103,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Auricare-V2"
     },
     {
-      "id": 5,
+      "id": 6,
       "title": "ResumeGenie Ai",
       "description": "An AI-powered Resume Analyzer and Generator. Utilizes OpenAI's GPT-3.5 Turbo to analyze resumes and generate feedback. Users can upload resumes and get ATS score and suggestions for improvements. Built with React and TypeScript, with Tailwind CSS for a modern UI. It helps job seekers optimize resumes for ATS systems.",
       "image": "/assets/ResumeGenie1.png",
@@ -102,7 +118,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/ResumeGenie-Ai"
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Sapphire Skies Resort",
       "description": "A fully functional resort booking system. It includes user registration, room selection, and booking history. Admin dashboard to manage rooms and bookings. Uses Clerk for user authentication. Frontend in React with Tailwind CSS and backend via Node.js, Express, and MongoDB.",
       "image": "/assets/sapphire.png",
@@ -118,7 +134,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Sapphire-skies-resort"
     },
     {
-      "id": 7,
+      "id": 8,
       "title": "Tournament Management System",
       "description": "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.#ClgProject",
       "image": "/assets/TMS_proj.png",
@@ -127,7 +143,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/TMS"
     },
     {
-      "id": 8,
+      "id": 9,
       "title": "Portfolio Website",
       "description": "Responsive personal portfolio with project showcase, contact form, and social media integration. Built using vanilla HTML/CSS/JS. Clean UI, animated sections, mobile-friendly layout. Hosted on Netlify.",
       "image": "/assets/portfolio.png",
@@ -136,7 +152,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Portfolio-js"
     },
     {
-      "id": 9,
+      "id": 10,
       "title": "Gemini-AI",
       "description": "An AI chatbot interface styled like Google's Gemini. Uses OpenAI's GPT-3.5 for conversational abilities. Minimalistic UI built with vanilla JS/CSS. Aimed at providing clean UI inspiration for AI dashboard tools.",
       "image": "/assets/gemini.jpg",
@@ -145,7 +161,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Gemini_App"
     },
     {
-      "id": 10,
+      "id": 11,
       "title": "Jarvis -Voice Assistant",
       "description": "Voice-controlled assistant using browser's speech recognition. Responds to commands like Google search, opening apps, telling time. Built with JS and Web Speech API. Clean UI and smooth audio feedback.",
       "image": "/assets/jarvis.gif",
@@ -156,7 +172,7 @@
   ],
   "machineLearningProjects": [
     {
-      "id": 11,
+      "id": 12,
       "title": "Anime Recommendation System",
       "description": "Anime Discover is a content-based recommendation platform that suggests similar anime titles by analyzing genre and metadata patterns with TF-IDF vectorization and cosine similarity. It is built with Python, Pandas, and Scikit-learn, served through a custom FastAPI backend for fast search and recommendation responses. The interface enriches every result in real time using the Jikan API, displaying posters, ratings, genres, and synopses to deliver a complete discovery experience for users.",
       "image": "/assets/p2.jpg",
@@ -171,7 +187,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git"
     },
     {
-      "id": 12,
+      "id": 13,
       "title": "Brain Tumor MRI Classification",
       "description": "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans. Includes data preprocessing, augmentation, and visualization of results.",
       "image": "/assets/brain_tumor.png",
@@ -180,7 +196,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls"
     },
     {
-      "id": 13,
+      "id": 14,
       "title": "PhonePe Transactions Insights",
       "description": "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction. Deployed via Streamlit for interactive exploration.",
       "image": "/assets/phonepe.png",
@@ -189,7 +205,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights"
     },
     {
-      "id": 14,
+      "id": 15,
       "title": "Shopper spectrum - Customer Segmentation",
       "description": "Clustering shoppers using K-means based on demographics and spending patterns. Visualized with Seaborn and deployed via Streamlit for real-time interaction and insights. Targeted towards marketing teams for behavior analysis.",
       "image": "/assets/shopper1.png",
@@ -205,7 +221,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation"
     },
     {
-      "id": 15,
+      "id": 16,
       "title": "Multi class fish classification",
       "description": "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics. Visualizes results with Matplotlib.",
       "image": "/assets/fish1.png",
