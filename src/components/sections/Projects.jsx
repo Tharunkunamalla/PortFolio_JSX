@@ -16,6 +16,23 @@ gsap.registerPlugin(ScrollTrigger);
 const webProjects = [
   {
     id: 0,
+    title: "Wavvy",
+    description:
+      "Wavvy is a real-time watch party platform that lets friends, families, and fandoms watch YouTube videos together in perfect synchronization. Create a room, share the link, and enjoy - no downloads, no plugins, just paste a link and watch.",
+    image: "/assets/wavvy.png",
+    technologies: [
+      "React",
+      "Vite",
+      "Node.js",
+      "Socket.IO",
+      "MongoDB",
+      "TailwindCSS",
+    ],
+    liveLink: "https://wavvy-xi.vercel.app/",
+    codeLink: "https://github.com/Tharunkunamalla/Wavvy.git",
+  },
+  {
+    id: 1,
     title: "CodeSync",
     description:
       "A real-time collaborative code editor built with Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative tools",
@@ -30,24 +47,6 @@ const webProjects = [
     ],
     liveLink: "https://codesync-cs.vercel.app",
     codeLink: "https://github.com/Tharunkunamalla/CodeSync",
-  },
-  {
-    id: 1,
-    title: "FaceRipple",
-    description:
-      "Video Calling Realtime Chat App & Social App using getStream API for real-time messaging, with MongoDB storing user data and messages.",
-    image: "/assets/FaceRipple1.png",
-    technologies: [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Postman-Api",
-      "Tailwind CSS",
-      "getStream",
-    ],
-    liveLink: "https://faceripple.onrender.com/",
-    codeLink: "https://github.com/Tharunkunamalla/FaceRipple",
   },
   {
     id: 2,
@@ -72,21 +71,21 @@ const webProjects = [
   },
   {
     id: 3,
-    title: "DSA- Play Visualizer",
+    title: "FaceRipple",
     description:
-      "A web app to visualize various Data Structures and Algorithms with interactive animations.Creative space for drawing, and for taking notes with saved logs Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms.",
-    image: "/assets/dsaplay1.png",
+      "Video Calling Realtime Chat App & Social App using getStream API for real-time messaging, with MongoDB storing user data and messages.",
+    image: "/assets/FaceRipple1.png",
     technologies: [
       "React",
-      "Tailwind CSS",
-      "GSAP",
-      "Express",
       "Node.js",
+      "Express",
       "MongoDB",
-      "JWT",
+      "Postman-Api",
+      "Tailwind CSS",
+      "getStream",
     ],
-    liveLink: "https://dsa-playground-iiitk.vercel.app/",
-    codeLink: "https://github.com/Tharunkunamalla/Dsa-playground.git",
+    liveLink: "https://faceripple.onrender.com/",
+    codeLink: "https://github.com/Tharunkunamalla/FaceRipple",
   },
   {
     id: 4,
