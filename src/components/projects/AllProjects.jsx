@@ -8,6 +8,7 @@ import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import {ChevronDown, ChevronUp, ArrowUp} from "lucide-react"; // 👈 import icons
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import {useLenis} from "@studio-freight/react-lenis";
 
 // import GitHubStats from "./GitHubStats";
@@ -432,7 +433,7 @@ const AllProjects = () => {
               onMouseLeave={() => setHoveredProject(null)}
             >
               <div className="relative h-56 overflow-hidden group flex-shrink-0 bg-black/5 dark:bg-white/5">
-                <img
+                <ImageWithSkeleton
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"

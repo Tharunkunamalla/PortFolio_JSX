@@ -7,6 +7,7 @@ import {Link as RouterLink} from "react-router-dom"; // 👈 add this
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 
 // import GitHubStats from "./GitHubStats";
 
@@ -361,7 +362,7 @@ const Projects = () => {
               onMouseLeave={() => setHoveredProject(null)}
             >
               <div className="relative w-full md:w-[55%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 border-white/10 dark:border-white/5">
-                <img
+                <ImageWithSkeleton
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/image:scale-110"

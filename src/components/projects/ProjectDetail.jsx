@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import projectsData from "../../data/projects.json";
 import {FaGithub, FaExternalLinkAlt} from "react-icons/fa";
+import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 
 const ProjectDetail = () => {
   const loaderRef = useRef(null);
@@ -77,7 +78,7 @@ const ProjectDetail = () => {
 
         {/* ===== HERO ===== */}
         <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-12 group">
-          <img
+          <ImageWithSkeleton
             src={project.image}
             alt={project.title}
             className="
@@ -190,7 +191,7 @@ const ProjectDetail = () => {
                   "
                 >
                   <div className="relative overflow-hidden">
-                    <img
+                    <ImageWithSkeleton
                       src={proj.image}
                       alt={proj.title}
                       className="
