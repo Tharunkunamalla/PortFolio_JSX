@@ -4,7 +4,7 @@
       "id": 0,
       "title": "Wavvy",
       "description": "Wavvy is a real-time watch party platform that lets friends, families, and fandoms watch YouTube videos together in perfect synchronization. Create a room, share the link, and enjoy - no downloads, no plugins, just paste a link and watch.",
-      "image": "/assets/wavvy.png",
+      "image": "/assets/w1.png",
       "technologies": [
         "React",
         "Vite",
