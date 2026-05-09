@@ -25,7 +25,9 @@
   border-radius: 25px;
   padding: 2px; /* border thickness */
   background: linear-gradient(180deg, #6366f1, #a855f7, #ec4899);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: 0;
@@ -139,12 +141,16 @@
 .animate-fade-in {
   animation: fade-in 0.7s ease-out;
 }
-.scrollbar-hide, body, html {
+.scrollbar-hide,
+body,
+html {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
 }
 
-.scrollbar-hide::-webkit-scrollbar, body::-webkit-scrollbar, html::-webkit-scrollbar {
+.scrollbar-hide::-webkit-scrollbar,
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
@@ -272,4 +278,3 @@
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: rgba(217, 70, 239, 0.5);
 }
-

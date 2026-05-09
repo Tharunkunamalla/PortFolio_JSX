@@ -353,7 +353,7 @@ const Projects = () => {
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
-              className="sticky w-full bg-white/10 dark:bg-[#1a1a24]/70 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col md:flex-row h-[500px] md:h-[450px]"
+              className="sticky w-full bg-white/10 dark:bg-[#1a1a24]/70 backdrop-blur-2xl border border-white/20 dark:border-white/10 rounded-3xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col md:flex-row h-auto md:h-[450px]"
               style={{
                 top: `calc(10vh + ${index * 45}px)`, // Adjusted for clean step visibility
                 zIndex: index,
@@ -361,7 +361,7 @@ const Projects = () => {
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative w-full md:w-[55%] h-[40%] md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 border-white/10 dark:border-white/5">
+              <div className="relative w-full md:w-[55%] h-56 sm:h-64 md:h-full overflow-hidden group/image flex-shrink-0 bg-black/5 dark:bg-white/5 border-white/10 dark:border-white/5">
                 <ImageWithSkeleton
                   src={project.image}
                   alt={project.title}
@@ -369,7 +369,7 @@ const Projects = () => {
                 />
 
                 <div
-                  className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-6 transition-opacity duration-300 ${
+                  className={`hidden md:flex absolute inset-0 bg-black/70 items-center justify-center gap-6 transition-opacity duration-300 ${
                     hoveredProject === project.id ? "opacity-100" : "opacity-0"
                   }`}
                 >
