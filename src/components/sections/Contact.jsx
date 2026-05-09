@@ -3,7 +3,16 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {Github, Linkedin, Twitter, Instagram, Mail, Phone, MapPin, Send} from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
@@ -35,11 +44,31 @@ const contactMethods = [
 ];
 
 const socialLinks = [
-  { icon: <Github />, href: "https://github.com/Tharunkunamalla", color: "hover:text-white hover:bg-gray-800" },
-  { icon: <Linkedin />, href: "https://www.linkedin.com/in/tharun-kunamalla-/", color: "hover:text-white hover:bg-blue-600" },
-  { icon: <Twitter />, href: "https://x.com/Tharunk0509", color: "hover:text-white hover:bg-black" },
-  { icon: <Instagram />, href: "https://www.instagram.com/__tharun_0509.__/", color: "hover:text-white hover:bg-pink-600" },
-  { icon: <FaDiscord className="w-6 h-6" />, href: "https://discord.com/users/751713701425446945", color: "hover:text-white hover:bg-[#5865F2]" },
+  {
+    icon: <Github />,
+    href: "https://github.com/Tharunkunamalla",
+    color: "hover:text-white hover:bg-gray-800",
+  },
+  {
+    icon: <Linkedin />,
+    href: "https://www.linkedin.com/in/tharun-kunamalla-/",
+    color: "hover:text-white hover:bg-blue-600",
+  },
+  {
+    icon: <Twitter />,
+    href: "https://x.com/Tharunk0509",
+    color: "hover:text-white hover:bg-black",
+  },
+  {
+    icon: <Instagram />,
+    href: "https://www.instagram.com/__tharun_0509.__/",
+    color: "hover:text-white hover:bg-pink-600",
+  },
+  {
+    icon: <FaDiscord className="w-6 h-6" />,
+    href: "https://discord.com/users/751713701425446945",
+    color: "hover:text-white hover:bg-[#5865F2]",
+  },
 ];
 
 const Contact = () => {
@@ -70,7 +99,7 @@ const Contact = () => {
         scrollTrigger: {
           trigger: headingRef.current,
           start: "top 90%",
-        }
+        },
       });
 
       // Form & Info Entrance
@@ -83,7 +112,7 @@ const Contact = () => {
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 85%",
-        }
+        },
       });
 
       // Individual Item Reveal
@@ -96,9 +125,8 @@ const Contact = () => {
         scrollTrigger: {
           trigger: infoRef.current,
           start: "top 85%",
-        }
+        },
       });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -106,7 +134,7 @@ const Contact = () => {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({...prev, [name]: value}));
   };
 
   const handleSubmit = async (e) => {
@@ -115,13 +143,16 @@ const Contact = () => {
 
     const data = {
       access_key: "5e5c5d50-8ed2-4b2d-b93d-3ba067f0af11",
-      ...formData
+      ...formData,
     };
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify(data),
       });
 
@@ -135,7 +166,7 @@ const Contact = () => {
           origin: {y: 0.8},
           colors: ["#6366f1", "#a855f7", "#ec4899"],
         });
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({name: "", email: "", subject: "", message: ""});
       } else {
         toast.error("Failed to send message.");
       }
@@ -153,14 +184,13 @@ const Contact = () => {
       className="relative py-20 sm:py-24 lg:py-32 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
     >
       <BackgroundParticles />
-      
+
       {/* Decorative Gradient Overlays */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/90 dark:from-black/80 to-transparent z-10" />
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-20">
-        
         {/* Header Section */}
         <div className="text-center mb-14 sm:mb-18 lg:mb-24">
           <h2
@@ -170,31 +200,46 @@ const Contact = () => {
             Get In <span className="text-secondary-500">Touch</span>
           </h2>
           <p className="contact-subtitle mt-5 sm:mt-6 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg px-2 sm:px-0">
-            Have a project in mind or just want to chat? I'm always open to new opportunities and collaborations.
+            Have a project in mind or just want to chat? I'm always open to new
+            opportunities and collaborations.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          
           {/* RIGHT-SIDE on Desktop, TOP-SIDE on Mobile: Message Form */}
-          <div ref={formRef} className="lg:col-span-7 contact-card order-1 lg:order-2">
+          <div
+            ref={formRef}
+            className="lg:col-span-7 contact-card order-1 lg:order-2"
+          >
             <form
               onSubmit={handleSubmit}
               className="bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-14 shadow-2xl space-y-6 sm:space-y-8"
             >
               <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                 <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Your Name</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
+                    Your Name
+                  </label>
                   <input
-                    type="text" name="name" required value={formData.name} onChange={handleChange}
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="John Doe"
                     className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
                   />
                 </div>
                 <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Email Address</label>
+                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
+                    Email Address
+                  </label>
                   <input
-                    type="email" name="email" required value={formData.email} onChange={handleChange}
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="john@example.com"
                     className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
                   />
@@ -202,18 +247,30 @@ const Contact = () => {
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Subject</label>
+                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
+                  Subject
+                </label>
                 <input
-                  type="text" name="subject" required value={formData.subject} onChange={handleChange}
+                  type="text"
+                  name="subject"
+                  required
+                  value={formData.subject}
+                  onChange={handleChange}
                   placeholder="How can I help you?"
                   className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
                 />
               </div>
 
               <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">Message</label>
+                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
+                  Message
+                </label>
                 <textarea
-                  name="message" rows={5} required value={formData.message} onChange={handleChange}
+                  name="message"
+                  rows={5}
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your message here..."
                   className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium resize-none autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
                 ></textarea>
@@ -227,8 +284,10 @@ const Contact = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <span className="relative z-10 flex items-center gap-3">
-                     {isSubmitting ? "Sending..." : "Send Message"}
-                     {!isSubmitting && <Send className="w-5 h-5 group-hover:rotate-12 transition-transform" />}
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {!isSubmitting && (
+                      <Send className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                    )}
                   </span>
                   {isSubmitting && (
                     <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
@@ -239,16 +298,28 @@ const Contact = () => {
           </div>
 
           {/* LEFT-SIDE on Desktop, BOTTOM-SIDE on Mobile: Contact Information */}
-          <div ref={infoRef} className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none space-y-10 sm:space-y-12 order-2 lg:order-1">
+          <div
+            ref={infoRef}
+            className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none space-y-10 sm:space-y-12 order-2 lg:order-1"
+          >
             <div className="space-y-6 sm:space-y-8">
               {contactMethods.map((method, idx) => (
-                <div key={idx} className="group flex flex-row items-center gap-4 sm:gap-6 contact-method">
+                <div
+                  key={idx}
+                  className="group flex flex-row items-center gap-4 sm:gap-6 contact-method"
+                >
                   <div className="relative">
-                    <div className={`absolute inset-0 bg-gradient-to-br ${method.color} blur-lg opacity-20 scale-150 group-hover:opacity-40 transition-opacity`} />
-                    <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 group-hover:-translate-y-2`}>
-                       <span className={`text-2xl ${method.color.split(' ')[0].replace('from-', 'text-')}`}>
-                          {method.icon}
-                       </span>
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${method.color} blur-lg opacity-20 scale-150 group-hover:opacity-40 transition-opacity`}
+                    />
+                    <div
+                      className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 group-hover:-translate-y-2`}
+                    >
+                      <span
+                        className={`text-2xl ${method.color.split(" ")[0].replace("from-", "text-")}`}
+                      >
+                        {method.icon}
+                      </span>
                     </div>
                   </div>
                   <div className="min-w-0 flex-1">
@@ -256,11 +327,16 @@ const Contact = () => {
                       {method.label}
                     </span>
                     {method.href ? (
-                      <a href={method.href} className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors break-all sm:break-normal">
+                      <a
+                        href={method.href}
+                        className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors break-all sm:break-normal"
+                      >
                         {method.value}
                       </a>
                     ) : (
-                      <span className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white break-words">{method.value}</span>
+                      <span className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white break-words">
+                        {method.value}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -268,42 +344,41 @@ const Contact = () => {
             </div>
 
             <div className="contact-card p-6 sm:p-10 bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-               <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl" />
-               <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-6 sm:mb-8">Let's Connect</h3>
-               <div className="flex flex-wrap gap-3 sm:gap-4">
-                  {socialLinks.map((link, idx) => (
-                    <a
-                      key={idx}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-600 dark:text-gray-400 transition-all duration-300 ${link.color} hover:scale-110 hover:shadow-lg`}
-                    >
-                      {link.icon}
-                    </a>
-                  ))}
-               </div>
-               <div className="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-black/5 dark:border-white/10">
-                  <div className="flex items-center gap-3 sm:gap-4">
-                     <div className="relative w-3 h-3">
-                        <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75" />
-                        <div className="relative w-3 h-3 bg-green-500 rounded-full shadow-[0_0_10px_#10b981]" />
-                     </div>
-                     <span className="text-xs sm:text-sm font-black text-gray-800 dark:text-green-400 tracking-wide uppercase">
-                        Available for Projects
-                     </span>
+              <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl" />
+              <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-6 sm:mb-8">
+                Let's Connect
+              </h3>
+              <div className="flex flex-wrap gap-3 sm:gap-4">
+                {socialLinks.map((link, idx) => (
+                  <a
+                    key={idx}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-600 dark:text-gray-400 transition-all duration-300 ${link.color} hover:scale-110 hover:shadow-lg`}
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+              <div className="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-black/5 dark:border-white/10">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="relative w-3 h-3">
+                    <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75" />
+                    <div className="relative w-3 h-3 bg-green-500 rounded-full shadow-[0_0_10px_#10b981]" />
                   </div>
-               </div>
+                  <span className="text-xs sm:text-sm font-black text-gray-800 dark:text-green-400 tracking-wide uppercase">
+                    Available for Projects
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <ToastContainer
-        position="bottom-center"
-        theme="dark"
-      />
-      
+      <ToastContainer position="bottom-center" theme="dark" />
+
       {/* Footer Blend */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/90 dark:from-black/80 to-transparent z-10" />
     </section>
