@@ -8,28 +8,41 @@ export default function ImageWithSkeleton({
   ...props
 }) {
   const [loaded, setLoaded] = useState(false);
+  const [imgSrc, setImgSrc] = useState(src);
+  const [triedFallback, setTriedFallback] = useState(false);
 
   useEffect(() => {
     setLoaded(false);
+    setImgSrc(src);
+    setTriedFallback(false);
   }, [src]);
+
+  const handleError = () => {
+    if (!triedFallback) {
+      // fallback to a lightweight placeholder shipped in public assets
+      setImgSrc("/assets/img.png");
+      setTriedFallback(true);
+    } else {
+      // final fallback: mark loaded so layout shows a neutral background
+      setLoaded(true);
+    }
+  };
 
   return (
     <div className={`relative overflow-hidden ${className}`} style={style}>
-      <div
-        aria-hidden
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${loaded ? "opacity-0 pointer-events-none" : "opacity-100"}`}
-      >
-        <div className="w-full h-full bg-gray-300 dark:bg-gray-800 animate-pulse" />
-      </div>
-
       <img
-        src={src}
+        src={imgSrc}
         alt={alt}
         onLoad={() => setLoaded(true)}
+        onError={handleError}
         {...props}
-        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+        className={`w-full h-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-90"}`}
         loading="lazy"
       />
+      {!loaded && (
+        // keep a tiny low-cost overlay while image decodes, but not the original skeleton
+        <div className="absolute inset-0 bg-black/10 dark:bg-black/20" aria-hidden />
+      )}
     </div>
   );
 }
