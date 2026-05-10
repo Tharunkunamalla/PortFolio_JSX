@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 
 export default function ImageWithSkeleton({
   src,
@@ -10,10 +10,19 @@ export default function ImageWithSkeleton({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
+  const imageRef = useRef(null);
 
   useEffect(() => {
     setLoaded(false);
     setFailed(false);
+  }, [src]);
+
+  useEffect(() => {
+    const image = imageRef.current;
+
+    if (image && image.complete && image.naturalWidth > 0) {
+      setLoaded(true);
+    }
   }, [src]);
 
   return (
@@ -34,6 +43,7 @@ export default function ImageWithSkeleton({
       )}
 
       <img
+        ref={imageRef}
         src={src}
         alt={alt}
         onLoad={() => setLoaded(true)}
