@@ -81,6 +81,7 @@ const ProjectDetail = () => {
           <ImageWithSkeleton
             src={project.image}
             alt={project.title}
+            loading="eager"
             className="
               w-full h-[320px] sm:h-[400px] md:h-[450px]
               object-cover transition-transform duration-700
@@ -194,6 +195,7 @@ const ProjectDetail = () => {
                     <ImageWithSkeleton
                       src={proj.image}
                       alt={proj.title}
+                      loading="eager"
                       className="
                         w-full h-40 object-cover
                         transition-transform duration-500

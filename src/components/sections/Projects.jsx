@@ -365,6 +365,7 @@ const Projects = () => {
                 <ImageWithSkeleton
                   src={project.image}
                   alt={project.title}
+                  loading="eager"
                   className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover/image:scale-110"
                 />
 
