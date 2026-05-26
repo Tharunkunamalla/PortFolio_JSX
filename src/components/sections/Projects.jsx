@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { Code, Monitor, ArrowRight } from "lucide-react";
+import React, {useState, useEffect, useRef} from "react";
+import {Link as RouterLink} from "react-router-dom";
+import {Code, Monitor, ArrowRight} from "lucide-react";
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 // Swiper imports
-import { Swiper, SwiperSlide } from "swiper/react";
+import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import { EffectCoverflow, Pagination, Keyboard } from "swiper/modules";
+import {EffectCoverflow, Pagination, Keyboard} from "swiper/modules";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -283,7 +283,7 @@ const Projects = () => {
           // Smooth mapping from scroll progress to active index
           const index = Math.min(
             totalSlides - 1,
-            Math.floor(self.progress * totalSlides)
+            Math.floor(self.progress * totalSlides),
           );
           if (swiperRef.current.activeIndex !== index) {
             swiperRef.current.slideTo(index);
@@ -307,8 +307,11 @@ const Projects = () => {
 
   return (
     // Outer container provides scroll height (500vh means scrolling 5 screen heights smoothly)
-    <div ref={containerRef} className="relative w-full" style={{ height: `${visibleProjects.length * 100}vh` }}>
-      
+    <div
+      ref={containerRef}
+      className="relative w-full"
+      style={{height: `${visibleProjects.length * 100}vh`}}
+    >
       {/* Inner section stays sticky on the screen perfectly using 100dvh for mobile stability */}
       <section
         id="projects"
@@ -322,7 +325,6 @@ const Projects = () => {
         <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
 
         <div className="relative z-10 w-full h-full flex flex-col justify-between pt-16 md:pt-24 lg:pt-20 pb-4 lg:pb-6">
-          
           {/* Header Section */}
           <div className="shrink-0 mb-2 lg:mb-4">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-1 md:mb-2 text-gray-800 dark:text-white px-4">
@@ -335,17 +337,27 @@ const Projects = () => {
 
           {/* Desktop Layout Wrapper */}
           <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center relative px-4 md:px-12 max-w-[1600px] mx-auto min-h-[300px] lg:min-h-[400px]">
-            
             {/* Left Text Content (Desktop only) */}
             <div className="hidden lg:flex flex-col w-1/4 pr-8 z-20 justify-center transition-all duration-500">
-              <h3 key={`title-${activeProject.id}`} className="text-4xl xl:text-5xl font-bold text-gray-800 dark:text-white font-heading tracking-tight mb-4 animate-fade-in-up">
+              <h3
+                key={`title-${activeProject.id}`}
+                className="text-4xl xl:text-5xl font-bold text-gray-800 dark:text-white font-heading tracking-tight mb-4 animate-fade-in-up"
+              >
                 {activeProject.title}
               </h3>
-              <p key={`desc-${activeProject.id}`} className="text-gray-600 dark:text-gray-400 font-light text-sm xl:text-base leading-relaxed line-clamp-4 mb-8 animate-fade-in-up" style={{animationDelay: '100ms'}}>
+              <p
+                key={`desc-${activeProject.id}`}
+                className="text-gray-600 dark:text-gray-400 font-light text-sm xl:text-base leading-relaxed line-clamp-4 mb-8 animate-fade-in-up"
+                style={{animationDelay: "100ms"}}
+              >
                 {activeProject.description}
               </p>
-              
-              <div key={`links-${activeProject.id}`} className="flex flex-col gap-4 animate-fade-in-up" style={{animationDelay: '200ms'}}>
+
+              <div
+                key={`links-${activeProject.id}`}
+                className="flex flex-col gap-4 animate-fade-in-up"
+                style={{animationDelay: "200ms"}}
+              >
                 <button
                   onClick={() => handleLiveClick(activeProject.liveLink)}
                   className="group relative flex items-center justify-center gap-3 px-6 py-3.5 w-full rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 transition-all duration-300 font-medium backdrop-blur-md shadow-lg shadow-black/20"
@@ -381,8 +393,8 @@ const Projects = () => {
                   modifier: 1,
                   slideShadows: false, // Turned off to remove harsh rectangle gradients
                 }}
-                keyboard={{ enabled: true }}
-                pagination={{ clickable: true, dynamicBullets: true }}
+                keyboard={{enabled: true}}
+                pagination={{clickable: true, dynamicBullets: true}}
                 modules={[EffectCoverflow, Pagination, Keyboard]}
                 onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
                 className="w-full h-full pointer-events-none sm:pointer-events-auto"
@@ -401,7 +413,9 @@ const Projects = () => {
                     >
                       <div
                         className={`relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 border border-white/10 ${
-                          isActive ? "ring-2 ring-secondary-500/50 shadow-secondary-500/20" : ""
+                          isActive
+                            ? "ring-2 ring-secondary-500/50 shadow-secondary-500/20"
+                            : ""
                         }`}
                       >
                         <ImageWithSkeleton
@@ -422,18 +436,23 @@ const Projects = () => {
               <h4 className="text-xs font-bold text-gray-400 tracking-[0.2em] uppercase mb-6">
                 Technologies Used
               </h4>
-              <div key={`tech-${activeProject.id}`} className="flex flex-col gap-3 animate-fade-in-up">
+              <div
+                key={`tech-${activeProject.id}`}
+                className="flex flex-col gap-3 animate-fade-in-up"
+              >
                 {activeProject.technologies.slice(0, 5).map((tech, idx) => (
                   <div
                     key={idx}
                     className="group px-6 py-3.5 w-full text-sm font-medium text-gray-400 bg-black/40 border border-transparent hover:border-secondary-500/50 rounded-2xl transition-all duration-300 flex items-center shadow-lg shadow-black/10"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-secondary-400 mr-3 transition-colors duration-300" />
-                    <span className="transition-colors duration-300 group-hover:text-white">{tech}</span>
+                    <span className="transition-colors duration-300 group-hover:text-white">
+                      {tech}
+                    </span>
                   </div>
                 ))}
               </div>
-              
+
               <RouterLink
                 to={`/project/${activeProject.id}`}
                 className="mt-8 flex items-center gap-2 text-secondary-500 font-medium hover:text-secondary-400 transition-colors group w-max"
@@ -442,7 +461,6 @@ const Projects = () => {
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" />
               </RouterLink>
             </div>
-
           </div>
 
           {/* Mobile Info Overlay (Visible only on screens < lg) */}
@@ -455,7 +473,10 @@ const Projects = () => {
             </p>
             <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-1">
               {activeProject.technologies.slice(0, 3).map((tech, idx) => (
-                <span key={idx} className="px-2.5 py-1 text-[10px] sm:text-[11px] font-medium bg-black/40 border border-white/5 rounded-full text-gray-300">
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 text-[10px] sm:text-[11px] font-medium bg-black/40 border border-white/5 rounded-full text-gray-300"
+                >
                   {tech}
                 </span>
               ))}
@@ -465,7 +486,8 @@ const Projects = () => {
                 onClick={() => handleLiveClick(activeProject.liveLink)}
                 className="group flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 flex-1 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-white/20 transition-all duration-300 font-medium backdrop-blur-md text-xs sm:text-sm"
               >
-                <Monitor className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:scale-110" /> Live
+                <Monitor className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:scale-110" />{" "}
+                Live
               </button>
               <a
                 href={activeProject.codeLink}
@@ -473,7 +495,8 @@ const Projects = () => {
                 rel="noopener noreferrer"
                 className="group flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 flex-1 rounded-xl bg-black/40 hover:bg-black/60 text-gray-300 hover:text-white border border-transparent hover:border-white/10 transition-all duration-300 font-medium backdrop-blur-md text-xs sm:text-sm"
               >
-                <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:rotate-12" /> Source
+                <Code className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:rotate-12" />{" "}
+                Source
               </a>
             </div>
           </div>
@@ -496,7 +519,6 @@ const Projects = () => {
               <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform duration-300 group-hover:translate-x-1.5" />
             </RouterLink>
           </div>
-
         </div>
 
         {/* ===== BOTTOM BLEND ===== */}
@@ -514,4 +536,3 @@ const Projects = () => {
 };
 
 export default Projects;
-
