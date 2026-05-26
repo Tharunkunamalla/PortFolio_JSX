@@ -321,10 +321,10 @@ const Projects = () => {
         <div className="absolute -bottom-16 -right-20 w-[400px] h-[400px] bg-gradient-to-tr from-primary-300 via-cyan-300 to-blue-300 opacity-25 rounded-full blur-3xl animate-pulse-slower pointer-events-none z-0" />
         <div className="absolute inset-0 bg-[radial-gradient(#4443_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.02] dark:opacity-5 z-0 pointer-events-none" />
 
-        <div className="relative z-10 w-full h-full flex flex-col justify-between pt-16 md:pt-24 pb-4 md:pb-8">
+        <div className="relative z-10 w-full h-full flex flex-col justify-between pt-16 md:pt-24 lg:pt-20 pb-4 lg:pb-6">
           
           {/* Header Section */}
-          <div className="shrink-0 mb-2 md:mb-8">
+          <div className="shrink-0 mb-2 lg:mb-4">
             <h2 className="text-3xl md:text-5xl font-bold text-center mb-1 md:mb-2 text-gray-800 dark:text-white px-4">
               Featured <span className="text-secondary-500">Projects</span>
             </h2>
@@ -334,7 +334,7 @@ const Projects = () => {
           </div>
 
           {/* Desktop Layout Wrapper */}
-          <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center relative px-4 md:px-12 max-w-[1600px] mx-auto min-h-[300px] md:min-h-[500px]">
+          <div className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center relative px-4 md:px-12 max-w-[1600px] mx-auto min-h-[300px] lg:min-h-[400px]">
             
             {/* Left Text Content (Desktop only) */}
             <div className="hidden lg:flex flex-col w-1/4 pr-8 z-20 justify-center transition-all duration-500">
@@ -366,7 +366,7 @@ const Projects = () => {
             </div>
 
             {/* 3D Carousel */}
-            <div className="w-full lg:w-2/4 h-[250px] sm:h-[400px] lg:h-[500px] relative z-10 flex items-center justify-center shrink-0">
+            <div className="w-full lg:w-2/4 h-[250px] sm:h-[400px] relative z-10 flex items-center justify-center shrink-0">
               <Swiper
                 onSwiper={(swiper) => (swiperRef.current = swiper)}
                 effect={"coverflow"}
@@ -379,7 +379,7 @@ const Projects = () => {
                   stretch: 0,
                   depth: 300,
                   modifier: 1,
-                  slideShadows: true,
+                  slideShadows: false, // Turned off to remove harsh rectangle gradients
                 }}
                 keyboard={{ enabled: true }}
                 pagination={{ clickable: true, dynamicBullets: true }}
@@ -397,7 +397,7 @@ const Projects = () => {
                   return (
                     <SwiperSlide
                       key={project.id}
-                      className="w-[75vw] sm:w-[500px] md:w-[600px] lg:w-[100%] h-[85%] flex items-center justify-center relative mt-4"
+                      className="w-[75vw] sm:w-[500px] md:w-[600px] lg:w-[100%] h-[85%] lg:h-[90%] flex items-center justify-center relative mt-4"
                     >
                       <div
                         className={`relative w-full h-full rounded-3xl overflow-hidden shadow-2xl transition-all duration-500 border border-white/10 ${
@@ -426,12 +426,9 @@ const Projects = () => {
                 {activeProject.technologies.slice(0, 5).map((tech, idx) => (
                   <div
                     key={idx}
-                    className="group px-6 py-3.5 w-full text-sm font-medium text-gray-400 bg-black/40 border border-transparent hover:border-secondary-500/50 rounded-2xl transition-all duration-300 cursor-default flex items-center shadow-lg shadow-black/10"
+                    className="group px-6 py-3.5 w-full text-sm font-medium text-gray-400 bg-black/40 border border-transparent hover:border-secondary-500/50 rounded-2xl transition-all duration-300 flex items-center shadow-lg shadow-black/10"
                   >
-                    <div className="relative flex items-center justify-center w-5 h-5 mr-3">
-                      <span className="absolute w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-secondary-400 transition-colors duration-300" />
-                      <span className="absolute w-5 h-5 rounded-full border border-secondary-400/50 opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" />
-                    </div>
+                    <span className="w-1.5 h-1.5 rounded-full bg-gray-600 group-hover:bg-secondary-400 mr-3 transition-colors duration-300" />
                     <span className="transition-colors duration-300 group-hover:text-white">{tech}</span>
                   </div>
                 ))}
@@ -482,7 +479,7 @@ const Projects = () => {
           </div>
 
           {/* Global Explore All Button (Visible on ALL devices) */}
-          <div className="w-full text-center mt-4 md:mt-8 pb-4 relative z-20 shrink-0">
+          <div className="w-full text-center mt-4 lg:mt-4 pb-4 relative z-20 shrink-0">
             <RouterLink
               to="/projects"
               className="
