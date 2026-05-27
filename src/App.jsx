@@ -26,12 +26,14 @@ import Footer from "./components/layout/Footer";
 
 import {Toaster} from "react-hot-toast";
 import ProjectDetail from "./components/projects/ProjectDetail";
+import {useLenis} from "@studio-freight/react-lenis";
 
 function ScrollRouterWrapper() {
   const [activeSection, setActiveSection] = useState("home");
   const sections = ["home", "about", "skills", "projects", "contact"];
   const sectionRefs = useRef({});
   const location = useLocation();
+  const lenis = useLenis();
 
   useEffect(() => {
     sections.forEach((section) => {
@@ -71,10 +73,17 @@ function ScrollRouterWrapper() {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80,
-        behavior: "smooth",
-      });
+      if (lenis) {
+        lenis.scrollTo(section, {
+          offset: -80,
+          duration: 1.2,
+        });
+      } else {
+        window.scrollTo({
+          top: section.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
     }
   };
 

@@ -110,6 +110,24 @@ const webProjects = [
   },
   {
     id: 5,
+    title: "DSA- Play Visualizer",
+    description:
+      "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms, And Creative space for drawing, and for taking notes with saved logs and JWT authentication. ",
+    image: "/assets/dsaplay1.png",
+    technologies: [
+      "React",
+      "Tailwind CSS",
+      "GSAP",
+      "MongoDB",
+      "Express",
+      "Node.js",
+      "JWT",
+    ],
+    liveLink: "https://dsa-playground-iiitk.vercel.app/",
+    codeLink: "https://github.com/Tharunkunamalla/Dsa-playground.git",
+  },
+  {
+    id: 6,
     title: "ResumeGenie Ai",
     description:
       "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
@@ -125,7 +143,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/ResumeGenie-Ai",
   },
   {
-    id: 6,
+    id: 7,
     title: "Sapphire Skies Resort",
     description:
       "A fully responsive resort booking app with authentication and room management. Users can book rooms, view amenities, and manage reservations.",
@@ -142,7 +160,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Sapphire-skies-resort",
   },
   {
-    id: 7,
+    id: 8,
     title: "Tournament Management System",
     description:
       "Manage tournaments, teams, and schedules online. Full-stack app. Database designed in SQL. Frontend using HTML/CSS/JS and backend logic in PHP.",
@@ -152,7 +170,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/TMS",
   },
   {
-    id: 8,
+    id: 9,
     title: "Portfolio Website",
     description:
       "My personal portfolio showcasing skills and projects. Built with modern web technologies and responsive design.",
@@ -162,7 +180,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Portfolio-js",
   },
   {
-    id: 9,
+    id: 10,
     title: "Gemini-AI",
     description:
       "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks.",
@@ -172,7 +190,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Gemini_App",
   },
   {
-    id: 10,
+    id: 11,
     title: "Jarvis -Voice Assistant",
     description:
       "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
@@ -185,7 +203,7 @@ const webProjects = [
 
 const machineLearningProjects = [
   {
-    id: 11,
+    id: 12,
     title: "Anime Recommendation System",
     description:
       "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input using FastApi.",
@@ -202,7 +220,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git",
   },
   {
-    id: 12,
+    id: 13,
     title: "Brain Tumor MRI Classification",
     description:
       "CNN and Transfer Learning to classify MRI brain images. Deployed via Streamlit with UI to upload and predict on MRI scans and visualize results.",
@@ -213,7 +231,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-3_Labmentix_Brain_Tumor_Img_cls",
   },
   {
-    id: 13,
+    id: 14,
     title: "PhonePe Transactions Insights",
     description:
       "Data analysis of PhonePe transactions using Python and visualization libraries. Extracts trends in transaction volume, types, and geography.",
@@ -224,7 +242,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-2-Labementix-PhonePe_Transaction_Insights",
   },
   {
-    id: 14,
+    id: 15,
     title: "Shopper spectrum - Customer Segmentation",
     description:
       "Customer segmentation using K-means clustering to analyze shopping behavior.",
@@ -242,7 +260,7 @@ const machineLearningProjects = [
       "https://github.com/Tharunkunamalla/Project-4-Shopper_spectrum-segmentation",
   },
   {
-    id: 15,
+    id: 16,
     title: "Multi class fish classification",
     description:
       "CNN model to classify different species of fish. Includes data preprocessing, augmentation, and visualization of results.",
