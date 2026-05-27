@@ -28,7 +28,7 @@ const ProjectDetail = () => {
   }, [projectId]);
 
   const goBackToProjects = () => {
-    navigate("/", {state: {scrollTo: "projects"}});
+    navigate("/projects");
   };
 
   /* ================= LOADER ================= */

@@ -240,7 +240,7 @@ const Contact = () => {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="Enter Your Email..."
                     className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
                   />
                 </div>
