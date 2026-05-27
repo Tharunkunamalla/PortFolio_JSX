@@ -6,15 +6,11 @@ import BackgroundParticles from "../layout/BackgroundParticles";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-
-// Swiper imports
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import {EffectCoverflow, Pagination, Keyboard} from "swiper/modules";
-
-gsap.registerPlugin(ScrollTrigger);
 
 // Your project data
 const webProjects = [

@@ -33,7 +33,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/CodeSync"
     },
     {
-      "id": 2,
+      "id": 3,
       "title": "FaceRipple",
       "description": "Video Calling Realtime Chat App & Social App. Combines WebRTC with React for seamless peer-to-peer video chat. Integrates getStream API for real-time messaging, with MongoDB storing user data and messages. Tailwind CSS ensures responsive design. User authentication and room management are handled via Express and Node.js backend.",
       "image": "/assets/FaceRipple1.png",
@@ -50,7 +50,7 @@
       "codeLink": "https://github.com/Tharunkunamalla/FaceRipple"
     },
     {
-      "id": 3,
+      "id": 2,
       "title": "InstantRoute",
       "description": "InstantRoute is an interactive map-based route visualization system that finds the shortest path between two locations using graph algorithms. It allows users to select source and destination points directly on the map and visually observe how algorithms explore routes step by step. The system snaps user-selected points to real road nodes to ensure accurate routing. A dynamic speed controller lets users adjust the algorithm execution in real time. The final shortest path is rendered clearly on the map using real-world road data. ",
       "image": "/assets/instant-route.png",
