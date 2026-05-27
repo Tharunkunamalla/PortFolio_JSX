@@ -92,7 +92,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/instant-route-guide.git",
   },
   {
-    id: 4,
+    id: 5,
     title: "DSA- Play Visualizer",
     description:
       "A web app to visualize various Data Structures and Algorithms with interactive animations.Creative space for drawing, and for taking notes with saved logs Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms.",
@@ -110,7 +110,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Dsa-playground.git",
   },
   {
-    id: 5,
+    id: 4,
     title: "Auricare- A Gift to God's child",
     description:
       "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",

@@ -19,7 +19,7 @@ import AllProjects from "./components/projects/AllProjects";
 import Contact from "./components/sections/Contact";
 import Message from "./components/layout/Message";
 
-import { ReactLenis } from '@studio-freight/react-lenis';
+import {ReactLenis} from "@studio-freight/react-lenis";
 
 import Footer from "./components/layout/Footer";
 // import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";

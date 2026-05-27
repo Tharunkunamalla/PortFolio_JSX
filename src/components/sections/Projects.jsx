@@ -92,7 +92,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/FaceRipple",
   },
   {
-    id: 4,
+    id: 5,
     title: "Auricare- A Gift to God's child",
     description:
       "A Healthcare platform for Autism patients which includes AI-Chatbot, Appointment booking, Learning-Hub, Scheduler, etc.",
@@ -109,7 +109,7 @@ const webProjects = [
     codeLink: "https://github.com/Tharunkunamalla/Auricare-V2",
   },
   {
-    id: 5,
+    id: 4,
     title: "DSA- Play Visualizer",
     description:
       "A web app to visualize various Data Structures and Algorithms with interactive animations. Supports arrays, linked lists, stacks, queues, trees, sorting algorithms, and pathfinding algorithms, And Creative space for drawing, and for taking notes with saved logs and JWT authentication. ",
