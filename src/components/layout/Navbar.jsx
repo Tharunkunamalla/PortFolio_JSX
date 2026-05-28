@@ -1,8 +1,22 @@
 import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
-import {FaDiscord} from "react-icons/fa";
+import {FaDiscord, FaWhatsapp} from "react-icons/fa";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../../context/ThemeContext";
+
+const whatsappNumber = "916303480726";
+const whatsappMessage = encodeURIComponent(
+  "Hi Tharun, I came across your portfolio and would like to discuss a project."
+);
+const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+const socialLinks = [
+  {Icon: Github, href: "https://github.com/Tharunkunamalla"},
+  {Icon: Linkedin, href: "https://www.linkedin.com/in/tharun-kunamalla-/"},
+  {Icon: Instagram, href: "https://instagram.com/__tharun_0509.__"},
+  {Icon: FaWhatsapp, href: whatsappHref},
+  {Icon: FaDiscord, href: "https://discord.com/users/751713701425446945"},
+];
 
 const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -98,12 +112,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
         <div className="flex items-center space-x-3 md:space-x-5">
           {/* Socials Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
-            {[
-              { Icon: Github, href: "https://github.com/Tharunkunamalla" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/in/tharun-kunamalla-/" },
-              { Icon: Instagram, href: "https://instagram.com/__tharun_0509.__" },
-              { Icon: FaDiscord, href: "https://discord.com/users/751713701425446945" }
-            ].map(({ Icon, href }, idx) => (
+            {socialLinks.map(({Icon, href}, idx) => (
               <a
                 key={idx}
                 href={href}
@@ -185,8 +194,16 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
           <div className="mt-auto py-8 border-t border-gray-200 dark:border-white/10">
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-widest font-bold">Social Connection</p>
             <div className="flex gap-6">
-              {[Github, Linkedin, Instagram, FaDiscord].map((Icon, i) => (
-                <Icon key={i} className="h-6 w-6 text-gray-400 hover:text-secondary-500 transition-colors cursor-pointer" />
+              {socialLinks.map(({Icon, href}, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-secondary-500 transition-colors cursor-pointer"
+                >
+                  <Icon className="h-6 w-6" />
+                </a>
               ))}
             </div>
           </div>

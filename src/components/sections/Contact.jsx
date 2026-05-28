@@ -13,11 +13,17 @@ import {
   MapPin,
   Send,
 } from "lucide-react";
-import {FaDiscord} from "react-icons/fa";
+import {FaDiscord, FaWhatsapp} from "react-icons/fa";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const whatsappNumber = "916303480726";
+const whatsappMessage = encodeURIComponent(
+  "Hi Tharun, I came across your portfolio and would like to discuss a project."
+);
+const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
 const contactMethods = [
   {
@@ -63,6 +69,11 @@ const socialLinks = [
     icon: <Instagram />,
     href: "https://www.instagram.com/__tharun_0509.__/",
     color: "hover:text-white hover:bg-pink-600",
+  },
+  {
+    icon: <FaWhatsapp className="w-6 h-6" />,
+    href: whatsappHref,
+    color: "hover:text-white hover:bg-green-500",
   },
   {
     icon: <FaDiscord className="w-6 h-6" />,

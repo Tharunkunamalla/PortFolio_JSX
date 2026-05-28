@@ -73,7 +73,7 @@ app.get("/api/monkeytype/:username", async (req, res) => {
           "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         },
-      }
+      },
     );
 
     const text = await response.text();
@@ -96,5 +96,5 @@ app.get("/api/monkeytype/:username", async (req, res) => {
 const PORT = process.env.PORT || 8081;
 
 app.listen(PORT, () =>
-  console.log(`✅ Proxy server running at http://localhost:${PORT}`)
+  console.log(`✅ Proxy server running at http://localhost:${PORT}`),
 );
