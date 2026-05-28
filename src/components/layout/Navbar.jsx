@@ -1,20 +1,13 @@
 import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
-import {FaDiscord, FaWhatsapp} from "react-icons/fa";
+import {FaDiscord} from "react-icons/fa";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../../context/ThemeContext";
-
-const whatsappNumber = "916303480726";
-const whatsappMessage = encodeURIComponent(
-  "Hi Tharun, I came across your portfolio and would like to discuss a project."
-);
-const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
 const socialLinks = [
   {Icon: Github, href: "https://github.com/Tharunkunamalla"},
   {Icon: Linkedin, href: "https://www.linkedin.com/in/tharun-kunamalla-/"},
   {Icon: Instagram, href: "https://instagram.com/__tharun_0509.__"},
-  {Icon: FaWhatsapp, href: whatsappHref},
   {Icon: FaDiscord, href: "https://discord.com/users/751713701425446945"},
 ];
 
