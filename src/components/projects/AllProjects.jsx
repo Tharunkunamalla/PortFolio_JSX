@@ -1,21 +1,16 @@
-// src/components/sections/Projects.jsx
-import React from "react";
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {Link as RouterLink} from "react-router-dom"; // 👈 add this
+import {Link as RouterLink} from "react-router-dom";
 import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
-import {ChevronDown, ChevronUp, ArrowUp} from "lucide-react"; // 👈 import icons
+import {ArrowUp} from "lucide-react";
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import {useLenis} from "@studio-freight/react-lenis";
 
-// import GitHubStats from "./GitHubStats";
-
 gsap.registerPlugin(ScrollTrigger);
 
-// Your project data
 const webProjects = [
   {
     id: 0,

@@ -4,7 +4,6 @@ import {
   Routes,
   Route,
   useLocation,
-  useNavigate,
 } from "react-router-dom";
 
 import {ThemeProvider} from "./context/ThemeContext";
@@ -22,7 +21,6 @@ import Message from "./components/layout/Message";
 import {ReactLenis} from "@studio-freight/react-lenis";
 
 import Footer from "./components/layout/Footer";
-// import MonkeyTypeStats from "./components/sections/MonkeyTypeStats";
 
 import {Toaster} from "react-hot-toast";
 import ProjectDetail from "./components/projects/ProjectDetail";
@@ -103,7 +101,6 @@ function ScrollRouterWrapper() {
                 <Home scrollToSection={scrollToSection} />
                 <About />
                 <Skills />
-                {/* <MonkeyTypeStats /> */}
                 <Toaster position="top-center" />
                 <Projects />
                 <Contact />

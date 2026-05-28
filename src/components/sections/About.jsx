@@ -1,11 +1,10 @@
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import Lottie from "lottie-react"; // Ensure the casing matches the actual directory
+import Lottie from "lottie-react";
 import codingAnimation from "../../data/Coding.json";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
-// import Snowfall from "react-snowfall";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +94,6 @@ const About = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Apply a global 3D perspective to the container parent so children can fly in 3D
       gsap.set(sectionRef.current, { perspective: 1000 });
 
       gsap.from(headingRef.current, {
@@ -156,7 +154,6 @@ const About = () => {
         });
       });
 
-      // Title animation
       gsap.from(introTitleRef.current, {
         y: 30,
         opacity: 0,
@@ -170,7 +167,6 @@ const About = () => {
         },
       });
 
-      // Gradient text subtle pop
       gsap.from(gradientTextRef.current, {
         scale: 0.8,
         rotationY: 15,
@@ -185,7 +181,6 @@ const About = () => {
         },
       });
 
-      // Underline draw animation
       gsap.to(underlineRef.current, {
         width: "100%",
         duration: 1,
