@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 const CameraController = () => {
   const { camera } = useThree();
   const [keys, setKeys] = useState({ w: false, a: false, s: false, d: false, q: false, e: false });
-  const speed = 0.6;
+  const speed = 0.2;
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -122,8 +122,8 @@ const Projects3D = ({ projects }) => {
         <PointerLockControls />
 
         {/* 3D Title "PROJECTS" */}
-        <group position={[0, 12, -40]} scale={3}>
-          <Html center className="pointer-events-none select-none">
+        <group position={[0, 22, -40]} scale={3}>
+          <Html transform center className="pointer-events-none select-none">
             <h1 className="text-[12rem] font-black text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-heading tracking-tighter mix-blend-overlay">
               PROJECTS
             </h1>

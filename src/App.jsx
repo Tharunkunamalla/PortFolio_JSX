@@ -24,6 +24,7 @@ import Footer from "./components/layout/Footer";
 
 import {Toaster} from "react-hot-toast";
 import ProjectDetail from "./components/projects/ProjectDetail";
+import Projects3DPage from "./components/projects/Projects3DPage";
 import {useLenis} from "@studio-freight/react-lenis";
 
 function ScrollRouterWrapper() {
@@ -109,6 +110,7 @@ function ScrollRouterWrapper() {
           />
           <Route path="/projects" element={<AllProjects />} />
           <Route path="/project/:projectId" element={<ProjectDetail />} />
+          <Route path="/projects-3d" element={<Projects3DPage />} />
         </Routes>
       </main>
       <Footer />

@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useRef} from "react";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {Code, Monitor, ArrowRight} from "lucide-react";
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
-import Projects3D from "./Projects3D";
+
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Swiper, SwiperSlide} from "swiper/react";
@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 import {EffectCoverflow, Pagination, Keyboard} from "swiper/modules";
 
 // Your project data
-const webProjects = [
+export const webProjects = [
   {
     id: 0,
     title: "Wavvy",
@@ -198,7 +198,7 @@ const webProjects = [
   },
 ];
 
-const machineLearningProjects = [
+export const machineLearningProjects = [
   {
     id: 12,
     title: "Anime Recommendation System",
@@ -275,20 +275,17 @@ const machineLearningProjects = [
   },
 ];
 
-const allProjects = [...webProjects, ...machineLearningProjects];
+export const allProjects = [...webProjects, ...machineLearningProjects];
+export const visibleProjects = allProjects.slice(0, 5);
 
 const Projects = () => {
   const containerRef = useRef(null);
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [is3DMode, setIs3DMode] = useState(false);
-  const [showToggle, setShowToggle] = useState(true);
-  const visibleProjects = allProjects.slice(0, 5);
+  const navigate = useNavigate();
   const activeProject = visibleProjects[activeIndex];
 
   useEffect(() => {
-    if (is3DMode) return;
-
     // We use a CSS sticky approach for pinning, and just use ScrollTrigger to track progress!
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -314,36 +311,7 @@ const Projects = () => {
     return () => {
       ctx.revert();
     };
-  }, [visibleProjects.length, is3DMode]);
-
-  // Handle navbar animation
-  useEffect(() => {
-    const nav = document.querySelector("nav");
-    if (nav) {
-      nav.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
-      if (is3DMode) {
-        nav.style.transform = "translateY(-100%)";
-      } else {
-        nav.style.transform = "translateY(0)";
-      }
-    }
-    return () => {
-      if (nav) nav.style.transform = "translateY(0)";
-    };
-  }, [is3DMode]);
-
-  const toggleMode = (enable3D) => {
-    setIs3DMode(enable3D);
-    setTimeout(() => {
-      const section = document.getElementById("projects");
-      if (section) {
-        window.scrollTo({
-          top: section.offsetTop,
-          behavior: "instant",
-        });
-      }
-    }, 10);
-  };
+  }, [visibleProjects.length]);
 
   const handleLiveClick = (liveLink) => {
     if (!liveLink) {
@@ -352,36 +320,6 @@ const Projects = () => {
     }
     window.open(liveLink, "_blank", "noopener noreferrer");
   };
-
-  if (is3DMode) {
-    return (
-      <section id="projects" className="relative w-full h-[100dvh] bg-[#0c0c10] overflow-hidden">
-        {/* Top Blend */}
-        <div className="pointer-events-none absolute top-0 inset-x-0 h-24 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60" />
-        
-        <Projects3D projects={visibleProjects} />
-        
-        {/* Toggle Button overlay */}
-        <div className="absolute top-6 right-6 sm:top-8 sm:right-12 z-50 flex items-center gap-4">
-          <div className="text-right hidden sm:block">
-            <p className="text-white font-bold text-sm">View Mode</p>
-            <p className="text-gray-400 text-xs">Switch between layouts</p>
-          </div>
-          <button
-            onClick={() => toggleMode(false)}
-            className="relative flex items-center w-20 h-10 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full p-1 transition-all duration-300 backdrop-blur-md"
-          >
-            <div className="absolute right-1 w-8 h-8 bg-gradient-to-r from-secondary-500 to-purple-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-purple-500/50">
-              3D
-            </div>
-          </button>
-        </div>
-
-        {/* Bottom Blend */}
-        <div className="pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10 bg-gradient-to-t from-white/90 to-transparent dark:from-black/80" />
-      </section>
-    );
-  }
 
   return (
     // Outer container provides scroll height (500vh means scrolling 5 screen heights smoothly)
@@ -418,7 +356,7 @@ const Projects = () => {
                 <p className="text-gray-600 dark:text-gray-400 text-xs">Switch between layouts</p>
               </div>
               <button
-                onClick={() => toggleMode(true)}
+                onClick={() => navigate("/projects-3d")}
                 className="relative flex items-center w-20 h-10 bg-gray-200 dark:bg-white/10 hover:bg-gray-300 dark:hover:bg-white/20 border border-gray-300 dark:border-white/20 rounded-full p-1 transition-all duration-300"
               >
                 <div className="absolute left-1 w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-[10px] font-bold text-gray-800 dark:text-white shadow">
