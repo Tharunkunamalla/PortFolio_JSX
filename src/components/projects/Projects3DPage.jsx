@@ -1,10 +1,36 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import Projects3D from "../sections/Projects3D";
-import { visibleProjects } from "../sections/Projects";
+import {visibleProjects} from "../sections/Projects";
+
+const useSpaceAudio = () => {
+  useEffect(() => {
+    const audio = new Audio("/space.mp3");
+    audio.loop = true;
+    audio.volume = 0.4; // Adjust volume as needed
+
+    const playAudio = () => {
+      audio.play().catch((err) => console.log("Waiting for user interaction to play audio..."));
+    };
+
+    playAudio();
+
+    // In case browser blocked autoplay, listen for interaction
+    window.addEventListener("click", playAudio);
+    window.addEventListener("keydown", playAudio);
+
+    return () => {
+      window.removeEventListener("click", playAudio);
+      window.removeEventListener("keydown", playAudio);
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
+};
 
 const Projects3DPage = () => {
   const navigate = useNavigate();
+  useSpaceAudio();
 
   // Handle navbar animation
   useEffect(() => {
@@ -13,7 +39,7 @@ const Projects3DPage = () => {
       nav.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
       nav.style.transform = "translateY(-100%)";
     }
-    
+
     // Ensure we start at the top
     window.scrollTo(0, 0);
 
@@ -24,16 +50,16 @@ const Projects3DPage = () => {
 
   const handleReturnTo2D = () => {
     // Navigate back to home and trigger smooth scroll to projects section
-    navigate("/", { state: { scrollTo: "projects" } });
+    navigate("/", {state: {scrollTo: "projects"}});
   };
 
   return (
     <section className="relative w-full h-[100dvh] bg-[#0c0c10] overflow-hidden">
       {/* Top Blend */}
       <div className="pointer-events-none absolute top-0 inset-x-0 h-24 z-10 bg-gradient-to-b from-white/80 to-transparent dark:from-black/60" />
-      
+
       <Projects3D projects={visibleProjects} />
-      
+
       {/* Toggle Button overlay */}
       <div className="fixed top-6 right-6 sm:top-8 sm:right-12 flex items-center gap-3 sm:gap-4 pointer-events-auto z-[99999]">
         <div className="text-right hidden sm:block">
