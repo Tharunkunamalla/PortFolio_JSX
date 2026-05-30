@@ -141,6 +141,9 @@ const Projects3D = ({ projects }) => {
                 <p>W A S D - Move around</p>
                 <p>Q / E - Move up / down</p>
               </div>
+              <p className="text-xs text-gray-400/90 border-t border-white/10 pt-3">
+                Scroll down to exit and reveal the black hole below.
+              </p>
               <p className="text-xs text-gray-400">Press ESC to show cursor and interact</p>
             </div>
           </Html>
