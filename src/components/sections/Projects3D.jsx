@@ -63,10 +63,10 @@ const ProjectCard = ({ project, position, rotation }) => {
       <Html
         transform
         occlude="blending"
-        className="w-[320px] sm:w-[400px] select-none"
+        className="w-[280px] sm:w-[340px] select-none"
       >
-        <div className="bg-[#12121a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl flex flex-col gap-4 text-white">
-          <div className="relative w-full h-[180px] rounded-xl overflow-hidden border border-white/5">
+        <div className="bg-[#12121a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-2xl flex flex-col gap-3.5 text-white">
+          <div className="relative w-full h-[160px] rounded-xl overflow-hidden border border-white/5">
             <ImageWithSkeleton
               src={project.image}
               alt={project.title}
@@ -75,8 +75,8 @@ const ProjectCard = ({ project, position, rotation }) => {
             />
           </div>
           <div>
-            <h3 className="text-xl font-bold font-heading mb-2">{project.title}</h3>
-            <p className="text-sm text-gray-400 line-clamp-3">{project.description}</p>
+            <h3 className="text-lg font-bold font-heading mb-2">{project.title}</h3>
+            <p className="text-xs sm:text-sm text-gray-400 line-clamp-3">{project.description}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {project.technologies.slice(0, 4).map((tech, idx) => (
@@ -91,7 +91,7 @@ const ProjectCard = ({ project, position, rotation }) => {
           <div className="flex gap-3 mt-2">
             <button
               onClick={() => handleLiveClick(project.liveLink)}
-              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-xs font-medium"
+              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-[11px] font-medium"
             >
               <Monitor className="w-4 h-4" /> Live Preview
             </button>
@@ -99,7 +99,7 @@ const ProjectCard = ({ project, position, rotation }) => {
               href={project.codeLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-black/40 hover:bg-black/60 border border-transparent hover:border-white/10 transition-colors text-xs font-medium"
+              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-xl bg-black/40 hover:bg-black/60 border border-transparent hover:border-white/10 transition-colors text-[11px] font-medium"
             >
               <Code className="w-4 h-4" /> Code
             </a>
@@ -113,7 +113,7 @@ const ProjectCard = ({ project, position, rotation }) => {
 const Projects3D = ({ projects }) => {
   return (
     <div className="w-full h-[100dvh] bg-[#0c0c10] overflow-hidden relative cursor-crosshair">
-      <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+      <Canvas camera={{ position: [0, 0.5, 9], fov: 50 }}>
         <color attach="background" args={["#0c0c10"]} />
         <ambientLight intensity={0.5} />
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
@@ -122,26 +122,26 @@ const Projects3D = ({ projects }) => {
         <PointerLockControls />
 
         {/* 3D Title "PROJECTS" */}
-        <group position={[0, 22, -40]} scale={3}>
+        <group position={[0, 16, -52]} scale={2.2}>
           <Html transform center className="pointer-events-none select-none">
-            <h1 className="text-[12rem] font-black text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-heading tracking-tighter mix-blend-overlay">
+            <h1 className="text-[10rem] font-black text-white/90 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] font-heading tracking-tighter mix-blend-overlay">
               PROJECTS
             </h1>
           </Html>
         </group>
 
         {/* Instructional Card */}
-        <group position={[0, 0, -5]}>
+        <group position={[0, -0.5, -12]}>
           <Html transform center className="pointer-events-none">
-            <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-8 text-center text-white shadow-2xl w-[450px]">
-              <h2 className="text-2xl font-bold mb-6">Welcome to 3D Mode.</h2>
-              <p className="text-lg mb-4 text-secondary-400">Click anywhere to look around (Mouse)</p>
-              <h3 className="text-xl font-semibold mb-4 text-secondary-400">Keyboard Controls:</h3>
-              <div className="space-y-3 text-lg font-mono mb-4">
+            <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 text-center text-white shadow-2xl w-[360px]">
+              <h2 className="text-xl font-bold mb-5">Welcome to 3D Mode.</h2>
+              <p className="text-base mb-4 text-secondary-400">Click anywhere to look around (Mouse)</p>
+              <h3 className="text-lg font-semibold mb-4 text-secondary-400">Keyboard Controls:</h3>
+              <div className="space-y-2.5 text-base font-mono mb-4">
                 <p>W A S D - Move around</p>
                 <p>Q / E - Move up / down</p>
               </div>
-              <p className="text-sm text-gray-400">Press ESC to show cursor and interact</p>
+              <p className="text-xs text-gray-400">Press ESC to show cursor and interact</p>
             </div>
           </Html>
         </group>
@@ -152,11 +152,11 @@ const Projects3D = ({ projects }) => {
           const total = projects.length;
           // Span from -PI/2 to PI/2
           const angle = (index / Math.max(1, total - 1)) * Math.PI - Math.PI / 2;
-          const radius = 22;
+          const radius = 30;
           
           const x = Math.sin(angle) * radius;
-          const z = -Math.cos(angle) * radius - 15; // Shift back significantly
-          const y = (index % 2 === 0 ? 1 : -1) * 2; // Stagger heights slightly
+          const z = -Math.cos(angle) * radius - 24; // Push cards farther back for a calmer scene
+          const y = (index % 2 === 0 ? 0.5 : -0.5) * 2; // Keep a subtle stagger
           
           // Rotate to face the center/origin roughly
           const rotY = -angle;

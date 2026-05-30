@@ -35,19 +35,23 @@ const Projects3DPage = () => {
       <Projects3D projects={visibleProjects} />
       
       {/* Toggle Button overlay */}
-      <div 
-        className="absolute top-6 right-6 sm:top-8 sm:right-12 flex items-center gap-4 pointer-events-auto"
-        style={{ zIndex: 99999 }}
-      >
+      <div className="fixed top-6 right-6 sm:top-8 sm:right-12 flex items-center gap-3 sm:gap-4 pointer-events-auto z-[99999]">
         <div className="text-right hidden sm:block">
           <p className="text-white font-bold text-sm">View Mode</p>
-          <p className="text-gray-400 text-xs">Switch between layouts</p>
+          <p className="text-gray-400 text-xs">Return to the 2D layout</p>
         </div>
         <button
+          type="button"
           onClick={handleReturnTo2D}
-          className="relative flex items-center w-20 h-10 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full p-1 transition-all duration-300 backdrop-blur-md"
+          aria-label="Back to 2D projects view"
+          title="Back to 2D"
+          className="group relative flex items-center justify-between w-28 h-11 rounded-full border border-white/20 bg-white/10 px-1.5 backdrop-blur-md shadow-2xl shadow-black/30 transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/60"
         >
-          <div className="absolute right-1 w-8 h-8 bg-gradient-to-r from-secondary-500 to-purple-500 rounded-full flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-purple-500/50">
+          <span className="pl-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/65">
+            2D
+          </span>
+          <div className="h-8 w-8 rounded-full bg-gradient-to-r from-secondary-500 to-purple-500 flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-purple-500/50 transition-transform duration-300 group-hover:scale-105">
+            <span className="sr-only">Switch back to 2D</span>
             3D
           </div>
         </button>
