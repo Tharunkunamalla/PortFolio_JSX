@@ -110,6 +110,84 @@ const ProjectCard = ({ project, position, rotation }) => {
   );
 };
 
+const Comets = () => {
+  const count = 10;
+  const dummy = new THREE.Object3D();
+  const meshRef = useRef();
+  const globalTimer = useRef(0);
+  
+  const cometsData = useRef(
+    Array.from({ length: count }, () => ({
+      active: false,
+      pos: new THREE.Vector3(),
+      vel: new THREE.Vector3(),
+      scaleZ: 1,
+    }))
+  ).current;
+
+  useFrame((state, delta) => {
+    if (!meshRef.current) return;
+    
+    globalTimer.current -= delta;
+    if (globalTimer.current <= 0) {
+      const inactiveComet = cometsData.find(c => !c.active);
+      if (inactiveComet) {
+        inactiveComet.active = true;
+        // Spawn on a sphere radius 120 around the center
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.acos((Math.random() * 2) - 1);
+        const radius = 120;
+        
+        inactiveComet.pos.set(
+          radius * Math.sin(phi) * Math.cos(theta),
+          radius * Math.sin(phi) * Math.sin(theta),
+          radius * Math.cos(phi) - 20
+        );
+
+        // Velocity directed towards the center region roughly
+        const targetX = (Math.random() - 0.5) * 60;
+        const targetY = (Math.random() - 0.5) * 60;
+        const targetZ = (Math.random() - 0.5) * 60 - 20;
+
+        const dir = new THREE.Vector3(targetX, targetY, targetZ).sub(inactiveComet.pos).normalize();
+        const speed = Math.random() * 80 + 60; // 60 to 140 units per second (medium-fast)
+        inactiveComet.vel.copy(dir).multiplyScalar(speed);
+        inactiveComet.scaleZ = Math.random() * 15 + 10; // Trail length
+      }
+      globalTimer.current = 5; // Spawn a comet every 5 seconds
+    }
+
+    cometsData.forEach((comet, i) => {
+      if (comet.active) {
+        comet.pos.addScaledVector(comet.vel, delta);
+        dummy.position.copy(comet.pos);
+        const target = comet.pos.clone().add(comet.vel);
+        dummy.lookAt(target);
+        dummy.scale.set(1, 1, comet.scaleZ);
+        dummy.updateMatrix();
+        meshRef.current.setMatrixAt(i, dummy.matrix);
+        
+        // Deactivate if it goes too far
+        if (comet.pos.length() > 200) {
+          comet.active = false;
+        }
+      } else {
+        dummy.position.set(0, -1000, 0); // Hide
+        dummy.updateMatrix();
+        meshRef.current.setMatrixAt(i, dummy.matrix);
+      }
+    });
+    meshRef.current.instanceMatrix.needsUpdate = true;
+  });
+
+  return (
+    <instancedMesh ref={meshRef} args={[null, null, count]}>
+      <boxGeometry args={[0.08, 0.08, 1]} />
+      <meshBasicMaterial color="#c0e8ff" transparent opacity={0.9} />
+    </instancedMesh>
+  );
+};
+
 const Projects3D = ({ projects }) => {
   const [controlsEnabled, setControlsEnabled] = useState(true);
 
@@ -139,6 +217,7 @@ const Projects3D = ({ projects }) => {
         <color attach="background" args={["#0c0c10"]} />
         <ambientLight intensity={0.5} />
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+        <Comets />
         
         <CameraController />
         <PointerLockControls enabled={controlsEnabled} />
