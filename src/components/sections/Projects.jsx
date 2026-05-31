@@ -350,7 +350,7 @@ const Projects = () => {
               Scroll down or swipe to explore
             </p>
             {/* Toggle Button */}
-            <div className="absolute right-4 sm:right-12 top-0 flex items-center gap-4 z-50">
+            <div className="absolute right-4 sm:right-12 top-0 hidden md:flex items-center gap-4 z-50">
               <div className="text-right hidden sm:block">
                 <p className="text-gray-800 dark:text-white font-bold text-sm">View Mode</p>
                 <p className="text-gray-600 dark:text-gray-400 text-xs">Switch between layouts</p>
