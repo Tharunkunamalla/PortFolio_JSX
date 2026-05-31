@@ -86,13 +86,17 @@ function ScrollRouterWrapper() {
     }
   };
 
+  const is3DPage = location.pathname === "/projects-3d";
+
   return (
     <>
-      <Navbar
-        activeSection={activeSection}
-        scrollToSection={scrollToSection}
-        isHomePage={location.pathname === "/"}
-      />
+      {!is3DPage && (
+        <Navbar
+          activeSection={activeSection}
+          scrollToSection={scrollToSection}
+          isHomePage={location.pathname === "/"}
+        />
+      )}
       <main>
         <Routes>
           <Route
