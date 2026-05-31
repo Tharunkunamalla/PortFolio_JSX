@@ -16,6 +16,24 @@ import {EffectCoverflow, Pagination, Keyboard} from "swiper/modules";
 // Your project data
 export const webProjects = [
   {
+    id: 100,
+    title: "MythWeaver",
+    description:
+      "MythWeaver is a premium, full-stack AI storytelling application. It transforms simple prompts into rich narratives complete with AI-generated background art, synchronized voice narration, dynamic AI background music, an expanding volume pill, and exportable PDF manuscripts.",
+    image: "/assets/weaver.png",
+    technologies: [
+      "React",
+      "Vite",
+      "FastAPI",
+      "Framer Motion",
+      "OpenAI",
+      "ElevenLabs",
+      "Suno API",
+    ],
+    liveLink: "",
+    codeLink: "https://github.com/Tharunkunamalla/MythWeaver-AI.git",
+  },
+  {
     id: 0,
     title: "Wavvy",
     description:
@@ -276,7 +294,7 @@ export const machineLearningProjects = [
 ];
 
 export const allProjects = [...webProjects, ...machineLearningProjects];
-export const visibleProjects = allProjects.slice(0, 5);
+export const visibleProjects = allProjects.slice(0, 6);
 
 const Projects = () => {
   const containerRef = useRef(null);
