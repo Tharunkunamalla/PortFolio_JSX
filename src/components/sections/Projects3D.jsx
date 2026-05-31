@@ -111,15 +111,37 @@ const ProjectCard = ({ project, position, rotation }) => {
 };
 
 const Projects3D = ({ projects }) => {
+  const [controlsEnabled, setControlsEnabled] = useState(true);
+
+  useEffect(() => {
+    const pauseControls = () => setControlsEnabled(false);
+    const resumeControls = () => setControlsEnabled(true);
+
+    window.addEventListener("pause-3d-controls", pauseControls);
+    window.addEventListener("resume-3d-controls", resumeControls);
+
+    return () => {
+      window.removeEventListener("pause-3d-controls", pauseControls);
+      window.removeEventListener("resume-3d-controls", resumeControls);
+    };
+  }, []);
+
+  const handleScenePointerDown = () => {
+    window.dispatchEvent(new Event("resume-3d-controls"));
+  };
+
   return (
-    <div className="w-full h-[100dvh] bg-[#0c0c10] overflow-hidden relative cursor-crosshair">
+    <div
+      className="w-full h-[100dvh] bg-[#0c0c10] overflow-hidden relative cursor-crosshair"
+      onPointerDown={handleScenePointerDown}
+    >
       <Canvas camera={{ position: [0, 0.5, 9], fov: 50 }}>
         <color attach="background" args={["#0c0c10"]} />
         <ambientLight intensity={0.5} />
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
         
         <CameraController />
-        <PointerLockControls />
+        <PointerLockControls enabled={controlsEnabled} />
 
         {/* 3D Title "PROJECTS" */}
         <group position={[0, 16, -52]} scale={2.2}>

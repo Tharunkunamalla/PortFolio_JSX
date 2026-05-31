@@ -2,10 +2,11 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import Projects3D from "../sections/Projects3D";
 import {visibleProjects} from "../sections/Projects";
+import spaceSound from "../../assets/space.mp3";
 
 const useSpaceAudio = () => {
   useEffect(() => {
-    const audio = new Audio("/space.mp3");
+    const audio = new Audio(spaceSound);
     audio.loop = true;
     audio.volume = 0.4; // Adjust volume as needed
 
@@ -17,10 +18,12 @@ const useSpaceAudio = () => {
 
     // In case browser blocked autoplay, listen for interaction
     window.addEventListener("click", playAudio);
+    window.addEventListener("pointerdown", playAudio);
     window.addEventListener("keydown", playAudio);
 
     return () => {
       window.removeEventListener("click", playAudio);
+      window.removeEventListener("pointerdown", playAudio);
       window.removeEventListener("keydown", playAudio);
       audio.pause();
       audio.currentTime = 0;
