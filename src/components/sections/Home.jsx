@@ -138,12 +138,11 @@ const Home = ({scrollToSection}) => {
         </div>
       )}
 
-      {/* Main Section */}
       <section
         ref={sectionRef}
         id="home"
         className="
-    relative min-h-screen flex items-center pt-16 pb-8
+    relative min-h-screen flex flex-col justify-center pt-24 pb-32 md:pt-16 md:pb-8
     bg-[#f8f9fb]
     dark:bg-[#0b0b0f]
     overflow-hidden
@@ -232,7 +231,7 @@ const Home = ({scrollToSection}) => {
 
             <div
               ref={buttonsRef}
-              className="flex flex-wrap gap-4 mb-16 md:mb-20"
+              className="flex flex-wrap gap-4 mb-4 md:mb-20"
             >
               <button
                 onClick={() => scrollToSection("contact")}
@@ -295,7 +294,7 @@ const Home = ({scrollToSection}) => {
         {/* Explore More Button */}
         <div
           ref={scrollDownRef}
-          className="absolute bottom-6 md:bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center z-20 group"
+          className="relative mt-12 md:mt-0 md:absolute w-full flex justify-center md:bottom-12 md:left-1/2 md:-translate-x-1/2 cursor-pointer z-20 group"
           onClick={() => scrollToSection("about")}
         >
           <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-black/50 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-black/80 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300 shadow-lg hover:shadow-primary-500/20">
