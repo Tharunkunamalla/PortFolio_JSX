@@ -3,7 +3,7 @@
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
-import {Github, Linkedin, Instagram, Mail, Code2} from "lucide-react";
+import {Github, Linkedin, Instagram, Mail, Code2, ArrowDownCircle} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
@@ -292,17 +292,15 @@ const Home = ({scrollToSection}) => {
           </div>
         </div>
 
-        {/* Scroll Down Button */}
+        {/* Explore More Button */}
         <div
           ref={scrollDownRef}
-          className="absolute bottom-4 md:bottom-10 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center"
+          className="absolute bottom-6 md:bottom-12 left-1/2 transform -translate-x-1/2 cursor-pointer flex flex-col items-center z-20 group"
           onClick={() => scrollToSection("about")}
         >
-          <span className="text-sm mb-3 text-gray-600 dark:text-gray-300">
-            Scroll
-          </span>
-          <div className="mouse-scroll">
-            <span className="wheel"></span>
+          <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-black/50 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-black/80 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300 shadow-lg hover:shadow-primary-500/20">
+            <span className="text-sm font-medium tracking-wide">Explore More</span>
+            <ArrowDownCircle className="w-5 h-5 group-hover:text-primary-500 group-hover:translate-y-1 transition-all duration-300" />
           </div>
         </div>
         {/* ===== BOTTOM BLEND (KEY PART) ===== */}

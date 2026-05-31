@@ -26,4 +26,16 @@ export const ownerMessages = [
     text: "Hi, I had recently Added My Discord Account on my portfolio. So If you want to connect with me or have any questions, feel free to join my Discord server. I will be happy to chat with you there.",
     postedAt: "2026-03-27T01:20:00",
   },
+  {
+    id: "Added New Project - April 2026",
+    type: "text",
+    text: "I have added a new project to my portfolio. It is a Ai-powered Story Telling Platform that allows users to create and share their own stories using artificial intelligence. You can check it out in the projects section of my portfolio.",
+    postedAt: "2026-04-01T10:00:00",
+  },
+  {
+    id: "Added 3-d view for the projects - April 2026",
+    type: "text",
+    text: "I have added a 3-d view for the projects in my portfolio. So now you can see the projects in a more interactive way. You can rotate and zoom in on the projects to see them from different angles.",
+    postedAt: "2026-04-05T15:30:00",
+  },
 ];
