@@ -7,24 +7,43 @@ import spaceSound from "../../assets/space.mp3";
 const useSpaceAudio = () => {
   useEffect(() => {
     const audio = new Audio(spaceSound);
+    audio.preload = "auto";
     audio.loop = true;
-    audio.volume = 0.4; // Adjust volume as needed
+    audio.volume = 0.4;
+    audio.load();
 
     const playAudio = () => {
-      audio.play().catch((err) => console.log("Waiting for user interaction to play audio..."));
+      if (!audio.paused) return;
+      audio.play().catch(() => {
+        // Expected on browsers that block autoplay until user gesture.
+      });
     };
 
+    const onCanPlay = () => {
+      playAudio();
+    };
+
+    const onError = () => {
+      // Keep a visible console signal for production diagnostics.
+      console.error("Space audio failed to load", {src: audio.src});
+    };
+
+    // Try once immediately for browsers allowing autoplay.
     playAudio();
 
-    // In case browser blocked autoplay, listen for interaction
-    window.addEventListener("click", playAudio);
-    window.addEventListener("pointerdown", playAudio);
-    window.addEventListener("keydown", playAudio);
+    // Ensure playback starts after first user gesture on stricter browsers.
+    window.addEventListener("click", playAudio, {once: true});
+    window.addEventListener("pointerdown", playAudio, {once: true});
+    window.addEventListener("keydown", playAudio, {once: true});
+    audio.addEventListener("canplaythrough", onCanPlay);
+    audio.addEventListener("error", onError);
 
     return () => {
       window.removeEventListener("click", playAudio);
       window.removeEventListener("pointerdown", playAudio);
       window.removeEventListener("keydown", playAudio);
+      audio.removeEventListener("canplaythrough", onCanPlay);
+      audio.removeEventListener("error", onError);
       audio.pause();
       audio.currentTime = 0;
     };
