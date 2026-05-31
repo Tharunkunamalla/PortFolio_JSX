@@ -111,14 +111,45 @@ const ProjectCard = ({ project, position, rotation }) => {
 };
 
 const Comets = () => {
-  const count = 10;
+  const count = 15;
   const dummy = new THREE.Object3D();
-  const meshRef = useRef();
+  
+  const meshRefRed = useRef();
+  const meshRefWhite = useRef();
+  const meshRefGradient = useRef();
   const globalTimer = useRef(0);
+  
+  // Create geometries with RGBA vertex colors for fading tails
+  const { fireGeo, whiteGeo, gradientGeo } = React.useMemo(() => {
+    const createGeo = (frontColor, backColor) => {
+      // Increased thickness to 0.25 so white comets don't blend into stars
+      const geo = new THREE.BoxGeometry(0.25, 0.25, 1);
+      const colors = [];
+      const pos = geo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        if (pos.getZ(i) > 0) {
+          // Front
+          colors.push(...frontColor);
+        } else {
+          // Back (Tail)
+          colors.push(...backColor);
+        }
+      }
+      geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+      return geo;
+    };
+    
+    return {
+      fireGeo: createGeo([1, 0.9, 0.1, 1], [1, 0.4, 0, 0]), // Fire: Yellow head fading to Orange tail
+      whiteGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]), // Pure White fading out
+      gradientGeo: createGeo([1, 1, 1, 1], [1, 0.5, 0, 0]) // White head fading to Orange tail
+    };
+  }, []);
   
   const cometsData = useRef(
     Array.from({ length: count }, () => ({
       active: false,
+      type: Math.floor(Math.random() * 3),
       pos: new THREE.Vector3(),
       vel: new THREE.Vector3(),
       scaleZ: 1,
@@ -126,13 +157,15 @@ const Comets = () => {
   ).current;
 
   useFrame((state, delta) => {
-    if (!meshRef.current) return;
+    if (!meshRefRed.current || !meshRefWhite.current || !meshRefGradient.current) return;
     
     globalTimer.current -= delta;
     if (globalTimer.current <= 0) {
       const inactiveComet = cometsData.find(c => !c.active);
       if (inactiveComet) {
         inactiveComet.active = true;
+        inactiveComet.type = Math.floor(Math.random() * 3); // 0 = Red, 1 = White, 2 = Gradient
+        
         // Spawn on a sphere radius 120 around the center
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos((Math.random() * 2) - 1);
@@ -154,9 +187,20 @@ const Comets = () => {
         inactiveComet.vel.copy(dir).multiplyScalar(speed);
         inactiveComet.scaleZ = Math.random() * 15 + 10; // Trail length
       }
-      globalTimer.current = 5; // Spawn a comet every 5 seconds
+      globalTimer.current = Math.random() * 1.5 + 0.3; // Spawn a new comet every 0.3 to 1.8 seconds
     }
 
+    // Reset all matrices to hidden state
+    dummy.position.set(0, -1000, 0);
+    dummy.scale.set(0, 0, 0);
+    dummy.updateMatrix();
+    for (let i = 0; i < count; i++) {
+      meshRefRed.current.setMatrixAt(i, dummy.matrix);
+      meshRefWhite.current.setMatrixAt(i, dummy.matrix);
+      meshRefGradient.current.setMatrixAt(i, dummy.matrix);
+    }
+
+    // Update active comets
     cometsData.forEach((comet, i) => {
       if (comet.active) {
         comet.pos.addScaledVector(comet.vel, delta);
@@ -165,26 +209,39 @@ const Comets = () => {
         dummy.lookAt(target);
         dummy.scale.set(1, 1, comet.scaleZ);
         dummy.updateMatrix();
-        meshRef.current.setMatrixAt(i, dummy.matrix);
+        
+        if (comet.type === 0) {
+          meshRefRed.current.setMatrixAt(i, dummy.matrix);
+        } else if (comet.type === 1) {
+          meshRefWhite.current.setMatrixAt(i, dummy.matrix);
+        } else {
+          meshRefGradient.current.setMatrixAt(i, dummy.matrix);
+        }
         
         // Deactivate if it goes too far
         if (comet.pos.length() > 200) {
           comet.active = false;
         }
-      } else {
-        dummy.position.set(0, -1000, 0); // Hide
-        dummy.updateMatrix();
-        meshRef.current.setMatrixAt(i, dummy.matrix);
       }
     });
-    meshRef.current.instanceMatrix.needsUpdate = true;
+    
+    meshRefRed.current.instanceMatrix.needsUpdate = true;
+    meshRefWhite.current.instanceMatrix.needsUpdate = true;
+    meshRefGradient.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[null, null, count]}>
-      <boxGeometry args={[0.08, 0.08, 1]} />
-      <meshBasicMaterial color="#c0e8ff" transparent opacity={0.9} />
-    </instancedMesh>
+    <>
+      <instancedMesh ref={meshRefRed} args={[fireGeo, null, count]}>
+        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </instancedMesh>
+      <instancedMesh ref={meshRefWhite} args={[whiteGeo, null, count]}>
+        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </instancedMesh>
+      <instancedMesh ref={meshRefGradient} args={[gradientGeo, null, count]}>
+        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+      </instancedMesh>
+    </>
   );
 };
 
