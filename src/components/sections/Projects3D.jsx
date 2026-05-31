@@ -113,14 +113,12 @@ const ProjectCard = ({ project, position, rotation }) => {
 const Comets = () => {
   const count = 15;
   const dummy = new THREE.Object3D();
-  
-  const meshRefRed = useRef();
+  const meshRefFire = useRef();
   const meshRefWhite = useRef();
-  const meshRefGradient = useRef();
   const globalTimer = useRef(0);
   
   // Create geometries with RGBA vertex colors for fading tails
-  const { fireGeo, whiteGeo, gradientGeo } = React.useMemo(() => {
+  const { fireGeo, whiteGeo } = React.useMemo(() => {
     const createGeo = (frontColor, backColor) => {
       // Increased thickness to 0.25 so white comets don't blend into stars
       const geo = new THREE.BoxGeometry(0.25, 0.25, 1);
@@ -140,16 +138,15 @@ const Comets = () => {
     };
     
     return {
-      fireGeo: createGeo([1, 0.9, 0.1, 1], [1, 0.4, 0, 0]), // Fire: Yellow head fading to Orange tail
-      whiteGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]), // Pure White fading out
-      gradientGeo: createGeo([1, 1, 1, 1], [1, 0.5, 0, 0]) // White head fading to Orange tail
+      fireGeo: createGeo([1, 0.55, 0, 1], [1, 0.15, 0, 0]), // Fire: Vibrant Orange head fading to Deep Red-Orange tail
+      whiteGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]) // Pure White fading out
     };
   }, []);
   
   const cometsData = useRef(
     Array.from({ length: count }, () => ({
       active: false,
-      type: Math.floor(Math.random() * 3),
+      type: Math.floor(Math.random() * 2),
       pos: new THREE.Vector3(),
       vel: new THREE.Vector3(),
       scaleZ: 1,
@@ -157,14 +154,14 @@ const Comets = () => {
   ).current;
 
   useFrame((state, delta) => {
-    if (!meshRefRed.current || !meshRefWhite.current || !meshRefGradient.current) return;
+    if (!meshRefFire.current || !meshRefWhite.current) return;
     
     globalTimer.current -= delta;
     if (globalTimer.current <= 0) {
       const inactiveComet = cometsData.find(c => !c.active);
       if (inactiveComet) {
         inactiveComet.active = true;
-        inactiveComet.type = Math.floor(Math.random() * 3); // 0 = Red, 1 = White, 2 = Gradient
+        inactiveComet.type = Math.floor(Math.random() * 2); // 0 = Fire, 1 = White
         
         // Spawn on a sphere radius 120 around the center
         const theta = Math.random() * Math.PI * 2;
@@ -195,9 +192,8 @@ const Comets = () => {
     dummy.scale.set(0, 0, 0);
     dummy.updateMatrix();
     for (let i = 0; i < count; i++) {
-      meshRefRed.current.setMatrixAt(i, dummy.matrix);
+      meshRefFire.current.setMatrixAt(i, dummy.matrix);
       meshRefWhite.current.setMatrixAt(i, dummy.matrix);
-      meshRefGradient.current.setMatrixAt(i, dummy.matrix);
     }
 
     // Update active comets
@@ -211,11 +207,9 @@ const Comets = () => {
         dummy.updateMatrix();
         
         if (comet.type === 0) {
-          meshRefRed.current.setMatrixAt(i, dummy.matrix);
-        } else if (comet.type === 1) {
-          meshRefWhite.current.setMatrixAt(i, dummy.matrix);
+          meshRefFire.current.setMatrixAt(i, dummy.matrix);
         } else {
-          meshRefGradient.current.setMatrixAt(i, dummy.matrix);
+          meshRefWhite.current.setMatrixAt(i, dummy.matrix);
         }
         
         // Deactivate if it goes too far
@@ -225,20 +219,16 @@ const Comets = () => {
       }
     });
     
-    meshRefRed.current.instanceMatrix.needsUpdate = true;
+    meshRefFire.current.instanceMatrix.needsUpdate = true;
     meshRefWhite.current.instanceMatrix.needsUpdate = true;
-    meshRefGradient.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
     <>
-      <instancedMesh ref={meshRefRed} args={[fireGeo, null, count]}>
+      <instancedMesh ref={meshRefFire} args={[fireGeo, null, count]}>
         <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
       </instancedMesh>
       <instancedMesh ref={meshRefWhite} args={[whiteGeo, null, count]}>
-        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
-      </instancedMesh>
-      <instancedMesh ref={meshRefGradient} args={[gradientGeo, null, count]}>
         <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
       </instancedMesh>
     </>
