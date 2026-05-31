@@ -183,9 +183,9 @@ const Comets = () => {
         const targetZ = (Math.random() - 0.5) * 60 - 20;
 
         const dir = new THREE.Vector3(targetX, targetY, targetZ).sub(inactiveComet.pos).normalize();
-        const speed = Math.random() * 80 + 60; // 60 to 140 units per second (medium-fast)
+        const speed = Math.random() * 20 + 30; // 30 to 50 units per second (medium speed)
         inactiveComet.vel.copy(dir).multiplyScalar(speed);
-        inactiveComet.scaleZ = Math.random() * 15 + 10; // Trail length
+        inactiveComet.scaleZ = Math.random() * 8 + 6; // Trail length adjusted for slower speed
       }
       globalTimer.current = Math.random() * 1.5 + 0.3; // Spawn a new comet every 0.3 to 1.8 seconds
     }
