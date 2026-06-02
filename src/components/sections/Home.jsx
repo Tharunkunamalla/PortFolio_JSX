@@ -3,12 +3,13 @@
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {Github, Linkedin, Instagram, Mail, Code2, ArrowDownCircle} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
 
-gsap.registerPlugin(MotionPathPlugin);
+gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
 const BUBBLE_COLORS = [
   "rgba(100, 100, 255, 0.22)",
@@ -49,6 +50,7 @@ const Home = ({scrollToSection}) => {
   const {theme} = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef(null);
+  const contentRef = useRef(null);
   const headingRef = useRef(null);
   const descriptionRef = useRef(null);
   const buttonsRef = useRef(null);
@@ -84,6 +86,19 @@ const Home = ({scrollToSection}) => {
           },
           "-=0.2",
         );
+
+      gsap.to([contentRef.current, scrollDownRef.current], {
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+        y: 150,
+        scale: 0.85,
+        opacity: 0,
+        ease: "none",
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -163,7 +178,7 @@ const Home = ({scrollToSection}) => {
           <div className="absolute top-1/4 -left-20 w-72 h-72 bg-secondary-200/20 dark:bg-secondary-900/20 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-accent-200/20 dark:bg-accent-900/20 rounded-full filter blur-3xl"></div>
         </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-8 items-center">
+        <div ref={contentRef} className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
             <h1
               ref={headingRef}
