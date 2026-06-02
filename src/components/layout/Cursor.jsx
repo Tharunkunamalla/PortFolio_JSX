@@ -1,11 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useLocation } from 'react-router-dom';
 
 const Cursor = () => {
   const cursorRef = useRef(null);
   const cursorOuterRef = useRef(null);
+  const location = useLocation();
+  const is3DPage = location.pathname === '/projects-3d';
 
   useEffect(() => {
+    if (is3DPage) {
+      document.body.style.cursor = 'auto';
+      return;
+    }
+
     const cursor = cursorRef.current;
     const cursorOuter = cursorOuterRef.current;
     
@@ -76,7 +84,9 @@ const Cursor = () => {
       });
       document.body.style.cursor = 'auto';
     };
-  }, []);
+  }, [is3DPage]);
+
+  if (is3DPage) return null;
 
   return (
     <>
