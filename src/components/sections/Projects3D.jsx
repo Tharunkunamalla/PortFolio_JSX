@@ -9,7 +9,9 @@ import toast from "react-hot-toast";
 const CameraController = () => {
   const { camera } = useThree();
   const [keys, setKeys] = useState({ w: false, a: false, s: false, d: false, q: false, e: false });
-  const speed = 0.2;
+  const velocity = useRef(new THREE.Vector3());
+  const speed = 0.4; // Base target speed
+  const damping = 0.05; // How fast it lerps to target
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -29,21 +31,24 @@ const CameraController = () => {
   }, []);
 
   useFrame(() => {
-    // Basic translation along world axes for simplicity, or camera local axes
-    // We will use local axes so if we ever add rotation, it works.
     const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion).normalize();
     const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize();
     
-    // Flatten movement to XZ plane if you want FPS-like strict ground movement
     dir.y = 0; dir.normalize();
     right.y = 0; right.normalize();
 
-    if (keys.w) camera.position.add(dir.clone().multiplyScalar(speed));
-    if (keys.s) camera.position.sub(dir.clone().multiplyScalar(speed));
-    if (keys.a) camera.position.sub(right.clone().multiplyScalar(speed));
-    if (keys.d) camera.position.add(right.clone().multiplyScalar(speed));
-    if (keys.q) camera.position.y += speed;
-    if (keys.e) camera.position.y -= speed;
+    const targetVelocity = new THREE.Vector3();
+
+    if (keys.w) targetVelocity.add(dir.clone().multiplyScalar(speed));
+    if (keys.s) targetVelocity.sub(dir.clone().multiplyScalar(speed));
+    if (keys.a) targetVelocity.sub(right.clone().multiplyScalar(speed));
+    if (keys.d) targetVelocity.add(right.clone().multiplyScalar(speed));
+    if (keys.q) targetVelocity.y += speed;
+    if (keys.e) targetVelocity.y -= speed;
+
+    // Smoothly interpolate current velocity towards target velocity
+    velocity.current.lerp(targetVelocity, damping);
+    camera.position.add(velocity.current);
   });
 
   return null;
@@ -65,7 +70,7 @@ const ProjectCard = ({ project, position, rotation }) => {
         occlude="blending"
         className="w-[280px] sm:w-[340px] select-none"
       >
-        <div className="bg-[#12121a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-2xl flex flex-col gap-3.5 text-white">
+        <div className="bg-[#12121a]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-3.5 shadow-[0_0_30px_rgba(255,255,255,0.05)] flex flex-col gap-3.5 text-white hover:border-white/30 hover:shadow-[0_0_40px_rgba(255,255,255,0.15)] transition-all duration-500">
           <div className="relative w-full h-[160px] rounded-xl overflow-hidden border border-white/5">
             <ImageWithSkeleton
               src={project.image}
@@ -261,6 +266,7 @@ const Projects3D = ({ projects }) => {
       onPointerDown={handleScenePointerDown}
     >
       <Canvas camera={{ position: [0, 0.5, 9], fov: 50 }}>
+        <fog attach="fog" args={["#0c0c10", 20, 80]} />
         <color attach="background" args={["#0c0c10"]} />
         <ambientLight intensity={0.5} />
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
