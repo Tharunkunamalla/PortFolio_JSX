@@ -92,7 +92,7 @@ const Home = ({scrollToSection}) => {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 1, // Changed from true to 1 for smooth scrubbing
         },
         y: 150,
         scale: 0.85,
