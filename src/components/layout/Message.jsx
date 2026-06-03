@@ -1,6 +1,7 @@
 import {useEffect, useMemo, useRef, useState} from "react";
 import {BellRing, MessageCircleMore, X} from "lucide-react";
 import {ownerMessages} from "../../data/ownerMessages";
+import {useLocation} from "react-router-dom";
 
 const formatDateTime = (value) => {
   const parsedDate = new Date(value);
@@ -66,6 +67,7 @@ const saveLastSeenState = (signature) => {
 };
 
 const Message = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [showNewMessageAlert, setShowNewMessageAlert] = useState(false);
   const [isLoaderVisible, setIsLoaderVisible] = useState(false);
@@ -159,6 +161,10 @@ const Message = () => {
   };
 
   if (isLoaderVisible) {
+    return null;
+  }
+
+  if (location.pathname === "/projects-3d") {
     return null;
   }
 
