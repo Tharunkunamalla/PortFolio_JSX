@@ -1,11 +1,21 @@
+import {ArrowLeft} from "lucide-react";
+import {useLocation, useNavigate} from "react-router-dom";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const is3DPage = location.pathname === "/projects-3d";
 
   const releasePointerLock = () => {
     window.dispatchEvent(new Event("pause-3d-controls"));
     if (document.pointerLockElement) {
       document.exitPointerLock();
     }
+  };
+
+  const handleReturnToProjects = () => {
+    navigate("/", {state: {scrollTo: "projects"}});
   };
 
   return (
@@ -42,6 +52,17 @@ const Footer = () => {
               Shinzou wo Sasageyo ✊
             </span>
           </p>
+
+          {is3DPage && (
+            <button
+              type="button"
+              onClick={handleReturnToProjects}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm font-medium">Return Home</span>
+            </button>
+          )}
         </div>
       </div>
     </footer>

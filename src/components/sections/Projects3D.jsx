@@ -1,14 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Html, Stars, PointerLockControls } from "@react-three/drei";
-import { Code, Monitor } from "lucide-react";
+import React, {useState, useEffect, useRef} from "react";
+import {Canvas, useFrame, useThree} from "@react-three/fiber";
+import {Html, Stars, PointerLockControls} from "@react-three/drei";
+import {Code, Monitor} from "lucide-react";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 import * as THREE from "three";
 import toast from "react-hot-toast";
 
 const CameraController = () => {
-  const { camera } = useThree();
-  const [keys, setKeys] = useState({ w: false, a: false, s: false, d: false, q: false, e: false });
+  const {camera} = useThree();
+  const [keys, setKeys] = useState({
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+    q: false,
+    e: false,
+  });
   const velocity = useRef(new THREE.Vector3());
   const speed = 0.4; // Base target speed
   const damping = 0.05; // How fast it lerps to target
@@ -16,11 +23,11 @@ const CameraController = () => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key.toLowerCase();
-      if (keys.hasOwnProperty(key)) setKeys((k) => ({ ...k, [key]: true }));
+      if (keys.hasOwnProperty(key)) setKeys((k) => ({...k, [key]: true}));
     };
     const handleKeyUp = (e) => {
       const key = e.key.toLowerCase();
-      if (keys.hasOwnProperty(key)) setKeys((k) => ({ ...k, [key]: false }));
+      if (keys.hasOwnProperty(key)) setKeys((k) => ({...k, [key]: false}));
     };
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
@@ -31,11 +38,17 @@ const CameraController = () => {
   }, []);
 
   useFrame(() => {
-    const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion).normalize();
-    const right = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion).normalize();
-    
-    dir.y = 0; dir.normalize();
-    right.y = 0; right.normalize();
+    const dir = new THREE.Vector3(0, 0, -1)
+      .applyQuaternion(camera.quaternion)
+      .normalize();
+    const right = new THREE.Vector3(1, 0, 0)
+      .applyQuaternion(camera.quaternion)
+      .normalize();
+
+    dir.y = 0;
+    dir.normalize();
+    right.y = 0;
+    right.normalize();
 
     const targetVelocity = new THREE.Vector3();
 
@@ -54,7 +67,7 @@ const CameraController = () => {
   return null;
 };
 
-const ProjectCard = ({ project, position, rotation }) => {
+const ProjectCard = ({project, position, rotation}) => {
   const handleLiveClick = (liveLink) => {
     if (!liveLink) {
       toast.error("Live preview will be updated soon... Stay Tuned!😉");
@@ -80,8 +93,12 @@ const ProjectCard = ({ project, position, rotation }) => {
             />
           </div>
           <div>
-            <h3 className="text-lg font-bold font-heading mb-2">{project.title}</h3>
-            <p className="text-xs sm:text-sm text-gray-400 line-clamp-3">{project.description}</p>
+            <h3 className="text-lg font-bold font-heading mb-2">
+              {project.title}
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-400 line-clamp-3">
+              {project.description}
+            </p>
           </div>
           <div className="flex flex-wrap gap-2">
             {project.technologies.slice(0, 4).map((tech, idx) => (
@@ -121,9 +138,9 @@ const Comets = () => {
   const meshRefFire = useRef();
   const meshRefWhite = useRef();
   const globalTimer = useRef(0);
-  
+
   // Create geometries with RGBA vertex colors for fading tails
-  const { fireGeo, whiteGeo } = React.useMemo(() => {
+  const {fireGeo, whiteGeo} = React.useMemo(() => {
     const createGeo = (frontColor, backColor) => {
       // Increased thickness to 0.25 so white comets don't blend into stars
       const geo = new THREE.BoxGeometry(0.25, 0.25, 1);
@@ -138,45 +155,45 @@ const Comets = () => {
           colors.push(...backColor);
         }
       }
-      geo.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4));
+      geo.setAttribute("color", new THREE.Float32BufferAttribute(colors, 4));
       return geo;
     };
-    
+
     return {
-      fireGeo: createGeo([1, 0.55, 0, 1], [1, 0.15, 0, 0]), // Fire: Vibrant Orange head fading to Deep Red-Orange tail
-      whiteGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]) // Pure White fading out
+      fireGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]), // Force white-only particles
+      whiteGeo: createGeo([1, 1, 1, 1], [1, 1, 1, 0]), // Pure White fading out
     };
   }, []);
-  
+
   const cometsData = useRef(
-    Array.from({ length: count }, () => ({
+    Array.from({length: count}, () => ({
       active: false,
       type: Math.floor(Math.random() * 2),
       pos: new THREE.Vector3(),
       vel: new THREE.Vector3(),
       scaleZ: 1,
-    }))
+    })),
   ).current;
 
   useFrame((state, delta) => {
     if (!meshRefFire.current || !meshRefWhite.current) return;
-    
+
     globalTimer.current -= delta;
     if (globalTimer.current <= 0) {
-      const inactiveComet = cometsData.find(c => !c.active);
+      const inactiveComet = cometsData.find((c) => !c.active);
       if (inactiveComet) {
         inactiveComet.active = true;
         inactiveComet.type = Math.floor(Math.random() * 2); // 0 = Fire, 1 = White
-        
+
         // Spawn on a sphere radius 120 around the center
         const theta = Math.random() * Math.PI * 2;
-        const phi = Math.acos((Math.random() * 2) - 1);
+        const phi = Math.acos(Math.random() * 2 - 1);
         const radius = 120;
-        
+
         inactiveComet.pos.set(
           radius * Math.sin(phi) * Math.cos(theta),
           radius * Math.sin(phi) * Math.sin(theta),
-          radius * Math.cos(phi) - 20
+          radius * Math.cos(phi) - 20,
         );
 
         // Velocity directed towards the center region roughly
@@ -184,7 +201,9 @@ const Comets = () => {
         const targetY = (Math.random() - 0.5) * 60;
         const targetZ = (Math.random() - 0.5) * 60 - 20;
 
-        const dir = new THREE.Vector3(targetX, targetY, targetZ).sub(inactiveComet.pos).normalize();
+        const dir = new THREE.Vector3(targetX, targetY, targetZ)
+          .sub(inactiveComet.pos)
+          .normalize();
         const speed = Math.random() * 20 + 30; // 30 to 50 units per second (medium speed)
         inactiveComet.vel.copy(dir).multiplyScalar(speed);
         inactiveComet.scaleZ = Math.random() * 8 + 6; // Trail length adjusted for slower speed
@@ -210,20 +229,20 @@ const Comets = () => {
         dummy.lookAt(target);
         dummy.scale.set(1, 1, comet.scaleZ);
         dummy.updateMatrix();
-        
+
         if (comet.type === 0) {
           meshRefFire.current.setMatrixAt(i, dummy.matrix);
         } else {
           meshRefWhite.current.setMatrixAt(i, dummy.matrix);
         }
-        
+
         // Deactivate if it goes too far
         if (comet.pos.length() > 200) {
           comet.active = false;
         }
       }
     });
-    
+
     meshRefFire.current.instanceMatrix.needsUpdate = true;
     meshRefWhite.current.instanceMatrix.needsUpdate = true;
   });
@@ -231,16 +250,28 @@ const Comets = () => {
   return (
     <>
       <instancedMesh ref={meshRefFire} args={[fireGeo, null, count]}>
-        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial
+          vertexColors
+          transparent
+          opacity={0.9}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
       </instancedMesh>
       <instancedMesh ref={meshRefWhite} args={[whiteGeo, null, count]}>
-        <meshBasicMaterial vertexColors transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial
+          vertexColors
+          transparent
+          opacity={0.9}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
       </instancedMesh>
     </>
   );
 };
 
-const Projects3D = ({ projects }) => {
+const Projects3D = ({projects}) => {
   const [controlsEnabled, setControlsEnabled] = useState(true);
 
   useEffect(() => {
@@ -265,13 +296,21 @@ const Projects3D = ({ projects }) => {
       className="w-full h-[100dvh] bg-[#0c0c10] overflow-hidden relative cursor-crosshair"
       onPointerDown={handleScenePointerDown}
     >
-      <Canvas camera={{ position: [0, 0.5, 9], fov: 50 }}>
+      <Canvas camera={{position: [0, 0.5, 9], fov: 50}}>
         <fog attach="fog" args={["#0c0c10", 20, 80]} />
         <color attach="background" args={["#0c0c10"]} />
         <ambientLight intensity={0.5} />
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+        <Stars
+          radius={100}
+          depth={50}
+          count={5000}
+          factor={4}
+          saturation={0}
+          fade
+          speed={1}
+        />
         <Comets />
-        
+
         <CameraController />
         <PointerLockControls enabled={controlsEnabled} />
 
@@ -289,8 +328,12 @@ const Projects3D = ({ projects }) => {
           <Html transform center className="pointer-events-none">
             <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 text-center text-white shadow-2xl w-[360px]">
               <h2 className="text-xl font-bold mb-5">Welcome to 3D Mode.</h2>
-              <p className="text-base mb-4 text-secondary-400">Click anywhere to look around (Mouse)</p>
-              <h3 className="text-lg font-semibold mb-4 text-secondary-400">Keyboard Controls:</h3>
+              <p className="text-base mb-4 text-secondary-400">
+                Click anywhere to look around (Mouse)
+              </p>
+              <h3 className="text-lg font-semibold mb-4 text-secondary-400">
+                Keyboard Controls:
+              </h3>
               <div className="space-y-2.5 text-base font-mono mb-4">
                 <p>W A S D - Move around</p>
                 <p>Q / E - Move up / down</p>
@@ -298,7 +341,9 @@ const Projects3D = ({ projects }) => {
               <p className="text-xs text-gray-400/90 border-t border-white/10 pt-3">
                 Scroll down to exit and reveal the black hole below.
               </p>
-              <p className="text-xs text-gray-400">Press ESC to show cursor and interact</p>
+              <p className="text-xs text-gray-400">
+                Press ESC to show cursor and interact
+              </p>
             </div>
           </Html>
         </group>
@@ -308,22 +353,23 @@ const Projects3D = ({ projects }) => {
           // Calculate a curved position
           const total = projects.length;
           // Span from -PI/2 to PI/2
-          const angle = (index / Math.max(1, total - 1)) * Math.PI - Math.PI / 2;
+          const angle =
+            (index / Math.max(1, total - 1)) * Math.PI - Math.PI / 2;
           const radius = 30;
-          
+
           const x = Math.sin(angle) * radius;
           const z = -Math.cos(angle) * radius - 24; // Push cards farther back for a calmer scene
           const y = (index % 2 === 0 ? 0.5 : -0.5) * 2; // Keep a subtle stagger
-          
+
           // Rotate to face the center/origin roughly
           const rotY = -angle;
 
           return (
-            <ProjectCard 
-              key={project.id} 
-              project={project} 
-              position={[x, y, z]} 
-              rotation={[0, rotY, 0]} 
+            <ProjectCard
+              key={project.id}
+              project={project}
+              position={[x, y, z]}
+              rotation={[0, rotY, 0]}
             />
           );
         })}

@@ -1,9 +1,8 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Projects3D from "../sections/Projects3D";
 import {visibleProjects} from "../sections/Projects";
 import spaceSound from "../../assets/space.mp3";
-import { ArrowLeft } from "lucide-react";
 
 const useSpaceAudio = () => {
   useEffect(() => {
@@ -53,15 +52,53 @@ const useSpaceAudio = () => {
 
 const Projects3DPage = () => {
   const navigate = useNavigate();
+  const [showBlackHole, setShowBlackHole] = useState(false);
+  const [blackHoleProgress, setBlackHoleProgress] = useState(0);
+  const [isWarping, setIsWarping] = useState(false);
   useSpaceAudio();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleReturnTo2D = () => {
-    // Navigate back to home and trigger smooth scroll to projects section
-    navigate("/", {state: {scrollTo: "projects"}});
+  useEffect(() => {
+    const revealStart = 40;
+    const revealEnd = 280;
+
+    const handleScroll = () => {
+      if (isWarping) return;
+
+      const y = window.scrollY || window.pageYOffset || 0;
+      const progress = Math.max(
+        0,
+        Math.min(1, (y - revealStart) / (revealEnd - revealStart)),
+      );
+
+      if (y > revealStart && document.pointerLockElement) {
+        document.exitPointerLock();
+      }
+
+      setBlackHoleProgress(progress);
+      setShowBlackHole(y > revealStart);
+    };
+
+    window.addEventListener("scroll", handleScroll, {passive: true});
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isWarping]);
+
+  const handleBlackHoleEnter = () => {
+    if (isWarping) return;
+
+    setIsWarping(true);
+    window.dispatchEvent(new Event("pause-3d-controls"));
+
+    window.setTimeout(() => {
+      navigate("/", {state: {scrollTo: "projects"}});
+    }, 900);
   };
 
   return (
@@ -71,16 +108,39 @@ const Projects3DPage = () => {
 
       <Projects3D projects={visibleProjects} />
 
-      {/* Clean Back Button */}
-      <div className="fixed top-6 left-6 pointer-events-auto z-[99999]">
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-28 z-[55] flex justify-center transition-all duration-500 ${
+          showBlackHole && !isWarping
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
+        }`}
+      >
         <button
           type="button"
-          onClick={handleReturnTo2D}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300"
+          onClick={handleBlackHoleEnter}
+          className="group pointer-events-auto relative h-28 w-28 rounded-full"
+          aria-label="Enter black hole to jump to projects section"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm font-medium">Return Home</span>
+          <span
+            className="absolute inset-0 rounded-full border border-fuchsia-400/40"
+            style={{
+              boxShadow:
+                "0 0 35px rgba(217,70,239,0.35), inset 0 0 30px rgba(0,0,0,0.95)",
+              transform: `scale(${0.9 + blackHoleProgress * 0.2})`,
+            }}
+          />
+          <span className="absolute inset-2 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(138,43,226,0.8),rgba(15,10,30,0.95)_45%,#000_72%)] animate-black-hole-spin" />
+          <span className="absolute inset-[-12px] rounded-full border border-fuchsia-400/20 animate-black-hole-ring" />
+          <span className="absolute inset-[-24px] rounded-full border border-cyan-300/15 animate-black-hole-ring-delayed" />
         </button>
+      </div>
+
+      <div
+        className={`pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-500 ${
+          isWarping ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="black-hole-warp-layer h-full w-full" />
       </div>
 
       {/* Bottom Blend */}

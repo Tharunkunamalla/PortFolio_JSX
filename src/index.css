@@ -278,3 +278,66 @@ html::-webkit-scrollbar {
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: rgba(217, 70, 239, 0.5);
 }
+
+@keyframes black-hole-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.06);
+    filter: hue-rotate(30deg);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
+
+@keyframes black-hole-ring {
+  0% {
+    transform: scale(0.72);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@keyframes black-hole-warp {
+  0% {
+    clip-path: circle(0% at 50% 78%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(140% at 50% 78%);
+    opacity: 1;
+  }
+}
+
+.animate-black-hole-spin {
+  animation: black-hole-spin 3s linear infinite;
+}
+
+.animate-black-hole-ring {
+  animation: black-hole-ring 2.6s ease-out infinite;
+}
+
+.animate-black-hole-ring-delayed {
+  animation: black-hole-ring 2.6s ease-out infinite;
+  animation-delay: 1.2s;
+}
+
+.black-hole-warp-layer {
+  background:
+    radial-gradient(circle at 50% 78%, rgba(0, 0, 0, 1) 4%, rgba(72, 19, 120, 0.95) 16%, rgba(0, 0, 0, 0.85) 36%, rgba(0, 0, 0, 0.98) 100%),
+    radial-gradient(circle at 50% 78%, rgba(245, 158, 255, 0.3) 0%, rgba(34, 211, 238, 0.06) 40%, rgba(0, 0, 0, 0) 62%);
+  animation: black-hole-warp 0.9s cubic-bezier(0.25, 0.9, 0.2, 1) forwards;
+}
