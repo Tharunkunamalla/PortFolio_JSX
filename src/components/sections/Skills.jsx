@@ -42,6 +42,7 @@ import {
 import {FaJava} from "react-icons/fa";
 import {VscCode} from "react-icons/vsc";
 import LeetCodeStats from "./LeetCodeStats.jsx";
+import GitHubStats from "./GitHubStats.jsx";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 
@@ -282,6 +283,11 @@ const Skills = () => {
         {/* LeetCodeStats moved inside section to fix background gap */}
         <div className="mt-32 relative z-20">
           <LeetCodeStats />
+        </div>
+
+        {/* GitHub Stats added below LeetCode Stats */}
+        <div className="mt-8 relative z-20">
+          <GitHubStats />
         </div>
       </div>
 
