@@ -91,7 +91,7 @@ const GitHubStats = () => {
               transitionSpeed={1500}
               className="w-full"
             >
-              <div className="rounded-2xl p-4 bg-white/5 dark:bg-white/[0.03] backdrop-blur-3xl border border-gray-200 dark:border-white/10 shadow-2xl transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-1 flex items-center justify-center min-h-[220px]">
+              <div className="rounded-2xl p-2 sm:p-4 bg-white/5 dark:bg-white/[0.03] backdrop-blur-3xl border border-gray-200 dark:border-white/10 shadow-2xl transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-1 flex items-center justify-center md:min-h-[220px]">
                 <img
                   src="https://streak-stats.demolab.com?user=Tharunkunamalla&theme=blue-green&hide_border=true&date_format=%5BY%20%5DM%20j"
                   alt="GitHub Streak"
@@ -113,7 +113,7 @@ const GitHubStats = () => {
               transitionSpeed={1500}
               className="w-full"
             >
-              <div className="rounded-2xl p-4 bg-white/5 dark:bg-white/[0.03] backdrop-blur-3xl border border-gray-200 dark:border-white/10 shadow-2xl transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-1 flex items-center justify-center min-h-[220px]">
+              <div className="rounded-2xl p-2 sm:p-4 bg-white/5 dark:bg-white/[0.03] backdrop-blur-3xl border border-gray-200 dark:border-white/10 shadow-2xl transition-all duration-300 hover:border-blue-500/30 hover:-translate-y-1 flex items-center justify-center md:min-h-[220px]">
                 <img
                   src="https://github-readme-stats-eight-theta.vercel.app/api?username=Tharunkunamalla&show_icons=true&count_private=true&line_height=20&icon_color=00b3ff&theme=blue-green&title_color=00b3ff"
                   alt="GitHub Stats"
