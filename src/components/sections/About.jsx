@@ -309,11 +309,11 @@ const About = () => {
                 <span
                   ref={gradientTextRef}
                   className="
-      relative inline-block
-      font-extrabold
-      bg-clip-text text-transparent
-      bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
-    "
+                        relative inline-block
+                        font-extrabold
+                        bg-clip-text text-transparent
+                        bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
+                      "
                 >
                   MERN-Stack Developer
                   <span
