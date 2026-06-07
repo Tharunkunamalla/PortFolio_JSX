@@ -106,7 +106,7 @@ function ScrollRouterWrapper() {
                 <Home scrollToSection={scrollToSection} />
                 <About />
                 <Skills />
-                <Toaster position="top-center" />
+                <Toaster position="top-right" />
                 <Projects />
                 <Contact />
               </>
