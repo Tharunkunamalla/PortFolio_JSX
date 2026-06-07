@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Projects3D from "../sections/Projects3D";
-import {visibleProjects} from "../sections/Projects";
+import {visibleProjects} from "../../constants/projectsData";
 import spaceSound from "../../assets/space.mp3";
 
 const useSpaceAudio = () => {
