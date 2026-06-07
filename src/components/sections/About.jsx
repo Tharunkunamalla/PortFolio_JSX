@@ -259,11 +259,10 @@ const About = () => {
 
       <div
         className="
-    absolute top-0 left-0 right-0 h-24
-    bg-gradient-to-b
-    from-white/80 to-transparent
-    dark:from-black/60
-  "
+          absolute top-0 left-0 right-0 h-24
+          bg-gradient-to-b
+          from-white/80 to-transparent
+          dark:from-black/60"
       />
       {/* ===== TOP BLEND ===== */}
       <div
