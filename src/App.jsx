@@ -17,6 +17,7 @@ import Projects from "./components/sections/Projects";
 import AllProjects from "./components/projects/AllProjects";
 import Contact from "./components/sections/Contact";
 import Message from "./components/layout/Message";
+import Error from "./components/layout/Error";
 
 import {ReactLenis} from "@studio-freight/react-lenis";
 
@@ -115,6 +116,7 @@ function ScrollRouterWrapper() {
           <Route path="/projects" element={<AllProjects />} />
           <Route path="/project/:projectId" element={<ProjectDetail />} />
           <Route path="/projects-3d" element={<Projects3DPage />} />
+          <Route path="*" element={<Error />} />
         </Routes>
       </main>
       <Footer />
