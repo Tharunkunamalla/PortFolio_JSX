@@ -17,7 +17,7 @@ export const webProjects = [
       "Google Cloud Storage (GCS)",
       "Google Cloud Firestore",
     ],
-    liveLink: "https://mythweaver-ai-taupe.vercel.app/",
+    liveLink: "https://mythweaver-ai-taupe.vercel.app",
     codeLink: "https://github.com/Tharunkunamalla/MythWeaver-AI.git",
   },
   {
