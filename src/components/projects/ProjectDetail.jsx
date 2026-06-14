@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {useParams, useNavigate} from "react-router-dom";
-import projectsData from "../../data/projects.json";
+import {allProjects} from "../../constants/projectsData";
 import {FaGithub, FaExternalLinkAlt} from "react-icons/fa";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
 
@@ -9,11 +9,6 @@ const ProjectDetail = () => {
   const {projectId} = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
-  const allProjects = [
-    ...projectsData.webProjects,
-    ...projectsData.machineLearningProjects,
-  ];
 
   const [project, setProject] = useState(null);
 

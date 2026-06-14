@@ -38,7 +38,7 @@ export const webProjects = [
     id: 1,
     title: "CodeSync",
     description:
-      "A real-time collaborative code editor built with Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative tools",
+      "A real-time collaborative code editor built with React, Node.js, Express, and Socket.IO. It allows multiple users to edit code simultaneously with live updates and syntax highlighting. Features include real-time cursor tracking, built-in code execution with multiple language support, user presence indicators, and collaborative debugging tools. The platform supports creating multiple editing sessions with customizable permissions for read-only or full-access modes. Code changes are instantly synchronized across all connected clients with conflict resolution. Users can save their sessions and export code in various formats. The application includes a comprehensive documentation library and example projects to help new users get started quickly.",
     image: "/assets/codesync.png",
     technologies: [
       "React",
@@ -76,7 +76,7 @@ export const webProjects = [
     id: 3,
     title: "FaceRipple",
     description:
-      "Video Calling Realtime Chat App & Social App using getStream API for real-time messaging, with MongoDB storing user data and messages.",
+      "Video Calling Realtime Chat App & Social App. Combines WebRTC with React for seamless peer-to-peer video chat. Integrates getStream API for real-time messaging, with MongoDB storing user data and messages. Tailwind CSS ensures responsive design. User authentication and room management are handled via Express and Node.js backend.",
     image: "/assets/FaceRipple1.png",
     technologies: [
       "React",
@@ -129,7 +129,7 @@ export const webProjects = [
     id: 6,
     title: "ResumeGenie Ai",
     description:
-      "An AI-powered Resume Tracker which tracks the resume and provides insights. It also generates the ATS score using GPT-3.5 Turbo.",
+      "An AI-powered Resume Analyzer and Generator. Utilizes OpenAI's GPT-3.5 Turbo to analyze resumes and generate feedback. Users can upload resumes and get ATS score and suggestions for improvements. Built with React and TypeScript, with Tailwind CSS for a modern UI. It helps job seekers optimize resumes for ATS systems.",
     image: "/assets/ResumeGenie1.png",
     technologies: [
       "React",
@@ -145,7 +145,7 @@ export const webProjects = [
     id: 7,
     title: "Sapphire Skies Resort",
     description:
-      "A fully responsive resort booking app with authentication and room management. Users can book rooms, view amenities, and manage reservations.",
+      "A fully functional resort booking system. It includes user registration, room selection, and booking history. Admin dashboard to manage rooms and bookings. Uses Clerk for user authentication. Frontend in React with Tailwind CSS and backend via Node.js, Express, and MongoDB.",
     image: "/assets/sapphire.png",
     technologies: [
       "React",
@@ -162,7 +162,7 @@ export const webProjects = [
     id: 8,
     title: "Tournament Management System",
     description:
-      "Manage tournaments, teams, and schedules online. Full-stack app. Database designed in SQL. Frontend using HTML/CSS/JS and backend logic in PHP.",
+      "A PHP-based system to manage tournaments, players, matches, and schedules. Includes features for team registration, match fixtures, live score updates, and admin control. Database designed in SQL. Full stack project with frontend using HTML/CSS/JS and backend logic written in PHP.#ClgProject",
     image: "/assets/TMS_proj.png",
     technologies: ["Php", "SQL", "JS", "CSS", "HTML"],
     liveLink: "",
@@ -172,7 +172,7 @@ export const webProjects = [
     id: 9,
     title: "Portfolio Website",
     description:
-      "My personal portfolio showcasing skills and projects. Built with modern web technologies and responsive design.",
+      "Responsive personal portfolio with project showcase, contact form, and social media integration. Built using vanilla HTML/CSS/JS. Clean UI, animated sections, mobile-friendly layout. Hosted on Netlify.",
     image: "/assets/portfolio.png",
     technologies: ["Js", "CSS", "HTML"],
     liveLink: "https://tharun-kunamalla.netlify.app/",
@@ -182,7 +182,7 @@ export const webProjects = [
     id: 10,
     title: "Gemini-AI",
     description:
-      "AI assistant dashboard with clean UI and GPT integration. Provides seamless interaction with AI models for various tasks.",
+      "An AI chatbot interface styled like Google's Gemini. Uses OpenAI's GPT-3.5 for conversational abilities. Minimalistic UI built with vanilla JS/CSS. Aimed at providing clean UI inspiration for AI dashboard tools.",
     image: "/assets/gemini.jpg",
     technologies: ["JS", "Css", "OpenAI API"],
     liveLink: "https://gemini-app-chatbot.vercel.app/",
@@ -192,7 +192,7 @@ export const webProjects = [
     id: 11,
     title: "Jarvis -Voice Assistant",
     description:
-      "Real-time voice assistant with Google integration. Supports voice commands, web search, and task automation.",
+      "Voice-controlled assistant using browser's speech recognition. Responds to commands like Google search, opening apps, telling time. Built with JS and Web Speech API. Clean UI and smooth audio feedback.",
     image: "/assets/jarvis.gif",
     technologies: ["JS", "Google"],
     liveLink: "https://jarvis-responder.vercel.app/",
@@ -205,8 +205,8 @@ export const machineLearningProjects = [
     id: 12,
     title: "Anime Recommendation System",
     description:
-      "A content-based anime recommendation system using cosine similarity.Fetches anime data from Jikan API and provides recommendations based on user input using FastApi.",
-    image: "/assets/p3.png",
+      "Anime Discover is a content-based recommendation platform that suggests similar anime titles by analyzing genre and metadata patterns with TF-IDF vectorization and cosine similarity. It is built with Python, Pandas, and Scikit-learn, served through a custom FastAPI backend for fast search and recommendation responses. The interface enriches every result in real time using the Jikan API, displaying posters, ratings, genres, and synopses to deliver a complete discovery experience for users.",
+    image: "/assets/p2.jpg",
     technologies: [
       "Python",
       "Scikit-learn",
@@ -214,7 +214,7 @@ export const machineLearningProjects = [
       "Jikan API",
       "Streamlit",
     ],
-    liveLink: "https://anime-recommendations-system.streamlit.app/",
+    liveLink: "https://anime-recommend-sys.netlify.app/",
     codeLink:
       "https://github.com/Tharunkunamalla/Anime-Recommendations-System.git",
   },
@@ -222,7 +222,7 @@ export const machineLearningProjects = [
     id: 13,
     title: "Brain Tumor MRI Classification",
     description:
-      "CNN and Transfer Learning to classify MRI brain images. Deployed via Streamlit with UI to upload and predict on MRI scans and visualize results.",
+      "Deep learning-based classification of brain tumors using CNN and transfer learning with VGG16 and ResNet50. Deployed via Streamlit with UI to upload and predict on MRI scans. Includes data preprocessing, augmentation, and visualization of results.",
     image: "/assets/brain_tumor.png",
     technologies: ["Python", "TensorFlow", "Keras", "Streamlit"],
     liveLink: "",
@@ -233,7 +233,7 @@ export const machineLearningProjects = [
     id: 14,
     title: "PhonePe Transactions Insights",
     description:
-      "Data analysis of PhonePe transactions using Python and visualization libraries. Extracts trends in transaction volume, types, and geography.",
+      "EDA on PhonePe data using Pandas, visualized with Matplotlib. Shows transaction volume, types, and geographic distribution. Focus on data wrangling, visualization, and trends extraction. Deployed via Streamlit for interactive exploration.",
     image: "/assets/phonepe.png",
     technologies: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
     liveLink: "",
@@ -244,7 +244,7 @@ export const machineLearningProjects = [
     id: 15,
     title: "Shopper spectrum - Customer Segmentation",
     description:
-      "Customer segmentation using K-means clustering to analyze shopping behavior.",
+      "Clustering shoppers using K-means based on demographics and spending patterns. Visualized with Seaborn and deployed via Streamlit for real-time interaction and insights. Targeted towards marketing teams for behavior analysis.",
     image: "/assets/shopper1.png",
     technologies: [
       "Python",
@@ -262,7 +262,7 @@ export const machineLearningProjects = [
     id: 16,
     title: "Multi class fish classification",
     description:
-      "CNN model to classify different species of fish. Includes data preprocessing, augmentation, and visualization of results.",
+      "Multi-class classification of fish species using 5 pre-trained CNN models. Streamlit UI to upload fish image and receive prediction. Includes data augmentation and model comparison metrics. Visualizes results with Matplotlib.",
     image: "/assets/fish1.png",
     technologies: [
       "Python",
