@@ -3,7 +3,7 @@ export const webProjects = [
     id: 100,
     title: "MythWeaver",
     description:
-      "MythWeaver is a premium, full-stack AI storytelling application. It transforms simple prompts into rich narratives complete with AI-generated background art, synchronized voice narration, dynamic AI background music, an expanding volume pill, and exportable PDF manuscripts.",
+      "MythWeaver is a premium, full-stack AI storytelling application. It transforms simple prompts into rich narratives complete with AI-generated background art, synchronized voice narration, dynamic AI background music, an expanding volume pill, and exportable PDF manuscripts. It integrates Google Cloud Platform to permanently host generated story assets (illustrations/voice audio) in GCS buckets and store metadata in Firestore. This enables a global 'Recent Stories' feed on the dashboard with direct streaming, along with a graceful zero-config fallback to ephemeral memory for local setups.",
     image: "/assets/weaver.png",
     technologies: [
       "React",
@@ -13,6 +13,9 @@ export const webProjects = [
       "OpenAI",
       "ElevenLabs",
       "Suno API",
+      "GCP",
+      "Google Cloud Storage (GCS)",
+      "Google Cloud Firestore",
     ],
     liveLink: "https://mythweaver-ai-taupe.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/MythWeaver-AI.git",
