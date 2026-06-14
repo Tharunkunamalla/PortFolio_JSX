@@ -14,7 +14,7 @@ export const webProjects = [
       "ElevenLabs",
       "Suno API",
     ],
-    liveLink: "",
+    liveLink: "https://mythweaver-ai-taupe.vercel.app/",
     codeLink: "https://github.com/Tharunkunamalla/MythWeaver-AI.git",
   },
   {
