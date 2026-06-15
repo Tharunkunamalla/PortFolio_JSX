@@ -4,7 +4,7 @@ export const webProjects = [
     title: "MythWeaver",
     description:
       "MythWeaver is a premium, full-stack AI storytelling application. It transforms simple prompts into rich narratives complete with AI-generated background art, synchronized voice narration, dynamic AI background music, an expanding volume pill, and exportable PDF manuscripts. It integrates Google Cloud Platform to permanently host generated story assets (illustrations/voice audio) in GCS buckets and store metadata in Firestore. This enables a global 'Recent Stories' feed on the dashboard with direct streaming, along with a graceful zero-config fallback to ephemeral memory for local setups.",
-    image: "/assets/weaver.png",
+    image: "/assets/weaver1.png",
     technologies: [
       "React",
       "Vite",
