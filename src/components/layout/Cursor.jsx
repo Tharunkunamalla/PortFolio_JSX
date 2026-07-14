@@ -1,15 +1,17 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { useLocation } from 'react-router-dom';
+import { useTerminal } from '../../context/TerminalContext';
 
 const Cursor = () => {
   const cursorRef = useRef(null);
   const cursorOuterRef = useRef(null);
   const location = useLocation();
+  const { isTerminalOpen } = useTerminal();
   const is3DPage = location.pathname === '/projects-3d';
 
   useEffect(() => {
-    if (is3DPage) {
+    if (is3DPage || isTerminalOpen) {
       document.body.style.cursor = 'auto';
       return;
     }
@@ -84,9 +86,9 @@ const Cursor = () => {
       });
       document.body.style.cursor = 'auto';
     };
-  }, [is3DPage]);
+  }, [is3DPage, isTerminalOpen]);
 
-  if (is3DPage) return null;
+  if (is3DPage || isTerminalOpen) return null;
 
   return (
     <>

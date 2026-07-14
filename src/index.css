@@ -341,3 +341,92 @@ html::-webkit-scrollbar {
     radial-gradient(circle at 50% 78%, rgba(245, 158, 255, 0.3) 0%, rgba(34, 211, 238, 0.06) 40%, rgba(0, 0, 0, 0) 62%);
   animation: black-hole-warp 0.9s cubic-bezier(0.25, 0.9, 0.2, 1) forwards;
 }
+
+/* ==========================================================================
+   CRT Retro Terminal Scanlines & Flicker Style
+   ========================================================================== */
+
+/* Scanline lines across the screen */
+.crt-screen::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.015), rgba(0, 0, 255, 0.04));
+  z-index: 10;
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+}
+
+@keyframes crt-flicker {
+  0% { opacity: 0.985; }
+  50% { opacity: 0.995; }
+  100% { opacity: 0.990; }
+}
+
+.crt-flicker {
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* Custom terminal scrollbar */
+.terminal-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.terminal-scrollbar::-webkit-scrollbar-track {
+  background: rgba(57, 255, 20, 0.03);
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(57, 255, 20, 0.2);
+  border-radius: 3px;
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(57, 255, 20, 0.4);
+}
+
+/* ==========================================================================
+   Hacker Mode Global Stylesheet Override (sudo hacker)
+   ========================================================================== */
+
+.hacker-mode {
+  --hacker-green: #39ff14;
+  --hacker-green-dim: rgba(57, 255, 20, 0.12);
+  --hacker-green-border: rgba(57, 255, 20, 0.25);
+}
+
+.hacker-mode,
+.hacker-mode * {
+  background-color: #050505 !important;
+  color: var(--hacker-green) !important;
+  border-color: var(--hacker-green-border) !important;
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.4) !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+
+/* Exclude the terminal window container from absolute black backgrounds to keep its CRT border visible */
+.hacker-mode .crt-screen {
+  background-color: #07070a !important;
+  border-color: rgba(57, 255, 20, 0.4) !important;
+}
+
+.hacker-mode input,
+.hacker-mode textarea,
+.hacker-mode select {
+  outline: 1px solid var(--hacker-green-border) !important;
+  background-color: #0c0c0f !important;
+}
+
+.hacker-mode button:hover,
+.hacker-mode a:hover {
+  background-color: var(--hacker-green-dim) !important;
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.4) !important;
+}
+
+.hacker-mode img,
+.hacker-mode video,
+.hacker-mode iframe,
+.hacker-mode canvas:not(.pointer-events-none) {
+  filter: grayscale(1) sepia(1) hue-rotate(85deg) saturate(3.5) brightness(0.85) !important;
+}
+

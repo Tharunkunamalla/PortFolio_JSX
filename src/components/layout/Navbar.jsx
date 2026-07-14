@@ -1,8 +1,9 @@
 import {useState, useEffect} from "react";
-import {Menu, X, Moon, Sun, Github, Linkedin, Instagram} from "lucide-react";
+import {Menu, X, Moon, Sun, Github, Linkedin, Instagram, Terminal as TerminalIcon} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import {useNavigate, useLocation} from "react-router-dom";
 import {useTheme} from "../../context/ThemeContext";
+import {useTerminal} from "../../context/TerminalContext";
 
 const socialLinks = [
   {Icon: Github, href: "https://github.com/Tharunkunamalla"},
@@ -15,6 +16,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const {theme, toggleTheme} = useTheme();
+  const {toggleTerminal} = useTerminal();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -59,7 +61,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
       <div
         className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
           isScrolled
-            ? "w-full max-w-6xl px-10 py-3 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            ? "w-full max-w-6xl px-12 py-3 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
             : "w-full container mx-auto px-6 md:px-12 py-5 md:py-8"
         }`}
       >
@@ -84,7 +86,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`relative px-7 py-2.5 text-sm font-bold tracking-[0.1em] uppercase transition-all duration-500 group
+                className={`relative px-5 py-2.5 text-sm font-bold tracking-[0.1em] uppercase transition-all duration-500 group
           ${
             isActive
               ? "text-white"
@@ -108,7 +110,7 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center space-x-3 md:space-x-5">
+        <div className="flex items-center space-x-2 md:space-x-3">
           {/* Socials Desktop */}
           <div className="hidden lg:flex items-center space-x-4">
             {socialLinks.map(({Icon, href}, idx) => (
@@ -138,6 +140,16 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
             ) : (
               <Moon className="h-7 w-7 text-gray-700 group-hover:rotate-12 transition-transform duration-300" />
             )}
+          </button>
+
+          {/* CLI Terminal Toggle */}
+          <button
+            onClick={toggleTerminal}
+            className="p-2.5 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-secondary-500/20 transition-all duration-300 group"
+            aria-label="Toggle CLI terminal"
+            title="Toggle CLI Terminal (` or Ctrl + K)"
+          >
+            <TerminalIcon className="h-7 w-7 text-gray-700 dark:text-gray-400 group-hover:text-secondary-500 transition-colors" />
           </button>
 
           {/* Mobile Menu Toggle */}

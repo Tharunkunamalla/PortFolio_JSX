@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import {ThemeProvider} from "./context/ThemeContext";
+import {TerminalProvider} from "./context/TerminalContext";
 import Cursor from "./components/layout/Cursor";
 import Navbar from "./components/layout/Navbar";
 import Line from "./components/layout/Line";
@@ -18,6 +19,8 @@ import AllProjects from "./components/projects/AllProjects";
 import Contact from "./components/sections/Contact";
 import Message from "./components/layout/Message";
 import Error from "./components/layout/Error";
+import Terminal from "./components/layout/Terminal";
+import MatrixRain from "./components/ui/MatrixRain";
 
 import {ReactLenis} from "@studio-freight/react-lenis";
 
@@ -129,12 +132,16 @@ function App() {
     <ReactLenis root>
       <Router>
         <ThemeProvider>
-          <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300 font-sans">
-            <Cursor />
-            <ScrollRouterWrapper />
-            <Message />
-            <Line />
-          </div>
+          <TerminalProvider>
+            <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300 font-sans">
+              <Cursor />
+              <ScrollRouterWrapper />
+              <Message />
+              <Line />
+              <Terminal />
+              <MatrixRain />
+            </div>
+          </TerminalProvider>
         </ThemeProvider>
       </Router>
     </ReactLenis>

@@ -22,8 +22,15 @@ export const ThemeProvider = ({children}) => {
     document.documentElement.classList.toggle("dark", newTheme === "dark");
   };
 
+  const changeTheme = (newTheme) => {
+    if (newTheme !== "dark" && newTheme !== "light") return;
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
+
   return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
+    <ThemeContext.Provider value={{theme, toggleTheme, changeTheme}}>
       {children}
     </ThemeContext.Provider>
   );
