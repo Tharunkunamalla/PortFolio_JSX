@@ -273,6 +273,9 @@ const Comets = () => {
 
 const Projects3D = ({projects}) => {
   const [controlsEnabled, setControlsEnabled] = useState(true);
+  const [nebulaActive, setNebulaActive] = useState(false);
+  const [cyberGridActive, setCyberGridActive] = useState(false);
+  const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   useEffect(() => {
     const pauseControls = () => setControlsEnabled(false);
@@ -297,9 +300,17 @@ const Projects3D = ({projects}) => {
       onPointerDown={handleScenePointerDown}
     >
       <Canvas camera={{position: [0, 0.5, 9], fov: 50}}>
-        <fog attach="fog" args={["#0c0c10", 20, 80]} />
-        <color attach="background" args={["#0c0c10"]} />
-        <ambientLight intensity={0.5} />
+        {nebulaActive ? (
+          <fog attach="fog" args={["#150722", 15, 70]} />
+        ) : (
+          <fog attach="fog" args={["#0c0c10", 20, 80]} />
+        )}
+        {nebulaActive ? (
+          <color attach="background" args={["#0a0410"]} />
+        ) : (
+          <color attach="background" args={["#0c0c10"]} />
+        )}
+        <ambientLight intensity={nebulaActive ? 0.35 : 0.5} />
         <Stars
           radius={100}
           depth={50}
@@ -310,6 +321,21 @@ const Projects3D = ({projects}) => {
           speed={1}
         />
         <Comets />
+
+        {nebulaActive && (
+          <>
+            <pointLight position={[0, 10, -30]} color="#d946ef" intensity={5} distance={100} />
+            <pointLight position={[30, -5, -40]} color="#0ea5e9" intensity={8} distance={100} />
+            <pointLight position={[-30, -5, -40]} color="#a855f7" intensity={8} distance={100} />
+          </>
+        )}
+
+        {cyberGridActive && (
+          <gridHelper
+            args={[300, 100, "#d946ef", "#0ea5e9"]}
+            position={[0, -6, -30]}
+          />
+        )}
 
         <CameraController />
         <PointerLockControls enabled={controlsEnabled} />
@@ -323,28 +349,110 @@ const Projects3D = ({projects}) => {
           </Html>
         </group>
 
-        {/* Instructional Card */}
+        {/* Instructional Card (Welcome board with 3D Controls) */}
         <group position={[0, -0.5, -12]}>
-          <Html transform center className="pointer-events-none">
-            <div className="bg-black/40 backdrop-blur-md border border-white/20 rounded-3xl p-6 text-center text-white shadow-2xl w-[360px]">
-              <h2 className="text-xl font-bold mb-5">Welcome to 3D Mode.</h2>
-              <p className="text-base mb-4 text-secondary-400">
-                Click anywhere to look around (Mouse)
-              </p>
-              <h3 className="text-lg font-semibold mb-4 text-secondary-400">
-                Keyboard Controls:
-              </h3>
-              <div className="space-y-2.5 text-base font-mono mb-4">
-                <p>W A S D - Move around</p>
-                <p>Q / E - Move up / down</p>
+          <Html transform center className="select-none">
+            {!showMoreOptions ? (
+              <div
+                className="bg-black/50 backdrop-blur-lg border border-white/15 rounded-3xl p-6 text-center text-white shadow-2xl w-[360px] pointer-events-auto transition-all duration-300"
+                onClick={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+              >
+                <h2 className="text-xl font-bold mb-4 font-heading">Welcome to 3D Mode.</h2>
+                <p className="text-sm mb-4 text-secondary-400 font-medium">
+                  Click anywhere to look around (Mouse)
+                </p>
+                
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-3 border-b border-white/10 pb-1 flex items-center justify-center">
+                  Keyboard Controls
+                </h3>
+                <div className="space-y-1 text-xs font-mono mb-5 text-gray-300">
+                  <p>W A S D - Move around</p>
+                  <p>Q / E - Move up / down</p>
+                </div>
+
+                <div className="text-[10px] text-gray-400/90 border-t border-white/10 pt-3.5 mb-4">
+                  Scroll down to exit (reveal the black hole).
+                </div>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowMoreOptions(true);
+                  }}
+                  className="px-4 py-2 text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 pointer-events-auto w-full text-secondary-400 hover:text-white"
+                >
+                  More Options...
+                </button>
               </div>
-              <p className="text-xs text-gray-400/90 border-t border-white/10 pt-3">
-                Scroll down to exit and reveal the black hole below.
-              </p>
-              <p className="text-xs text-gray-400">
-                Press ESC to show cursor and interact
-              </p>
-            </div>
+            ) : (
+              <div
+                className="bg-black/50 backdrop-blur-lg border border-white/15 rounded-3xl p-6 text-center text-white shadow-2xl w-[360px] pointer-events-auto transition-all duration-300"
+                onClick={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+              >
+                <h2 className="text-xl font-bold mb-4 font-heading">3D Settings</h2>
+                
+                <h3 className="text-xs font-black uppercase tracking-[0.2em] text-gray-400 mb-4 border-b border-white/10 pb-1 flex items-center justify-center">
+                  Scene Controls
+                </h3>
+                <div className="space-y-3.5 mb-5 pl-2 pr-2">
+                  {/* Nebula Glow Toggle */}
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-semibold text-gray-300">Nebula Glow</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setNebulaActive(!nebulaActive);
+                      }}
+                      className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors duration-300 pointer-events-auto ${
+                        nebulaActive ? "bg-secondary-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" : "bg-gray-700"
+                      }`}
+                    >
+                      <div
+                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
+                          nebulaActive ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+
+                  {/* Cyber Grid Toggle */}
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="font-semibold text-gray-300">Cyber Grid</span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCyberGridActive(!cyberGridActive);
+                      }}
+                      className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors duration-300 pointer-events-auto ${
+                        cyberGridActive ? "bg-primary-500 shadow-[0_0_10px_rgba(14,165,233,0.5)]" : "bg-gray-700"
+                      }`}
+                    >
+                      <div
+                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
+                          cyberGridActive ? "translate-x-4" : "translate-x-0"
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="text-[10px] text-gray-400/90 border-t border-white/10 pt-3.5 mb-4 leading-relaxed">
+                  Press <kbd className="px-1.5 py-0.5 bg-white/10 rounded font-mono text-[9px]">ESC</kbd> to unlock cursor & toggle settings.
+                </div>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowMoreOptions(false);
+                  }}
+                  className="px-4 py-2 text-xs font-bold bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl transition-all duration-300 pointer-events-auto w-full text-secondary-400 hover:text-white"
+                >
+                  Back to Help
+                </button>
+              </div>
+            )}
           </Html>
         </group>
 
