@@ -274,7 +274,6 @@ const Comets = () => {
 const Projects3D = ({projects}) => {
   const [controlsEnabled, setControlsEnabled] = useState(true);
   const [nebulaActive, setNebulaActive] = useState(false);
-  const [cyberGridActive, setCyberGridActive] = useState(false);
   const [showMoreOptions, setShowMoreOptions] = useState(false);
 
   useEffect(() => {
@@ -330,12 +329,7 @@ const Projects3D = ({projects}) => {
           </>
         )}
 
-        {cyberGridActive && (
-          <gridHelper
-            args={[300, 100, "#d946ef", "#0ea5e9"]}
-            position={[0, -6, -30]}
-          />
-        )}
+
 
         <CameraController />
         <PointerLockControls enabled={controlsEnabled} />
@@ -417,25 +411,7 @@ const Projects3D = ({projects}) => {
                     </button>
                   </div>
 
-                  {/* Cyber Grid Toggle */}
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="font-semibold text-gray-300">Cyber Grid</span>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCyberGridActive(!cyberGridActive);
-                      }}
-                      className={`w-9 h-5 flex items-center rounded-full p-0.5 transition-colors duration-300 pointer-events-auto ${
-                        cyberGridActive ? "bg-primary-500 shadow-[0_0_10px_rgba(14,165,233,0.5)]" : "bg-gray-700"
-                      }`}
-                    >
-                      <div
-                        className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-300 ${
-                          cyberGridActive ? "translate-x-4" : "translate-x-0"
-                        }`}
-                      />
-                    </button>
-                  </div>
+
                 </div>
 
                 <div className="text-[10px] text-gray-400/90 border-t border-white/10 pt-3.5 mb-4 leading-relaxed">
