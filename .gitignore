@@ -25,3 +25,5 @@ dist-ssr
 *.sln
 *.sw?
 .env
+public/assets/blackhole_animation_vid1.mp4
+# blackhole_animation_vid1.mp4

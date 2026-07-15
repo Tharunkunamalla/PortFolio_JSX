@@ -29,22 +29,16 @@ const Footer = () => {
     // Disable body scroll
     document.body.style.overflow = "hidden";
 
-    // Find the center coordinates of the button relative to the viewport
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-
-      // Animate page elements spiraling into the black hole button
-      gsap.to("main, nav, footer > div:first-child", {
-        scale: 0,
-        rotation: 1080,
-        opacity: 0,
-        duration: 1.8,
-        ease: "power2.in",
-        transformOrigin: `${x}px ${y}px`,
-      });
-    }
+    // Animate page elements spiraling inward (into the center of the screen) like a black hole absorbing them
+    gsap.to("main, nav, footer > div:first-child", {
+      scale: 0,
+      rotation: 1440, // 4 full spins for intense absorption
+      opacity: 0,
+      filter: "blur(12px)",
+      duration: 1.8,
+      ease: "power2.in",
+      transformOrigin: "center center",
+    });
 
     // Set safety backup redirect timeout (in case video fails to load/play)
     const safetyTimeout = setTimeout(() => {
@@ -185,7 +179,7 @@ const Footer = () => {
         <div className="black-hole-overlay-container fixed inset-0 z-[99999] bg-black flex items-center justify-center opacity-0 pointer-events-auto">
           <video
             ref={videoRef}
-            src="/assets/blackhole_animation_vid.mp4"
+            src="/assets/blackhole_animation_vid1.mp4"
             className="w-full h-full object-cover"
             autoPlay
             muted

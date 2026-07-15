@@ -67,12 +67,12 @@ const Projects = () => {
     // Outer container provides scroll height (500vh means scrolling 5 screen heights smoothly)
     <div
       ref={containerRef}
+      id="projects"
       className="relative w-full"
       style={{height: `${visibleProjects.length * 100}vh`}}
     >
       {/* Inner section stays sticky on the screen perfectly using 100dvh for mobile stability */}
       <section
-        id="projects"
         className="sticky top-0 h-[100dvh] w-full bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden flex flex-col justify-center"
       >
         <BackgroundParticles />
