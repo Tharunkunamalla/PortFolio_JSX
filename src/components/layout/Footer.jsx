@@ -1,11 +1,16 @@
-import {ArrowLeft} from "lucide-react";
+import {useState, useEffect, useRef} from "react";
+import {createPortal} from "react-dom";
 import {useLocation, useNavigate} from "react-router-dom";
+import {gsap} from "gsap";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const location = useLocation();
   const navigate = useNavigate();
-  const is3DPage = location.pathname === "/projects-3d";
+  const isHomePage = location.pathname === "/";
+  const [isWarping, setIsWarping] = useState(false);
+  const buttonRef = useRef(null);
+  const videoRef = useRef(null);
 
   const releasePointerLock = () => {
     window.dispatchEvent(new Event("pause-3d-controls"));
@@ -14,9 +19,101 @@ const Footer = () => {
     }
   };
 
-  const handleReturnToProjects = () => {
-    navigate("/", {state: {scrollTo: "projects"}});
+  const handleBlackHoleHover = () => {
+    if (isWarping) return;
+    setIsWarping(true);
+
+    // Release pointer lock and pause 3D controls if present
+    releasePointerLock();
+
+    // Disable body scroll
+    document.body.style.overflow = "hidden";
+
+    // Find the center coordinates of the button relative to the viewport
+    if (buttonRef.current) {
+      const rect = buttonRef.current.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      // Animate page elements spiraling into the black hole button
+      gsap.to("main, nav, footer > div:first-child", {
+        scale: 0,
+        rotation: 1080,
+        opacity: 0,
+        duration: 1.8,
+        ease: "power2.in",
+        transformOrigin: `${x}px ${y}px`,
+      });
+    }
+
+    // Set safety backup redirect timeout (in case video fails to load/play)
+    const safetyTimeout = setTimeout(() => {
+      triggerRedirect();
+    }, 2800);
+
+    // Store timeout ID to clear if needed
+    window.blackHoleTimeout = safetyTimeout;
   };
+
+  const triggerRedirect = () => {
+    if (window.blackHoleTimeout) {
+      clearTimeout(window.blackHoleTimeout);
+      window.blackHoleTimeout = null;
+    }
+    // Navigate home
+    navigate("/");
+    // Scroll home page to top immediately (hidden under overlay)
+    window.scrollTo(0, 0);
+  };
+
+  // Trigger video overlay fade-in
+  useEffect(() => {
+    if (isWarping && !isHomePage) {
+      gsap.to(".black-hole-overlay-container", {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.inOut",
+      });
+    }
+  }, [isWarping, isHomePage]);
+
+  // Recover page elements and fade out video overlay when returning home
+  useEffect(() => {
+    if (isHomePage && isWarping) {
+      // 1. Instantly clear all GSAP override styles so elements lay out normally
+      gsap.set("main, nav, footer > div:first-child", {
+        clearProps: "all",
+      });
+
+      // 2. Ensure scroll position is at the very top
+      window.scrollTo(0, 0);
+
+      // 3. Delay the overlay fade-out slightly to give the homepage time to mount and paint under the cover of the overlay
+      const fadeTimeout = setTimeout(() => {
+        gsap.to(".black-hole-overlay-container", {
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          onComplete: () => {
+            setIsWarping(false);
+            // Restore body scrolling
+            document.body.style.overflow = "auto";
+          },
+        });
+      }, 250);
+
+      return () => clearTimeout(fadeTimeout);
+    }
+  }, [location.pathname, isWarping, isHomePage]);
+
+  // Clean up safety timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (window.blackHoleTimeout) {
+        clearTimeout(window.blackHoleTimeout);
+      }
+    };
+  }, []);
 
   return (
     <footer
@@ -53,18 +150,51 @@ const Footer = () => {
             </span>
           </p>
 
-          {is3DPage && (
-            <button
-              type="button"
-              onClick={handleReturnToProjects}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white backdrop-blur-md transition-all duration-300"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Return Home</span>
-            </button>
+          {!isHomePage && (
+            <div className="flex flex-col items-center gap-1.5 select-none z-30">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-400 animate-pulse">
+                Event Horizon
+              </span>
+              <button
+                ref={buttonRef}
+                type="button"
+                onMouseEnter={handleBlackHoleHover}
+                className="group relative h-14 w-14 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
+                aria-label="Hover to warp back to Home Page"
+              >
+                {/* Outer glowing border */}
+                <span
+                  className="absolute inset-0 rounded-full border border-fuchsia-500/30 transition-all duration-500 group-hover:scale-125"
+                  style={{
+                    boxShadow: "0 0 20px rgba(217,70,239,0.35), inset 0 0 10px rgba(0,0,0,0.9)",
+                  }}
+                />
+                {/* Swirling space gradient */}
+                <span className="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(138,43,226,0.9),rgba(15,10,30,0.95)_45%,#000_75%)] animate-black-hole-spin group-hover:scale-115 transition-transform duration-500" />
+                {/* Orbital dust rings */}
+                <span className="absolute inset-[-6px] rounded-full border border-fuchsia-500/15 animate-black-hole-ring pointer-events-none" />
+                <span className="absolute inset-[-12px] rounded-full border border-cyan-400/10 animate-black-hole-ring-delayed pointer-events-none" />
+                {/* Core singularity */}
+                <span className="absolute w-3.5 h-3.5 rounded-full bg-black shadow-[0_0_8px_rgba(217,70,239,0.6)]" />
+              </button>
+            </div>
           )}
         </div>
       </div>
+      {isWarping && createPortal(
+        <div className="black-hole-overlay-container fixed inset-0 z-[99999] bg-black flex items-center justify-center opacity-0 pointer-events-auto">
+          <video
+            ref={videoRef}
+            src="/assets/blackhole_animation_vid.mp4"
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            playsInline
+            onEnded={triggerRedirect}
+          />
+        </div>,
+        document.body
+      )}
     </footer>
   );
 };
