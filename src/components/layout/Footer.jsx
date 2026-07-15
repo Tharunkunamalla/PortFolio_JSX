@@ -179,7 +179,7 @@ const Footer = () => {
         <div className="black-hole-overlay-container fixed inset-0 z-[99999] bg-black flex items-center justify-center opacity-0 pointer-events-auto">
           <video
             ref={videoRef}
-            src="/assets/blackhole_animation_vid1.mp4"
+            src="/assets/blackhole_animation_vid.mp4"
             className="w-full h-full object-cover"
             autoPlay
             muted

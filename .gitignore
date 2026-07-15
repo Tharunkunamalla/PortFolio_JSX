@@ -25,5 +25,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Large Assets
 public/assets/blackhole_animation_vid1.mp4
-# blackhole_animation_vid1.mp4
