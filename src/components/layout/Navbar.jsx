@@ -52,16 +52,16 @@ const Navbar = ({activeSection, scrollToSection, isHomePage}) => {
 
   return (
     <nav
-      className={`fixed left-0 w-full z-40 transition-all duration-500 ease-in-out ${
+      className={`fixed left-0 w-full z-40 transition-all duration-500 ease-in-out will-change-transform ${
         isScrolled
           ? "top-4 px-4 md:px-0 flex justify-center"
           : "top-0 bg-transparent"
       }`}
     >
       <div
-        className={`flex justify-between items-center transition-all duration-500 ease-in-out ${
+        className={`flex justify-between items-center transition-all duration-500 ease-in-out will-change-[transform,backdrop-filter] ${
           isScrolled
-            ? "w-full max-w-6xl px-12 py-3 rounded-full bg-white/70 dark:bg-[#0f0f14]/80 backdrop-blur-md shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
+            ? "w-full max-w-6xl px-12 py-3 rounded-full bg-white/35 dark:bg-black/40 backdrop-blur-md shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.25)]"
             : "w-full container mx-auto px-6 md:px-12 py-5 md:py-8"
         }`}
       >
