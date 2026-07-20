@@ -52,6 +52,8 @@ export const aboutData = [
         date: "2026",
         description: "Research Intern at NIT Warangal",
       },
+      {name: "AI-ML Intern", date: "2025", description: "Labmentix, Bengaluru"},
+      {name: "AI-ML Intern", date: "2025", description: "EDUNET-Microsoft"},
       {
         name: "GSSoC- 25 Contributor",
         date: "2025",
@@ -67,8 +69,6 @@ export const aboutData = [
         date: "2024 - 2025",
         description: "BETA-LABS, IIIT-Kottayam",
       },
-      {name: "AI-ML Intern", date: "2025", description: "Labmentix, Bengaluru"},
-      {name: "AI-ML Intern", date: "2025", description: "EDUNET-Microsoft"},
     ],
   },
 ];
