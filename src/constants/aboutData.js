@@ -24,6 +24,11 @@ export const aboutData = [
     id: 2,
     title: "Certifications",
     items: [
+      {
+        name: "NIT Warangal Research Intern",
+        date: "2026",
+        description: "Research Intern at NIT Warangal",
+      },
       {name: "Machine Learning", date: "2025", description: "Coursera"},
       {
         name: "Cloud Essentials Knowledge Badge Assessment",
@@ -42,6 +47,11 @@ export const aboutData = [
     id: 3,
     title: "Experience",
     items: [
+      {
+        name: "NIT Warangal Research Intern",
+        date: "2026",
+        description: "Research Intern at NIT Warangal",
+      },
       {
         name: "GSSoC- 25 Contributor",
         date: "2025",
