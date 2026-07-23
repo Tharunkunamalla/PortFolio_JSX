@@ -6,7 +6,7 @@
     {"src": "package.json", "use": "@vercel/static-build"}
   ],
   "routes": [
-    {"src": "^/api/leetcode/graphql$", "dest": "/proxy-server.js"},
+    {"src": "^/api/.*", "dest": "/proxy-server.js"},
     {"handle": "filesystem"},
     {"src": "/.*", "dest": "/index.html"}
   ]

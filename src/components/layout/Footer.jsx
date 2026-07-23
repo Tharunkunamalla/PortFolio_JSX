@@ -12,6 +12,7 @@ const Footer = () => {
   const buttonRef = useRef(null);
   const videoRef = useRef(null);
 
+
   const releasePointerLock = () => {
     window.dispatchEvent(new Event("pause-3d-controls"));
     if (document.pointerLockElement) {
@@ -143,6 +144,7 @@ const Footer = () => {
               Shinzou wo Sasageyo ✊
             </span>
           </p>
+
 
           {!isHomePage && (
             <div className="flex flex-col items-center gap-1.5 select-none z-30">

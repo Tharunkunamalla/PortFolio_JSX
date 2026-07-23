@@ -93,6 +93,24 @@ app.get("/api/monkeytype/:username", async (req, res) => {
   }
 });
 
+// -------- Views/Visitor Counter Proxy --------
+app.get("/api/views", async (req, res) => {
+  try {
+    const namespace = "tharunkunamalla";
+    const key = "portfolio-visits";
+    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
+    if (!response.ok) {
+      throw new Error(`CounterAPI returned status ${response.status}`);
+    }
+    const data = await response.json();
+    res.status(200).json({ count: data.count || 0 });
+  } catch (err) {
+    console.error("Views proxy error:", err);
+    res.status(500).json({ error: "Failed to fetch visitor count" });
+  }
+});
+
+
 const PORT = process.env.PORT || 8081;
 
 app.listen(PORT, () =>

@@ -4,7 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {MotionPathPlugin} from "gsap/MotionPathPlugin";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {Github, Linkedin, Instagram, Mail, Code2, ArrowDownCircle} from "lucide-react";
+import {Github, Linkedin, Instagram, Mail, Code2, ArrowDownCircle, Eye} from "lucide-react";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
@@ -57,6 +57,40 @@ const Home = ({scrollToSection}) => {
   const scrollDownRef = useRef(null);
   const bubblesContainerRef = useRef(null);
   const loaderRef = useRef(null);
+  const viewsRef = useRef(null);
+
+  const [views, setViews] = useState(null);
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    const fetchViews = async () => {
+      try {
+        const response = await fetch("/api/views");
+        if (!response.ok) throw new Error("Proxy views failed");
+        const data = await response.json();
+        if (data.count !== undefined) {
+          setViews(data.count);
+        }
+      } catch (err) {
+        console.warn("Proxy view counter failed, trying direct call:", err);
+        try {
+          const directResponse = await fetch("https://api.counterapi.dev/v1/tharunkunamalla/portfolio-visits/up");
+          const directData = await directResponse.json();
+          if (directData.count !== undefined) {
+            setViews(directData.count);
+          }
+        } catch (directErr) {
+          console.error("Direct view counter failed:", directErr);
+        }
+      }
+    };
+
+    fetchViews();
+  }, []);
+
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -78,7 +112,7 @@ const Home = ({scrollToSection}) => {
           "-=0.4",
         )
         .from(
-          scrollDownRef.current,
+          [scrollDownRef.current, viewsRef.current],
           {
             opacity: 0,
             duration: 0.5,
@@ -87,7 +121,7 @@ const Home = ({scrollToSection}) => {
           "-=0.2",
         );
 
-      gsap.to([contentRef.current, scrollDownRef.current], {
+      gsap.to([contentRef.current, scrollDownRef.current, viewsRef.current], {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
@@ -99,6 +133,7 @@ const Home = ({scrollToSection}) => {
         opacity: 0,
         ease: "none",
       });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -180,6 +215,7 @@ const Home = ({scrollToSection}) => {
         </div>
         <div ref={contentRef} className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-8 items-center">
           <div className="order-2 md:order-1">
+
             <h1
               ref={headingRef}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
@@ -317,6 +353,27 @@ const Home = ({scrollToSection}) => {
             <ArrowDownCircle className="w-5 h-5 group-hover:text-primary-500 group-hover:translate-y-1 transition-all duration-300" />
           </div>
         </div>
+
+        {/* Elegant light-blurred visitor counter badge - positioned in bottom right corner */}
+        <div
+          ref={viewsRef}
+          className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-20 select-none"
+        >
+          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/25 dark:bg-black/40 backdrop-blur-[12px] border border-gray-300/40 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:scale-105 transition-all duration-300 group">
+            <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-secondary-500 transition-colors duration-300 group-hover:animate-pulse" />
+            <span className="text-xs font-bold text-gray-700 dark:text-gray-200">
+              {views !== null ? (
+                <>
+                  <span className="text-secondary-500 dark:text-secondary-400 font-black">{views.toLocaleString()}</span> views
+                </>
+              ) : (
+                <span className="opacity-50 text-[10px]">Loading...</span>
+              )}
+            </span>
+          </div>
+        </div>
+
+
         {/* ===== BOTTOM BLEND (KEY PART) ===== */}
         <div
           className="
