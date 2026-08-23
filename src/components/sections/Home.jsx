@@ -111,6 +111,9 @@ const Home = ({scrollToSection}) => {
           },
           "-=0.4",
         )
+
+
+        
         .from(
           [scrollDownRef.current, viewsRef.current],
           {
