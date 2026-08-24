@@ -245,22 +245,12 @@ const About = () => {
                 I'm a{" "}
                 <span
                   ref={gradientTextRef}
-                  className="
-                        relative inline-block
-                        font-extrabold
-                        bg-clip-text text-transparent
-                        bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
-                      "
+                  className="relative inline-block font-extrabold text-primary-500 dark:text-primary-400"
                 >
                   MERN-Stack Developer
                   <span
                     ref={underlineRef}
-                    className="
-        absolute left-0 -bottom-1 h-[2px]
-        bg-gradient-to-r from-blue-400 via-purple-400 to-pink-500
-        rounded-full
-        w-0
-      "
+                    className="absolute left-0 -bottom-1 h-[2px] bg-primary-500 dark:bg-primary-400 rounded-full w-0"
                   />
                 </span>
               </h3>
@@ -332,16 +322,10 @@ const About = () => {
                       <div key={i} className="relative pl-4 py-2">
                         <span
                           ref={(el) => (lineRefs.current[index * 10 + i] = el)}
-                          className="absolute left-0 top-0 w-0.5 bg-gradient-to-b from-blue-400 via-purple-400 to-pink-400"
+                          className="absolute left-0 top-0 w-0.5 bg-primary-500 dark:bg-primary-400"
                           style={{height: "0%"}}
                         />
-                        <h4
-                          className={`font-medium ${
-                            i % 2 === 0
-                              ? "text-primary-500"
-                              : "text-secondary-500"
-                          }`}
-                        >
+                        <h4 className="font-medium text-gray-900 dark:text-white">
                           {item.name}
                         </h4>
                         {item.date && (
