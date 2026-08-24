@@ -72,7 +72,7 @@ const SkillsMarquee = ({skills}) => {
           ))}
         </div>
       </div>
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-2xl opacity-0 group-hover/reel:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute -inset-1 bg-primary-500/10 rounded-full blur-2xl opacity-0 group-hover/reel:opacity-100 transition-opacity duration-700 pointer-events-none" />
     </div>
   );
 };
