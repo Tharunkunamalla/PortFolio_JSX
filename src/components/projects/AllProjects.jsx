@@ -199,7 +199,7 @@ const AllProjects = () => {
               </div>
 
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-3 bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent font-heading">
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors font-heading">
                   {project.title}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed line-clamp-3">
