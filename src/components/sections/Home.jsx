@@ -224,7 +224,7 @@ const Home = ({scrollToSection}) => {
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
             >
               <span className="text-gray-800 dark:text-white">Hi, I am </span>
-              <span className="bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 text-transparent bg-clip-text">
+              <span className="text-primary-500 dark:text-primary-400">
                 Tharun
               </span>
             </h1>
@@ -289,7 +289,7 @@ const Home = ({scrollToSection}) => {
             >
               <button
                 onClick={() => scrollToSection("contact")}
-                className="interactive px-6 py-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                className="interactive px-6 py-3 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
               >
                 <Mail className="h-5 w-5" />
                 Contact Me
