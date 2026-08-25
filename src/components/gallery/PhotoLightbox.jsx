@@ -52,8 +52,8 @@ const PhotoLightbox = ({ photo, photos, onClose, onNavigate }) => {
             <Camera className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="font-display font-bold text-sm sm:text-base text-white tracking-wide">
-              {photo.title}
+            <h3 className="font-display font-semibold text-sm sm:text-base text-zinc-200 tracking-wide">
+              Captured by Tharun
             </h3>
             <span className="text-[11px] font-mono text-zinc-400">
               Frame {currentIndex + 1} of {totalPhotos}
@@ -75,12 +75,12 @@ const PhotoLightbox = ({ photo, photos, onClose, onNavigate }) => {
       {/* Main Image Container */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative max-w-5xl max-h-[80vh] w-full flex items-center justify-center select-none"
+        className="relative max-w-5xl max-h-[85vh] w-full flex items-center justify-center select-none"
       >
         <img
           src={photo.src}
-          alt={photo.title}
-          className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl border border-zinc-800/60 transition-transform duration-300 hover:scale-[1.01]"
+          alt="Captured by Tharun"
+          className="max-h-[80vh] max-w-full object-contain rounded-2xl shadow-2xl border border-zinc-800/60 transition-transform duration-300"
         />
 
         {/* Previous Button */}
@@ -106,27 +106,6 @@ const PhotoLightbox = ({ photo, photos, onClose, onNavigate }) => {
             <ChevronRight className="w-6 h-6" />
           </button>
         )}
-      </div>
-
-      {/* Bottom Metadata Bar */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className="absolute bottom-6 inset-x-6 flex items-center justify-center gap-4 text-xs font-mono text-zinc-400 pointer-events-auto"
-      >
-        <div className="px-4 py-2 rounded-full bg-zinc-900/80 border border-zinc-800/80 flex items-center gap-4 shadow-lg backdrop-blur-md">
-          {photo.location && (
-            <span className="flex items-center gap-1.5 text-zinc-300">
-              <MapPin className="w-3.5 h-3.5 text-zinc-500" />
-              {photo.location}
-            </span>
-          )}
-          {photo.date && (
-            <span className="flex items-center gap-1.5 text-zinc-400 border-l border-zinc-800 pl-4">
-              <Calendar className="w-3.5 h-3.5 text-zinc-500" />
-              {photo.date}
-            </span>
-          )}
-        </div>
       </div>
     </div>
   );

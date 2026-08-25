@@ -260,25 +260,12 @@ const About = () => {
                         <Eye className="w-4 h-4" />
                       </div>
 
-                      {/* Photo Information & Caption */}
-                      <div className="absolute bottom-0 inset-x-0 p-4 text-white space-y-1 transform translate-y-1 group-hover:translate-y-0 transition-transform">
-                        <h4 className="font-display font-bold text-sm sm:text-base text-white drop-shadow-md tracking-wide line-clamp-1">
-                          {photo.title}
-                        </h4>
-                        <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-300">
-                          {photo.location && (
-                            <span className="flex items-center gap-1">
-                              <MapPin className="w-3 h-3 text-zinc-400" />
-                              {photo.location}
-                            </span>
-                          )}
-                          {photo.date && (
-                            <span className="flex items-center gap-1">
-                              <Calendar className="w-3 h-3 text-zinc-400" />
-                              {photo.date}
-                            </span>
-                          )}
-                        </div>
+                      {/* Minimalist Captured by Tharun pill on hover/view */}
+                      <div className="absolute bottom-0 inset-x-0 p-3.5 flex items-center justify-between pointer-events-none">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-mono font-medium text-zinc-200 shadow-md">
+                          <Camera className="w-3 h-3 text-zinc-400" />
+                          Captured by Tharun
+                        </span>
                       </div>
                     </div>
                   ))}
