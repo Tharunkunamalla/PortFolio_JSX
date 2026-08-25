@@ -96,14 +96,22 @@ app.get("/api/monkeytype/:username", async (req, res) => {
 // -------- Views/Visitor Counter Proxy --------
 app.get("/api/views", async (req, res) => {
   try {
-    const namespace = "tharunkunamalla";
-    const key = "portfolio-visits";
-    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`);
-    if (!response.ok) {
-      throw new Error(`CounterAPI returned status ${response.status}`);
+    const response = await fetch("https://komarev.com/ghpvc/?username=Tharunkunamalla", {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+      },
+    });
+    const svg = await response.text();
+    const matches = svg.match(/<text[^>]*>([0-9,]+)<\/text>/g);
+    if (matches && matches.length > 0) {
+      const lastMatch = matches[matches.length - 1];
+      const countStr = lastMatch.replace(/<[^>]+>/g, "").replace(/,/g, "");
+      const count = parseInt(countStr, 10);
+      if (!isNaN(count)) {
+        return res.status(200).json({ count });
+      }
     }
-    const data = await response.json();
-    res.status(200).json({ count: data.count || 0 });
+    throw new Error("Unable to parse visitor count");
   } catch (err) {
     console.error("Views proxy error:", err);
     res.status(500).json({ error: "Failed to fetch visitor count" });
