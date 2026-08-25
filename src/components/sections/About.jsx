@@ -89,28 +89,26 @@ const About = () => {
           <div className="lg:col-span-5 space-y-5">
             {/* Main Profile Bento Card */}
             <div className="bg-zinc-50 dark:bg-zinc-950/80 p-6 sm:p-7 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-6">
-              {/* Profile Header with Avatar and Status */}
+              {/* Profile Header with Avatar and Info */}
               <div className="flex items-center gap-5">
                 <div className="relative group shrink-0">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-black border-2 border-zinc-300 dark:border-zinc-700 shadow-xl transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
                     <img
                       src="/assets/img.png"
-                      alt="Tharun Kunamalla"
+                      alt="Tharun K"
                       className="w-full h-full object-contain filter contrast-125"
                     />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-zinc-950 shadow-md animate-pulse" />
                 </div>
 
                 <div className="min-w-0">
-                  <h3 className="text-xl sm:text-2xl font-display font-extrabold text-black dark:text-white tracking-tight leading-tight mb-1 truncate">
-                    Tharun Kunamalla
+                  <h3 className="text-2xl sm:text-3xl font-sans font-extrabold text-black dark:text-white tracking-tight leading-tight mb-1">
+                    Tharun K
                   </h3>
                   <p className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
                     Backend & Full-Stack Engineer
                   </p>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-zinc-200/60 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-zinc-200/70 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
                     <span>Open to Roles</span>
                   </div>
                 </div>
