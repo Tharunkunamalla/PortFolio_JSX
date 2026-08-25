@@ -14,13 +14,13 @@
   justify-content: center;
   align-items: flex-start;
   border-radius: 25px;
-  border: 2px solid #0ea5e9;
+  border: 2px solid #52525b;
   overflow: hidden; /* keep dot inside */
 }
 
 @media (prefers-color-scheme: dark) {
   .mouse-scroll {
-    border-color: #38bdf8;
+    border-color: #a1a1aa;
   }
 }
 
@@ -32,14 +32,14 @@
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #0ea5e9;
+  background: #71717a;
   animation: wheelMove 1.5s infinite;
   z-index: 1;
 }
 
 @media (prefers-color-scheme: dark) {
   .mouse-scroll .wheel {
-    background: #38bdf8;
+    background: #ffffff;
   }
 }
 
@@ -61,7 +61,7 @@
 /* Custom styles for the home page with bubbles*/
 .bubble {
   --bubble-size: 40px;
-  --bubble-color: rgba(100, 100, 255, 0.12);
+  --bubble-color: rgba(255, 255, 255, 0.08);
   width: var(--bubble-size);
   height: var(--bubble-size);
   background: radial-gradient(circle, var(--bubble-color) 0%, transparent 70%);
@@ -73,7 +73,7 @@
   z-index: 0;
 }
 .dark .bubble {
-  --bubble-color: rgba(255, 255, 255, 0.08);
+  --bubble-color: rgba(255, 255, 255, 0.06);
 }
 
 /*Project sections*/
@@ -81,11 +81,11 @@
   0%,
   100% {
     transform: scale(1);
-    opacity: 0.3;
+    opacity: 0.15;
   }
   50% {
     transform: scale(1.1);
-    opacity: 0.5;
+    opacity: 0.25;
   }
 }
 
@@ -93,11 +93,11 @@
   0%,
   100% {
     transform: scale(1);
-    opacity: 0.2;
+    opacity: 0.1;
   }
   50% {
     transform: scale(1.2);
-    opacity: 0.4;
+    opacity: 0.2;
   }
 }
 
@@ -137,13 +137,13 @@ html::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-/* Purple smoky blur at the bottom of the viewport (soft, non-interactive) */
+/* Monochromatic smoky blur at the bottom of the viewport (soft, non-interactive) */
 .site-bottom-smoke {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 80px;
+  height: 60px;
   pointer-events: none;
   z-index: 30;
   overflow: visible;
@@ -154,16 +154,16 @@ html::-webkit-scrollbar {
   left: 12px;
   right: 12px;
   bottom: 6px;
-  height: 10px;
+  height: 4px;
   border-radius: 6px;
   background: linear-gradient(
     90deg,
-    rgba(180, 160, 255, 0.45),
-    rgba(140, 80, 255, 0.45),
-    rgba(110, 60, 220, 0.45)
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.05)
   );
-  filter: blur(10px);
-  opacity: 20;
+  filter: blur(6px);
+  opacity: 0.6;
   animation: smoke-drift 6s ease-in-out infinite;
 }
 
@@ -171,11 +171,11 @@ html::-webkit-scrollbar {
   0%,
   100% {
     transform: translateX(0) scaleX(1);
-    opacity: 0.4;
+    opacity: 0.3;
   }
   50% {
     transform: translateX(20px) scaleX(1.1);
-    opacity: 0.7;
+    opacity: 0.6;
   }
 }
 
@@ -187,21 +187,21 @@ html::-webkit-scrollbar {
 /* ===== Floating particles ===== */
 .particle {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, transparent 70%);
   border-radius: 50%;
-  opacity: 0.6;
+  opacity: 0.4;
   animation: floatParticle linear infinite;
 }
 
 @keyframes floatParticle {
   0% {
     transform: translateY(0) scale(0.8);
-    opacity: 0.3;
+    opacity: 0.2;
   }
   50% {
-    opacity: 0.8;
+    opacity: 0.6;
   }
   100% {
     transform: translateY(-120px) scale(1.2);
@@ -212,28 +212,29 @@ html::-webkit-scrollbar {
 /* ===== Glow blobs ===== */
 .glow {
   position: absolute;
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.25;
-  animation: glowMove 12s ease-in-out infinite alternate;
+  filter: blur(100px);
+  opacity: 0.12;
+  animation: glowMove 14s ease-in-out infinite alternate;
 }
 
-.glow-purple {
-  background: #a855f7;
+.glow-purple,
+.glow-pink,
+.glow-blue,
+.glow-silver {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
   top: 20%;
   left: 10%;
 }
 
 .glow-pink {
-  background: #ec4899;
   bottom: 15%;
   right: 15%;
 }
 
 .glow-blue {
-  background: #3b82f6;
   top: 50%;
   right: 25%;
 }
@@ -255,11 +256,11 @@ html::-webkit-scrollbar {
   background: transparent;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb {
-  background: rgba(217, 70, 239, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-  background: rgba(217, 70, 239, 0.5);
+  background: rgba(255, 255, 255, 0.4);
 }
 
 @keyframes black-hole-spin {
