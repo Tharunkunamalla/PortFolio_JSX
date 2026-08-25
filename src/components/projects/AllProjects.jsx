@@ -1,9 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {Link as RouterLink} from "react-router-dom";
-import {ExternalLink, Github, Code, Monitor, ArrowRight} from "lucide-react";
-import {ArrowUp} from "lucide-react";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
+import {ExternalLink, Github, Code, Monitor, ArrowRight, ArrowUp, Orbit, Sparkles} from "lucide-react";
 import toast from "react-hot-toast";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import ImageWithSkeleton from "../ui/ImageWithSkeleton";
@@ -22,13 +21,9 @@ const AllProjects = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [showScrollTop, setShowScrollTop] = useState(false);
   const lenis = useLenis();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    if (lenis) {
-      lenis.scrollTo(0, {immediate: true});
-    }
-
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowScrollTop(true);
@@ -39,13 +34,12 @@ const AllProjects = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lenis]);
+  }, []);
 
   const scrollToTop = () => {
     if (lenis) {
       lenis.scrollTo(0, {
-        duration: 1.5,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        duration: 1.2,
       });
     } else {
       window.scrollTo({
@@ -75,36 +69,27 @@ const AllProjects = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Refresh ScrollTrigger to account for dynamic content height changes
       ScrollTrigger.refresh();
 
-      projectRefs.current.forEach((ref, index) => {
+      projectRefs.current.forEach((ref) => {
         if (!ref) return;
-
-        // Alternate pop direction and rotation for a dynamic feel
-        const isOdd = index % 2 !== 0;
 
         gsap.fromTo(
           ref,
           {
             opacity: 0,
-            scale: 0.85,
-            y: 40,
-            rotateX: -10,
-            rotateY: isOdd ? 5 : -5,
+            scale: 0.95,
+            y: 30,
           },
           {
             opacity: 1,
             scale: 1,
             y: 0,
-            rotateX: 0,
-            rotateY: 0,
-            duration: 0.7,
-            ease: "back.out(1.1)",
+            duration: 0.6,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: ref,
-              start: "top 92%",
-              end: "top 40%",
+              start: "top 95%",
               toggleActions: "play none none reverse",
             },
           },
@@ -118,45 +103,72 @@ const AllProjects = () => {
   projectRefs.current = projectRefs.current.slice(0, currentProjects.length);
 
   return (
-    <div className="relative pt-32 pb-24 min-h-screen bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10]">
+    <div className="relative pt-28 pb-24 min-h-screen bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden">
       <BackgroundParticles />
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8">
-        <div className="mb-12">
-          <RouterLink
-            to="/"
-            className="inline-flex items-center gap-2 text-secondary-500 hover:text-secondary-400 mb-6 font-medium transition-colors"
+
+      {/* Monochromatic Background Glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -right-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
+        {/* Page Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-bold uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
+              Selected Works
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-black dark:text-white tracking-tight leading-tight mb-4">
+              Featured Projects
+            </h1>
+            <p className="text-zinc-600 dark:text-zinc-400 text-base font-light leading-relaxed">
+              Full-stack web applications, machine learning architectures, and interactive digital experiences.
+            </p>
+          </div>
+
+          {/* 3D Space Experience Launcher */}
+          <button
+            onClick={() => navigate("/projects-3d")}
+            className="interactive inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white hover:border-black dark:hover:border-white transition-all duration-300 shadow-sm group self-start md:self-auto"
           >
-            <span>&larr; Back to Home</span>
-          </RouterLink>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-white">
-            All <span className="text-secondary-500">Projects</span>
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Showing {currentProjects.length} of {allProjects.length} total
-            projects
-          </p>
+            <div className="p-2 rounded-xl bg-black dark:bg-white text-white dark:text-black">
+              <Orbit className="w-4 h-4 animate-spin" style={{animationDuration: "12s"}} />
+            </div>
+            <div className="text-left">
+              <p className="text-xs font-display font-bold uppercase tracking-wider">3D Space View</p>
+              <p className="text-[10px] font-mono text-zinc-500">Explore in WebGL Orbit</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-1 transition-transform ml-1" />
+          </button>
         </div>
 
-        <div className="flex flex-wrap gap-4 mb-12">
-          {["all", "web", "ml"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-1 text-sm md:text-base shadow-lg ${
-                activeTab === tab
-                  ? "bg-secondary-500 text-white shadow-secondary-500/20"
-                  : "bg-white/5 border border-white/10 text-gray-600 dark:text-gray-300 hover:bg-white/10"
-              }`}
-            >
-              {tab === "all"
-                ? "All Projects"
-                : tab === "web"
-                  ? "Web Development"
-                  : "Machine Learning"}
-            </button>
-          ))}
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap gap-2 mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+          {[
+            {id: "all", label: "All Projects"},
+            {id: "web", label: "Web Applications"},
+            {id: "ml", label: "Machine Learning"},
+          ].map((tab) => {
+            const active = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  active
+                    ? "bg-black dark:bg-white text-white dark:text-black shadow-md"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
 
+        {/* Projects Grid */}
         <div
           ref={containerRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -165,93 +177,86 @@ const AllProjects = () => {
             <div
               key={project.id}
               ref={(el) => (projectRefs.current[index] = el)}
-              className="bg-white/10 dark:bg-[#1a1a24]/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_0_rgba(150,58,235,0.2)] transition-all duration-500 flex flex-col h-full group"
+              className="bg-zinc-50 dark:bg-zinc-950/70 border border-zinc-200 dark:border-zinc-800/80 rounded-3xl overflow-hidden hover:border-black dark:hover:border-white transition-all duration-500 flex flex-col h-full group shadow-sm hover:shadow-xl dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.08)]"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="relative h-56 overflow-hidden group flex-shrink-0 bg-black/5 dark:bg-white/5">
+              <div className="relative h-56 overflow-hidden flex-shrink-0 bg-zinc-100 dark:bg-zinc-900">
                 <ImageWithSkeleton
                   src={project.image}
                   alt={project.title}
                   loading="eager"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="w-full h-full object-cover object-top transition-all duration-700 ease-out group-hover:scale-105"
                 />
                 <div
-                  className={`absolute inset-0 bg-black/70 flex items-center justify-center gap-4 transition-opacity duration-300 ${
-                    hoveredProject === project.id ? "opacity-100" : "opacity-0"
+                  className={`absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center gap-3 transition-opacity duration-300 ${
+                    hoveredProject === project.id ? "opacity-100" : "opacity-0 pointer-events-none"
                   }`}
                 >
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
+                    className="p-3 rounded-full bg-white text-black hover:scale-110 transition-all duration-300"
+                    title="Live Demo"
                   >
-                    <Monitor className="h-5 w-5" />
+                    <Monitor className="h-4 w-4" />
                   </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-full bg-white text-gray-800 hover:bg-secondary-500 hover:text-white transition-colors duration-300"
+                    className="p-3 rounded-full bg-white text-black hover:scale-110 transition-all duration-300"
+                    title="View Source Code"
                   >
-                    <Code className="h-5 w-5" />
+                    <Code className="h-4 w-4" />
                   </a>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors font-heading">
+              <div className="p-6 sm:p-7 flex flex-col flex-grow">
+                <h3 className="text-xl font-display font-bold mb-2 text-black dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed line-clamp-3">
+                <p className="text-zinc-600 dark:text-zinc-400 mb-6 flex-grow text-xs sm:text-sm leading-relaxed font-light line-clamp-3">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.slice(0, 4).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 text-[10px] font-semibold tracking-wide text-primary-700 dark:text-primary-300 bg-primary-500/5 dark:bg-primary-500/10 border border-primary-500/20 dark:border-primary-500/10 rounded-full"
+                      className="px-3 py-1 text-[10px] font-mono font-semibold tracking-wider text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 4 && (
-                    <span className="px-2.5 py-1 text-[10px] font-medium text-gray-500 bg-transparent">
+                    <span className="px-2.5 py-1 text-[10px] font-mono text-zinc-400">
                       +{project.technologies.length - 4}
                     </span>
                   )}
                 </div>
-                <div className="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-white/10 mt-auto">
+                <div className="flex justify-between items-center pt-4 border-t border-zinc-200 dark:border-zinc-800/80 mt-auto text-xs font-mono font-bold uppercase tracking-wider">
                   <button
                     onClick={() => handleLiveClick(project.liveLink)}
-                    className="text-xs font-bold text-primary-600 dark:text-primary-400 flex items-center gap-1 group/link"
+                    className="text-black dark:text-white hover:underline flex items-center gap-1"
                   >
-                    <span className="relative">
-                      Live Demo
-                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300 group-hover/link:w-full"></span>
-                    </span>
-                    <ExternalLink className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    Live Demo
+                    <ExternalLink className="h-3 w-3" />
                   </button>
                   <a
                     href={project.codeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-bold text-gray-600 dark:text-gray-400 flex items-center gap-1 group/link"
+                    className="text-zinc-500 hover:text-black dark:hover:text-white flex items-center gap-1 transition-colors"
                   >
-                    <span className="relative">
-                      Code
-                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gray-500 transition-all duration-300 group-hover/link:w-full"></span>
-                    </span>
+                    Code
                     <Github className="h-3.5 w-3.5" />
                   </a>
                   <RouterLink
                     to={`/project/${project.id}`}
-                    className="text-xs font-bold text-secondary-600 dark:text-secondary-400 flex items-center gap-1 group/link"
+                    className="text-zinc-800 dark:text-zinc-200 hover:text-black dark:hover:text-white flex items-center gap-1 transition-colors"
                   >
-                    <span className="relative">
-                      Details
-                      <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-secondary-500 transition-all duration-300 group-hover/link:w-full"></span>
-                    </span>
-                    <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5" />
+                    Details
+                    <ArrowRight className="h-3 w-3" />
                   </RouterLink>
                 </div>
               </div>
@@ -259,71 +264,30 @@ const AllProjects = () => {
           ))}
         </div>
 
-        <div className="text-center mt-16 relative">
+        {/* GitHub Link */}
+        <div className="text-center mt-16">
           <a
             href="https://github.com/Tharunkunamalla"
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              relative inline-flex items-center gap-3 px-8 py-4
-              rounded-full font-medium tracking-wide
-              text-white
-              bg-gradient-to-r from-[#1f1f2e] via-[#26263a] to-[#1a1a2a]
-              border border-white/10
-              shadow-lg shadow-purple-500/20
-              backdrop-blur-md
-              transition-all duration-500
-              hover:-translate-y-1
-              hover:shadow-purple-500/40
-              hover:border-purple-400/40
-              group
-            "
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest font-bold text-black dark:text-white bg-zinc-100 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 hover:border-black dark:hover:border-white transition-all duration-300 shadow-sm hover:scale-105"
           >
-            <span className="text-sm md:text-base">
-              More Projects on GitHub
-            </span>
-
-            <Github className="h-5 w-5 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110" />
+            <span>Explore More on GitHub</span>
+            <Github className="h-4 w-4" />
           </a>
         </div>
       </div>
 
-      <div
-        className="
-          pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-          bg-gradient-to-t
-          from-white/90 to-transparent
-          dark:from-black/80
-        "
-      />
-
-      {/* Floating Scroll to Top Button */}
+      {/* Floating Scroll to Top Button (Left Side) */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 left-10 z-[100] p-4 rounded-full bg-secondary-500 text-white shadow-2xl shadow-secondary-500/40 hover:bg-secondary-600 transition-all duration-300 transform hover:-translate-y-2 hover:scale-110 active:scale-95 group"
+          className="fixed bottom-6 left-6 md:bottom-8 md:left-10 z-50 p-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+          aria-label="Scroll to top"
         >
-          <ArrowUp className="w-6 h-6 animate-bounce-subtle" />
-          <span className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-gray-900 text-white text-[10px] font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-            Back to Top
-          </span>
+          <ArrowUp className="w-5 h-5" />
         </button>
       )}
-
-      <style jsx="true">{`
-        @keyframes bounce-subtle {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-4px);
-          }
-        }
-        .animate-bounce-subtle {
-          animation: bounce-subtle 2s infinite ease-in-out;
-        }
-      `}</style>
     </div>
   );
 };
