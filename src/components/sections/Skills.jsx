@@ -105,6 +105,7 @@ const Skills = () => {
           loop
           muted
           playsInline
+          preload="auto"
           src="/assets/skill-vid.mp4"
           className="w-full h-full object-cover opacity-35 dark:opacity-40 filter contrast-125 brightness-90"
         />
