@@ -94,12 +94,12 @@ const Cursor = () => {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-3 h-3 bg-secondary-400 rounded-full pointer-events-none z-[120] transform -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[120] transform -translate-x-1/2 -translate-y-1/2"
         style={{ mixBlendMode: 'difference' }}
       />
       <div
         ref={cursorOuterRef}
-        className="fixed top-0 left-0 w-8 h-8 border border-secondary-400 rounded-full pointer-events-none z-[110] transform -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-7 h-7 border border-white/60 rounded-full pointer-events-none z-[110] transform -translate-x-1/2 -translate-y-1/2"
         style={{ mixBlendMode: 'difference' }}
       />
     </>
