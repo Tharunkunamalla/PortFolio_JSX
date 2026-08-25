@@ -41,33 +41,39 @@ export const contactMethods = [
 
 export const socialLinks = [
   {
-    icon: <Github />,
+    name: "GitHub",
+    icon: <Github className="w-5 h-5 transition-colors duration-300" />,
     href: "https://github.com/Tharunkunamalla",
-    color: "hover:text-white hover:bg-gray-800",
+    hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/10 hover:shadow-md",
   },
   {
-    icon: <Linkedin />,
+    name: "LinkedIn",
+    icon: <Linkedin className="w-5 h-5 transition-colors duration-300" />,
     href: "https://www.linkedin.com/in/tharun-kunamalla-/",
-    color: "hover:text-white hover:bg-blue-600",
+    hoverColor: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10 hover:shadow-[0_0_15px_rgba(10,102,194,0.25)]",
   },
   {
-    icon: <Twitter />,
+    name: "Twitter",
+    icon: <Twitter className="w-5 h-5 transition-colors duration-300" />,
     href: "https://x.com/Tharunk0509",
-    color: "hover:text-white hover:bg-black",
+    hoverColor: "hover:text-[#1DA1F2] hover:border-[#1DA1F2] hover:bg-[#1DA1F2]/10 hover:shadow-[0_0_15px_rgba(29,161,242,0.25)]",
   },
   {
-    icon: <Instagram />,
+    name: "Instagram",
+    icon: <Instagram className="w-5 h-5 transition-colors duration-300" />,
     href: "https://www.instagram.com/__tharun_0509.__/",
-    color: "hover:text-white hover:bg-pink-600",
+    hoverColor: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10 hover:shadow-[0_0_15px_rgba(228,64,95,0.25)]",
   },
   {
-    icon: <FaWhatsapp className="w-6 h-6" />,
+    name: "WhatsApp",
+    icon: <FaWhatsapp className="w-5 h-5 transition-colors duration-300" />,
     href: whatsappHref,
-    color: "hover:text-white hover:bg-green-500",
+    hoverColor: "hover:text-[#25D366] hover:border-[#25D366] hover:bg-[#25D366]/10 hover:shadow-[0_0_15px_rgba(37,211,102,0.25)]",
   },
   {
-    icon: <FaDiscord className="w-6 h-6" />,
+    name: "Discord",
+    icon: <FaDiscord className="w-5 h-5 transition-colors duration-300" />,
     href: "https://discord.com/users/751713701425446945",
-    color: "hover:text-white hover:bg-[#5865F2]",
+    hoverColor: "hover:text-[#5865F2] hover:border-[#5865F2] hover:bg-[#5865F2]/10 hover:shadow-[0_0_15px_rgba(88,101,242,0.25)]",
   },
 ];
