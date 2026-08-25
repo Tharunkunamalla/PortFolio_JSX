@@ -3,8 +3,8 @@ import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { contactMethods, socialLinks } from "../../constants/contactData";
-import { Send } from "lucide-react";
+import {contactMethods, socialLinks} from "../../constants/contactData";
+import {Send, Mail, Sparkles, CheckCircle2} from "lucide-react";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
 
@@ -27,44 +27,11 @@ const Contact = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Heading & Subtitle Animation
-      gsap.from([headingRef.current, ".contact-subtitle"], {
-        y: 40,
+      gsap.from(headingRef.current, {
+        y: 30,
         opacity: 0,
-        scale: 0.95,
-        stagger: 0.1,
-        duration: 1,
-        ease: "back.out(2)",
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: "top 90%",
-        },
-      });
-
-      // Form & Info Entrance
-      gsap.from(".contact-card", {
-        y: 60,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 1.2,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: infoRef.current,
-          start: "top 85%",
-        },
-      });
-
-      // Individual Item Reveal
-      gsap.from(".contact-method", {
-        x: -40,
-        opacity: 0,
-        stagger: 0.1,
         duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: infoRef.current,
-          start: "top 85%",
-        },
       });
     }, sectionRef);
 
@@ -98,19 +65,19 @@ const Contact = () => {
       const result = await response.json();
 
       if (result.success) {
-        toast.success("Message sent successfully!");
+        toast.success("Message transmitted successfully!");
         confetti({
-          particleCount: 150,
-          spread: 80,
+          particleCount: 120,
+          spread: 70,
           origin: {y: 0.8},
-          colors: ["#6366f1", "#a855f7", "#ec4899"],
+          colors: ["#ffffff", "#e4e4e7", "#a1a1aa", "#27272a"],
         });
         setFormData({name: "", email: "", subject: "", message: ""});
       } else {
-        toast.error("Failed to send message.");
+        toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
-      toast.error("An error occurred.");
+      toast.error("An unexpected error occurred.");
     }
 
     setIsSubmitting(false);
@@ -120,160 +87,59 @@ const Contact = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-20 sm:py-24 lg:py-32 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden"
+      className="relative min-h-screen pt-28 pb-24 md:pt-32 md:pb-28 bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden"
     >
       <BackgroundParticles />
 
-      {/* Decorative Gradient Overlays */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/90 dark:from-black/80 to-transparent z-10" />
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Monochromatic Background Glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -right-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-1/4 -left-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+      </div>
 
-      <div className="container mx-auto px-4 sm:px-6 relative z-20">
-        {/* Header Section */}
-        <div className="text-center mb-14 sm:mb-18 lg:mb-24">
-          <h2
-            ref={headingRef}
-            className="text-3xl sm:text-4xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight"
-          >
-            Get In <span className="text-secondary-500">Touch</span>
-          </h2>
-          <p className="contact-subtitle mt-5 sm:mt-6 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-base sm:text-lg px-2 sm:px-0">
-            Have a project in mind or just want to chat? I'm always open to new
-            opportunities and collaborations.
+      <div className="container mx-auto px-6 md:px-12 relative z-20">
+        {/* Page Header */}
+        <div ref={headingRef} className="max-w-3xl mb-14 md:mb-18">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-bold uppercase tracking-widest text-zinc-700 dark:text-zinc-300 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
+            Initiate Contact
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-black dark:text-white tracking-tight leading-tight mb-4">
+            Let's Build Something Exceptional.
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg font-light leading-relaxed">
+            Have a project in mind, seeking engineering talent, or want to discuss modern web architecture? Drop a direct message below.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          {/* RIGHT-SIDE on Desktop, TOP-SIDE on Mobile: Message Form */}
-          <div
-            ref={formRef}
-            className="lg:col-span-7 contact-card order-1 lg:order-2"
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 md:p-14 shadow-2xl space-y-6 sm:space-y-8"
-            >
-              <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Enter Your Name..."
-                    className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
-                  />
-                </div>
-                <div className="space-y-3">
-                  <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Enter Your Email..."
-                    className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="How can I help you?"
-                  className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
-                />
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-black uppercase tracking-widest text-gray-500 dark:text-gray-400 ml-1">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Your message here..."
-                  className="w-full px-4 sm:px-6 py-3.5 sm:py-4 bg-white/50 dark:bg-black/40 border border-black/10 dark:border-white/10 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none text-white font-medium resize-none autofill:shadow-[0_0_0_30px_#12121a_inset] [selection:text-white] [-webkit-text-fill-color:white!important]"
-                ></textarea>
-              </div>
-
-              <div className="flex justify-center pt-4">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group relative w-full sm:w-auto overflow-hidden px-8 sm:px-10 py-4 rounded-2xl bg-white dark:bg-white/10 border border-black/10 dark:border-white/10 text-gray-900 dark:text-white font-bold transition-all active:scale-95 disabled:opacity-70 flex items-center justify-center gap-3 shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="relative z-10 flex items-center gap-3">
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                    {!isSubmitting && (
-                      <Send className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                    )}
-                  </span>
-                  {isSubmitting && (
-                    <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin relative z-10" />
-                  )}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* LEFT-SIDE on Desktop, BOTTOM-SIDE on Mobile: Contact Information */}
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Contact Information & Channels */}
           <div
             ref={infoRef}
-            className="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none space-y-10 sm:space-y-12 order-2 lg:order-1"
+            className="lg:col-span-5 space-y-6"
           >
-            <div className="space-y-6 sm:space-y-8">
+            <div className="space-y-4">
               {contactMethods.map((method, idx) => (
                 <div
                   key={idx}
-                  className="group flex flex-row items-center gap-4 sm:gap-6 contact-method"
+                  className="group flex items-center gap-4 p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950/80 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 shadow-xs"
                 >
-                  <div className="relative">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${method.color} blur-lg opacity-20 scale-150 group-hover:opacity-40 transition-opacity`}
-                    />
-                    <div
-                      className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center shadow-xl transition-all duration-500 group-hover:-translate-y-2`}
-                    >
-                      <span
-                        className={`text-2xl ${method.color.split(" ")[0].replace("from-", "text-")}`}
-                      >
-                        {method.icon}
-                      </span>
-                    </div>
+                  <div className="w-12 h-12 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-black dark:text-white text-xl shrink-0 group-hover:scale-110 transition-transform shadow-xs">
+                    {method.icon}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <span className="text-xs font-mono uppercase tracking-widest text-gray-400 dark:text-gray-500 block mb-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 block mb-1">
                       {method.label}
                     </span>
                     {method.href ? (
                       <a
                         href={method.href}
-                        className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors break-all sm:break-normal"
+                        className="block text-sm sm:text-base font-display font-bold text-black dark:text-white hover:underline truncate"
                       >
                         {method.value}
                       </a>
                     ) : (
-                      <span className="block text-base sm:text-xl font-bold text-gray-800 dark:text-white break-words">
+                      <span className="block text-sm sm:text-base font-display font-bold text-black dark:text-white truncate">
                         {method.value}
                       </span>
                     )}
@@ -282,44 +148,127 @@ const Contact = () => {
               ))}
             </div>
 
-            <div className="contact-card p-6 sm:p-10 bg-white/50 dark:bg-white/5 backdrop-blur-3xl border border-black/5 dark:border-white/10 rounded-[2rem] sm:rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl" />
-              <h3 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white mb-6 sm:mb-8">
-                Let's Connect
+            {/* Social Connection & Availability Box */}
+            <div className="p-7 sm:p-8 bg-zinc-50 dark:bg-zinc-950/80 border border-zinc-200 dark:border-zinc-800/80 rounded-3xl space-y-6 shadow-xs">
+              <h3 className="text-lg font-display font-bold text-black dark:text-white uppercase tracking-wider">
+                Digital Presence
               </h3>
-              <div className="flex flex-wrap gap-3 sm:gap-4">
+              <div className="flex flex-wrap gap-3">
                 {socialLinks.map((link, idx) => (
                   <a
                     key={idx}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-gray-600 dark:text-gray-400 transition-all duration-300 ${link.color} hover:scale-110 hover:shadow-lg`}
+                    aria-label={link.name || "Social Link"}
+                    className={`w-12 h-12 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300 ${link.hoverColor} hover:scale-110 hover:shadow-lg transition-all duration-300 shadow-xs`}
                   >
                     {link.icon}
                   </a>
                 ))}
               </div>
-              <div className="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-black/5 dark:border-white/10">
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <div className="relative w-3 h-3">
-                    <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75" />
-                    <div className="relative w-3 h-3 bg-green-500 rounded-full shadow-[0_0_10px_#10b981]" />
-                  </div>
-                  <span className="text-xs sm:text-sm font-black text-gray-800 dark:text-green-400 tracking-wide uppercase">
-                    Available for Projects
-                  </span>
+
+              <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center gap-3">
+                <div className="relative w-2.5 h-2.5">
+                  <div className="absolute inset-0 bg-black dark:bg-white rounded-full animate-ping opacity-75" />
+                  <div className="relative w-2.5 h-2.5 bg-black dark:bg-white rounded-full" />
                 </div>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
+                  Open for Full-time Roles & Freelancing
+                </span>
               </div>
             </div>
+          </div>
+
+          {/* Contact Message Form */}
+          <div
+            ref={formRef}
+            className="lg:col-span-7 contact-card"
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="bg-zinc-50 dark:bg-zinc-950/70 border border-zinc-200 dark:border-zinc-800/80 rounded-3xl p-8 sm:p-10 shadow-lg space-y-6"
+            >
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="e.g. Satoshi Nakamoto"
+                    className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="e.g. user@domain.com"
+                    className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  required
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="e.g. Software Engineer Opportunity / Project Inquiry"
+                  className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                  Message
+                </label>
+                <textarea
+                  name="message"
+                  rows={5}
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Describe your vision, inquiry, or timeline..."
+                  className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm resize-none"
+                ></textarea>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-3 shadow-md"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 
-      <ToastContainer position="bottom-center" theme="dark" />
-
-      {/* Footer Blend */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/90 dark:from-black/80 to-transparent z-10" />
+      <ToastContainer
+        position="bottom-center"
+        toastClassName="dark:bg-zinc-900 dark:text-white border dark:border-zinc-800 font-mono text-xs"
+      />
     </section>
   );
 };
