@@ -70,22 +70,25 @@ const Cursor = () => {
     window.addEventListener('pointermove', onMouseMove, { passive: true });
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     
-    // Add effect for interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .interactive');
-    
-    interactiveElements.forEach((el) => {
-      el.addEventListener('mouseenter', onMouseEnter);
-      el.addEventListener('mouseleave', onMouseLeave);
-    });
+    // Delegated hover detection for interactive elements (supports dynamic modals/lightbox)
+    const onMouseOver = (e) => {
+      const isInteractive = e.target && e.target.closest('a, button, .interactive, [role="button"], input, textarea, select');
+      if (isInteractive) {
+        gsap.to(cursor, { scale: 1.5, opacity: 0.5, duration: 0.2, overwrite: 'auto' });
+        gsap.to(cursorOuter, { scale: 1.5, duration: 0.2, overwrite: 'auto' });
+      } else {
+        gsap.to(cursor, { scale: 1, opacity: 1, duration: 0.2, overwrite: 'auto' });
+        gsap.to(cursorOuter, { scale: 1, duration: 0.2, overwrite: 'auto' });
+      }
+    };
+
+    window.addEventListener('mouseover', onMouseOver, { passive: true });
     
     return () => {
       // Clean up
       window.removeEventListener('pointermove', onMouseMove);
       window.removeEventListener('mousemove', onMouseMove);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener('mouseenter', onMouseEnter);
-        el.removeEventListener('mouseleave', onMouseLeave);
-      });
+      window.removeEventListener('mouseover', onMouseOver);
       document.body.style.cursor = 'auto';
     };
   }, [is3DPage, isTerminalOpen]);
@@ -96,12 +99,12 @@ const Cursor = () => {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[120] transform -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[99999] transform -translate-x-1/2 -translate-y-1/2"
         style={{ mixBlendMode: 'difference' }}
       />
       <div
         ref={cursorOuterRef}
-        className="fixed top-0 left-0 w-7 h-7 border border-white/60 rounded-full pointer-events-none z-[110] transform -translate-x-1/2 -translate-y-1/2"
+        className="fixed top-0 left-0 w-7 h-7 border border-white/60 rounded-full pointer-events-none z-[99998] transform -translate-x-1/2 -translate-y-1/2"
         style={{ mixBlendMode: 'difference' }}
       />
     </>
