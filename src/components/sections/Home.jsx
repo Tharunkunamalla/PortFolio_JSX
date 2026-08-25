@@ -67,7 +67,14 @@ const Home = () => {
   const loaderRef = useRef(null);
   const viewsRef = useRef(null);
 
-  const [views, setViews] = useState(null);
+  const [views, setViews] = useState(() => {
+    try {
+      const cached = localStorage.getItem("portfolio_views");
+      return cached ? parseInt(cached, 10) : 1429;
+    } catch {
+      return 1429;
+    }
+  });
   const hasFetched = useRef(false);
 
   useEffect(() => {
@@ -75,47 +82,47 @@ const Home = () => {
     hasFetched.current = true;
 
     const fetchViews = async () => {
-      // 1. Try local proxy server
+      // 1. Direct fetch from global real-time hits service
+      try {
+        const directResponse = await fetch("https://hits.sh/tharunkunamalla.vercel.app.svg");
+        if (directResponse.ok) {
+          const svg = await directResponse.text();
+          const match = svg.match(/<title>hits:\s*([0-9,]+)<\/title>/i);
+          if (match && match[1]) {
+            const hits = parseInt(match[1].replace(/,/g, ""), 10);
+            const total = 1428 + hits;
+            setViews(total);
+            localStorage.setItem("portfolio_views", total.toString());
+            return;
+          }
+        }
+      } catch (directErr) {
+        console.warn("Direct hits counter failed, trying proxy:", directErr);
+      }
+
+      // 2. Try proxy server
       try {
         const response = await fetch("/api/views");
         if (response.ok) {
           const data = await response.json();
-          if (data.count !== undefined && data.count !== null) {
+          if (data.count) {
             setViews(data.count);
             localStorage.setItem("portfolio_views", data.count.toString());
             return;
           }
         }
       } catch (err) {
-        console.warn("Proxy view counter failed, trying direct source:", err);
+        console.warn("Proxy counter failed:", err);
       }
 
-      // 2. Direct fetch from komarev counter
-      try {
-        const directResponse = await fetch("https://komarev.com/ghpvc/?username=Tharunkunamalla");
-        if (directResponse.ok) {
-          const svg = await directResponse.text();
-          const matches = svg.match(/<text[^>]*>([0-9,]+)<\/text>/g);
-          if (matches && matches.length > 0) {
-            const lastMatch = matches[matches.length - 1];
-            const countStr = lastMatch.replace(/<[^>]+>/g, "").replace(/,/g, "");
-            const count = parseInt(countStr, 10);
-            if (!isNaN(count)) {
-              setViews(count);
-              localStorage.setItem("portfolio_views", count.toString());
-              return;
-            }
-          }
-        }
-      } catch (directErr) {
-        console.warn("Direct view counter failed:", directErr);
-      }
-
-      // 3. Fallback to cached or baseline count
-      const cached = localStorage.getItem("portfolio_views");
-      const fallbackCount = cached ? parseInt(cached, 10) + 1 : 1;
-      setViews(fallbackCount);
-      localStorage.setItem("portfolio_views", fallbackCount.toString());
+      // 3. Fallback increment
+      setViews((prev) => {
+        const next = (prev || 1429) + 1;
+        try {
+          localStorage.setItem("portfolio_views", next.toString());
+        } catch {}
+        return next;
+      });
     };
 
     fetchViews();
