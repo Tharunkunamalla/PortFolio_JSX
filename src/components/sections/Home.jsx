@@ -221,10 +221,10 @@ const Home = ({scrollToSection}) => {
 
             <h1
               ref={headingRef}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+              className="text-3xl sm:text-4xl lg:text-5xl font-unbounded font-black tracking-tight mb-5 leading-tight"
             >
-              <span className="text-gray-800 dark:text-white">Hi, I am </span>
-              <span className="text-primary-500 dark:text-primary-400">
+              <span className="text-gray-900 dark:text-white">Hi, I am </span>
+              <span className="text-primary-500 dark:text-primary-400 inline-block drop-shadow-[0_0_24px_rgba(14,165,233,0.35)]">
                 Tharun
               </span>
             </h1>

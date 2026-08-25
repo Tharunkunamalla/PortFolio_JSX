@@ -62,6 +62,9 @@ export default {
       fontFamily: {
         sans: ["Outfit", "sans-serif"],
         heading: ["Space Grotesk", "sans-serif"],
+        unbounded: ["Unbounded", "sans-serif"],
+        orbitron: ["Orbitron", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
       },
       spacing: {
         128: "32rem",
