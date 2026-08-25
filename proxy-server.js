@@ -96,22 +96,15 @@ app.get("/api/monkeytype/:username", async (req, res) => {
 // -------- Views/Visitor Counter Proxy --------
 app.get("/api/views", async (req, res) => {
   try {
-    const response = await fetch("https://komarev.com/ghpvc/?username=Tharunkunamalla", {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-      },
-    });
+    const response = await fetch("https://hits.sh/tharunkunamalla.vercel.app.svg");
     const svg = await response.text();
-    const matches = svg.match(/<text[^>]*>([0-9,]+)<\/text>/g);
-    if (matches && matches.length > 0) {
-      const lastMatch = matches[matches.length - 1];
-      const countStr = lastMatch.replace(/<[^>]+>/g, "").replace(/,/g, "");
-      const count = parseInt(countStr, 10);
-      if (!isNaN(count)) {
-        return res.status(200).json({ count });
-      }
+    const match = svg.match(/<title>hits:\s*([0-9,]+)<\/title>/i);
+    if (match && match[1]) {
+      const hits = parseInt(match[1].replace(/,/g, ""), 10);
+      const totalViews = 1428 + hits;
+      return res.status(200).json({ count: totalViews });
     }
-    throw new Error("Unable to parse visitor count");
+    throw new Error("Unable to parse hits SVG");
   } catch (err) {
     console.error("Views proxy error:", err);
     res.status(500).json({ error: "Failed to fetch visitor count" });
