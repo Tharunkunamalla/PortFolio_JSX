@@ -1,10 +1,8 @@
-// src/components/sections/Skills.jsx
 import {useEffect, useRef} from "react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {Cpu, Globe, Terminal} from "lucide-react";
-import { skillsData } from "../../constants/skillsData";
-import {VscCode} from "react-icons/vsc";
+import {Cpu, Globe, Terminal, Layers} from "lucide-react";
+import {skillsData} from "../../constants/skillsData";
 import LeetCodeStats from "./LeetCodeStats.jsx";
 import GitHubStats from "./GitHubStats.jsx";
 import BackgroundParticles from "../layout/BackgroundParticles";
@@ -15,30 +13,21 @@ gsap.registerPlugin(ScrollTrigger);
 const SkillCard = ({skill}) => {
   return (
     <Tilt
-      tiltMaxAngleX={10}
-      tiltMaxAngleY={10}
+      tiltMaxAngleX={8}
+      tiltMaxAngleY={8}
       perspective={1000}
-      scale={1.05}
+      scale={1.03}
       transitionSpeed={1500}
       className="w-full h-full"
     >
-      <div
-        className="group relative p-6 rounded-2xl bg-black/5 dark:bg-white/[0.03] border border-black/10 dark:border-white/5 hover:border-transparent transition-all duration-500 overflow-hidden"
-        style={{"--hover-color": skill.color}}
-      >
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
-          style={{backgroundColor: skill.color}}
-        />
-        <div className="absolute inset-0 border-2 border-transparent group-hover:border-[var(--hover-color)] opacity-0 group-hover:opacity-30 transition-all duration-500 rounded-2xl pointer-events-none" />
-
-        <div className="relative z-10 flex flex-col items-center justify-center gap-4">
-          <div className="p-4 rounded-xl bg-white/5 transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-1">
-            <span className="text-4xl" style={{color: skill.color}}>
+      <div className="group relative p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-950/70 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 overflow-hidden shadow-sm hover:shadow-lg">
+        <div className="relative z-10 flex flex-col items-center justify-center gap-3">
+          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 transition-transform duration-300 group-hover:scale-110 group-hover:-translate-y-1">
+            <span className="text-3xl" style={{color: skill.color}}>
               {skill.icon}
             </span>
           </div>
-          <h4 className="text-gray-600 dark:text-white/70 font-semibold text-lg group-hover:text-gray-900 dark:group-hover:text-white transition-colors text-center">
+          <h4 className="text-zinc-700 dark:text-zinc-300 font-display font-semibold text-xs tracking-wider uppercase group-hover:text-black dark:group-hover:text-white transition-colors text-center">
             {skill.name}
           </h4>
         </div>
@@ -50,29 +39,23 @@ const SkillCard = ({skill}) => {
 const SkillsMarquee = ({skills}) => {
   return (
     <div className="relative max-w-7xl mx-auto px-4 md:px-0">
-      <div className="relative overflow-hidden py-8 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.3)] group/reel transition-all duration-500 hover:border-white/20 hover:bg-white/[0.06]">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/reel:animate-shine pointer-events-none" />
-
+      <div className="relative overflow-hidden py-6 rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-950/60 backdrop-blur-xl shadow-sm group/reel transition-all duration-300 hover:border-zinc-400 dark:hover:border-zinc-600">
         <div className="flex whitespace-nowrap animate-marquee">
           {[...skills, ...skills].map((skill, idx) => (
             <div
               key={idx}
-              className="flex items-center gap-4 px-12 group transition-transform duration-300"
+              className="flex items-center gap-3 px-10 group transition-transform duration-300"
             >
-              <span
-                className="text-4xl grayscale opacity-30 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-500"
-                style={{color: skill.color}}
-              >
+              <span className="text-3xl group-hover:scale-110 transition-all duration-300" style={{color: skill.color}}>
                 {skill.icon}
               </span>
-              <span className="text-gray-900/40 dark:text-white/20 group-hover:text-gray-900/90 dark:group-hover:text-white/90 font-black tracking-widest uppercase transition-colors text-[10px]">
+              <span className="text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white font-mono font-bold tracking-widest uppercase transition-colors text-xs">
                 {skill.name}
               </span>
             </div>
           ))}
         </div>
       </div>
-      <div className="absolute -inset-1 bg-primary-500/10 rounded-full blur-2xl opacity-0 group-hover/reel:opacity-100 transition-opacity duration-700 pointer-events-none" />
     </div>
   );
 };
@@ -83,33 +66,19 @@ const Skills = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Set perspective for 3D animations
-      gsap.set(sectionRef.current, {perspective: 1000});
-
       gsap.from(headingRef.current, {
-        y: 100,
-        z: -200,
-        rotationX: -20,
+        y: 40,
         opacity: 0,
-        duration: 1.2,
+        duration: 0.9,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: "top 90%",
-          toggleActions: "play reverse play reverse",
-        },
       });
 
       const cards = gsap.utils.toArray(".skill-card-anim");
       gsap.from(cards, {
-        scrollTrigger: {
-          trigger: ".skills-grid",
-          start: "top 85%",
-        },
-        y: 30,
+        y: 25,
         opacity: 0,
-        stagger: 0.04,
-        duration: 0.8,
+        stagger: 0.03,
+        duration: 0.7,
         ease: "power2.out",
       });
     }, sectionRef);
@@ -127,47 +96,48 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative py-28 bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] transition-colors duration-300 overflow-hidden"
+      className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-24 bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden"
     >
       <BackgroundParticles />
 
-      {/* ===== TOP BLEND ===== */}
-      <div
-        className="
-            pointer-events-none absolute top-0 inset-x-0 h-24 z-10
-            bg-gradient-to-b
-            from-white/80 to-transparent
-            dark:from-black/60
-          "
-      />
+      {/* Monochromatic Background Glow */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+        <div className="absolute bottom-1/3 -right-40 w-96 h-96 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+      </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-24">
-          <h2
-            ref={headingRef}
-            className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white tracking-tight"
-          >
-            Technical <span className="text-secondary-500">Skills</span>
-          </h2>
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+        {/* Page Header */}
+        <div ref={headingRef} className="max-w-3xl mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-bold uppercase tracking-widest text-zinc-600 dark:text-zinc-400 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-black dark:bg-white"></span>
+            Technical Arsenal
+          </div>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold text-black dark:text-white tracking-tight leading-tight mb-4">
+            Skills & Expertise
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg font-light leading-relaxed">
+            Technologies, frameworks, and modern tools leveraged across frontend, backend, machine learning, and cloud infrastructure.
+          </p>
         </div>
 
-        <div className="space-y-24">
+        <div className="space-y-16">
           {["frontend", "backend"].map((cat) => (
-            <div key={cat} className="space-y-10">
-              <div className="flex items-center gap-4 opacity-70 px-2">
-                <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
+            <div key={cat} className="space-y-6">
+              <div className="flex items-center gap-4 px-1">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
                   {cat === "frontend" ? (
-                    <Globe className="w-4 h-4" />
+                    <Globe className="w-4 h-4 text-zinc-500" />
                   ) : (
-                    <Terminal className="w-4 h-4" />
+                    <Terminal className="w-4 h-4 text-zinc-500" />
                   )}
-                  {cat} Development
+                  {cat} Architecture
                 </h3>
-                <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
+                <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
-                {categorizedSkills[cat].map((skill) => (
+                {categorizedSkills[cat]?.map((skill) => (
                   <div key={skill.name} className="skill-card-anim">
                     <SkillCard skill={skill} />
                   </div>
@@ -176,26 +146,35 @@ const Skills = () => {
             </div>
           ))}
 
-          <div className="space-y-10 pt-10">
-            <div className="flex items-center gap-4 opacity-70 px-2">
-              <h3 className="text-sm font-black uppercase tracking-[0.3em] text-gray-500 dark:text-white/40 flex items-center gap-2">
-                <Cpu className="w-4 h-4" />
-                Tools & Ecosystem
+          {/* Ecosystem / Marquee */}
+          <div className="space-y-6 pt-4">
+            <div className="flex items-center gap-4 px-1">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-zinc-500" />
+                DevOps, AI & Ecosystem
               </h3>
-              <div className="h-[1px] flex-1 bg-black/10 dark:bg-white/20" />
+              <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
             </div>
-            <SkillsMarquee skills={categorizedSkills.ecosystem} />
+            {categorizedSkills.ecosystem && (
+              <SkillsMarquee skills={categorizedSkills.ecosystem} />
+            )}
           </div>
         </div>
 
-        {/* LeetCodeStats moved inside section to fix background gap */}
-        <div className="mt-32 relative z-20">
-          <LeetCodeStats />
-        </div>
+        {/* Live Coding Analytics Section */}
+        <div className="mt-24 space-y-16">
+          <div className="flex items-center gap-4 px-1">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+              <Layers className="w-4 h-4 text-zinc-500" />
+              Live Coding Metrics
+            </h3>
+            <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
+          </div>
 
-        {/* GitHub Stats added below LeetCode Stats */}
-        <div className="mt-8 relative z-20">
-          <GitHubStats />
+          <div className="space-y-12">
+            <LeetCodeStats />
+            <GitHubStats />
+          </div>
         </div>
       </div>
 
@@ -206,35 +185,18 @@ const Skills = () => {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        @keyframes shine {
-          100% { transform: translateX(100%); }
-        }
         .animate-marquee {
-          --marquee-duration: 18s;
+          --marquee-duration: 22s;
           animation: marquee var(--marquee-duration) linear infinite;
         }
         @media (max-width: 640px) {
-          /* Faster marquee on mobile for better perceived speed */
-          .animate-marquee { --marquee-duration: 8s; }
+          .animate-marquee { --marquee-duration: 12s; }
         }
         .animate-marquee:hover {
           animation-play-state: paused;
         }
-        .animate-shine {
-          animation: shine 1.5s ease-out;
-        }
       `,
         }}
-      />
-
-      {/* ===== BOTTOM BLEND ===== */}
-      <div
-        className="
-            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-            bg-gradient-to-t
-            from-white/90 to-transparent
-            dark:from-black/80
-          "
       />
     </section>
   );
