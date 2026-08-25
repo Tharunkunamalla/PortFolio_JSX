@@ -193,12 +193,12 @@ const Home = () => {
         <div
           ref={loaderRef}
           data-app-loader="true"
-          className="fixed inset-0 z-[100] bg-white dark:bg-[#09090b] flex items-center justify-center transition-all duration-500"
+          className="fixed inset-0 z-[100] bg-black flex items-center justify-center transition-all duration-500 overflow-hidden"
         >
           <img
-            src="/assets/loader.gif"
+            src="/assets/newload.gif"
             alt="Loading..."
-            className="w-24 h-24 object-contain filter grayscale dark:invert"
+            className="w-48 h-48 sm:w-64 sm:h-64 object-contain mix-blend-screen pointer-events-none select-none"
           />
         </div>
       )}
