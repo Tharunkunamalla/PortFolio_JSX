@@ -295,9 +295,9 @@ const Home = () => {
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
               <div className="absolute inset-0 rounded-3xl bg-zinc-200 dark:bg-zinc-800 transform rotate-3 scale-102 transition-transform duration-500" />
               <img
-                src="/assets/img.png"
+                src="/assets/pic.jpg"
                 alt="Tharun - Full Stack Developer"
-                className="relative z-10 w-full h-full object-cover rounded-3xl filter grayscale contrast-110 border border-zinc-200 dark:border-zinc-800 shadow-2xl animate-float"
+                className="relative z-10 w-full h-full object-cover rounded-3xl contrast-110 border border-zinc-200 dark:border-zinc-800 shadow-2xl animate-float"
               />
               {/* Floating Social Icons */}
               <div className="absolute -bottom-4 -left-4 z-20 flex gap-2">
