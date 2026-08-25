@@ -1,22 +1,29 @@
 "use client";
 
 import {useEffect, useRef, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {gsap} from "gsap";
-import {MotionPathPlugin} from "gsap/MotionPathPlugin";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
-import {Github, Linkedin, Instagram, Mail, Code2, ArrowDownCircle, Eye} from "lucide-react";
+import {Github, Linkedin, Instagram, Mail, Code2, ArrowRight, Eye, Sparkles} from "lucide-react";
+import {FaJava} from "react-icons/fa";
+import {SiSpringboot, SiMongodb, SiExpress, SiReact, SiNodedotjs} from "react-icons/si";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
 
-gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
+const coreStack = [
+  {name: "Java", icon: <FaJava />, color: "#EA2D2E"},
+  {name: "Spring Boot", icon: <SiSpringboot />, color: "#6DB33F"},
+  {name: "MongoDB", icon: <SiMongodb />, color: "#47A248"},
+  {name: "Express.js", icon: <SiExpress />, color: "#9ca3af"},
+  {name: "React", icon: <SiReact />, color: "#61DAFB"},
+  {name: "Node.js", icon: <SiNodedotjs />, color: "#339933"},
+];
 
 const BUBBLE_COLORS = [
-  "rgba(100, 100, 255, 0.22)",
-  "rgba(0, 200, 255, 0.20)",
-  "rgba(255, 0, 200, 0.20)",
-  "rgba(0, 255, 200, 0.20)",
-  "rgba(255, 255, 255, 0.17)",
+  "rgba(255, 255, 255, 0.12)",
+  "rgba(220, 220, 220, 0.10)",
+  "rgba(180, 180, 180, 0.08)",
+  "rgba(255, 255, 255, 0.15)",
 ];
 
 function spawnBubble(container) {
@@ -39,22 +46,23 @@ function spawnBubble(container) {
     y: gsap.utils.random(-window.innerHeight * 0.7, -window.innerHeight * 0.9),
     x: gsap.utils.random(-40, 40),
     scale: gsap.utils.random(0.7, 1.3),
-    opacity: gsap.utils.random(0.5, 0.85),
+    opacity: gsap.utils.random(0.4, 0.8),
     duration: gsap.utils.random(8, 14),
     ease: "sine.inOut",
     onComplete: () => bubble.remove(),
   });
 }
 
-const Home = ({scrollToSection}) => {
+const Home = () => {
   const {theme} = useTheme();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const headingRef = useRef(null);
   const descriptionRef = useRef(null);
   const buttonsRef = useRef(null);
-  const scrollDownRef = useRef(null);
+  const exploreRef = useRef(null);
   const bubblesContainerRef = useRef(null);
   const loaderRef = useRef(null);
   const viewsRef = useRef(null);
@@ -91,52 +99,34 @@ const Home = ({scrollToSection}) => {
     fetchViews();
   }, []);
 
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({defaults: {ease: "power3.out"}});
-      tl.from(headingRef.current, {y: 50, opacity: 0, duration: 1})
+      tl.from(headingRef.current, {y: 40, opacity: 0, duration: 0.9})
         .from(
           descriptionRef.current,
-          {y: 30, opacity: 0, duration: 0.8},
+          {y: 25, opacity: 0, duration: 0.7},
           "-=0.4",
         )
         .from(
           buttonsRef.current,
           {
-            y: 30,
+            y: 25,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 0.7,
+            stagger: 0.1,
           },
           "-=0.4",
         )
-
-
-        
         .from(
-          [scrollDownRef.current, viewsRef.current],
+          [exploreRef.current, viewsRef.current],
           {
             opacity: 0,
             duration: 0.5,
-            y: 20,
+            y: 15,
           },
           "-=0.2",
         );
-
-      gsap.to([contentRef.current, scrollDownRef.current, viewsRef.current], {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1, // Changed from true to 1 for smooth scrubbing
-        },
-        y: 150,
-        scale: 0.85,
-        opacity: 0,
-        ease: "none",
-      });
-
     }, sectionRef);
 
     return () => ctx.revert();
@@ -147,10 +137,10 @@ const Home = ({scrollToSection}) => {
     const loader = loaderRef.current;
     if (!container || !loader) return;
 
-    const loadingTl = gsap.timeline({delay: 1.5});
+    const loadingTl = gsap.timeline({delay: 1.2});
     loadingTl.to(loader, {
       yPercent: -100,
-      duration: 1,
+      duration: 0.8,
       ease: "power4.inOut",
       onComplete: () => {
         setIsLoading(false);
@@ -161,11 +151,11 @@ const Home = ({scrollToSection}) => {
     function addBubble() {
       if (running && container) {
         spawnBubble(container);
-        setTimeout(addBubble, gsap.utils.random(800, 1800));
+        setTimeout(addBubble, gsap.utils.random(900, 1900));
       }
     }
 
-    for (let i = 0; i < 10; i++) spawnBubble(container);
+    for (let i = 0; i < 8; i++) spawnBubble(container);
     addBubble();
 
     return () => {
@@ -181,12 +171,12 @@ const Home = ({scrollToSection}) => {
         <div
           ref={loaderRef}
           data-app-loader="true"
-          className="fixed inset-0 z-[100] bg-[#f8f9fb]  dark:bg-[#0b0b0f] flex items-center justify-center transition-all duration-500"
+          className="fixed inset-0 z-[100] bg-white dark:bg-[#09090b] flex items-center justify-center transition-all duration-500"
         >
           <img
             src="/assets/loader.gif"
             alt="Loading..."
-            className="w-28 h-28 object-contain"
+            className="w-24 h-24 object-contain filter grayscale dark:invert"
           />
         </div>
       )}
@@ -194,15 +184,11 @@ const Home = ({scrollToSection}) => {
       <section
         ref={sectionRef}
         id="home"
-        className="
-    relative min-h-screen flex flex-col justify-center pt-24 pb-32 md:pt-16 md:pb-8
-    bg-[#f8f9fb]
-    dark:bg-[#0b0b0f]
-    overflow-hidden
-  "
+        className="relative min-h-[92vh] flex flex-col justify-center pt-28 pb-20 md:pt-24 md:pb-16 bg-white dark:bg-[#09090b] overflow-hidden transition-colors duration-300"
       >
         <BackgroundParticles />
-        {/* Bubbles */}
+
+        {/* Bubbles Container */}
         <div
           ref={bubblesContainerRef}
           className="absolute inset-0 overflow-hidden pointer-events-none"
@@ -210,134 +196,140 @@ const Home = ({scrollToSection}) => {
           aria-hidden="true"
         />
 
-        {/* Colored blurred circles */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-primary-200/20 dark:bg-primary-900/20 rounded-full filter blur-3xl"></div>
-          <div className="absolute top-1/4 -left-20 w-72 h-72 bg-secondary-200/20 dark:bg-secondary-900/20 rounded-full filter blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-accent-200/20 dark:bg-accent-900/20 rounded-full filter blur-3xl"></div>
+        {/* Monochromatic Glow Circles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-black/[0.03] dark:bg-white/[0.04] rounded-full filter blur-3xl"></div>
+          <div className="absolute top-1/3 -left-20 w-80 h-80 bg-black/[0.02] dark:bg-white/[0.03] rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-black/[0.02] dark:bg-white/[0.02] rounded-full filter blur-3xl"></div>
         </div>
-        <div ref={contentRef} className="container mx-auto px-4 md:px-6 relative z-10 grid md:grid-cols-2 gap-8 items-center">
-          <div className="order-2 md:order-1">
+
+        <div ref={contentRef} className="container mx-auto px-6 md:px-12 relative z-10 grid md:grid-cols-12 gap-10 items-center">
+          <div className="order-2 md:order-1 md:col-span-7">
+            {/* Open to work pill */}
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest uppercase mb-6 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 dark:bg-white opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-black dark:bg-white"></span>
+              </span>
+              <span>Available for Opportunities</span>
+            </div>
 
             <h1
               ref={headingRef}
-              className="text-3xl sm:text-4xl lg:text-5xl font-unbounded font-black tracking-tight mb-5 leading-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 leading-tight text-black dark:text-white"
             >
-              <span className="text-gray-900 dark:text-white">Hi, I am </span>
-              <span className="text-primary-500 dark:text-primary-400 inline-block drop-shadow-[0_0_24px_rgba(14,165,233,0.35)]">
+              Hi, I am{" "}
+              <span className="underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-8">
                 Tharun
               </span>
             </h1>
 
             <TypeAnimation
               sequence={[
-                "MERN Stack Developer",
+                "Full Stack Developer",
                 2000,
-                "ML Enthusiast",
+                "Spring Boot & Java Backend",
                 2000,
-                "FullStack Developer",
+                "MERN Stack Architect",
+                2000,
+                "Machine Learning Enthusiast",
                 2000,
               ]}
               wrapper="p"
               speed={50}
-              className="text-xl md:text-2xl font-medium text-primary-600 dark:text-primary-400 mb-6"
+              className="text-lg md:text-2xl font-mono font-medium text-zinc-600 dark:text-zinc-400 mb-6"
               repeat={Infinity}
             />
 
             <p
               ref={descriptionRef}
-              className="text-gray-600 dark:text-gray-300 mb-8 max-w-lg"
+              className="text-zinc-600 dark:text-zinc-400 text-base md:text-lg mb-8 max-w-xl leading-relaxed font-light"
             >
-              Skilled in FrontEnd Development and Full Stack Development,
-              looking for opportunities to enhance my skills
+              Engineering robust backend architectures and scalable full-stack applications using <strong className="font-semibold text-black dark:text-white">Spring Boot</strong>, <strong className="font-semibold text-black dark:text-white">Java</strong>, and the <strong className="font-semibold text-black dark:text-white">MERN Stack</strong>. Focused on high-throughput microservices, clean RESTful APIs, and intelligent digital systems.
             </p>
 
-            <div className="flex items-center gap-2 text-lg font-medium mb-4 px-4 py-2 rounded-full bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 w-fit">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            {/* Tech Stack Icons */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-10">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 mr-1">
+                Core Stack:
               </span>
-              Open to Work
+              <div className="flex flex-wrap items-center gap-2.5">
+                {coreStack.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="group relative p-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 flex items-center justify-center shadow-xs cursor-pointer"
+                    title={tech.name}
+                  >
+                    <span className="text-xl sm:text-2xl transition-transform duration-300" style={{color: tech.color}}>
+                      {tech.icon}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 mb-8">
-              <img
-                src="/assets/mongodb.svg"
-                alt="MongoDB"
-                className="w-10 h-10"
-              />
-              <img
-                src={
-                  theme === "dark"
-                    ? "/assets/expressjs-dark.svg"
-                    : "/assets/express.svg"
-                }
-                alt="Express"
-                className="w-10 h-10"
-              />
-              <img src="/assets/react.svg" alt="React" className="w-10 h-10" />
-              <img
-                src="/assets/nodejs.svg"
-                alt="Node.js"
-                className="w-10 h-10"
-              />
-            </div>
-
+            {/* CTAs */}
             <div
               ref={buttonsRef}
-              className="flex flex-wrap gap-4 mb-4 md:mb-20"
+              className="flex flex-wrap items-center gap-4"
             >
               <button
-                onClick={() => scrollToSection("contact")}
-                className="interactive px-6 py-3 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                onClick={() => navigate("/projects")}
+                className="interactive px-7 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-sm tracking-wider uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
               >
-                <Mail className="h-5 w-5" />
-                Contact Me
+                <Code2 className="h-4 w-4" />
+                View Projects
               </button>
               <button
-                onClick={() => scrollToSection("projects")}
-                className="interactive px-6 py-3 rounded-full border-2 border-secondary-500 text-secondary-600 dark:text-secondary-300 hover:bg-secondary-500/20 font-medium hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 bg-transparent"
+                onClick={() => navigate("/contact")}
+                className="interactive px-7 py-3.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold text-sm tracking-wider uppercase hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
               >
-                <Code2 className="h-5 w-5" />
-                View Projects
+                <Mail className="h-4 w-4" />
+                Contact Me
               </button>
             </div>
           </div>
 
-          <div className="order-1 md:order-2 flex justify-center">
-            <div className="relative w-64 h-64 md:w-80 md:h-80">
+          {/* Profile Card */}
+          <div className="order-1 md:order-2 md:col-span-5 flex justify-center">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
+              <div className="absolute inset-0 rounded-3xl bg-zinc-200 dark:bg-zinc-800 transform rotate-3 scale-102 transition-transform duration-500" />
               <img
                 src="/assets/img.png"
-                alt="Tharun - Frontend Developer"
-                className="w-full h-full object-cover rounded-3xl animate-float"
+                alt="Tharun - Full Stack Developer"
+                className="relative z-10 w-full h-full object-cover rounded-3xl filter grayscale contrast-110 border border-zinc-200 dark:border-zinc-800 shadow-2xl animate-float"
               />
-              <div className="md:hidden absolute -left-4 flex flex-col space-y-4 top-1/2 transform -translate-y-1/2">
+              {/* Floating Social Icons */}
+              <div className="absolute -bottom-4 -left-4 z-20 flex gap-2">
                 {[
                   {
                     href: "https://github.com/Tharunkunamalla",
-                    icon: <Github className="h-5 w-5" />,
+                    icon: <Github className="h-4 w-4 transition-colors duration-300" />,
                     label: "GitHub",
+                    hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white",
                   },
                   {
                     href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                    icon: <Linkedin className="h-5 w-5" />,
+                    icon: <Linkedin className="h-4 w-4 transition-colors duration-300" />,
                     label: "LinkedIn",
+                    hoverColor: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10",
                   },
                   {
                     href: "https://www.instagram.com/__tharun_0509.__/",
-                    icon: <Instagram className="h-5 w-5" />,
+                    icon: <Instagram className="h-4 w-4 transition-colors duration-300" />,
                     label: "Instagram",
+                    hoverColor: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
                   },
-                ].map(({href, icon, label}) => (
+                ].map(({href, icon, label, hoverColor}) => (
                   <a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-white dark:bg-dark-200 flex items-center justify-center text-gray-800 dark:text-white shadow-md hover:bg-secondary-500 hover:text-white transition-all duration-300 interactive"
+                    aria-label={label}
+                    className={`w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300 ${hoverColor} shadow-md hover:scale-110 transition-all duration-300 interactive`}
                   >
                     {icon}
-                    <span className="sr-only">{label}</span>
                   </a>
                 ))}
               </div>
@@ -345,47 +337,38 @@ const Home = ({scrollToSection}) => {
           </div>
         </div>
 
-        {/* Explore More Button */}
+        {/* Explore More Link to About */}
         <div
-          ref={scrollDownRef}
-          className="relative mt-12 md:mt-0 md:absolute w-full flex justify-center md:bottom-12 md:left-1/2 md:-translate-x-1/2 cursor-pointer z-20 group"
-          onClick={() => scrollToSection("about")}
+          ref={exploreRef}
+          className="container mx-auto px-6 md:px-12 mt-12 md:mt-16 flex items-center justify-between relative z-20"
         >
-          <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/80 dark:bg-black/50 backdrop-blur-md border border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-black/80 hover:border-primary-500/50 dark:hover:border-primary-500/50 transition-all duration-300 shadow-lg hover:shadow-primary-500/20">
-            <span className="text-sm font-medium tracking-wide">Explore More</span>
-            <ArrowDownCircle className="w-5 h-5 group-hover:text-primary-500 group-hover:translate-y-1 transition-all duration-300" />
+          <button
+            onClick={() => navigate("/about")}
+            className="group flex items-center gap-3 text-xs font-mono font-bold tracking-widest uppercase text-zinc-500 hover:text-black dark:hover:text-white transition-colors"
+          >
+            <span>Explore Story & Experience</span>
+            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-300" />
+          </button>
+
+          {/* Visitor Counter Badge */}
+          <div
+            ref={viewsRef}
+            className="select-none"
+          >
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm text-xs font-mono">
+              <Eye className="w-3.5 h-3.5 text-zinc-500" />
+              <span>
+                {views !== null ? (
+                  <>
+                    <span className="font-bold text-black dark:text-white">{views.toLocaleString()}</span> views
+                  </>
+                ) : (
+                  <span className="opacity-50">Loading...</span>
+                )}
+              </span>
+            </div>
           </div>
         </div>
-
-        {/* Elegant light-blurred visitor counter badge - positioned in bottom right corner */}
-        <div
-          ref={viewsRef}
-          className="absolute bottom-6 right-6 md:bottom-12 md:right-12 z-20 select-none"
-        >
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/25 dark:bg-black/40 backdrop-blur-[12px] border border-gray-300/40 dark:border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] hover:scale-105 transition-all duration-300 group">
-            <Eye className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-secondary-500 transition-colors duration-300 group-hover:animate-pulse" />
-            <span className="text-xs font-bold text-gray-700 dark:text-gray-200">
-              {views !== null ? (
-                <>
-                  <span className="text-secondary-500 dark:text-secondary-400 font-black">{views.toLocaleString()}</span> views
-                </>
-              ) : (
-                <span className="opacity-50 text-[10px]">Loading...</span>
-              )}
-            </span>
-          </div>
-        </div>
-
-
-        {/* ===== BOTTOM BLEND (KEY PART) ===== */}
-        <div
-          className="
-            pointer-events-none absolute bottom-0 inset-x-0 h-32 z-10
-            bg-gradient-to-t
-            from-white/90 to-transparent
-            dark:from-black/80
-          "
-        />
       </section>
     </>
   );
