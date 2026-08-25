@@ -49,14 +49,14 @@ const About = () => {
     >
       <BackgroundParticles />
 
-      {/* Atmospheric Background Image Layer */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Fixed Atmospheric Background Image Layer */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         <img
           src="/assets/bg-about.jpg"
           alt="About Background"
-          className="w-full h-full object-cover opacity-20 dark:opacity-25 filter contrast-125 brightness-90"
+          className="w-full h-full object-cover opacity-35 dark:opacity-40 filter contrast-125 brightness-95"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white dark:from-[#09090b]/90 dark:via-[#09090b]/75 dark:to-[#09090b]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/55 to-white/85 dark:from-[#09090b]/85 dark:via-[#09090b]/55 dark:to-[#09090b]/85" />
       </div>
 
       {/* Monochromatic background glow */}

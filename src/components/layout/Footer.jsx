@@ -122,34 +122,36 @@ const Footer = () => {
           <Link
             data-cursor-ignore="true"
             to="/"
-            className="flex items-center gap-1 text-2xl font-display font-extrabold tracking-tight text-black dark:text-white"
+            className="flex items-center gap-2 text-2xl font-display font-extrabold tracking-tight text-white group"
           >
-            <span className="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-black text-sm">
+            <span className="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-black text-sm shadow-md group-hover:scale-105 transition-transform">
               T
             </span>
-            <span className="font-bold">harun Kunamalla</span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-100 to-zinc-300 font-bold">
+              harun Kunamalla
+            </span>
           </Link>
 
           {/* Quick Page Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-mono tracking-wider uppercase text-zinc-500 dark:text-zinc-400">
-            <Link to="/" className="hover:text-black dark:hover:text-white transition-colors">Home</Link>
-            <Link to="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
-            <Link to="/skills" className="hover:text-black dark:hover:text-white transition-colors">Skills</Link>
-            <Link to="/projects" className="hover:text-black dark:hover:text-white transition-colors">Projects</Link>
-            <Link to="/contact" className="hover:text-black dark:hover:text-white transition-colors">Contact</Link>
+          <div className="flex flex-wrap justify-center gap-6 text-xs font-mono font-bold tracking-widest uppercase text-zinc-400">
+            <Link to="/" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Home</Link>
+            <Link to="/about" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">About</Link>
+            <Link to="/skills" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Skills</Link>
+            <Link to="/projects" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Projects</Link>
+            <Link to="/contact" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Contact</Link>
           </div>
 
           {/* Footer Text */}
-          <p className="text-zinc-500 dark:text-zinc-400 text-center text-xs md:text-sm flex flex-col md:flex-row items-center gap-1 font-mono">
-            <span>&copy; {currentYear} Tharun.</span>
-            <span className="text-zinc-800 dark:text-zinc-200 font-medium">
+          <p className="text-zinc-300 dark:text-zinc-200 text-center text-xs md:text-sm flex flex-col md:flex-row items-center gap-1.5 font-mono">
+            <span className="text-zinc-300">&copy; {currentYear} Tharun.</span>
+            <span className="text-white font-semibold">
               All rights reserved.
             </span>
           </p>
 
           {!isHomePage && (
             <div className="flex flex-col items-center gap-1.5 select-none z-30">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 animate-pulse">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-300 dark:text-zinc-300 animate-pulse">
                 Event Horizon
               </span>
               <button
