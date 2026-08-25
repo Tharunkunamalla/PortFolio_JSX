@@ -1,4 +1,5 @@
 import {useState, useEffect, useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import {X, Terminal as TerminalIcon, Maximize2, Minimize2} from "lucide-react";
 import {useTerminal} from "../../context/TerminalContext";
 import {useTheme} from "../../context/ThemeContext";
@@ -19,6 +20,7 @@ const Terminal = () => {
 
   const {theme, changeTheme} = useTheme();
   const lenis = useLenis();
+  const navigate = useNavigate();
 
   const [inputValue, setInputValue] = useState("");
   const [logs, setLogs] = useState([]);
@@ -32,6 +34,7 @@ const Terminal = () => {
 
   const commands = [
     "help",
+    "goto",
     "about",
     "skills",
     "projects",
@@ -142,6 +145,7 @@ const Terminal = () => {
               <p className="text-secondary-400 font-black tracking-wide uppercase text-xs">Available Commands:</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-gray-300 font-mono text-[11px] sm:text-xs">
                 <div><span className="text-[#39ff14] font-semibold">help</span> - Show this help menu</div>
+                <div><span className="text-[#39ff14] font-semibold">goto &lt;page&gt;</span> - Navigate to (home, about, skills, projects, contact, space)</div>
                 <div><span className="text-[#39ff14] font-semibold">about</span> - Tharun's profile & career summary</div>
                 <div><span className="text-[#39ff14] font-semibold">skills</span> - List of technical programming skills</div>
                 <div><span className="text-[#39ff14] font-semibold">projects</span> - Showcase of all project files</div>
@@ -157,6 +161,41 @@ const Terminal = () => {
           ),
           type: "system",
         };
+        break;
+
+      case "goto":
+      case "cd":
+        const targetPage = args[0]?.toLowerCase();
+        if (targetPage === "home" || targetPage === "/") {
+          navigate("/");
+          setTerminalOpen(false);
+          return;
+        } else if (targetPage === "about") {
+          navigate("/about");
+          setTerminalOpen(false);
+          return;
+        } else if (targetPage === "skills") {
+          navigate("/skills");
+          setTerminalOpen(false);
+          return;
+        } else if (targetPage === "projects" || targetPage === "work") {
+          navigate("/projects");
+          setTerminalOpen(false);
+          return;
+        } else if (targetPage === "contact") {
+          navigate("/contact");
+          setTerminalOpen(false);
+          return;
+        } else if (targetPage === "space" || targetPage === "3d") {
+          navigate("/projects-3d");
+          setTerminalOpen(false);
+          return;
+        } else {
+          responseLog = {
+            text: "Destination error: Unknown page. Options: goto (home | about | skills | projects | contact | space)",
+            type: "error",
+          };
+        }
         break;
 
       case "about":
