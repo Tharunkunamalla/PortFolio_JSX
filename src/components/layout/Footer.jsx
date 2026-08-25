@@ -114,70 +114,57 @@ const Footer = () => {
       data-cursor-ignore="true"
       onPointerDownCapture={releasePointerLock}
       onMouseDownCapture={releasePointerLock}
-      className="bg-[#fafafa] dark:bg-[#09090b] border-t border-zinc-200 dark:border-zinc-800/80 py-10 transition-colors duration-300"
+      className="relative z-30 bg-zinc-950/80 backdrop-blur-xl border-t border-zinc-900 py-8 transition-colors duration-300"
     >
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Logo / Name */}
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+          {/* Left: Brand Identity */}
           <Link
             data-cursor-ignore="true"
             to="/"
-            className="flex items-center gap-2 text-2xl font-display font-extrabold tracking-tight text-white group"
+            className="flex items-center gap-1.5 group shrink-0"
           >
-            <span className="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-black text-sm shadow-md group-hover:scale-105 transition-transform">
+            <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-zinc-800/90 border border-zinc-700/70 text-zinc-300 flex items-center justify-center font-mono font-bold text-xs shadow-inner group-hover:border-zinc-500 transition-colors">
               T
             </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-100 to-zinc-300 font-bold">
+            <span className="font-display font-medium text-base text-zinc-400 group-hover:text-zinc-200 transition-colors tracking-wide">
               harun Kunamalla
             </span>
           </Link>
 
-          {/* Quick Page Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-xs font-mono font-bold tracking-widest uppercase text-zinc-400">
-            <Link to="/" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Home</Link>
-            <Link to="/about" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">About</Link>
-            <Link to="/skills" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Skills</Link>
-            <Link to="/projects" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Projects</Link>
-            <Link to="/contact" className="hover:!text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.9)] hover:scale-105 transition-all duration-200">Contact</Link>
+          {/* Right: Copyright & Event Horizon */}
+          <div className="flex items-center gap-4 shrink-0">
+            <p className="text-zinc-500 text-xs font-mono">
+              &copy; {currentYear} Tharun. <span className="text-zinc-400">All rights reserved.</span>
+            </p>
+
+            {!isHomePage && (
+              <div className="flex items-center gap-2 select-none">
+                <button
+                  ref={buttonRef}
+                  type="button"
+                  onMouseEnter={handleBlackHoleHover}
+                  className="group relative h-9 w-9 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
+                  aria-label="Hover to warp back to Home Page"
+                  title="Event Horizon: Warp to Home"
+                >
+                  {/* Outer glowing border */}
+                  <span
+                    className="absolute inset-0 rounded-full border border-white/20 transition-all duration-500 group-hover:scale-125"
+                    style={{
+                      boxShadow: "0 0 10px rgba(255,255,255,0.15), inset 0 0 6px rgba(0,0,0,0.9)",
+                    }}
+                  />
+                  {/* Swirling space gradient */}
+                  <span className="absolute inset-0.5 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(200,200,200,0.9),rgba(30,30,35,0.95)_45%,#000_75%)] animate-black-hole-spin group-hover:scale-115 transition-transform duration-500" />
+                  {/* Orbital dust rings */}
+                  <span className="absolute inset-[-3px] rounded-full border border-white/20 animate-black-hole-ring pointer-events-none" />
+                  {/* Core singularity */}
+                  <span className="absolute w-2.5 h-2.5 rounded-full bg-black shadow-[0_0_6px_rgba(255,255,255,0.8)]" />
+                </button>
+              </div>
+            )}
           </div>
-
-          {/* Footer Text */}
-          <p className="text-zinc-300 dark:text-zinc-200 text-center text-xs md:text-sm flex flex-col md:flex-row items-center gap-1.5 font-mono">
-            <span className="text-zinc-300">&copy; {currentYear} Tharun.</span>
-            <span className="text-white font-semibold">
-              All rights reserved.
-            </span>
-          </p>
-
-          {!isHomePage && (
-            <div className="flex flex-col items-center gap-1.5 select-none z-30">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-300 dark:text-zinc-300 animate-pulse">
-                Event Horizon
-              </span>
-              <button
-                ref={buttonRef}
-                type="button"
-                onMouseEnter={handleBlackHoleHover}
-                className="group relative h-12 w-12 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
-                aria-label="Hover to warp back to Home Page"
-              >
-                {/* Outer glowing border */}
-                <span
-                  className="absolute inset-0 rounded-full border border-zinc-400/40 dark:border-white/30 transition-all duration-500 group-hover:scale-125"
-                  style={{
-                    boxShadow: "0 0 16px rgba(255,255,255,0.2), inset 0 0 8px rgba(0,0,0,0.9)",
-                  }}
-                />
-                {/* Swirling space gradient */}
-                <span className="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(200,200,200,0.9),rgba(30,30,35,0.95)_45%,#000_75%)] animate-black-hole-spin group-hover:scale-115 transition-transform duration-500" />
-                {/* Orbital dust rings */}
-                <span className="absolute inset-[-4px] rounded-full border border-white/20 animate-black-hole-ring pointer-events-none" />
-                <span className="absolute inset-[-8px] rounded-full border border-zinc-400/20 animate-black-hole-ring-delayed pointer-events-none" />
-                {/* Core singularity */}
-                <span className="absolute w-3 h-3 rounded-full bg-black shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-              </button>
-            </div>
-          )}
         </div>
       </div>
       {isWarping && createPortal(
