@@ -94,6 +94,8 @@ const Contact = () => {
         <img
           src="/assets/contact.jpg"
           alt="Contact Background"
+          loading="eager"
+          fetchPriority="high"
           className="w-full h-full object-cover opacity-35 dark:opacity-40 filter contrast-125 brightness-95"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/55 to-white/85 dark:from-[#09090b]/85 dark:via-[#09090b]/55 dark:to-[#09090b]/85" />
