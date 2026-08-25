@@ -85,59 +85,107 @@ const About = () => {
 
         {/* Compact Grid Layout */}
         <div className="grid lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Anime Visual + Bio Summary (5 cols) */}
-          <div className="lg:col-span-5 bg-zinc-50 dark:bg-zinc-950/80 p-6 sm:p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full space-y-6">
-            <div className="mx-auto w-48 h-48 sm:w-56 sm:h-56 md:w-60 md:h-60 flex items-center justify-center">
-              <img
-                src="/assets/about.gif"
-                alt="About Animation"
-                className="w-full h-full object-contain filter contrast-110"
-              />
-            </div>
+          {/* Left Column: Premium Bento Profile Hub (5 cols) */}
+          <div className="lg:col-span-5 space-y-5">
+            {/* Main Profile Bento Card */}
+            <div className="bg-zinc-50 dark:bg-zinc-950/80 p-6 sm:p-7 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-6">
+              {/* Profile Header with Avatar and Status */}
+              <div className="flex items-center gap-5">
+                <div className="relative group shrink-0">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-black border-2 border-zinc-300 dark:border-zinc-700 shadow-xl transition-transform duration-500 group-hover:scale-105 flex items-center justify-center">
+                    <img
+                      src="/assets/img.png"
+                      alt="Tharun Kunamalla"
+                      className="w-full h-full object-contain filter contrast-125"
+                    />
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white dark:border-zinc-950 shadow-md animate-pulse" />
+                </div>
 
-            <div className="space-y-4">
-              <h3 className="text-xl sm:text-2xl font-display font-bold text-black dark:text-white">
-                Tharun Kunamalla
-              </h3>
-              <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed font-light">
-                Computer Science undergraduate at <strong>IIIT Kottayam (2023 - 2027)</strong>. Specialized in building enterprise-grade backend microservices and full-stack solutions using <strong className="text-black dark:text-white font-semibold">Java, Spring Boot</strong>, and the <strong className="text-black dark:text-white font-semibold">MERN Stack</strong> (MongoDB, Express, React, Node.js).
-              </p>
-              <p className="text-zinc-600 dark:text-zinc-300 text-sm leading-relaxed font-light">
-                Passionate about clean architecture, high-throughput REST APIs, database optimization, and intelligent machine learning workflows. Research Intern at NIT Warangal and active open-source contributor.
-              </p>
-            </div>
+                <div className="min-w-0">
+                  <h3 className="text-xl sm:text-2xl font-display font-extrabold text-black dark:text-white tracking-tight leading-tight mb-1 truncate">
+                    Tharun Kunamalla
+                  </h3>
+                  <p className="text-xs font-mono font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
+                    Backend & Full-Stack Engineer
+                  </p>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-zinc-200/60 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span>Open to Roles</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* Highlights Chips */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white">
-                🎓 IIIT Kottayam '27
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white">
-                ☕ Spring Boot & Java
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white">
-                ⚛️ MERN Stack
-              </span>
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-white">
-                🔬 NIT Warangal Intern
-              </span>
-            </div>
+              {/* Engineering Narrative */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800/80 space-y-2.5">
+                <div className="flex items-center justify-between text-xs font-mono font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+                  <span>// Core Focus</span>
+                  <span>IIIT-K '27</span>
+                </div>
+                <p className="text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm leading-relaxed font-light">
+                  Specialized in architecting high-throughput backend microservices and responsive web applications with <strong className="font-semibold text-black dark:text-white">Java, Spring Boot</strong>, and the <strong className="font-semibold text-black dark:text-white">MERN Stack</strong>. Research intern at NIT Warangal and active open-source contributor.
+                </p>
+              </div>
 
-            {/* Resume Button */}
-            <div className="pt-2">
-              <button
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                    "_blank",
-                  )
-                }
-                className="interactive w-full sm:w-auto px-6 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
-              >
-                <FileText className="w-4 h-4" />
-                View Full Resume / LinkedIn
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </button>
+              {/* 2x2 Mini Metric Bento Grid */}
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="p-3.5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 block mb-0.5">
+                    Institution
+                  </span>
+                  <p className="font-display font-bold text-xs sm:text-sm text-black dark:text-white">
+                    IIIT Kottayam
+                  </p>
+                  <span className="text-[11px] text-zinc-500 font-mono">2023 - 2027</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 block mb-0.5">
+                    Research
+                  </span>
+                  <p className="font-display font-bold text-xs sm:text-sm text-black dark:text-white">
+                    NIT Warangal
+                  </p>
+                  <span className="text-[11px] text-zinc-500 font-mono">Summer '26</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 block mb-0.5">
+                    Backend Core
+                  </span>
+                  <p className="font-display font-bold text-xs sm:text-sm text-black dark:text-white">
+                    Spring Boot & Java
+                  </p>
+                  <span className="text-[11px] text-zinc-500 font-mono">Microservices</span>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 block mb-0.5">
+                    Web Stack
+                  </span>
+                  <p className="font-display font-bold text-xs sm:text-sm text-black dark:text-white">
+                    MERN Ecosystem
+                  </p>
+                  <span className="text-[11px] text-zinc-500 font-mono">React · Node · DB</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-1 flex flex-col sm:flex-row gap-2.5">
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
+                      "_blank",
+                    )
+                  }
+                  className="interactive flex-1 px-5 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-102 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
+                >
+                  <FileText className="w-4 h-4" />
+                  View Resume
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
 
