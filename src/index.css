@@ -353,19 +353,31 @@ html::-webkit-scrollbar {
   animation: crt-flicker 0.15s infinite;
 }
 
-/* Custom terminal scrollbar */
-.terminal-scrollbar::-webkit-scrollbar {
-  width: 6px;
+/* Custom monochrome scrollbar */
+.terminal-scrollbar::-webkit-scrollbar,
+.about-scrollbar::-webkit-scrollbar {
+  width: 5px;
 }
-.terminal-scrollbar::-webkit-scrollbar-track {
-  background: rgba(57, 255, 20, 0.03);
+.terminal-scrollbar::-webkit-scrollbar-track,
+.about-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
 }
-.terminal-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(57, 255, 20, 0.2);
-  border-radius: 3px;
+.terminal-scrollbar::-webkit-scrollbar-thumb,
+.about-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 9999px;
 }
-.terminal-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(57, 255, 20, 0.4);
+.dark .terminal-scrollbar::-webkit-scrollbar-thumb,
+.dark .about-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+}
+.terminal-scrollbar::-webkit-scrollbar-thumb:hover,
+.about-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+.dark .terminal-scrollbar::-webkit-scrollbar-thumb:hover,
+.dark .about-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* ==========================================================================

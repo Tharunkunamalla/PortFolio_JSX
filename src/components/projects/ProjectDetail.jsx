@@ -63,6 +63,16 @@ const ProjectDetail = () => {
 
   return (
     <section className="relative min-h-screen pt-28 pb-20 bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden">
+      {/* Fixed Atmospheric Background Image Layer */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+        <img
+          src="/assets/projects-bg.jpg"
+          alt="Projects Background"
+          className="w-full h-full object-cover opacity-35 dark:opacity-40 filter contrast-125 brightness-95"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/55 to-white/85 dark:from-[#09090b]/85 dark:via-[#09090b]/55 dark:to-[#09090b]/85" />
+      </div>
+
       <BackgroundParticles />
 
       <div className="max-w-6xl mx-auto px-6 md:px-12 relative z-10">
