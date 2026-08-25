@@ -8,6 +8,7 @@ import {FaJava} from "react-icons/fa";
 import {SiSpringboot, SiMongodb, SiExpress, SiReact, SiNodedotjs} from "react-icons/si";
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
+import {useVisitor} from "../../context/VisitorContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
 
 const coreStack = [
@@ -55,6 +56,7 @@ function spawnBubble(container) {
 
 const Home = () => {
   const {theme} = useTheme();
+  const {count: views} = useVisitor();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const sectionRef = useRef(null);
@@ -66,67 +68,6 @@ const Home = () => {
   const bubblesContainerRef = useRef(null);
   const loaderRef = useRef(null);
   const viewsRef = useRef(null);
-
-  const [views, setViews] = useState(() => {
-    try {
-      const cached = localStorage.getItem("portfolio_views");
-      return cached ? parseInt(cached, 10) : 1429;
-    } catch {
-      return 1429;
-    }
-  });
-  const hasFetched = useRef(false);
-
-  useEffect(() => {
-    if (hasFetched.current) return;
-    hasFetched.current = true;
-
-    const fetchViews = async () => {
-      // 1. Direct fetch from global real-time hits service
-      try {
-        const directResponse = await fetch("https://hits.sh/tharunkunamalla.vercel.app.svg");
-        if (directResponse.ok) {
-          const svg = await directResponse.text();
-          const match = svg.match(/<title>hits:\s*([0-9,]+)<\/title>/i);
-          if (match && match[1]) {
-            const hits = parseInt(match[1].replace(/,/g, ""), 10);
-            const total = 1428 + hits;
-            setViews(total);
-            localStorage.setItem("portfolio_views", total.toString());
-            return;
-          }
-        }
-      } catch (directErr) {
-        console.warn("Direct hits counter failed, trying proxy:", directErr);
-      }
-
-      // 2. Try proxy server
-      try {
-        const response = await fetch("/api/views");
-        if (response.ok) {
-          const data = await response.json();
-          if (data.count) {
-            setViews(data.count);
-            localStorage.setItem("portfolio_views", data.count.toString());
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn("Proxy counter failed:", err);
-      }
-
-      // 3. Fallback increment
-      setViews((prev) => {
-        const next = (prev || 1429) + 1;
-        try {
-          localStorage.setItem("portfolio_views", next.toString());
-        } catch {}
-        return next;
-      });
-    };
-
-    fetchViews();
-  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

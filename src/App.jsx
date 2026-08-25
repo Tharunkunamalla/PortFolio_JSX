@@ -8,6 +8,7 @@ import {
 
 import {ThemeProvider} from "./context/ThemeContext";
 import {TerminalProvider} from "./context/TerminalContext";
+import {VisitorProvider} from "./context/VisitorContext";
 import Cursor from "./components/layout/Cursor";
 import Navbar from "./components/layout/Navbar";
 import Line from "./components/layout/Line";
@@ -85,14 +86,16 @@ function App() {
       <Router>
         <ThemeProvider>
           <TerminalProvider>
-            <div className="min-h-screen bg-[#ffffff] dark:bg-[#09090b] text-[#18181b] dark:text-[#f4f4f5] transition-colors duration-300 font-sans selection:bg-white selection:text-black">
-              <Cursor />
-              <MainLayout />
-              <Message />
-              <Line />
-              <Terminal />
-              <MatrixRain />
-            </div>
+            <VisitorProvider>
+              <div className="min-h-screen bg-[#ffffff] dark:bg-[#09090b] text-[#18181b] dark:text-[#f4f4f5] transition-colors duration-300 font-sans selection:bg-white selection:text-black">
+                <Cursor />
+                <MainLayout />
+                <Message />
+                <Line />
+                <Terminal />
+                <MatrixRain />
+              </div>
+            </VisitorProvider>
           </TerminalProvider>
         </ThemeProvider>
       </Router>
