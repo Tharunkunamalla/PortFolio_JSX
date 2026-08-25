@@ -96,20 +96,19 @@ const Skills = () => {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-24 bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden"
+      className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-24 bg-white/90 dark:bg-[#09090b]/90 transition-colors duration-300 overflow-hidden"
     >
       {/* Fixed Background Video Layer */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="fixed inset-0 w-full h-full object-cover opacity-25 dark:opacity-30 filter contrast-125 brightness-75 -z-10"
-        >
-          <source src="/assets/skill-vid.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white dark:from-[#09090b]/90 dark:via-[#09090b]/75 dark:to-[#09090b]" />
+          src="/assets/skill-vid.mp4"
+          className="w-full h-full object-cover opacity-35 dark:opacity-40 filter contrast-125 brightness-90"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/90 dark:from-[#09090b]/80 dark:via-[#09090b]/40 dark:to-[#09090b]/90" />
       </div>
 
       <BackgroundParticles />
