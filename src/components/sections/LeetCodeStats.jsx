@@ -187,7 +187,7 @@ const LeetCodeStats = () => {
         >
           <div>
             <h2 className="text-xl sm:text-2xl font-display font-bold text-black dark:text-white">
-              LeetCode & Algorithm Mastery
+              DSA Journey
             </h2>
             <p className="text-xs font-mono text-zinc-500">Live Graphql Query Progress</p>
           </div>

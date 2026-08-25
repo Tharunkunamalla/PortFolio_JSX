@@ -156,28 +156,36 @@ const AllProjects = () => {
           </button>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2 mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          {[
-            {id: "all", label: "All Projects"},
-            {id: "web", label: "Web Applications"},
-            {id: "ml", label: "Machine Learning"},
-          ].map((tab) => {
-            const active = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-                  active
-                    ? "bg-black dark:bg-white text-white dark:text-black shadow-md"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900"
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
+        {/* Filter Tabs & Sleek Glowing Laser Divider Line */}
+        <div className="mb-12 space-y-4">
+          <div className="flex flex-wrap gap-2">
+            {[
+              {id: "all", label: "All Projects"},
+              {id: "web", label: "Web Applications"},
+              {id: "ml", label: "Machine Learning"},
+            ].map((tab) => {
+              const active = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-5 py-2 rounded-full font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                    active
+                      ? "bg-black dark:bg-white text-white dark:text-black shadow-md"
+                      : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Ultra-thin 1px laser divider: Glowing white on left fading to transparent on right in dark theme */}
+          <div className="relative w-full h-[1px] bg-gradient-to-r from-black via-zinc-400/25 to-transparent dark:from-white dark:via-white/20 dark:to-transparent overflow-visible">
+            {/* Luminous glow on the left end */}
+            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 sm:w-80 h-[2px] bg-gradient-to-r from-black to-transparent dark:from-white dark:to-transparent opacity-90 blur-[1.5px] pointer-events-none" />
+          </div>
         </div>
 
         {/* Projects Grid */}
