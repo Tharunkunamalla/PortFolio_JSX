@@ -19,8 +19,8 @@ export const contactMethods = [
   {
     icon: <Mail className="w-6 h-6" />,
     label: "Email",
-    value: "kunamallatharun701@gmail.com",
-    href: "mailto:kunamallatharun701@gmail.com",
+    value: "tharun.stark701@gmail.com",
+    href: "mailto:tharun.stark701@gmail.com",
     color: "from-blue-500 to-cyan-400",
   },
   {

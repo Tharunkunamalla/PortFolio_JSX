@@ -25,19 +25,19 @@ const Cursor = () => {
     document.body.style.cursor = 'none';
     
     const onMouseMove = (e) => {
-      // Position the cursor dot
-      gsap.to(cursor, {
+      // Position the cursor dot instantly without drift
+      gsap.set(cursor, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.1,
       });
       
-      // Position the cursor outer circle with a slight delay for the trailing effect
+      // Position the cursor outer circle with snappy following
       gsap.to(cursorOuter, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.5,
+        duration: 0.15,
         ease: 'power2.out',
+        overwrite: 'auto',
       });
     };
     
@@ -46,11 +46,11 @@ const Cursor = () => {
       gsap.to(cursor, {
         scale: 1.5,
         opacity: 0.5,
-        duration: 0.3,
+        duration: 0.2,
       });
       gsap.to(cursorOuter, {
         scale: 1.5,
-        duration: 0.3,
+        duration: 0.2,
       });
     };
     
@@ -58,16 +58,17 @@ const Cursor = () => {
       gsap.to(cursor, {
         scale: 1,
         opacity: 1,
-        duration: 0.3,
+        duration: 0.2,
       });
       gsap.to(cursorOuter, {
         scale: 1,
-        duration: 0.3,
+        duration: 0.2,
       });
     };
     
-    // Add event listeners
-    document.addEventListener('mousemove', onMouseMove);
+    // Add event listeners on window to track throughout drags
+    window.addEventListener('pointermove', onMouseMove, { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     
     // Add effect for interactive elements
     const interactiveElements = document.querySelectorAll('a, button, .interactive');
@@ -79,7 +80,8 @@ const Cursor = () => {
     
     return () => {
       // Clean up
-      document.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('pointermove', onMouseMove);
+      window.removeEventListener('mousemove', onMouseMove);
       interactiveElements.forEach((el) => {
         el.removeEventListener('mouseenter', onMouseEnter);
         el.removeEventListener('mouseleave', onMouseLeave);

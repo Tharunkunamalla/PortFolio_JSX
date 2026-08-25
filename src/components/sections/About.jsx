@@ -219,7 +219,8 @@ const About = () => {
             {/* List of items in active category */}
             <div
               ref={contentRef}
-              className="space-y-3 max-h-[580px] overflow-y-auto pr-1 terminal-scrollbar"
+              data-lenis-prevent="true"
+              className="space-y-3 max-h-[580px] overflow-y-auto overscroll-contain touch-pan-y pr-2 terminal-scrollbar"
             >
               {activeCategory.items.map((item, idx) => (
                 <div
