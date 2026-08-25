@@ -75,25 +75,47 @@ const Home = () => {
     hasFetched.current = true;
 
     const fetchViews = async () => {
+      // 1. Try local proxy server
       try {
         const response = await fetch("/api/views");
-        if (!response.ok) throw new Error("Proxy views failed");
-        const data = await response.json();
-        if (data.count !== undefined) {
-          setViews(data.count);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.count !== undefined && data.count !== null) {
+            setViews(data.count);
+            localStorage.setItem("portfolio_views", data.count.toString());
+            return;
+          }
         }
       } catch (err) {
-        console.warn("Proxy view counter failed, trying direct call:", err);
-        try {
-          const directResponse = await fetch("https://api.counterapi.dev/v1/tharunkunamalla/portfolio-visits/up");
-          const directData = await directResponse.json();
-          if (directData.count !== undefined) {
-            setViews(directData.count);
-          }
-        } catch (directErr) {
-          console.error("Direct view counter failed:", directErr);
-        }
+        console.warn("Proxy view counter failed, trying direct source:", err);
       }
+
+      // 2. Direct fetch from komarev counter
+      try {
+        const directResponse = await fetch("https://komarev.com/ghpvc/?username=Tharunkunamalla");
+        if (directResponse.ok) {
+          const svg = await directResponse.text();
+          const matches = svg.match(/<text[^>]*>([0-9,]+)<\/text>/g);
+          if (matches && matches.length > 0) {
+            const lastMatch = matches[matches.length - 1];
+            const countStr = lastMatch.replace(/<[^>]+>/g, "").replace(/,/g, "");
+            const count = parseInt(countStr, 10);
+            if (!isNaN(count)) {
+              setViews(count);
+              localStorage.setItem("portfolio_views", count.toString());
+              return;
+            }
+          }
+        }
+      } catch (directErr) {
+        console.warn("Direct view counter failed:", directErr);
+      }
+
+      // 3. Fallback to cached or baseline count
+      const cached = localStorage.getItem("portfolio_views");
+      const fallbackCount = cached ? parseInt(cached, 10) + 1 : 1;
+      setViews(fallbackCount);
+      localStorage.setItem("portfolio_views", fallbackCount.toString());
     };
 
     fetchViews();
@@ -230,7 +252,7 @@ const Home = () => {
                 2000,
                 "Spring Boot & Java Backend",
                 2000,
-                "MERN Stack Architect",
+                "MERN Stack Developer",
                 2000,
                 "Machine Learning Enthusiast",
                 2000,

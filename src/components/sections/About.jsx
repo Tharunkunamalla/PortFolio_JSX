@@ -224,26 +224,26 @@ const About = () => {
               {activeCategory.items.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-5 sm:p-6 rounded-2xl bg-zinc-50 dark:bg-zinc-950/90 border border-zinc-200 dark:border-zinc-800/90 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-200 shadow-xs group"
+                  className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-zinc-500 transition-all duration-200 shadow-sm hover:shadow-md group"
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-black dark:bg-white shrink-0 group-hover:scale-125 transition-transform" />
-                      <h4 className="font-display font-bold text-base sm:text-lg text-black dark:text-white group-hover:text-zinc-600 dark:group-hover:text-zinc-200 transition-colors">
+                      <h4 className="font-display font-bold text-base sm:text-lg text-black dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
                         {item.name}
                       </h4>
                     </div>
 
                     {item.date && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold bg-zinc-200/70 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-black dark:text-zinc-200 self-start sm:self-auto shrink-0">
-                        <Calendar className="w-3 h-3 text-zinc-500" />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-zinc-200 self-start sm:self-auto shrink-0">
+                        <Calendar className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
                         {item.date}
                       </span>
                     )}
                   </div>
 
                   {item.description && (
-                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 font-light pl-5 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light pl-5 leading-relaxed">
                       {item.description}
                     </p>
                   )}
