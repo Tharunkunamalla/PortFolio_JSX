@@ -2,19 +2,28 @@ import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import {aboutData} from "../../constants/aboutData";
-import {FileText, ArrowUpRight, Briefcase, GraduationCap, Award, Sparkles, Building2, Calendar} from "lucide-react";
+import {getGalleryPhotos} from "../../constants/galleryData";
+import PhotoLightbox from "../gallery/PhotoLightbox";
+import {FileText, ArrowUpRight, Briefcase, GraduationCap, Award, Sparkles, Building2, Calendar, Camera, MapPin, Eye} from "lucide-react";
 
 const tabIcons = {
   Experience: Briefcase,
   Education: GraduationCap,
   Certifications: Award,
+  Photography: Camera,
 };
 
 const About = () => {
   const sectionRef = useRef(null);
   const headingRef = useRef(null);
   const [activeTab, setActiveTab] = useState("Experience");
+  const [photos, setPhotos] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
   const contentRef = useRef(null);
+
+  useEffect(() => {
+    setPhotos(getGalleryPhotos());
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -193,16 +202,19 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6">
             {/* Category Tab Switcher */}
             <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-              {["Experience", "Education", "Certifications"].map((tabName) => {
+              {["Experience", "Education", "Certifications", "Photography"].map((tabName) => {
                 const Icon = tabIcons[tabName];
-                const count = aboutData.find((d) => d.title === tabName)?.items.length || 0;
+                const count =
+                  tabName === "Photography"
+                    ? photos.length
+                    : aboutData.find((d) => d.title === tabName)?.items.length || 0;
                 const isActive = activeTab === tabName;
 
                 return (
                   <button
                     key={tabName}
                     onClick={() => setActiveTab(tabName)}
-                    className={`flex-1 min-w-[120px] py-2.5 px-4 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
+                    className={`flex-1 min-w-[110px] py-2.5 px-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
                       isActive
                         ? "bg-white dark:bg-black text-black dark:text-white shadow-sm border border-zinc-200 dark:border-zinc-700"
                         : "text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white"
@@ -218,44 +230,110 @@ const About = () => {
               })}
             </div>
 
-            {/* List of items in active category */}
-            <div
-              ref={contentRef}
-              data-lenis-prevent="true"
-              className="space-y-3 max-h-[580px] overflow-y-auto overscroll-contain touch-pan-y pr-2 terminal-scrollbar"
-            >
-              {activeCategory.items.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-zinc-500 transition-all duration-200 shadow-sm hover:shadow-md group"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-black dark:bg-white shrink-0 group-hover:scale-125 transition-transform" />
-                      <h4 className="font-display font-bold text-base sm:text-lg text-black dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
-                        {item.name}
-                      </h4>
+            {/* Tab Content Area */}
+            {activeTab === "Photography" ? (
+              <div
+                ref={contentRef}
+                data-lenis-prevent="true"
+                className="max-h-[580px] overflow-y-auto overscroll-contain touch-pan-y pr-2 terminal-scrollbar"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  {photos.map((photo) => (
+                    <div
+                      key={photo.id}
+                      onClick={() => setSelectedPhoto(photo)}
+                      className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100 dark:bg-black cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300"
+                    >
+                      {/* Photo Image */}
+                      <img
+                        src={photo.src}
+                        alt={photo.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                      />
+
+                      {/* Dark gradient overlay for readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+
+                      {/* Quick Inspect Icon Badge */}
+                      <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                        <Eye className="w-4 h-4" />
+                      </div>
+
+                      {/* Photo Information & Caption */}
+                      <div className="absolute bottom-0 inset-x-0 p-4 text-white space-y-1 transform translate-y-1 group-hover:translate-y-0 transition-transform">
+                        <h4 className="font-display font-bold text-sm sm:text-base text-white drop-shadow-md tracking-wide line-clamp-1">
+                          {photo.title}
+                        </h4>
+                        <div className="flex items-center gap-3 text-[11px] font-mono text-zinc-300">
+                          {photo.location && (
+                            <span className="flex items-center gap-1">
+                              <MapPin className="w-3 h-3 text-zinc-400" />
+                              {photo.location}
+                            </span>
+                          )}
+                          {photo.date && (
+                            <span className="flex items-center gap-1">
+                              <Calendar className="w-3 h-3 text-zinc-400" />
+                              {photo.date}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              /* List of items in active career/education category */
+              <div
+                ref={contentRef}
+                data-lenis-prevent="true"
+                className="space-y-3 max-h-[580px] overflow-y-auto overscroll-contain touch-pan-y pr-2 terminal-scrollbar"
+              >
+                {activeCategory?.items?.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-black border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-zinc-500 transition-all duration-200 shadow-sm hover:shadow-md group"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+                      <div className="flex items-center gap-3">
+                        <div className="w-2 h-2 rounded-full bg-black dark:bg-white shrink-0 group-hover:scale-125 transition-transform" />
+                        <h4 className="font-display font-bold text-base sm:text-lg text-black dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
+                          {item.name}
+                        </h4>
+                      </div>
+
+                      {item.date && (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-zinc-200 self-start sm:self-auto shrink-0">
+                          <Calendar className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
+                          {item.date}
+                        </span>
+                      )}
                     </div>
 
-                    {item.date && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-black dark:text-zinc-200 self-start sm:self-auto shrink-0">
-                        <Calendar className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
-                        {item.date}
-                      </span>
+                    {item.description && (
+                      <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light pl-5 leading-relaxed">
+                        {item.description}
+                      </p>
                     )}
                   </div>
-
-                  {item.description && (
-                    <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 font-light pl-5 leading-relaxed">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedPhoto && (
+        <PhotoLightbox
+          photo={selectedPhoto}
+          photos={photos}
+          onClose={() => setSelectedPhoto(null)}
+          onNavigate={(newPhoto) => setSelectedPhoto(newPhoto)}
+        />
+      )}
     </section>
   );
 };
