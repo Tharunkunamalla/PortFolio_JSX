@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from "react";
 import {createPortal} from "react-dom";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, Link} from "react-router-dom";
 import {gsap} from "gsap";
 
 const Footer = () => {
@@ -11,7 +11,6 @@ const Footer = () => {
   const [isWarping, setIsWarping] = useState(false);
   const buttonRef = useRef(null);
   const videoRef = useRef(null);
-
 
   const releasePointerLock = () => {
     window.dispatchEvent(new Event("pause-3d-controls"));
@@ -115,63 +114,65 @@ const Footer = () => {
       data-cursor-ignore="true"
       onPointerDownCapture={releasePointerLock}
       onMouseDownCapture={releasePointerLock}
-      className="bg-light-200 dark:bg-light-100 dark:bg-gradient-to-br from-[#0f0f14] via-[#12121a] to-[#0c0c10] overflow-hidden py-10 border-t border-gray-300 dark:border-gray-700 shadow-inner"
+      className="bg-[#fafafa] dark:bg-[#09090b] border-t border-zinc-200 dark:border-zinc-800/80 py-10 transition-colors duration-300"
     >
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo / Name */}
-          <a
+          <Link
             data-cursor-ignore="true"
-            href="#home"
-            className="text-gray-900 dark:text-white font-extrabold tracking-tight"
+            to="/"
+            className="flex items-center gap-1 text-2xl font-display font-extrabold tracking-tight text-black dark:text-white"
           >
-            {/* Mobile */}
-            <span className="block md:hidden text-3xl leading-tight">
-              <span className="text-secondary-500 drop-shadow text-4xl">T</span>
-              <span className="drop-shadow text-2xl">harun Kunamalla</span>
+            <span className="w-7 h-7 rounded-lg bg-black dark:bg-white text-white dark:text-black flex items-center justify-center font-black text-sm">
+              T
             </span>
-            {/* Desktop */}
-            <span className="hidden md:block text-4xl leading-tight">
-              <span className="text-secondary-500 drop-shadow">T</span>
-              harun <span className="text-secondary-500">K</span>
-            </span>
-          </a>
+            <span className="font-bold">harun Kunamalla</span>
+          </Link>
+
+          {/* Quick Page Links */}
+          <div className="flex flex-wrap justify-center gap-6 text-xs font-mono tracking-wider uppercase text-zinc-500 dark:text-zinc-400">
+            <Link to="/" className="hover:text-black dark:hover:text-white transition-colors">Home</Link>
+            <Link to="/about" className="hover:text-black dark:hover:text-white transition-colors">About</Link>
+            <Link to="/skills" className="hover:text-black dark:hover:text-white transition-colors">Skills</Link>
+            <Link to="/projects" className="hover:text-black dark:hover:text-white transition-colors">Projects</Link>
+            <Link to="/contact" className="hover:text-black dark:hover:text-white transition-colors">Contact</Link>
+          </div>
 
           {/* Footer Text */}
-          <p className="text-gray-600 dark:text-gray-400 text-center text-sm md:text-base flex flex-col md:flex-row items-center gap-1">
-            <span>&copy; {currentYear} Tharun. All rights reserved.</span>
-            <span className="text-md font-semibold text-secondary-600 dark:text-secondary-400">
-              Shinzou wo Sasageyo ✊
+          <p className="text-zinc-500 dark:text-zinc-400 text-center text-xs md:text-sm flex flex-col md:flex-row items-center gap-1 font-mono">
+            <span>&copy; {currentYear} Tharun.</span>
+            <span className="text-zinc-800 dark:text-zinc-200 font-medium">
+              All rights reserved.
             </span>
           </p>
 
-
           {!isHomePage && (
             <div className="flex flex-col items-center gap-1.5 select-none z-30">
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-fuchsia-400 animate-pulse">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 animate-pulse">
                 Event Horizon
               </span>
               <button
                 ref={buttonRef}
                 type="button"
                 onMouseEnter={handleBlackHoleHover}
-                className="group relative h-14 w-14 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
+                className="group relative h-12 w-12 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
                 aria-label="Hover to warp back to Home Page"
               >
                 {/* Outer glowing border */}
                 <span
-                  className="absolute inset-0 rounded-full border border-fuchsia-500/30 transition-all duration-500 group-hover:scale-125"
+                  className="absolute inset-0 rounded-full border border-zinc-400/40 dark:border-white/30 transition-all duration-500 group-hover:scale-125"
                   style={{
-                    boxShadow: "0 0 20px rgba(217,70,239,0.35), inset 0 0 10px rgba(0,0,0,0.9)",
+                    boxShadow: "0 0 16px rgba(255,255,255,0.2), inset 0 0 8px rgba(0,0,0,0.9)",
                   }}
                 />
                 {/* Swirling space gradient */}
-                <span className="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(138,43,226,0.9),rgba(15,10,30,0.95)_45%,#000_75%)] animate-black-hole-spin group-hover:scale-115 transition-transform duration-500" />
+                <span className="absolute inset-1 rounded-full bg-[radial-gradient(circle_at_35%_30%,rgba(200,200,200,0.9),rgba(30,30,35,0.95)_45%,#000_75%)] animate-black-hole-spin group-hover:scale-115 transition-transform duration-500" />
                 {/* Orbital dust rings */}
-                <span className="absolute inset-[-6px] rounded-full border border-fuchsia-500/15 animate-black-hole-ring pointer-events-none" />
-                <span className="absolute inset-[-12px] rounded-full border border-cyan-400/10 animate-black-hole-ring-delayed pointer-events-none" />
+                <span className="absolute inset-[-4px] rounded-full border border-white/20 animate-black-hole-ring pointer-events-none" />
+                <span className="absolute inset-[-8px] rounded-full border border-zinc-400/20 animate-black-hole-ring-delayed pointer-events-none" />
                 {/* Core singularity */}
-                <span className="absolute w-3.5 h-3.5 rounded-full bg-black shadow-[0_0_8px_rgba(217,70,239,0.6)]" />
+                <span className="absolute w-3 h-3 rounded-full bg-black shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
               </button>
             </div>
           )}
