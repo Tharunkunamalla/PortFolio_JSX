@@ -319,80 +319,48 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Profile Showcase - Cyber Minimalist Glass HUD */}
+          {/* Profile Card */}
           <div className="order-1 md:order-2 md:col-span-5 flex justify-center">
-            <div className="relative group w-72 sm:w-80 md:w-88">
-              {/* Outer Ambient Glow */}
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-zinc-500/20 via-zinc-300/10 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent opacity-75 blur-xl group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* Offset Geometric Shadow Card */}
-              <div className="absolute inset-0 rounded-3xl bg-zinc-200/90 dark:bg-zinc-800/80 transform rotate-2 group-hover:rotate-3 scale-102 transition-transform duration-500 border border-zinc-300/60 dark:border-zinc-700/50" />
-
-              {/* Main Card Frame */}
-              <div className="relative z-10 rounded-3xl bg-white dark:bg-zinc-950 p-2.5 border border-zinc-300/80 dark:border-zinc-800 shadow-2xl overflow-hidden backdrop-blur-xl transition-all duration-300 group-hover:border-zinc-400 dark:group-hover:border-zinc-600">
-                {/* Status Indicator Badge */}
-                <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[11px] font-mono font-medium text-white shadow-lg">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Available</span>
-                </div>
-
-                {/* Avatar Photo Frame */}
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-zinc-900">
-                  <img
-                    src="/assets/pic.jpg"
-                    alt="Tharun Kunamalla"
-                    className="w-full h-full object-cover contrast-110 group-hover:scale-105 transition-transform duration-700"
-                  />
-                  {/* Subtle Gradient Shadow Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
-
-                  {/* Integrated Glass Dock */}
-                  <div className="absolute bottom-2.5 inset-x-2.5 p-3 rounded-xl bg-zinc-950/80 backdrop-blur-md border border-white/15 flex items-center justify-between gap-2 shadow-lg">
-                    <div className="min-w-0">
-                      <h3 className="font-display font-bold text-sm text-white leading-tight truncate">
-                        Tharun Kunamalla
-                      </h3>
-                      <p className="text-[11px] font-mono text-zinc-400 truncate">
-                        Full-Stack &amp; ML
-                      </p>
-                    </div>
-
-                    {/* Social Buttons */}
-                    <div className="flex items-center gap-1.5 shrink-0">
-                      {[
-                        {
-                          href: "https://github.com/Tharunkunamalla",
-                          icon: <Github className="h-3.5 w-3.5" />,
-                          label: "GitHub",
-                          hoverColor: "hover:bg-white hover:text-black",
-                        },
-                        {
-                          href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                          icon: <Linkedin className="h-3.5 w-3.5" />,
-                          label: "LinkedIn",
-                          hoverColor: "hover:bg-[#0A66C2] hover:text-white",
-                        },
-                        {
-                          href: "https://www.instagram.com/__tharun_0509.__/",
-                          icon: <Instagram className="h-3.5 w-3.5" />,
-                          label: "Instagram",
-                          hoverColor: "hover:bg-[#E4405F] hover:text-white",
-                        },
-                      ].map(({href, icon, label, hoverColor}) => (
-                        <a
-                          key={label}
-                          href={href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={label}
-                          className={`w-7 h-7 rounded-lg bg-white/10 text-zinc-300 border border-white/10 flex items-center justify-center ${hoverColor} transition-all duration-300 interactive`}
-                        >
-                          {icon}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
+              <div className="absolute inset-0 rounded-3xl bg-zinc-200 dark:bg-zinc-800 transform rotate-3 scale-102 transition-transform duration-500" />
+              <img
+                src="/assets/pic.jpg"
+                alt="Tharun - Full Stack Developer"
+                className="relative z-10 w-full h-full object-cover rounded-3xl contrast-110 border border-zinc-200 dark:border-zinc-800 shadow-2xl animate-float"
+              />
+              {/* Floating Social Icons */}
+              <div className="absolute -bottom-4 -left-4 z-20 flex gap-2">
+                {[
+                  {
+                    href: "https://github.com/Tharunkunamalla",
+                    icon: <Github className="h-4 w-4 transition-colors duration-300" />,
+                    label: "GitHub",
+                    hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white",
+                  },
+                  {
+                    href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
+                    icon: <Linkedin className="h-4 w-4 transition-colors duration-300" />,
+                    label: "LinkedIn",
+                    hoverColor: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10",
+                  },
+                  {
+                    href: "https://www.instagram.com/__tharun_0509.__/",
+                    icon: <Instagram className="h-4 w-4 transition-colors duration-300" />,
+                    label: "Instagram",
+                    hoverColor: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
+                  },
+                ].map(({href, icon, label, hoverColor}) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className={`w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300 ${hoverColor} shadow-md hover:scale-110 transition-all duration-300 interactive`}
+                  >
+                    {icon}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
