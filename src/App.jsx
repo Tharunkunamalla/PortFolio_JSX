@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import {useEffect} from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,115 +14,67 @@ import Line from "./components/layout/Line";
 import Home from "./components/sections/Home";
 import About from "./components/sections/About";
 import Skills from "./components/sections/Skills";
-import Projects from "./components/sections/Projects";
 import AllProjects from "./components/projects/AllProjects";
 import Contact from "./components/sections/Contact";
 import Message from "./components/layout/Message";
 import Error from "./components/layout/Error";
 import Terminal from "./components/layout/Terminal";
 import MatrixRain from "./components/ui/MatrixRain";
-
-import {ReactLenis} from "@studio-freight/react-lenis";
-
 import Footer from "./components/layout/Footer";
-
-import {Toaster} from "react-hot-toast";
 import ProjectDetail from "./components/projects/ProjectDetail";
 import Projects3DPage from "./components/projects/Projects3DPage";
-import {useLenis} from "@studio-freight/react-lenis";
 
-function ScrollRouterWrapper() {
-  const [activeSection, setActiveSection] = useState("home");
-  const sections = ["home", "about", "skills", "projects", "contact"];
-  const sectionRefs = useRef({});
-  const location = useLocation();
+import {ReactLenis, useLenis} from "@studio-freight/react-lenis";
+import {Toaster} from "react-hot-toast";
+
+function ScrollToTop() {
+  const {pathname} = useLocation();
   const lenis = useLenis();
 
   useEffect(() => {
-    sections.forEach((section) => {
-      sectionRefs.current[section] = document.getElementById(section);
-    });
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200;
-
-      for (const section of sections) {
-        const element = sectionRefs.current[section];
-        if (element) {
-          const {offsetTop, offsetHeight} = element;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    // Check scroll-to-section state on first load
-    if (location.pathname === "/" && location.state?.scrollTo) {
-      const section = location.state.scrollTo;
-      scrollToSection(section);
+    if (lenis) {
+      lenis.scrollTo(0, {immediate: true});
+    } else {
+      window.scrollTo(0, 0);
     }
+  }, [pathname, lenis]);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location]);
+  return null;
+}
 
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      if (lenis) {
-        lenis.scrollTo(section, {
-          offset: -80,
-          duration: 1.2,
-        });
-      } else {
-        window.scrollTo({
-          top: section.offsetTop - 80,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
-
+function MainLayout() {
+  const location = useLocation();
   const is3DPage = location.pathname === "/projects-3d";
 
   return (
     <>
-      {!is3DPage && (
-        <Navbar
-          activeSection={activeSection}
-          scrollToSection={scrollToSection}
-          isHomePage={location.pathname === "/"}
-        />
-      )}
-      <main>
+      <ScrollToTop />
+      {!is3DPage && <Navbar />}
+      <main className="min-h-screen">
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Home scrollToSection={scrollToSection} />
-                <About />
-                <Skills />
-                <Toaster position="top-right" />
-                <Projects />
-                <Contact />
-              </>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<AllProjects />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/project/:projectId" element={<ProjectDetail />} />
           <Route path="/projects-3d" element={<Projects3DPage />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
-      <Footer />
+      {!is3DPage && <Footer />}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          className: "dark:bg-zinc-900 dark:text-white border dark:border-zinc-800",
+          style: {
+            borderRadius: "12px",
+            background: "#18181b",
+            color: "#ffffff",
+            border: "1px solid rgba(255,255,255,0.1)",
+          },
+        }}
+      />
     </>
   );
 }
@@ -133,9 +85,9 @@ function App() {
       <Router>
         <ThemeProvider>
           <TerminalProvider>
-            <div className="min-h-screen bg-light-100 dark:bg-dark-100 text-gray-800 dark:text-white transition-colors duration-300 font-sans">
+            <div className="min-h-screen bg-[#ffffff] dark:bg-[#09090b] text-[#18181b] dark:text-[#f4f4f5] transition-colors duration-300 font-sans selection:bg-white selection:text-black">
               <Cursor />
-              <ScrollRouterWrapper />
+              <MainLayout />
               <Message />
               <Line />
               <Terminal />
