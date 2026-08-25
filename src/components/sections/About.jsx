@@ -96,7 +96,7 @@ const About = () => {
                     <img
                       src="/assets/img.png"
                       alt="Tharun K"
-                      className="w-full h-full object-contain filter contrast-125"
+                      className="w-full h-full object-contain "
                     />
                   </div>
                 </div>
