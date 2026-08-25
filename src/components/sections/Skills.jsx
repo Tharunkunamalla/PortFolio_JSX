@@ -98,6 +98,20 @@ const Skills = () => {
       id="skills"
       className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-24 bg-white dark:bg-[#09090b] transition-colors duration-300 overflow-hidden"
     >
+      {/* Fixed Background Video Layer */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="fixed inset-0 w-full h-full object-cover opacity-25 dark:opacity-30 filter contrast-125 brightness-75 -z-10"
+        >
+          <source src="/assets/skill-vid.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-white dark:from-[#09090b]/90 dark:via-[#09090b]/75 dark:to-[#09090b]" />
+      </div>
+
       <BackgroundParticles />
 
       {/* Monochromatic Background Glow */}
