@@ -188,10 +188,8 @@ const Home = () => {
               ref={headingRef}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 leading-tight text-black dark:text-white"
             >
-              Hi, I am{" "}
-              <span className="underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-8">
-                Tharun
-              </span>
+              Hi, I am <br />
+              <span>Tharun</span>
             </h1>
 
             <TypeAnimation
