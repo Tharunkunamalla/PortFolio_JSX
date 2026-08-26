@@ -183,12 +183,9 @@ const About = () => {
               <div className="pt-1 flex flex-col sm:flex-row gap-2.5">
                 <button
                   onClick={() =>
-                    window.open(
-                      "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                      "_blank",
-                    )
+                    window.open("/resume.pdf", "_blank", "noopener,noreferrer")
                   }
-                  className="interactive flex-1 px-5 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-102 transition-all duration-300 flex items-center justify-center gap-2 shadow-md"
+                  className="interactive flex-1 px-5 py-3 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-102 transition-all duration-300 flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 >
                   <FileText className="w-4 h-4" />
                   View Resume

@@ -4,17 +4,17 @@ export const aboutData = [
     title: "Education",
     items: [
       {
-        name: "B.Tech in Computer Science",
-        date: "2023 - 2027",
-        description: "IIIT- Kottayam, Kerala",
+        name: "B.Tech in Computer Science and Engineering",
+        date: "Aug 2023 – May 2027",
+        description: "Indian Institute of Information Technology (IIIT) Kottayam, Kerala. Relevant Coursework: DSA, DBMS, OS, Computer Networks, OOP, Machine Learning, AI.",
       },
       {
-        name: "Intermediate Education",
+        name: "Intermediate Education (MPC)",
         date: "2020 - 2022",
         description: "Hanamkonda, Telangana",
       },
       {
-        name: "High School",
+        name: "Secondary School Certificate (SSC)",
         date: "2019 - 2020",
         description: "Shine High School, Hanamkonda, Telangana",
       },
@@ -25,22 +25,25 @@ export const aboutData = [
     title: "Certifications",
     items: [
       {
-        name: "NIT Warangal Research Intern",
-        date: "2026",
-        description: "Research Intern at NIT Warangal",
-      },
-      {name: "Machine Learning", date: "2025", description: "Coursera"},
-      {
-        name: "Cloud Essentials Knowledge Badge Assessment",
-        date: "2024",
-        description: "AWS Training and Certification",
+        name: "Microsoft Azure AI",
+        date: "2025 - 2026",
+        description: "Certified in Artificial Intelligence Fundamentals and Azure Cloud AI Services.",
       },
       {
-        name: "HackerRank Java Certification",
-        date: "2024",
-        description: "HackerRank",
+        name: "AWS Cloud Essentials",
+        date: "2024 - 2025",
+        description: "AWS Training and Certification for Core Cloud Architecture & Infrastructure.",
       },
-      {name: "Basics of Cloud Computing", date: "2025", description: "Udemy"},
+      {
+        name: "Postman API Expert",
+        date: "2025",
+        description: "Certified in Advanced REST API Design, Testing, and Automated Workflow Execution.",
+      },
+      {
+        name: "Labmentix AI/ML Training",
+        date: "2025",
+        description: "Advanced Machine Learning model engineering, feature optimization, and hyperparameter tuning.",
+      },
     ],
   },
   {
@@ -48,26 +51,29 @@ export const aboutData = [
     title: "Experience",
     items: [
       {
-        name: "NIT Warangal Research Intern",
+        name: "Research Assistant · NIT Warangal",
+        date: "May 2026 – July 2026",
+        description: "Contributed to the UniRecSys group recommendation system by extending DREX to SGDREX using GRU, BERT, and collaborative filtering under Prof. Venkateshwara sir.",
+      },
+      {
+        name: "AI/ML Intern · Labmentix",
+        date: "Jun 2025 – Aug 2025",
+        description: "Built XGBoost, Random Forest, and Decision Tree models, achieving 87% accuracy through feature engineering, EDA on 10K+ records, and GridSearchCV hyperparameter tuning.",
+      },
+      {
+        name: "GSoC 2026 Contributor · Google Summer of Code",
         date: "2026",
-        description: "Research Intern at NIT Warangal",
+        description: "Contributed to OmegaUp and Sugar Labs – Music Blocks through open-source feature development, bug fixes, and pull requests.",
       },
-      {name: "AI-ML Intern", date: "2025", description: "Labmentix, Bengaluru"},
-      {name: "AI-ML Intern", date: "2025", description: "EDUNET-Microsoft"},
       {
-        name: "GSSoC- 25 Contributor",
+        name: "GSSoC'25 Contributor · GirlScript Summer of Code",
         date: "2025",
-        description: "GirlScript Summer of Code 2025 - GSSoC Foundation",
+        description: "Completed 20+ open-source contributions, collaborating with maintainers through issue resolution, code reviews, and feature releases.",
       },
       {
-        name: "Open Source Contribution India",
-        date: "2025",
-        description: "Various Open Source Projects",
-      },
-      {
-        name: "Sub-Lead of Robotics Club-IIIT-K",
-        date: "2024 - 2025",
-        description: "BETA-LABS, IIIT-Kottayam",
+        name: "Sub-Lead, Robotics Club · BetaLabs",
+        date: "Sep 2024 – Oct 2025",
+        description: "Sub-Lead of Robotics Club at IIIT Kottayam. Solved 500+ Data Structures & Algorithms problems on LeetCode using Java.",
       },
     ],
   },
