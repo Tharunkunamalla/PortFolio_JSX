@@ -1,5 +1,5 @@
-// Dynamically import all images placed into /public/assets/gallery/
-const galleryGlob = import.meta.glob('/public/assets/gallery/*.{jpg,jpeg,png,webp,avif,gif}', {
+// Dynamically import all images placed into public/assets/gallery/
+const galleryGlob = import.meta.glob('../../public/assets/gallery/*.{jpg,jpeg,png,webp,avif,gif}', {
   eager: true,
   query: '?url',
   import: 'default',
@@ -17,7 +17,7 @@ export const getGalleryPhotos = () => {
         .replace(/\b\w/g, (char) => char.toUpperCase());
 
       // Format path for public asset referencing
-      const publicSrc = filePath.replace(/^\/public/, '');
+      const publicSrc = filePath.replace(/^.*\/public/, '');
 
       return {
         id: index + 1,
