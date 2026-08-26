@@ -28,11 +28,19 @@ import Projects3DPage from "./components/projects/Projects3DPage";
 import {ReactLenis, useLenis} from "@studio-freight/react-lenis";
 import {Toaster} from "react-hot-toast";
 
+import {gsap} from "gsap";
+
 function ScrollToTop() {
   const {pathname} = useLocation();
   const lenis = useLenis();
 
   useEffect(() => {
+    // Reset any lingering GSAP transforms, opacities, or body overflow locks from warps
+    gsap.set("main, nav, footer, canvas, body", {
+      clearProps: "all",
+    });
+    document.body.style.overflow = "auto";
+
     if (lenis) {
       lenis.scrollTo(0, {immediate: true});
     } else {
