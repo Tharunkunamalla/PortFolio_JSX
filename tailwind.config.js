@@ -61,8 +61,8 @@ export default {
       },
       fontFamily: {
         sans: ["Plus Jakarta Sans", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
-        heading: ["Unbounded", "Syne", "sans-serif"],
-        display: ["Unbounded", "Syne", "sans-serif"],
+        heading: ["Syne", "Space Grotesk", "sans-serif"],
+        display: ["Syne", "sans-serif"],
         unbounded: ["Unbounded", "sans-serif"],
         orbitron: ["Orbitron", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
