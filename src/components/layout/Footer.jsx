@@ -3,7 +3,7 @@ import {createPortal} from "react-dom";
 import {useLocation, useNavigate, Link} from "react-router-dom";
 import {gsap} from "gsap";
 
-const Footer = () => {
+const Footer = ({showBlackHole = false}) => {
   const currentYear = new Date().getFullYear();
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,21 +29,27 @@ const Footer = () => {
     // Disable body scroll
     document.body.style.overflow = "hidden";
 
+    // Play preloaded video immediately
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+    }
+
     // Animate page elements spiraling inward (into the center of the screen) like a black hole absorbing them
-    gsap.to("main, nav, footer > div:first-child", {
+    gsap.to("main, nav, footer > div:first-child, canvas", {
       scale: 0,
       rotation: 1440, // 4 full spins for intense absorption
       opacity: 0,
       filter: "blur(12px)",
-      duration: 1.8,
+      duration: 1.6,
       ease: "power2.in",
       transformOrigin: "center center",
     });
 
-    // Set safety backup redirect timeout (in case video fails to load/play)
+    // Set safety backup redirect timeout (in case video fails to finish)
     const safetyTimeout = setTimeout(() => {
       triggerRedirect();
-    }, 2800);
+    }, 6000);
 
     // Store timeout ID to clear if needed
     window.blackHoleTimeout = safetyTimeout;
@@ -54,58 +60,30 @@ const Footer = () => {
       clearTimeout(window.blackHoleTimeout);
       window.blackHoleTimeout = null;
     }
-    // Navigate home
+
+    // Instantly reset GSAP properties and overflow before routing
+    gsap.set("main, nav, footer > div:first-child, canvas, body", {
+      clearProps: "all",
+    });
+    document.body.style.overflow = "auto";
+    setIsWarping(false);
+
+    // Navigate home and scroll to top
     navigate("/");
-    // Scroll home page to top immediately (hidden under overlay)
     window.scrollTo(0, 0);
   };
 
-  // Trigger video overlay fade-in
-  useEffect(() => {
-    if (isWarping && !isHomePage) {
-      gsap.to(".black-hole-overlay-container", {
-        opacity: 1,
-        duration: 0.6,
-        ease: "power2.inOut",
-      });
-    }
-  }, [isWarping, isHomePage]);
-
-  // Recover page elements and fade out video overlay when returning home
-  useEffect(() => {
-    if (isHomePage && isWarping) {
-      // 1. Instantly clear all GSAP override styles so elements lay out normally
-      gsap.set("main, nav, footer > div:first-child", {
-        clearProps: "all",
-      });
-
-      // 2. Ensure scroll position is at the very top
-      window.scrollTo(0, 0);
-
-      // 3. Delay the overlay fade-out slightly to give the homepage time to mount and paint under the cover of the overlay
-      const fadeTimeout = setTimeout(() => {
-        gsap.to(".black-hole-overlay-container", {
-          opacity: 0,
-          duration: 0.6,
-          ease: "power2.out",
-          onComplete: () => {
-            setIsWarping(false);
-            // Restore body scrolling
-            document.body.style.overflow = "auto";
-          },
-        });
-      }, 250);
-
-      return () => clearTimeout(fadeTimeout);
-    }
-  }, [location.pathname, isWarping, isHomePage]);
-
-  // Clean up safety timeout on unmount
+  // Clean up on unmount (guaranteeing page elements and overflow are always restored)
   useEffect(() => {
     return () => {
       if (window.blackHoleTimeout) {
         clearTimeout(window.blackHoleTimeout);
+        window.blackHoleTimeout = null;
       }
+      gsap.set("main, nav, footer > div:first-child, canvas, body", {
+        clearProps: "all",
+      });
+      document.body.style.overflow = "auto";
     };
   }, []);
 
@@ -132,17 +110,18 @@ const Footer = () => {
             </span>
           </Link>
 
-          {/* Right: Copyright & Event Horizon */}
+          {/* Right: Copyright & Black Hole Portal (only in 3D view when showBlackHole=true) */}
           <div className="flex items-center gap-4 shrink-0">
             <p className="text-zinc-500 text-xs font-mono">
               &copy; {currentYear} Tharun. <span className="text-zinc-400">All rights reserved.</span>
             </p>
 
-            {!isHomePage && (
+            {showBlackHole && (
               <div className="flex items-center gap-2 select-none">
                 <button
                   ref={buttonRef}
                   type="button"
+                  onClick={handleBlackHoleHover}
                   onMouseEnter={handleBlackHoleHover}
                   className="group relative h-9 w-9 rounded-full flex items-center justify-center pointer-events-auto cursor-pointer focus:outline-none"
                   aria-label="Hover to warp back to Home Page"
@@ -167,16 +146,21 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      {isWarping && createPortal(
-        <div className="black-hole-overlay-container fixed inset-0 z-[99999] bg-black flex items-center justify-center opacity-0 pointer-events-auto">
+      {showBlackHole && createPortal(
+        <div
+          className={`black-hole-overlay-container fixed inset-0 z-[99999] bg-black flex items-center justify-center transition-opacity duration-500 ${
+            isWarping ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
+        >
           <video
             ref={videoRef}
             src="/assets/blackhole_animation_vid.mp4"
             className="w-full h-full object-cover"
-            autoPlay
+            preload="auto"
             muted
             playsInline
             onEnded={triggerRedirect}
+            onError={triggerRedirect}
           />
         </div>,
         document.body
