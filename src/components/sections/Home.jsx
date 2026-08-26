@@ -173,7 +173,7 @@ const Home = () => {
           <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-black/[0.02] dark:bg-white/[0.02] rounded-full filter blur-3xl"></div>
         </div>
 
-        <div ref={contentRef} className="container mx-auto px-6 md:px-12 relative z-10 grid md:grid-cols-12 gap-10 items-center">
+        <div ref={contentRef} className="container mx-auto max-w-7xl px-6 md:px-12 relative z-10 grid md:grid-cols-12 gap-10 items-center">
           <div className="order-2 md:order-1 md:col-span-7">
             {/* Open to work pill */}
             <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest uppercase mb-6 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 shadow-sm">
@@ -188,8 +188,10 @@ const Home = () => {
               ref={headingRef}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight mb-4 leading-tight text-black dark:text-white"
             >
-              Hi, I am <br />
-              <span>Tharun</span>
+              Hi, I am{" "}
+              <span className="underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-8">
+                Tharun
+              </span>
             </h1>
 
             <TypeAnimation
@@ -305,10 +307,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Explore More Link to About */}
+        {/* Explore More Link to About & Views Counter */}
         <div
           ref={exploreRef}
-          className="container mx-auto px-6 md:px-12 mt-12 md:mt-16 flex items-center justify-between relative z-20"
+          className="container mx-auto max-w-7xl px-6 md:px-12 mt-12 md:mt-16 flex items-center justify-between relative z-20 pr-28 sm:pr-32"
         >
           <button
             onClick={() => navigate("/about")}
