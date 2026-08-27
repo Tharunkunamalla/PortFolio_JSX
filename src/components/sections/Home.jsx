@@ -10,6 +10,7 @@ import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import {useVisitor} from "../../context/VisitorContext";
 import BackgroundParticles from "../layout/BackgroundParticles";
+import SamuraiAvatar from "../ui/SamuraiAvatar";
 
 const coreStack = [
   {name: "Java", icon: <FaJava />, color: "#EA2D2E"},
@@ -260,50 +261,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Profile Card */}
+          {/* Samurai Interactive Avatar */}
           <div className="order-1 md:order-2 md:col-span-5 flex justify-center">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80">
-              <div className="absolute inset-0 rounded-3xl bg-zinc-200 dark:bg-zinc-800 transform rotate-3 scale-102 transition-transform duration-500" />
-              <img
-                src="/assets/pic.jpg"
-                alt="Tharun - Full Stack Developer"
-                className="relative z-10 w-full h-full object-cover rounded-3xl contrast-110 border border-zinc-200 dark:border-zinc-800 shadow-2xl animate-float"
-              />
-              {/* Floating Social Icons */}
-              <div className="absolute -bottom-4 -left-4 z-20 flex gap-2">
-                {[
-                  {
-                    href: "https://github.com/Tharunkunamalla",
-                    icon: <Github className="h-4 w-4 transition-colors duration-300" />,
-                    label: "GitHub",
-                    hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white",
-                  },
-                  {
-                    href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
-                    icon: <Linkedin className="h-4 w-4 transition-colors duration-300" />,
-                    label: "LinkedIn",
-                    hoverColor: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10",
-                  },
-                  {
-                    href: "https://www.instagram.com/__tharun_0509.__/",
-                    icon: <Instagram className="h-4 w-4 transition-colors duration-300" />,
-                    label: "Instagram",
-                    hoverColor: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
-                  },
-                ].map(({href, icon, label, hoverColor}) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={`w-9 h-9 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300 ${hoverColor} shadow-md hover:scale-110 transition-all duration-300 interactive`}
-                  >
-                    {icon}
-                  </a>
-                ))}
-              </div>
-            </div>
+            <SamuraiAvatar />
           </div>
         </div>
 
