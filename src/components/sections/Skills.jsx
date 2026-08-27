@@ -5,7 +5,7 @@ import {Cpu, Globe, Terminal, Layers} from "lucide-react";
 import {skillsData} from "../../constants/skillsData";
 import LeetCodeStats from "./LeetCodeStats.jsx";
 import GitHubStats from "./GitHubStats.jsx";
-import BackgroundParticles from "../layout/BackgroundParticles";
+// import BackgroundParticles from "../layout/BackgroundParticles";
 import Tilt from "react-parallax-tilt";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -112,7 +112,7 @@ const Skills = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-white/90 dark:from-[#09090b]/80 dark:via-[#09090b]/40 dark:to-[#09090b]/90" />
       </div>
 
-      <BackgroundParticles />
+      {/* <BackgroundParticles /> */}
 
       {/* Monochromatic Background Glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
