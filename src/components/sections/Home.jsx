@@ -9,7 +9,6 @@ import {SiSpringboot, SiMongodb, SiExpress, SiReact, SiNodedotjs} from "react-ic
 import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import {useVisitor} from "../../context/VisitorContext";
-import BackgroundParticles from "../layout/BackgroundParticles";
 import SamuraiAvatar from "../ui/SamuraiAvatar";
 
 const coreStack = [
@@ -157,7 +156,6 @@ const Home = () => {
         id="home"
         className="relative min-h-[92vh] flex flex-col justify-center pt-28 pb-20 md:pt-24 md:pb-16 bg-white dark:bg-[#09090b] overflow-hidden transition-colors duration-300"
       >
-        <BackgroundParticles />
 
         {/* Bubbles Container */}
         <div
