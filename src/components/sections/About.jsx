@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import {gsap} from "gsap";
-import BackgroundParticles from "../layout/BackgroundParticles";
+// import BackgroundParticles from "../layout/BackgroundParticles";
 import {aboutData} from "../../constants/aboutData";
 import {getGalleryPhotos} from "../../constants/galleryData";
 import PhotoLightbox from "../gallery/PhotoLightbox";
@@ -56,7 +56,7 @@ const About = () => {
       id="about"
       className="relative min-h-screen pt-28 pb-20 md:pt-32 md:pb-24 bg-white dark:bg-[#09090b] overflow-hidden transition-colors duration-300"
     >
-      <BackgroundParticles />
+      {/* <BackgroundParticles /> */}
 
       {/* Fixed Atmospheric Background Image Layer */}
       <div className="fixed inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
