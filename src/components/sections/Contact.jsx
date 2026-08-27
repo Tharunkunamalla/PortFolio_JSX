@@ -101,7 +101,7 @@ const Contact = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/55 to-white/85 dark:from-[#09090b]/85 dark:via-[#09090b]/55 dark:to-[#09090b]/85" />
       </div>
 
-      <BackgroundParticles />
+      <BackgroundParticles count={38} speed="slow-mid" minSize={0.8} maxSize={2.2} />
 
       {/* Monochromatic Background Glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
