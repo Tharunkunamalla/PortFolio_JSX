@@ -2,8 +2,6 @@ import React, {useState, useEffect} from "react";
 import Tilt from "react-parallax-tilt";
 import {Loader2} from "lucide-react";
 
-const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 // Helper to determine green shade intensity based on count
 const getCellBgColor = (count) => {
   if (count === null || count === undefined || count === 0) {
@@ -46,9 +44,85 @@ const GitHubActivityCalendar = () => {
   useEffect(() => {
     let isMounted = true;
 
-    fetch("https://github-contributions-api.jogruber.de/v4/Tharunkunamalla?y=last")
-      .then((res) => res.json())
-      .then((data) => {
+    async function fetchGitHubData() {
+      // 1. Try official GitHub GraphQL via local proxy (Zero-cache real-time synchronization)
+      try {
+        const query = `
+          query {
+            user(login: "Tharunkunamalla") {
+              contributionsCollection {
+                contributionCalendar {
+                  totalContributions
+                  weeks {
+                    contributionDays {
+                      contributionCount
+                      date
+                      contributionLevel
+                      weekday
+                    }
+                  }
+                  months {
+                    name
+                    totalWeeks
+                  }
+                }
+              }
+            }
+          }
+        `;
+
+        const res = await fetch("/api/github/graphql", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({query}),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const calendar = data?.data?.user?.contributionsCollection?.contributionCalendar;
+          if (calendar && isMounted) {
+            setTotalContributions(calendar.totalContributions);
+
+            const rawWeeks = calendar.weeks; // Array of 52-53 weeks
+            // Transpose into 7 rows (Sunday=0 to Saturday=6)
+            const matrix7Rows = Array.from({length: 7}, (_, dayOfWeek) =>
+              rawWeeks.map((week) => {
+                const dayMatch = week.contributionDays.find(
+                  (d) => d.weekday === dayOfWeek
+                );
+                return dayMatch
+                  ? {count: dayMatch.contributionCount, date: dayMatch.date}
+                  : null;
+              })
+            );
+
+            // Calculate month label offsets
+            let runningCol = 0;
+            const months = (calendar.months || []).map((m) => {
+              const col = runningCol;
+              runningCol += m.totalWeeks;
+              return {name: m.name, col};
+            });
+
+            setLiveWeeks({
+              matrix: matrix7Rows,
+              totalCols: rawWeeks.length,
+            });
+            setMonthLabels(months);
+            setIsLoading(false);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn("Direct GraphQL fetch failed, trying fallback API:", err);
+      }
+
+      // 2. Secondary fallback: jogruber public API
+      try {
+        const fallbackRes = await fetch(
+          "https://github-contributions-api.jogruber.de/v4/Tharunkunamalla?y=last"
+        );
+        const data = await fallbackRes.json();
         if (!isMounted || !data?.contributions?.length) return;
 
         if (data.total?.lastYear !== undefined) {
@@ -58,6 +132,7 @@ const GitHubActivityCalendar = () => {
         const days = data.contributions;
         const weeks = [];
         let currentWeek = new Array(7).fill(null);
+        const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const months = [];
         let lastMonth = -1;
 
@@ -82,7 +157,6 @@ const GitHubActivityCalendar = () => {
           }
         });
 
-        // Transpose weeks (columns) into 7 rows for horizontal week rendering
         const matrix7Rows = Array.from({length: 7}, (_, rowIdx) =>
           weeks.map((week) => week[rowIdx] || null)
         );
@@ -92,12 +166,14 @@ const GitHubActivityCalendar = () => {
           totalCols: weeks.length,
         });
         setMonthLabels(months);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.warn("GitHub live contributions fetch error:", err);
+      } catch (err) {
+        console.error("All GitHub contribution fetches failed:", err);
+      } finally {
         if (isMounted) setIsLoading(false);
-      });
+      }
+    }
+
+    fetchGitHubData();
 
     return () => {
       isMounted = false;
@@ -152,7 +228,7 @@ const GitHubActivityCalendar = () => {
               >
                 {/* Month Skeleton Headers */}
                 <div className="flex justify-between w-full h-5 px-1 mb-0.5">
-                  {MONTH_NAMES.map((m, idx) => (
+                  {["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"].map((m, idx) => (
                     <div
                       key={idx}
                       className="h-3 w-6 bg-zinc-800/60 rounded text-[11px]"
