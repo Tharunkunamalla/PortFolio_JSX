@@ -96,12 +96,15 @@ const GitHubActivityCalendar = () => {
               })
             );
 
-            // Calculate month label offsets
+            // Calculate month label offsets cleanly without overlapping initial partial months
             let runningCol = 0;
-            const months = (calendar.months || []).map((m) => {
+            const months = [];
+            (calendar.months || []).forEach((m, idx) => {
               const col = runningCol;
               runningCol += m.totalWeeks;
-              return {name: m.name, col};
+              // Skip first month if it only spans 1-2 partial weeks to avoid overlapping with next month label
+              if (idx === 0 && m.totalWeeks <= 2) return;
+              months.push({name: m.name, col});
             });
 
             setLiveWeeks({
@@ -144,11 +147,14 @@ const GitHubActivityCalendar = () => {
           currentWeek[dayOfWeek] = day;
 
           if (monthIdx !== lastMonth && dayOfWeek <= 2) {
-            months.push({
-              name: MONTH_NAMES[monthIdx],
-              col: weeks.length,
-            });
-            lastMonth = monthIdx;
+            // Only add month if it's not overlapping the very first column
+            if (weeks.length >= 2 || months.length === 0) {
+              months.push({
+                name: MONTH_NAMES[monthIdx],
+                col: weeks.length,
+              });
+              lastMonth = monthIdx;
+            }
           }
 
           if (dayOfWeek === 6 || index === days.length - 1) {
