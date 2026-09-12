@@ -113,7 +113,8 @@ const Footer = ({showBlackHole = false}) => {
           {/* Right: Copyright & Black Hole Portal (only in 3D view when showBlackHole=true) */}
           <div className="flex items-center gap-4 shrink-0">
             <p className="text-zinc-500 text-xs font-mono">
-              &copy; {currentYear} Tharun. <span className="text-zinc-400">All rights reserved.</span>
+             <span className="text-zinc-400">&copy;</span> {currentYear} Tharun. <span className="text-zinc-400">All rights reserved.</span>
+              <span className="text-zinc-200 font-medium">Shinzou wo Sasageyo ✊</span>
             </p>
 
             {showBlackHole && (
