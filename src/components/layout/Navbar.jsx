@@ -1,9 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram, Terminal as TerminalIcon} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
 import {useNavigate, useLocation, Link} from "react-router-dom";
 import {useTheme} from "../../context/ThemeContext";
 import {useTerminal} from "../../context/TerminalContext";
+import {gsap} from "gsap";
 
 const socialLinks = [
   {Icon: Github, href: "https://github.com/Tharunkunamalla", label: "GitHub", hoverColor: "hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"},
@@ -23,10 +24,15 @@ const navItems = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hoveredPath, setHoveredPath] = useState(null);
   const {theme, toggleTheme} = useTheme();
   const {toggleTerminal} = useTerminal();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const navContainerRef = useRef(null);
+  const indicatorRef = useRef(null);
+  const buttonRefs = useRef({});
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
@@ -50,6 +56,65 @@ const Navbar = () => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
   };
+
+  const activeItem = navItems.find((item) => isItemActive(item.path));
+  const currentPath = hoveredPath || (activeItem ? activeItem.path : null);
+
+  useEffect(() => {
+    const container = navContainerRef.current;
+    const targetButton = currentPath ? buttonRefs.current[currentPath] : null;
+    const indicator = indicatorRef.current;
+
+    if (!container || !indicator) return;
+
+    if (!targetButton) {
+      gsap.to(indicator, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.25,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+      return;
+    }
+
+    const containerRect = container.getBoundingClientRect();
+    const btnRect = targetButton.getBoundingClientRect();
+
+    const targetX = btnRect.left - containerRect.left;
+    const targetWidth = btnRect.width;
+
+    gsap.to(indicator, {
+      x: targetX,
+      width: targetWidth,
+      opacity: 1,
+      scale: 1,
+      duration: 0.35,
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+  }, [currentPath, location.pathname, isScrolled]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const container = navContainerRef.current;
+      const targetButton = currentPath ? buttonRefs.current[currentPath] : null;
+      const indicator = indicatorRef.current;
+
+      if (container && indicator && targetButton) {
+        const containerRect = container.getBoundingClientRect();
+        const btnRect = targetButton.getBoundingClientRect();
+        gsap.set(indicator, {
+          x: btnRect.left - containerRect.left,
+          width: btnRect.width,
+        });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    document.fonts?.ready?.then(handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [currentPath]);
 
   return (
     <nav
@@ -79,26 +144,36 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-500">
+        <div
+          ref={navContainerRef}
+          onMouseLeave={() => setHoveredPath(null)}
+          className="relative hidden md:flex items-center gap-1 bg-black/5 dark:bg-white/5 p-1 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-500"
+        >
+          {/* Smooth Sliding Pill Indicator */}
+          <div
+            ref={indicatorRef}
+            className="absolute top-1 bottom-1 left-0 rounded-full bg-black dark:bg-white shadow-[0_2px_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] pointer-events-none z-0 opacity-0 will-change-transform"
+          />
+
           {navItems.map((item) => {
-            const active = isItemActive(item.path);
+            const isCurrent = currentPath === item.path;
+            const isActualActive = isItemActive(item.path);
 
             return (
               <button
                 key={item.path}
+                ref={(el) => (buttonRefs.current[item.path] = el)}
                 onClick={() => handleNavClick(item.path)}
-                className={`relative px-4 py-2 text-xs font-semibold tracking-[0.12em] uppercase transition-all duration-300 rounded-full group ${
-                  active
+                onMouseEnter={() => setHoveredPath(item.path)}
+                className={`relative px-4 py-2 text-xs font-semibold tracking-[0.12em] uppercase rounded-full transition-colors duration-200 group z-10 ${
+                  isCurrent
                     ? "text-white dark:text-black font-bold"
+                    : isActualActive
+                    ? "text-black dark:text-white font-bold"
                     : "text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white"
                 }`}
               >
                 <span className="relative z-10">{item.label}</span>
-
-                {/* Active Pill Background */}
-                {active && (
-                  <span className="absolute inset-0 rounded-full bg-black dark:bg-white shadow-[0_2px_10px_rgba(0,0,0,0.2)] dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300" />
-                )}
               </button>
             );
           })}
