@@ -2,9 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  outline: 1px solid red !important;
-} */
+/* ==========================================================================
+   Custom Cursor Global Rules (Hides native OS mouse pointer across all elements)
+   ========================================================================== */
+html.custom-cursor-active,
+html.custom-cursor-active *,
+html.custom-cursor-active *::before,
+html.custom-cursor-active *::after,
+body.custom-cursor-active,
+body.custom-cursor-active *,
+body.custom-cursor-active *::before,
+body.custom-cursor-active *::after {
+  cursor: none !important;
+}
+
 
 .mouse-scroll {
   width: 35px;

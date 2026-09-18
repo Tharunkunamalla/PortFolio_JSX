@@ -11,8 +11,11 @@ const Cursor = () => {
   const is3DPage = location.pathname === '/projects-3d';
 
   useEffect(() => {
-    if (is3DPage || isTerminalOpen) {
-      document.body.style.cursor = 'auto';
+    // Check if device is touch-only without a precision mouse pointer
+    const isTouchOnly = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (isTouchOnly || is3DPage || isTerminalOpen) {
+      document.documentElement.classList.remove('custom-cursor-active');
+      document.body.classList.remove('custom-cursor-active');
       return;
     }
 
@@ -21,42 +24,19 @@ const Cursor = () => {
     
     if (!cursor || !cursorOuter) return;
 
-    // Hide system cursor by default
-    document.body.style.cursor = 'none';
+    // Apply global CSS class to hide native OS cursor everywhere
+    document.documentElement.classList.add('custom-cursor-active');
+    document.body.classList.add('custom-cursor-active');
 
-    let isOverScrollbar = false;
-    
+    // Initial state: hidden until mouse moves into view
+    gsap.set([cursor, cursorOuter], { opacity: 0 });
+
+    let hasMoved = false;
+
     const onMouseMove = (e) => {
-      // Check if mouse is near right scrollbar gutter of viewport or scrollable container
-      const isNearViewportScrollbar = (window.innerWidth - e.clientX) <= 16;
-      let isNearInnerScrollbar = false;
-
-      try {
-        const el = document.elementFromPoint(e.clientX, e.clientY);
-        if (el) {
-          const scrollParent = el.closest('.overflow-y-auto, .overflow-y-scroll, .terminal-scrollbar');
-          if (scrollParent) {
-            const rect = scrollParent.getBoundingClientRect();
-            if (rect.right - e.clientX <= 14 && rect.right - e.clientX >= -2) {
-              isNearInnerScrollbar = true;
-            }
-          }
-        }
-      } catch {}
-
-      if (isNearViewportScrollbar || isNearInnerScrollbar) {
-        if (!isOverScrollbar) {
-          isOverScrollbar = true;
-          document.body.style.cursor = 'auto';
-          gsap.to([cursor, cursorOuter], { opacity: 0, duration: 0.1, overwrite: 'auto' });
-        }
-        return;
-      } else {
-        if (isOverScrollbar) {
-          isOverScrollbar = false;
-          document.body.style.cursor = 'none';
-          gsap.to([cursor, cursorOuter], { opacity: 1, duration: 0.1, overwrite: 'auto' });
-        }
+      if (!hasMoved) {
+        hasMoved = true;
+        gsap.to([cursor, cursorOuter], { opacity: 1, duration: 0.15, overwrite: 'auto' });
       }
 
       // Position the cursor dot instantly without latency
@@ -77,8 +57,7 @@ const Cursor = () => {
     
     // Delegated hover detection for interactive elements
     const onMouseOver = (e) => {
-      if (isOverScrollbar) return;
-      const isInteractive = e.target && e.target.closest('a, button, .interactive, [role="button"], input, textarea, select');
+      const isInteractive = e.target && e.target.closest('a, button, .interactive, [role="button"], input, textarea, select, label, [data-cursor-pointer], summary');
       if (isInteractive) {
         gsap.to(cursor, { scale: 1.5, opacity: 0.5, duration: 0.2, overwrite: 'auto' });
         gsap.to(cursorOuter, { scale: 1.5, duration: 0.2, overwrite: 'auto' });
@@ -93,7 +72,7 @@ const Cursor = () => {
     };
 
     const onMouseEnterWindow = () => {
-      if (!isOverScrollbar) {
+      if (hasMoved) {
         gsap.to([cursor, cursorOuter], { opacity: 1, duration: 0.15, overwrite: 'auto' });
       }
     };
@@ -111,7 +90,8 @@ const Cursor = () => {
       window.removeEventListener('mouseover', onMouseOver);
       document.removeEventListener('mouseleave', onMouseLeaveWindow);
       document.removeEventListener('mouseenter', onMouseEnterWindow);
-      document.body.style.cursor = 'auto';
+      document.documentElement.classList.remove('custom-cursor-active');
+      document.body.classList.remove('custom-cursor-active');
     };
   }, [is3DPage, isTerminalOpen]);
 
@@ -121,13 +101,13 @@ const Cursor = () => {
     <>
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[99999] transform -translate-x-1/2 -translate-y-1/2"
-        style={{ mixBlendMode: 'difference' }}
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none select-none z-[99999] transform -translate-x-1/2 -translate-y-1/2 opacity-0"
+        style={{ mixBlendMode: 'difference', pointerEvents: 'none' }}
       />
       <div
         ref={cursorOuterRef}
-        className="fixed top-0 left-0 w-7 h-7 border border-white/60 rounded-full pointer-events-none z-[99998] transform -translate-x-1/2 -translate-y-1/2"
-        style={{ mixBlendMode: 'difference' }}
+        className="fixed top-0 left-0 w-7 h-7 border border-white/60 rounded-full pointer-events-none select-none z-[99998] transform -translate-x-1/2 -translate-y-1/2 opacity-0"
+        style={{ mixBlendMode: 'difference', pointerEvents: 'none' }}
       />
     </>
   );

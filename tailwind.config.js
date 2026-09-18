@@ -93,9 +93,6 @@ export default {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
-      cursor: {
-        default: "url(/cursor.svg), auto",
-      },
     },
   },
   plugins: [],
