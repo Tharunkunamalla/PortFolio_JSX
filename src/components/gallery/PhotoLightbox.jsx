@@ -1,8 +1,9 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import { X, ChevronLeft, ChevronRight, Camera } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Camera, Download, Loader2, Sparkles, CheckCircle2 } from "lucide-react";
 
 const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
   const [isClosing, setIsClosing] = useState(false);
+  const [downloadState, setDownloadState] = useState("idle"); // "idle" | "generating" | "ready"
   const closingRef = useRef(false);
 
   const currentIndex = photos.findIndex((p) => p.id === photo?.id);
@@ -57,14 +58,14 @@ const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
 
   const handlePrev = (e) => {
     e?.stopPropagation();
-    if (isClosing) return;
+    if (isClosing || downloadState === "generating") return;
     const prevIndex = (currentIndex - 1 + totalPhotos) % totalPhotos;
     onNavigate(photos[prevIndex]);
   };
 
   const handleNext = (e) => {
     e?.stopPropagation();
-    if (isClosing) return;
+    if (isClosing || downloadState === "generating") return;
     const nextIndex = (currentIndex + 1) % totalPhotos;
     onNavigate(photos[nextIndex]);
   };
@@ -83,7 +84,164 @@ const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
     };
-  }, [currentIndex, photos, handleClose]);
+  }, [currentIndex, photos, handleClose, downloadState]);
+
+  // Generate downloadable collectible card with photo, photographer name, and github/developer credentials
+  const handleDownloadCard = async (e) => {
+    e?.stopPropagation();
+    if (downloadState === "generating") return;
+
+    setDownloadState("generating");
+
+    try {
+      // Load source image
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = photo.src;
+
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => {
+          // If cors blocks direct blob access, continue to allow drawing
+          resolve();
+        };
+      });
+
+      // Artificial mini-delay to show the sleek card generation animation
+      await new Promise((r) => setTimeout(r, 900));
+
+      // Canvas dimensions for a high-res collector's card
+      const cardPadding = 48;
+      const cardWidth = 1400;
+      const photoWidth = cardWidth - cardPadding * 2;
+      const photoHeight = Math.round((photoWidth * (img.naturalHeight || 900)) / (img.naturalWidth || 1400));
+      const footerHeight = 220;
+      const headerHeight = 90;
+      const cardHeight = headerHeight + photoHeight + footerHeight + cardPadding * 2;
+
+      const canvas = document.createElement("canvas");
+      canvas.width = cardWidth;
+      canvas.height = cardHeight;
+      const ctx = canvas.getContext("2d");
+
+      // 1. Sleek Dark Obsidian Glass Background
+      const bgGrad = ctx.createLinearGradient(0, 0, cardWidth, cardHeight);
+      bgGrad.addColorStop(0, "#08080a");
+      bgGrad.addColorStop(0.5, "#0d0e12");
+      bgGrad.addColorStop(1, "#050507");
+      ctx.fillStyle = bgGrad;
+
+      // Rounded card background
+      const radius = 36;
+      ctx.beginPath();
+      ctx.moveTo(radius, 0);
+      ctx.lineTo(cardWidth - radius, 0);
+      ctx.quadraticCurveTo(cardWidth, 0, cardWidth, radius);
+      ctx.lineTo(cardWidth, cardHeight - radius);
+      ctx.quadraticCurveTo(cardWidth, cardHeight, cardWidth - radius, cardHeight);
+      ctx.lineTo(radius, cardHeight);
+      ctx.quadraticCurveTo(0, cardHeight, 0, cardHeight - radius);
+      ctx.lineTo(0, radius);
+      ctx.quadraticCurveTo(0, 0, radius, 0);
+      ctx.closePath();
+      ctx.fill();
+
+      // Outer silver glow border
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.stroke();
+
+      // 2. Top Header inside Card
+      ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+      ctx.font = "bold 26px 'Plus Jakarta Sans', system-ui, sans-serif";
+      ctx.fillText("EXCLUSIVE PHOTOGRAPHY", cardPadding, cardPadding + 36);
+
+      // 3. Render Photo inside clipped rounded rect
+      const imgY = cardPadding + headerHeight;
+      const imgRadius = 24;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cardPadding + imgRadius, imgY);
+      ctx.lineTo(cardPadding + photoWidth - imgRadius, imgY);
+      ctx.quadraticCurveTo(cardPadding + photoWidth, imgY, cardPadding + photoWidth, imgY + imgRadius);
+      ctx.lineTo(cardPadding + photoWidth, imgY + photoHeight - imgRadius);
+      ctx.quadraticCurveTo(cardPadding + photoWidth, imgY + photoHeight, cardPadding + photoWidth - imgRadius, imgY + photoHeight);
+      ctx.lineTo(cardPadding + imgRadius, imgY + photoHeight);
+      ctx.quadraticCurveTo(cardPadding, imgY + photoHeight, cardPadding, imgY + photoHeight - imgRadius);
+      ctx.lineTo(cardPadding, imgY + imgRadius);
+      ctx.quadraticCurveTo(cardPadding, imgY, cardPadding + imgRadius, imgY);
+      ctx.closePath();
+      ctx.clip();
+
+      ctx.drawImage(img, cardPadding, imgY, photoWidth, photoHeight);
+      ctx.restore();
+
+      // Photo border
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(cardPadding + imgRadius, imgY);
+      ctx.lineTo(cardPadding + photoWidth - imgRadius, imgY);
+      ctx.quadraticCurveTo(cardPadding + photoWidth, imgY, cardPadding + photoWidth, imgY + imgRadius);
+      ctx.lineTo(cardPadding + photoWidth, imgY + photoHeight - imgRadius);
+      ctx.quadraticCurveTo(cardPadding + photoWidth, imgY + photoHeight, cardPadding + photoWidth - imgRadius, imgY + photoHeight);
+      ctx.lineTo(cardPadding + imgRadius, imgY + photoHeight);
+      ctx.quadraticCurveTo(cardPadding, imgY + photoHeight, cardPadding, imgY + photoHeight - imgRadius);
+      ctx.lineTo(cardPadding, imgY + imgRadius);
+      ctx.quadraticCurveTo(cardPadding, imgY, cardPadding + imgRadius, imgY);
+      ctx.closePath();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+      ctx.stroke();
+      ctx.restore();
+
+      // 4. Card Details Footer
+      const footerY = imgY + photoHeight + 48;
+
+      // Divider line
+      ctx.beginPath();
+      ctx.moveTo(cardPadding, footerY - 18);
+      ctx.lineTo(cardWidth - cardPadding, footerY - 18);
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Left Column: Captured By Tharun Kunamalla
+      ctx.fillStyle = "#8a8f9d";
+      ctx.font = "600 18px 'JetBrains Mono', monospace";
+      ctx.fillText("CAPTURED BY", cardPadding, footerY + 12);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 34px 'Plus Jakarta Sans', system-ui, sans-serif";
+      ctx.fillText("Tharun Kunamalla", cardPadding, footerY + 54);
+
+      // Right Column: Developed by Tharun Kunamalla & Full-Stack Software Engineer
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#8a8f9d";
+      ctx.font = "600 18px 'JetBrains Mono', monospace";
+      ctx.fillText("DEVELOPED BY THARUN KUNAMALLA", cardWidth - cardPadding, footerY + 12);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 32px 'Plus Jakarta Sans', system-ui, sans-serif";
+      ctx.fillText("Full-Stack Software Engineer", cardWidth - cardPadding, footerY + 54);
+      ctx.textAlign = "left";
+
+      // Trigger Instant Download
+      const dataUrl = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.download = `tharun-photography-frame-${currentIndex + 1}.png`;
+      link.href = dataUrl;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setDownloadState("ready");
+      setTimeout(() => setDownloadState("idle"), 2400);
+    } catch (err) {
+      console.error("Card generation failed:", err);
+      setDownloadState("idle");
+    }
+  };
 
   if (!photo) return null;
 
@@ -141,6 +299,24 @@ const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
             alt="Captured by Tharun"
             className="max-h-[76vh] max-w-full object-contain block select-none"
           />
+
+          {/* Loading overlay when generating card */}
+          {downloadState === "generating" && (
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center gap-3.5 text-white z-30 animate-fadeIn">
+              <div className="relative">
+                <div className="w-14 h-14 rounded-full border-2 border-white/20 border-t-white animate-spin flex items-center justify-center" />
+                <Sparkles className="w-5 h-5 text-amber-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+              </div>
+              <div className="text-center">
+                <h4 className="font-display font-semibold text-base sm:text-lg text-white tracking-wide">
+                  Generating Collector Card...
+                </h4>
+                <p className="text-xs font-mono text-zinc-400 mt-1">
+                  Embedding photographer & developer credentials
+                </p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Previous Button - Always visible, high contrast with glowing glass aesthetic */}
@@ -166,6 +342,44 @@ const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
             <ChevronRight className="w-7 h-7 stroke-[2.5]" />
           </button>
         )}
+      </div>
+
+      {/* Right Bottom Download Floating Action Button */}
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute bottom-5 right-5 sm:bottom-7 sm:right-8 z-40 pointer-events-auto"
+      >
+        <button
+          onClick={handleDownloadCard}
+          disabled={downloadState === "generating"}
+          type="button"
+          aria-label="Download photography card"
+          title="Download Collector Card with Credentials"
+          className={`flex items-center gap-2.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full font-medium text-xs sm:text-sm shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(255,255,255,0.1)] border transition-all duration-300 cursor-pointer ${
+            downloadState === "generating"
+              ? "bg-zinc-800 border-zinc-600 text-zinc-300 cursor-wait"
+              : downloadState === "ready"
+              ? "bg-emerald-500 hover:bg-emerald-400 border-emerald-400 text-black font-semibold"
+              : "bg-white/10 hover:bg-white text-white hover:text-black border-white/20 hover:border-white backdrop-blur-xl hover:scale-105 active:scale-95"
+          }`}
+        >
+          {downloadState === "generating" ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin text-white" />
+              <span>Creating Card...</span>
+            </>
+          ) : downloadState === "ready" ? (
+            <>
+              <CheckCircle2 className="w-4 h-4 text-black" />
+              <span>Card Downloaded!</span>
+            </>
+          ) : (
+            <>
+              <Download className="w-4 h-4" />
+              <span>Download Card</span>
+            </>
+          )}
+        </button>
       </div>
     </div>
   );
