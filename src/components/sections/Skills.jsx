@@ -139,7 +139,7 @@ const Skills = () => {
           {["frontend", "backend"].map((cat) => (
             <div key={cat} className="space-y-6">
               <div className="flex items-center gap-4 px-1">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2 shrink-0">
                   {cat === "frontend" ? (
                     <Globe className="w-4 h-4 text-zinc-500" />
                   ) : (
@@ -147,7 +147,9 @@ const Skills = () => {
                   )}
                   {cat} Architecture
                 </h3>
-                <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
+                <div className="flex-1 flex items-center overflow-visible">
+                  <div className="skills-laser-line" />
+                </div>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-8 gap-4 skills-grid">
@@ -163,11 +165,13 @@ const Skills = () => {
           {/* Ecosystem / Marquee */}
           <div className="space-y-6 pt-4">
             <div className="flex items-center gap-4 px-1">
-              <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+              <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2 shrink-0">
                 <Cpu className="w-4 h-4 text-zinc-500" />
                 DevOps, AI & Ecosystem
               </h3>
-              <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
+              <div className="flex-1 flex items-center overflow-visible">
+                <div className="skills-laser-line" />
+              </div>
             </div>
             {categorizedSkills.ecosystem && (
               <SkillsMarquee skills={categorizedSkills.ecosystem} />
@@ -178,11 +182,13 @@ const Skills = () => {
         {/* Live Coding Analytics Section */}
         <div className="mt-24 space-y-16">
           <div className="flex items-center gap-4 px-1">
-            <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-800 dark:text-zinc-200 flex items-center gap-2 shrink-0">
               <Layers className="w-4 h-4 text-zinc-500" />
               Live Coding Metrics
             </h3>
-            <div className="h-[1px] flex-1 bg-zinc-200 dark:bg-zinc-800" />
+            <div className="flex-1 flex items-center overflow-visible">
+              <div className="skills-laser-line" />
+            </div>
           </div>
 
           <div className="space-y-12">
