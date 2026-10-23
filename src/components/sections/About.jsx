@@ -216,7 +216,6 @@ const About = () => {
             {/* Category Tab Switcher */}
             <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
               {["Experience", "Education", "Certifications", "Photography"].map((tabName) => {
-                const Icon = tabIcons[tabName];
                 const count =
                   tabName === "Photography"
                     ? photos.length
@@ -233,7 +232,6 @@ const About = () => {
                         : "text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white"
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
                     <span>{tabName}</span>
                     <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white" : "bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400"}`}>
                       {count}
