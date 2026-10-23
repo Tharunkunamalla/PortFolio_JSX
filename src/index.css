@@ -437,3 +437,89 @@ html::-webkit-scrollbar {
   filter: grayscale(1) sepia(1) hue-rotate(85deg) saturate(3.5) brightness(0.85) !important;
 }
 
+/* ==========================================================================
+   macOS Window Opening & Genie Minimize Animations (60FPS GPU Accelerated)
+   ========================================================================== */
+@keyframes macWindowOpen {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--genie-dx, 0px), var(--genie-dy, 80px), 0) scale(var(--genie-sx, 0.25), var(--genie-sy, 0.25)) perspective(1000px) rotateX(12deg) skewX(var(--genie-skew, 0deg));
+    filter: blur(8px);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(calc(var(--genie-dx, 0px) * -0.03), -6px, 0) scale(1.02, 1.015) perspective(1000px) rotateX(-1deg) skewX(0deg);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1, 1) perspective(1000px) rotateX(0deg) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+@keyframes macGenieMinimize {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1, 1) perspective(1000px) rotateX(0deg) skewX(0deg);
+    filter: blur(0px);
+  }
+  25% {
+    opacity: 0.98;
+    transform: translate3d(calc(var(--genie-dx, 0px) * 0.15), calc(var(--genie-dy, 100px) * 0.12), 0) scale(0.92, 0.94) perspective(1000px) rotateX(4deg) skewX(calc(var(--genie-skew, -4deg) * 0.5));
+    filter: blur(0px);
+  }
+  60% {
+    opacity: 0.75;
+    transform: translate3d(calc(var(--genie-dx, 0px) * 0.65), calc(var(--genie-dy, 100px) * 0.6), 0) scale(calc(var(--genie-sx, 0.25) + 0.18), calc(var(--genie-sy, 0.25) + 0.12)) perspective(1000px) rotateX(16deg) skewX(var(--genie-skew, -8deg));
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--genie-dx, 0px), var(--genie-dy, 100px), 0) scale(var(--genie-sx, 0.2), var(--genie-sy, 0.2)) perspective(1000px) rotateX(25deg) skewX(calc(var(--genie-skew, -8deg) * 1.4));
+    filter: blur(6px);
+  }
+}
+
+@keyframes macBackdropFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes macBackdropFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-genie-open {
+  animation: macWindowOpen 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-genie-close {
+  animation: macGenieMinimize 0.36s cubic-bezier(0.4, 0, 0.6, 0.15) forwards;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-mac-backdrop-in {
+  animation: macBackdropFadeIn 0.35s ease-out forwards;
+}
+
+.animate-mac-backdrop-out {
+  animation: macBackdropFadeOut 0.3s ease-in forwards;
+}
+
