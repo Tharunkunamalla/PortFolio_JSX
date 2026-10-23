@@ -19,6 +19,22 @@ const About = () => {
   const [activeTab, setActiveTab] = useState("Experience");
   const [photos, setPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [sourceRect, setSourceRect] = useState(null);
+
+  const handleOpenPhoto = (photo, event) => {
+    if (event?.currentTarget) {
+      const rect = event.currentTarget.getBoundingClientRect();
+      setSourceRect({
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+      });
+    } else {
+      setSourceRect(null);
+    }
+    setSelectedPhoto(photo);
+  };
   const contentRef = useRef(null);
 
   useEffect(() => {
@@ -238,7 +254,7 @@ const About = () => {
                   {photos.map((photo) => (
                     <div
                       key={photo.id}
-                      onClick={() => setSelectedPhoto(photo)}
+                      onClick={(e) => handleOpenPhoto(photo, e)}
                       className="group relative h-56 sm:h-64 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800/90 bg-zinc-100 dark:bg-black cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300"
                     >
                       {/* Photo Image */}
@@ -314,7 +330,11 @@ const About = () => {
         <PhotoLightbox
           photo={selectedPhoto}
           photos={photos}
-          onClose={() => setSelectedPhoto(null)}
+          sourceRect={sourceRect}
+          onClose={() => {
+            setSelectedPhoto(null);
+            setSourceRect(null);
+          }}
           onNavigate={(newPhoto) => setSelectedPhoto(newPhoto)}
         />
       )}
