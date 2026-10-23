@@ -522,4 +522,29 @@ html::-webkit-scrollbar {
 .animate-mac-backdrop-out {
   animation: macBackdropFadeOut 0.3s ease-in forwards;
 }
+/* ==========================================================================
+   Clean Crisp Line (Solid on Left, Smooth Tapering to Right - No Neon Glow)
+   ========================================================================== */
+.skills-laser-line {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.8) 25%,
+    rgba(255, 255, 255, 0.35) 60%,
+    rgba(255, 255, 255, 0.08) 85%,
+    transparent 100%
+  );
+}
 
+.skills-laser-line::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28%;
+  height: 1px;
+  background: #ffffff;
+}

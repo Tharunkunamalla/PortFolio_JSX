@@ -354,7 +354,7 @@ const PhotoLightbox = ({ photo, photos, sourceRect, onClose, onNavigate }) => {
           disabled={downloadState === "generating"}
           type="button"
           aria-label="Download photography card"
-          title="Download Collector Card with Credentials"
+          title="Do you want to download my Image?"
           className={`flex items-center gap-2.5 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full font-medium text-xs sm:text-sm shadow-[0_10px_30px_rgba(0,0,0,0.8),0_0_20px_rgba(255,255,255,0.1)] border transition-all duration-300 cursor-pointer ${
             downloadState === "generating"
               ? "bg-zinc-800 border-zinc-600 text-zinc-300 cursor-wait"
