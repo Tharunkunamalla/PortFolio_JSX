@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {Menu, X, Moon, Sun, Github, Linkedin, Instagram, Terminal as TerminalIcon} from "lucide-react";
 import {FaDiscord} from "react-icons/fa";
+import {FaXTwitter} from "react-icons/fa6";
 import {useNavigate, useLocation, Link} from "react-router-dom";
 import {useTheme} from "../../context/ThemeContext";
 import {useTerminal} from "../../context/TerminalContext";
@@ -8,6 +9,7 @@ import {useTerminal} from "../../context/TerminalContext";
 const socialLinks = [
   {Icon: Github, href: "https://github.com/Tharunkunamalla", label: "GitHub", hoverColor: "hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"},
   {Icon: Linkedin, href: "https://www.linkedin.com/in/tharun-kunamalla-/", label: "LinkedIn", hoverColor: "hover:text-[#0077b5] hover:bg-[#0077b5]/10"},
+  {Icon: FaXTwitter, href: "https://x.com/Tharunk0509", label: "X (Twitter)", hoverColor: "hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10"},
   {Icon: Instagram, href: "https://instagram.com/__tharun_0509.__", label: "Instagram", hoverColor: "hover:text-[#E4405F] hover:bg-[#E4405F]/10"},
   {Icon: FaDiscord, href: "https://discord.com/users/751713701425446945", label: "Discord", hoverColor: "hover:text-[#5865F2] hover:bg-[#5865F2]/10"},
 ];
