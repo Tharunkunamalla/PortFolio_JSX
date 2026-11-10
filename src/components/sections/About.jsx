@@ -3,14 +3,17 @@ import {gsap} from "gsap";
 // import BackgroundParticles from "../layout/BackgroundParticles";
 import {aboutData} from "../../constants/aboutData";
 import {getGalleryPhotos} from "../../constants/galleryData";
+import {animeData} from "../../constants/animeData";
 import PhotoLightbox from "../gallery/PhotoLightbox";
-import {FileText, ArrowUpRight, Briefcase, GraduationCap, Award, Sparkles, Building2, Calendar, Camera, MapPin, Eye} from "lucide-react";
+import AnimeShowcase from "../anime/AnimeShowcase";
+import {FileText, ArrowUpRight, Briefcase, GraduationCap, Award, Sparkles, Building2, Calendar, Camera, MapPin, Eye, Tv} from "lucide-react";
 
 const tabIcons = {
   Experience: Briefcase,
   Education: GraduationCap,
   Certifications: Award,
   Photography: Camera,
+  Anime: Tv,
 };
 
 const About = () => {
@@ -215,10 +218,12 @@ const About = () => {
           <div className="lg:col-span-7 space-y-6">
             {/* Category Tab Switcher */}
             <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-              {["Experience", "Education", "Certifications", "Photography"].map((tabName) => {
+              {["Experience", "Education", "Certifications", "Photography", "Anime"].map((tabName) => {
                 const count =
                   tabName === "Photography"
                     ? photos.length
+                    : tabName === "Anime"
+                    ? animeData.length
                     : aboutData.find((d) => d.title === tabName)?.items.length || 0;
                 const isActive = activeTab === tabName;
 
@@ -226,7 +231,7 @@ const About = () => {
                   <button
                     key={tabName}
                     onClick={() => setActiveTab(tabName)}
-                    className={`flex-1 min-w-[110px] py-2.5 px-3.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 ${
+                    className={`flex-1 min-w-[95px] py-2 px-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 ${
                       isActive
                         ? "bg-white dark:bg-black text-black dark:text-white shadow-sm border border-zinc-200 dark:border-zinc-700"
                         : "text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white"
@@ -281,6 +286,14 @@ const About = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            ) : activeTab === "Anime" ? (
+              <div
+                ref={contentRef}
+                data-lenis-prevent="true"
+                className="max-h-[580px] overflow-y-auto overscroll-contain touch-pan-y pr-2 terminal-scrollbar"
+              >
+                <AnimeShowcase />
               </div>
             ) : (
               /* List of items in active career/education category */
