@@ -1,27 +1,23 @@
-// Dynamically import all images placed into public/assets/gallery/
-const galleryGlob = import.meta.glob('../../public/assets/gallery/*.{jpg,jpeg,png,webp,avif,gif}', {
+// Dynamically import all images placed into src/assets/gallery/
+const galleryGlob = import.meta.glob('../assets/gallery/*.{jpg,jpeg,png,webp,avif,gif}', {
   eager: true,
-  query: '?url',
   import: 'default',
 });
 
 export const getGalleryPhotos = () => {
-  const globEntries = Object.keys(galleryGlob);
+  const globEntries = Object.entries(galleryGlob);
 
   if (globEntries.length > 0) {
-    return globEntries.map((filePath, index) => {
+    return globEntries.map(([filePath, assetUrl], index) => {
       const fileName = filePath.split('/').pop() || `Photo ${index + 1}`;
       const nameWithoutExt = fileName.replace(/\.[^/.]+$/, '');
       const formattedTitle = nameWithoutExt
         .replace(/[-_]/g, ' ')
         .replace(/\b\w/g, (char) => char.toUpperCase());
 
-      // Format path for public asset referencing
-      const publicSrc = filePath.replace(/^.*\/public/, '');
-
       return {
         id: index + 1,
-        src: publicSrc,
+        src: assetUrl,
         title: formattedTitle,
         category: 'Photography',
         location: 'Captured by Tharun',
