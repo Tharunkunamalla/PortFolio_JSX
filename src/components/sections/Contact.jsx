@@ -23,6 +23,38 @@ const Contact = () => {
     message: "",
   });
 
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+  const subjectInputRef = useRef(null);
+  const submitButtonRef = useRef(null);
+
+  // Set up listeners for the custom elements and handle value syncing
+  useEffect(() => {
+    const handleName = (e) => setFormData((prev) => ({...prev, name: e.target.value}));
+    const handleEmail = (e) => setFormData((prev) => ({...prev, email: e.target.value}));
+    const handleSubject = (e) => setFormData((prev) => ({...prev, subject: e.target.value}));
+
+    const nameEl = nameInputRef.current;
+    const emailEl = emailInputRef.current;
+    const subjectEl = subjectInputRef.current;
+
+    nameEl?.addEventListener("input", handleName);
+    nameEl?.addEventListener("change", handleName);
+    emailEl?.addEventListener("input", handleEmail);
+    emailEl?.addEventListener("change", handleEmail);
+    subjectEl?.addEventListener("input", handleSubject);
+    subjectEl?.addEventListener("change", handleSubject);
+
+    return () => {
+      nameEl?.removeEventListener("input", handleName);
+      nameEl?.removeEventListener("change", handleName);
+      emailEl?.removeEventListener("input", handleEmail);
+      emailEl?.removeEventListener("change", handleEmail);
+      subjectEl?.removeEventListener("input", handleSubject);
+      subjectEl?.removeEventListener("change", handleSubject);
+    };
+  }, []);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -72,6 +104,12 @@ const Contact = () => {
           origin: {y: 0.8},
           colors: ["#ffffff", "#e4e4e7", "#a1a1aa", "#27272a"],
         });
+        if (submitButtonRef.current?.done) {
+          submitButtonRef.current.done();
+        }
+        if (nameInputRef.current) nameInputRef.current.value = "";
+        if (emailInputRef.current) emailInputRef.current.value = "";
+        if (subjectInputRef.current) subjectInputRef.current.value = "";
         setFormData({name: "", email: "", subject: "", message: ""});
       } else {
         toast.error("Failed to send message. Please try again.");
@@ -203,48 +241,45 @@ const Contact = () => {
             >
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 block">
                     Your Name
                   </label>
-                  <input
-                    type="text"
+                  <sakuga-input
+                    ref={nameInputRef}
                     name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
+                    type="text"
+                    label="Your Name"
                     placeholder="e.g. Satoshi Nakamoto"
-                    className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
-                  />
+                    class="w-full block [--sk-input-width:100%]"
+                  ></sakuga-input>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                  <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 block">
                     Email Address
                   </label>
-                  <input
-                    type="email"
+                  <sakuga-input
+                    ref={emailInputRef}
                     name="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
+                    type="email"
+                    label="Email Address"
                     placeholder="e.g. user@domain.com"
-                    className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
-                  />
+                    class="w-full block [--sk-input-width:100%]"
+                  ></sakuga-input>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                <label className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-500 block">
                   Subject
                 </label>
-                <input
-                  type="text"
+                <sakuga-input
+                  ref={subjectInputRef}
                   name="subject"
-                  required
-                  value={formData.subject}
-                  onChange={handleChange}
+                  type="text"
+                  label="Subject"
                   placeholder="e.g. Software Engineer Opportunity / Project Inquiry"
-                  className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm"
-                />
+                  class="w-full block [--sk-input-width:100%]"
+                ></sakuga-input>
               </div>
 
               <div className="space-y-2">
@@ -258,19 +293,22 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Describe your vision, inquiry, or timeline..."
-                  className="w-full px-4 py-3.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm resize-none"
+                  className="w-full px-4 py-3.5 bg-white dark:bg-[#09090b] border-2 border-[var(--sk-btn-line)] rounded-[var(--sk-r)] focus:border-black dark:focus:border-white focus:outline-none transition-all text-black dark:text-white font-medium text-sm resize-none shadow-[var(--sk-sh)] placeholder:text-[var(--sk-dim)]"
                 ></textarea>
               </div>
 
               <div className="pt-2">
-                <button
+                <sakuga-button
+                  ref={submitButtonRef}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-all duration-300 disabled:opacity-70 flex items-center justify-center gap-3 shadow-md"
+                  class="inline-block"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
-                </button>
+                  <span className="flex items-center gap-2">
+                    <Send className="w-4 h-4 inline" />
+                    <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
+                  </span>
+                </sakuga-button>
               </div>
             </form>
           </div>

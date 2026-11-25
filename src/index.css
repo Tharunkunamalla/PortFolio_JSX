@@ -3,6 +3,45 @@
 @tailwind utilities;
 
 /* ==========================================================================
+   Sakuga VFX & Controls Palette (Light & Dark Mode)
+   ========================================================================== */
+:root {
+  --sk-card: #ffffff;
+  --sk-ink: #09090b;
+  --sk-dim: #71717a;
+  --sk-soft: #e4e4e7;
+  --sk-pri: #18181b;
+  --sk-pri-ink: #ffffff;
+  --sk-acc: #ff5fa8;
+  --sk-track: #e4e4e7;
+  --sk-r: 14px;
+  --sk-bw: 2px;
+  --sk-sh: 4px 4px 0px rgba(0, 0, 0, 0.08);
+  --sk-btn-sh: 4px 4px 0px rgba(0, 0, 0, 0.12);
+  --sk-btn-line: #18181b;
+  --sk-alt-sh: 3px 3px 0px rgba(0, 0, 0, 0.06);
+  --sk-alt-line: #71717a;
+}
+
+html.dark {
+  --sk-card: #09090b;
+  --sk-ink: #f4f4f5;
+  --sk-dim: #a1a1aa;
+  --sk-soft: #27272a;
+  --sk-pri: #fafafa;
+  --sk-pri-ink: #09090b;
+  --sk-acc: #ff5fa8;
+  --sk-track: #27272a;
+  --sk-r: 14px;
+  --sk-bw: 2px;
+  --sk-sh: 4px 4px 0px rgba(255, 255, 255, 0.08);
+  --sk-btn-sh: 4px 4px 0px rgba(255, 255, 255, 0.15);
+  --sk-btn-line: #f4f4f5;
+  --sk-alt-sh: 3px 3px 0px rgba(255, 255, 255, 0.08);
+  --sk-alt-line: #a1a1aa;
+}
+
+/* ==========================================================================
    Custom Cursor Global Rules (Hides native OS mouse pointer across all elements)
    ========================================================================== */
 html.custom-cursor-active,
