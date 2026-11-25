@@ -243,20 +243,34 @@ const Home = () => {
               ref={buttonsRef}
               className="flex flex-wrap items-center gap-4"
             >
-              <button
-                onClick={() => navigate("/projects")}
-                className="interactive px-7 py-3.5 rounded-full bg-black dark:bg-white text-white dark:text-black font-semibold text-sm tracking-wider uppercase hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-[0_4px_20px_rgba(0,0,0,0.15)] dark:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+              <sakuga-button
+                variant="secondary"
+                onClick={() => {
+                  setTimeout(() => {
+                    navigate("/projects");
+                  }, 200);
+                }}
+                class="inline-block anime-contact-btn"
               >
-                <Code2 className="h-4 w-4" />
-                View Projects
-              </button>
-              <button
-                onClick={() => navigate("/contact")}
-                className="interactive px-7 py-3.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 font-semibold text-sm tracking-wider uppercase hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Code2 className="h-4 w-4" />
+                  <span>View Projects</span>
+                </span>
+              </sakuga-button>
+              <sakuga-button
+                variant="secondary"
+                onClick={() => {
+                  setTimeout(() => {
+                    navigate("/contact");
+                  }, 200);
+                }}
+                class="inline-block anime-contact-btn"
               >
-                <Mail className="h-4 w-4" />
-                Contact Me
-              </button>
+                <span className="inline-flex items-center justify-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  <span>Contact Me</span>
+                </span>
+              </sakuga-button>
             </div>
           </div>
 
