@@ -301,11 +301,11 @@ const Contact = () => {
                 <sakuga-button
                   ref={submitButtonRef}
                   type="submit"
-                  disabled={isSubmitting}
-                  class="inline-block"
+                  disabled={isSubmitting ? "" : undefined}
+                  class="inline-block anime-contact-btn"
                 >
-                  <span className="flex items-center gap-2">
-                    <Send className="w-4 h-4 inline" />
+                  <span className="inline-flex items-center justify-center gap-2.5">
+                    <Send className="w-3.5 h-3.5 shrink-0" />
                     <span>{isSubmitting ? "Transmitting..." : "Send Message"}</span>
                   </span>
                 </sakuga-button>
