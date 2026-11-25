@@ -7,6 +7,7 @@ import {contactMethods, socialLinks} from "../../constants/contactData";
 import {Send, Mail, Sparkles, CheckCircle2} from "lucide-react";
 import BackgroundParticles from "../layout/BackgroundParticles";
 import confetti from "canvas-confetti";
+import RatingSection from "../ui/RatingSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -312,6 +313,11 @@ const Contact = () => {
               </div>
             </form>
           </div>
+        </div>
+
+        {/* Website Impression & Rating Section */}
+        <div className="mt-16 md:mt-20">
+          <RatingSection />
         </div>
       </div>
 
