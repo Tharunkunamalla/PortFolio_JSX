@@ -10,6 +10,7 @@ import {TypeAnimation} from "react-type-animation";
 import {useTheme} from "../../context/ThemeContext";
 import {useVisitor} from "../../context/VisitorContext";
 import SamuraiAvatar from "../ui/SamuraiAvatar";
+import SlidingNumber from "../ui/SlidingNumber";
 
 const coreStack = [
   {name: "Java", icon: <FaJava />, color: "#EA2D2E"},
@@ -284,11 +285,17 @@ const Home = () => {
             className="select-none"
           >
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm text-xs font-mono">
-              <Eye className="w-3.5 h-3.5 text-zinc-500" />
-              <span>
-                {views !== null ? (
+              <Eye className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+              <span className="flex items-center gap-1">
+                {views !== null && views !== undefined ? (
                   <>
-                    <span className="font-bold text-black dark:text-white">{views.toLocaleString()}</span> views
+                    <span className="font-bold text-black dark:text-white inline-flex items-center">
+                      <SlidingNumber
+                        number={Number(views)}
+                        thousandSeparator=","
+                      />
+                    </span>
+                    <span>views</span>
                   </>
                 ) : (
                   <span className="opacity-50">Loading...</span>
