@@ -108,7 +108,7 @@ const RatingSection = () => {
               If you like this website, rate this!
             </h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-light max-w-md">
-              Share your impression by giving your name and selecting a star rating. Your rating lands directly in my inbox.
+              Share your impression by giving your name and selecting a star rating.
             </p>
           </div>
 
