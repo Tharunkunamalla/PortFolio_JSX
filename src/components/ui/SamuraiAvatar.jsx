@@ -87,13 +87,13 @@ const SamuraiAvatar = () => {
               href: "https://www.linkedin.com/in/tharun-kunamalla-b9b477288/",
               icon: <Linkedin className="h-4 w-4 transition-colors duration-300" />,
               label: "LinkedIn",
-              hoverColor: "hover:text-[#0A66C2] hover:border-[#0A66C2] hover:bg-[#0A66C2]/10",
+              hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/10",
             },
             {
               href: "https://www.instagram.com/__tharun_0509.__/",
               icon: <Instagram className="h-4 w-4 transition-colors duration-300" />,
               label: "Instagram",
-              hoverColor: "hover:text-[#E4405F] hover:border-[#E4405F] hover:bg-[#E4405F]/10",
+              hoverColor: "hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white hover:bg-black/5 dark:hover:bg-white/10",
             },
           ].map(({href, icon, label, hoverColor}) => (
             <a
