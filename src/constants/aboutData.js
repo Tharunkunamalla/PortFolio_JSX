@@ -53,7 +53,7 @@ export const aboutData = [
       {
         name: "Research Assistant · NIT Warangal",
         date: "May 2026 – July 2026",
-        description: "Contributed to the UniRecSys group recommendation system by extending DREX to SGDREX using GRU, BERT, and collaborative filtering under Prof. Venkateshwara sir.",
+        description: "Contributed to the UniRecSys group recommendation system by extending DREX to SGDREX using GRU, BERT, and collaborative filtering under Prof. Venkateshwara.",
       },
       {
         name: "AI/ML Intern · Labmentix",
