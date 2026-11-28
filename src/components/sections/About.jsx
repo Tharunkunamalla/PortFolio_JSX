@@ -217,29 +217,37 @@ const About = () => {
           {/* Right Column: Interactive Category Hub (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
             {/* Category Tab Switcher */}
-            <div className="flex flex-wrap gap-2 p-1.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-              {["Experience", "Education", "Certifications", "Photography", "Anime"].map((tabName) => {
-                const count =
-                  tabName === "Photography"
-                    ? photos.length
-                    : tabName === "Anime"
-                    ? animeData.length
-                    : aboutData.find((d) => d.title === tabName)?.items.length || 0;
-                const isActive = activeTab === tabName;
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-1.5 p-1.5 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
+              {[
+                { name: "Experience", label: "Experience", count: aboutData.find((d) => d.title === "Experience")?.items.length || 0 },
+                { name: "Education", label: "Education", count: aboutData.find((d) => d.title === "Education")?.items.length || 0 },
+                { name: "Certifications", label: "Certificates", shortLabel: "Certs", count: aboutData.find((d) => d.title === "Certifications")?.items.length || 0 },
+                { name: "Photography", label: "Photos", count: photos.length },
+                { name: "Anime", label: "Anime", count: animeData.length },
+              ].map((tab) => {
+                const isActive = activeTab === tab.name;
 
                 return (
                   <button
-                    key={tabName}
-                    onClick={() => setActiveTab(tabName)}
-                    className={`flex-1 min-w-[95px] py-2 px-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-1.5 ${
+                    key={tab.name}
+                    onClick={() => setActiveTab(tab.name)}
+                    className={`py-2 px-2.5 rounded-xl font-mono text-[11px] sm:text-xs font-semibold tracking-tight transition-all duration-200 flex items-center justify-center gap-1.5 ${
                       isActive
                         ? "bg-white dark:bg-black text-black dark:text-white shadow-sm border border-zinc-200 dark:border-zinc-700"
                         : "text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white"
                     }`}
                   >
-                    <span>{tabName}</span>
-                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? "bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white" : "bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400"}`}>
-                      {count}
+                    <span className="truncate">
+                      {tab.label}
+                    </span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full shrink-0 ${
+                        isActive
+                          ? "bg-zinc-200 dark:bg-zinc-800 text-black dark:text-white"
+                          : "bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400"
+                      }`}
+                    >
+                      {tab.count}
                     </span>
                   </button>
                 );
