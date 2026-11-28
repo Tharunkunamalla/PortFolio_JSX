@@ -296,7 +296,7 @@ const Home = () => {
           {/* Visitor Counter Badge */}
           <div
             ref={viewsRef}
-            className="select-none"
+            className="select-none flex items-center gap-2"
           >
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-sm text-xs font-mono">
               <Eye className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
@@ -315,6 +315,15 @@ const Home = () => {
                   <span className="opacity-50">Loading...</span>
                 )}
               </span>
+            </div>
+            {/* Desktop Sakuga Tooltip on hover */}
+            <div className="hidden sm:inline-flex">
+              <sakuga-tooltip
+                text="Live verified portfolio views"
+                label="Visitor counter info"
+              >
+                i
+              </sakuga-tooltip>
             </div>
           </div>
         </div>

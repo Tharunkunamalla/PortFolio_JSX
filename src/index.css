@@ -69,6 +69,40 @@ html.dark {
   box-shadow: 4px 5px 0px rgba(0, 0, 0, 0.45);
 }
 
+/* Sakuga Tooltip Styling: Desktop enhanced & human-sized */
+sakuga-tooltip {
+  margin-top: 0 !important;
+  vertical-align: middle;
+}
+
+sakuga-tooltip::part(button) {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  border-width: 1.5px;
+  box-shadow: 2px 2px 0px var(--sk-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+sakuga-tooltip::part(button):hover {
+  transform: scale(1.1);
+  box-shadow: 3px 3px 0px var(--sk-pri);
+}
+
+sakuga-tooltip::part(tip) {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border-width: 1.5px;
+  box-shadow: 4px 5px 0px var(--sk-soft);
+  letter-spacing: 0.02em;
+}
+
 /* ==========================================================================
    Custom Cursor Global Rules (Hides native OS mouse pointer across all elements)
    ========================================================================== */
